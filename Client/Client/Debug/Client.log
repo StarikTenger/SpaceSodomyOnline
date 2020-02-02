@@ -1,0 +1,29 @@
+﻿  Camera.cpp
+  Color.cpp
+  Control.cpp
+  Control.events.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\Control.h(5,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  DrawSystem.basics.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\Control.h(5,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  DrawSystem.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  DrawSystem.loadTextures.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Gamepad.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.h(3,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  geometry.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\Gamepad.h(2,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\geometry.cpp(81,20): warning C4018: '<': signed/unsigned mismatch
+  getMilliCount.cpp
+  main.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\geometry.cpp(92,20): warning C4018: '<': signed/unsigned mismatch
+  Mouse.cpp
+  random.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\Control.h(5,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  System.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\random.cpp(6,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  System.step.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\System.h(6,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Vector2d.cpp
+  Generating Code...
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\System.h(6,10): fatal error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory

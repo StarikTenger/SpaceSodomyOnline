@@ -1,0 +1,8 @@
+﻿  Control.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\Control.cpp(77,23): warning C4018: '<': signed/unsigned mismatch
+  Generating code
+  3 of 698 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    10 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Server.vcxproj -> C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Release\Server.exe
