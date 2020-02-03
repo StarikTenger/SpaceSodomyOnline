@@ -23,10 +23,16 @@ Control::Control() {
 	}
 
 	sys = System("level.lvl");
+	
+	std::ifstream config("config.conf");
+	config >> address;
+	config >> port;
+	config >> id;
+	config.close();
+
 	sys.id = id;
 
 	socket.setBlocking(0);
-	//socket.bind(8002);
 }
 
 Control::~Control() {
@@ -74,6 +80,8 @@ void Control::step() {
 			message += "r";
 		if (keys[TURN_LEFT])
 			message += "l";
+		if (keys[STABILIZE_ROTATION])
+			message += "s";
 		socket.send(message.c_str(), message.size() + 1, address, port);
 
 		// Receive
@@ -81,7 +89,7 @@ void Control::step() {
 		sf::IpAddress sender;
 		unsigned short port = 0;
 		socket.receive(buffer, sizeof(buffer), received, sender, port);*/
-		std::cout << buffer << "\n";
+		//std::cout << buffer << "\n";
 		sys.state = std::string(buffer);
 		sys.unpack(sys.state);
 

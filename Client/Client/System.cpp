@@ -75,6 +75,20 @@ void System::unpack(std::string str) {
 			objects.back().id = id;
 			objects.back().pos = { x,y };
 			objects.back().dir = dir;
+
+			// orders
+			int orders;
+			ss >> orders;
+			int i = 0; objects.back().orders.size();
+			while (orders > 0) {
+				if (orders % 2 == 1)
+					objects.back().orders[i] = 1;
+				orders /= 2;
+				i++;
+			}
+			/*for (auto e : objects.back().orders)
+				cout << e;
+			cout << "\n";*/
 		}
 	}
 }

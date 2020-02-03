@@ -56,20 +56,11 @@ void System::collision() {
 		for (Object& b : objects) {
 			Vec2 aPos = a.pos + a.vel * dt;
 			Vec2 bPos = b.pos + b.vel * dt;
-			if (geom::distance(aPos, bPos) < EPS || !a.collision || !b.collision)
+			if (&a == &b || !a.collision || !b.collision)
 				continue;
-			if (geom::distance(a.pos, b.pos) < a.r + b.r) {
-				a.vel += geom::direction(a.pos, b.pos) * dt * 100 / a.m;
-			}
-			else {
-				if (geom::distance(aPos, bPos) < a.r + b.r) {
-					double ang = geom::angle(a.pos - b.pos);
-					Vec2 v = geom::rotate(a.vel, -ang);
-					v.x *= bounce;
-					a.vel = geom::rotate(v, ang);
-					touch = 1;
-				}
-			}
+
+			if (geom::distance(a.pos, b.pos) < a.r + b.r)
+				a.vel += geom::direction(a.pos, b.pos) * dt * 10 / a.m;	
 
 		}
 	}

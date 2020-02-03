@@ -12,12 +12,14 @@ public:
 	Camera cam;
 	System* system;
 	bool fullscreenMode = 0;
-	DrawSystem();
-	~DrawSystem();
+
+
 	Mouse mouse;
 	double w, h;
 	double blockSize = 1;
 
+	DrawSystem();
+	~DrawSystem();
 
 	std::vector<Color> colorMatches = {
 		Color(0, 151, 255),

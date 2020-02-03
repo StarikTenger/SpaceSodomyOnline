@@ -8,7 +8,7 @@
 #include <sstream>
 
 DrawSystem::DrawSystem(){
-	window = new sf::RenderWindow(sf::VideoMode(600, 600), "Water");
+	window = new sf::RenderWindow(sf::VideoMode(600, 600), "Space Sodomy (Orgy)");
 	loadTextures();
 	
 }
@@ -62,6 +62,19 @@ void DrawSystem::drawScene() {
 	// Drawing ships
 	for (const auto& object : sys.objects) {
 		image("ship", object.pos.x, object.pos.y, object.r*2, object.r * 2, object.dir);
+		double r1 = object.r * 2.0 * 44.0 / 24.0;
+		if(object.orders[Object::MOVE_FORWARD])
+			image("fireForward", object.pos.x, object.pos.y, r1, r1, object.dir);
+		if (object.orders[Object::MOVE_BACKWARD])
+			image("fireBackward", object.pos.x, object.pos.y, r1, r1, object.dir);
+		if (object.orders[Object::MOVE_LEFT])
+			image("fireLeft", object.pos.x, object.pos.y, r1, r1, object.dir);
+		if (object.orders[Object::MOVE_RIGHT])
+			image("fireRight", object.pos.x, object.pos.y, r1, r1, object.dir);
+		if (object.orders[Object::TURN_LEFT])
+			image("fireTurnLeft", object.pos.x, object.pos.y, r1, r1, object.dir);
+		if (object.orders[Object::TURN_RIGHT])
+			image("fireTurnRight", object.pos.x, object.pos.y, r1, r1, object.dir);
 	}
 
 	drawWalls();

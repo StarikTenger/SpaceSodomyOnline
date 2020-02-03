@@ -98,6 +98,9 @@ void Control::receive() {
 					case 'r':
 						object.orders[Object::TURN_RIGHT] = 1;
 						break;
+					case 's':
+						object.orders[Object::STABILIZE_ROTATION] = 1;
+						break;
 					}
 				}
 			}

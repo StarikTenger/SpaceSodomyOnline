@@ -81,6 +81,13 @@ std::string System::pack() {
 		str += to_string(object.pos.x, 3) + " ";
 		str += to_string(object.pos.y, 3) + " ";
 		str += to_string(object.dir, 4) + " ";
+		// packing orders
+		int orders = 0;
+		for (int i = 0; i < object.orders.size(); i++) {
+			if (object.orders[i])
+				orders += pow(2, i);
+		}
+		str += to_string(orders) + " ";
 	}
 	return str;
 }

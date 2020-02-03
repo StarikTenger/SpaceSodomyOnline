@@ -42,7 +42,7 @@ public:
 	double w = 0; // angular velocity
 	double hp = 1; // hit points
 
-	bool collision = 0;
+	bool collision = 1;
 
 	std::vector<bool> orders = {0,0,0,0,0,0,0,0,0,0}; // shows which commands are active
 

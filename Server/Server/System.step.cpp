@@ -9,6 +9,12 @@ void System::step() {
 	for (auto& object : objects) {
 		if (object.type != Object::SHIP) // Orders are for ships only
 			continue;
+		if (object.orders[Object::STABILIZE_ROTATION] && !object.orders[Object::TURN_LEFT] && !object.orders[Object::TURN_RIGHT])
+			if (object.w > EPS)
+				object.orders[Object::TURN_LEFT] = 1;
+			else if (object.w < -EPS)
+				object.orders[Object::TURN_RIGHT] = 1;
+
 		if (object.orders[Object::MOVE_FORWARD])
 			object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir) * dt;
 		if (object.orders[Object::MOVE_RIGHT])
@@ -22,7 +28,7 @@ void System::step() {
 			object.w += object.engine.angularForce * dt;
 		if (object.orders[Object::TURN_LEFT])
 			object.w -= object.engine.angularForce * dt;
-
+		
 	}
 
 	// Collison
