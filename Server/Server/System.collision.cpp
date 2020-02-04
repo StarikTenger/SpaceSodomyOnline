@@ -56,11 +56,16 @@ void System::collision() {
 		for (Object& b : objects) {
 			Vec2 aPos = a.pos + a.vel * dt;
 			Vec2 bPos = b.pos + b.vel * dt;
-			if (&a == &b || !a.collision || !b.collision)
+			if (a.id == b.id || &a == &b || !a.collision || !b.collision)
 				continue;
 
-			if (geom::distance(a.pos, b.pos) < a.r + b.r)
-				a.vel += geom::direction(a.pos, b.pos) * dt * 10 / a.m;	
+			if (geom::distance(a.pos, b.pos) < a.r + b.r) {
+				if (a.type == Object::BULLET && a.hp > EPS) {
+					b.hp -= 1;
+					a.hp = -EPS;
+				}
+				a.vel += geom::direction(a.pos, b.pos) * dt * 10 / a.m;
+			}
 
 		}
 	}
@@ -119,6 +124,9 @@ void System::collision() {
 				if (wall.second)
 					dmg = 1;
 			}
+		}
+		if (touch && u.type == Object::BULLET) {
+			u.hp = 0;
 		}
 	}
 }

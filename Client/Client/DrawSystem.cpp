@@ -22,7 +22,7 @@ void DrawSystem::drawScene() {
 	h = window->getSize().y;
 
 	for (const auto& object : sys.objects) {
-		if (object.id == sys.id) {
+		if (object.type == Object::SHIP && object.id == sys.id) {
 			cam.pos = object.pos;
 			cam.dir = object.dir;
 		}
@@ -61,20 +61,36 @@ void DrawSystem::drawScene() {
 
 	// Drawing ships
 	for (const auto& object : sys.objects) {
-		image("ship", object.pos.x, object.pos.y, object.r*2, object.r * 2, object.dir);
-		double r1 = object.r * 2.0 * 44.0 / 24.0;
-		if(object.orders[Object::MOVE_FORWARD])
-			image("fireForward", object.pos.x, object.pos.y, r1, r1, object.dir);
-		if (object.orders[Object::MOVE_BACKWARD])
-			image("fireBackward", object.pos.x, object.pos.y, r1, r1, object.dir);
-		if (object.orders[Object::MOVE_LEFT])
-			image("fireLeft", object.pos.x, object.pos.y, r1, r1, object.dir);
-		if (object.orders[Object::MOVE_RIGHT])
-			image("fireRight", object.pos.x, object.pos.y, r1, r1, object.dir);
-		if (object.orders[Object::TURN_LEFT])
-			image("fireTurnLeft", object.pos.x, object.pos.y, r1, r1, object.dir);
-		if (object.orders[Object::TURN_RIGHT])
-			image("fireTurnRight", object.pos.x, object.pos.y, r1, r1, object.dir);
+		if (object.type == Object::SHIP) {
+			image("ship", object.pos.x, object.pos.y, object.r * 2, object.r * 2, object.dir);
+
+			// engines
+			double r1 = object.r * 2.0 * 44.0 / 24.0;
+			if (object.orders[Object::MOVE_FORWARD])
+				image("fireForward", object.pos.x, object.pos.y, r1, r1, object.dir);
+			if (object.orders[Object::MOVE_BACKWARD])
+				image("fireBackward", object.pos.x, object.pos.y, r1, r1, object.dir);
+			if (object.orders[Object::MOVE_LEFT])
+				image("fireLeft", object.pos.x, object.pos.y, r1, r1, object.dir);
+			if (object.orders[Object::MOVE_RIGHT])
+				image("fireRight", object.pos.x, object.pos.y, r1, r1, object.dir);
+			if (object.orders[Object::TURN_LEFT])
+				image("fireTurnLeft", object.pos.x, object.pos.y, r1, r1, object.dir);
+			if (object.orders[Object::TURN_RIGHT])
+				image("fireTurnRight", object.pos.x, object.pos.y, r1, r1, object.dir);
+
+			// hp
+			auto shift = Vec2(0, 0) - geom::direction(cam.dir) * 0.5;
+			double l = object.hp / object.hpMax * 1;
+			image("box", object.pos.x + shift.x, object.pos.y + shift.y, 1, 0.1, cam.dir + M_PI / 2, {20, 100, 20, 255});
+			shift = Vec2(0, 0) - geom::rotate({(1 - l) / 2, -0.5}, cam.dir + M_PI / 2);
+			image("box", object.pos.x + shift.x , object.pos.y + shift.y, l, 0.1, cam.dir + M_PI / 2, {0, 255, 0, 255});
+
+		}
+		if (object.type == Object::BULLET) {
+			double r1 = object.r * 2.0 * 2;
+			image("bullet", object.pos.x, object.pos.y, r1, r1, object.dir);
+		}
 	}
 
 	drawWalls();

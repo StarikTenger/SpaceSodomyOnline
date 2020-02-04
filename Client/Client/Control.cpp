@@ -82,6 +82,8 @@ void Control::step() {
 			message += "l";
 		if (keys[STABILIZE_ROTATION])
 			message += "s";
+		if (keys[SHOOT])
+			message += "S";
 		socket.send(message.c_str(), message.size() + 1, address, port);
 
 		// Receive

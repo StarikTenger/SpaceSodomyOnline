@@ -16,6 +16,7 @@ public:
 	Vec2 border = {50, 50};
 
 	std::vector<Object> objects;
+	std::vector<Object> objectsToAdd;
 	std::vector<std::vector<Cell> > field;
 
 	System();
@@ -24,6 +25,7 @@ public:
 
 	std::string pack();
 	void step();
+	void shoot(Object& object);
 	bool collision(Object& body, std::pair<Vec2, Vec2> wall);
 	void collision();
 };

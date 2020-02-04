@@ -36,11 +36,12 @@ public:
 	Engine engine;
 	Gun gun;
 
-	double m = 0; // mass
+	double m = 1; // mass
 	double r = 0.4; // radius 
 	double dir = 0; // direction
 	double w = 0; // angular velocity
-	double hp = 1; // hit points
+	double maxHp = 5; // maximum hit points
+	double hp = maxHp; // hit points
 
 	bool collision = 1;
 

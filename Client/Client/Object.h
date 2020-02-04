@@ -25,6 +25,7 @@ public:
 	double r = 0.4;
 	double dir;
 	double hp;
+	double hpMax;
 
 	std::vector<bool> orders = { 0,0,0,0,0,0,0,0,0,0 };
 

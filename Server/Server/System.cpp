@@ -76,20 +76,47 @@ System::~System() {
 std::string System::pack() {
 	std::string str = "";
 	for (const auto& object : objects) {
-		str += "S ";
-		str += to_string(object.id) + " ";
-		str += to_string(object.pos.x, 3) + " ";
-		str += to_string(object.pos.y, 3) + " ";
-		str += to_string(object.dir, 4) + " ";
-		// packing orders
-		int orders = 0;
-		for (int i = 0; i < object.orders.size(); i++) {
-			if (object.orders[i])
-				orders += pow(2, i);
+		if (object.type == Object::SHIP) {
+			str += "S ";
+			str += to_string(object.id) + " ";
+			str += to_string(object.pos.x, 3) + " ";
+			str += to_string(object.pos.y, 3) + " ";
+			str += to_string(object.dir, 4) + " ";
+			// hp
+			str += to_string(object.hp, 1) + " ";
+			str += to_string(object.maxHp, 1) + " ";
+			// packing orders
+			int orders = 0;
+			for (int i = 0; i < object.orders.size(); i++) {
+				if (object.orders[i])
+					orders += pow(2, i);
+			}
+			str += to_string(orders) + " ";
 		}
-		str += to_string(orders) + " ";
+		if (object.type == Object::BULLET) {
+			str += "B ";
+			str += to_string(object.id) + " ";
+			str += to_string(object.pos.x, 3) + " ";
+			str += to_string(object.pos.y, 3) + " ";
+			str += to_string(object.dir, 4) + " ";
+		}
 	}
 	return str;
 }
 
+void System::shoot(Object& object) {
+	if (object.gun.timeToCooldown > 0)
+		return;
+	std::cout << object.gun.timeToCooldown << "\n";
+	object.gun.timeToCooldown = object.gun.cooldownTime;
 
+	Object bullet;
+	bullet.type = Object::BULLET;
+	bullet.id = object.id;
+	bullet.r = 0.2;
+	bullet.dir = object.dir;
+	bullet.pos = object.pos;
+	bullet.vel = object.vel + geom::direction(object.dir) * object.gun.vel;
+	bullet.hp = object.gun.lifetime;
+	objectsToAdd.push_back(bullet);
+}

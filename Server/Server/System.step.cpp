@@ -5,11 +5,21 @@
 #include <math.h>
 
 void System::step() {
+	// Cooldown
+	for (auto& object : objects) {
+		if (object.type == Object::SHIP)
+			object.gun.timeToCooldown -= dt;
+		if (object.type == Object::BULLET)
+			object.hp -= dt;
+	}
+
 	// Orders
 	for (auto& object : objects) {
 		if (object.type != Object::SHIP) // Orders are for ships only
 			continue;
-		if (object.orders[Object::STABILIZE_ROTATION] && !object.orders[Object::TURN_LEFT] && !object.orders[Object::TURN_RIGHT])
+		if (object.orders[Object::STABILIZE_ROTATION] && 
+			!object.orders[Object::TURN_LEFT] && 
+			!object.orders[Object::TURN_RIGHT])
 			if (object.w > EPS)
 				object.orders[Object::TURN_LEFT] = 1;
 			else if (object.w < -EPS)
@@ -28,11 +38,28 @@ void System::step() {
 			object.w += object.engine.angularForce * dt;
 		if (object.orders[Object::TURN_LEFT])
 			object.w -= object.engine.angularForce * dt;
+
+		if (object.orders[Object::SHOOT])
+			shoot(object);
 		
 	}
 
 	// Collison
 	collision();
+
+	// Add new objects
+	for (auto& object : objectsToAdd) {
+		objects.push_back(object);
+	}
+	objectsToAdd = {};
+
+	// Delete
+	for (int i = 0; i < objects.size(); i++) {
+		if (objects[i].hp < EPS) {
+			objects.erase(objects.begin() + i);
+			i--;
+		}
+	}
 
 	// Movement
 	for (auto& object : objects) {

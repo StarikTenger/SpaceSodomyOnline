@@ -72,7 +72,7 @@ void Control::receive() {
 		ss >> id;
 
 		for (auto& object : sys.objects) {
-			if (object.id == id) {
+			if (object.type == Object::SHIP && object.id == id) {
 				// Setting all orders to 0
 				for (int i = 0; i < object.orders.size(); i++)
 					object.orders[i] = 0;
@@ -97,6 +97,9 @@ void Control::receive() {
 						break;
 					case 'r':
 						object.orders[Object::TURN_RIGHT] = 1;
+						break;
+					case 'S':
+						object.orders[Object::SHOOT] = 1;
 						break;
 					case 's':
 						object.orders[Object::STABILIZE_ROTATION] = 1;

@@ -66,7 +66,7 @@ void System::unpack(std::string str) {
 	ss << str;
 	std::string type;
 	while (ss >> type) {
-		if (type == "S") {
+		if (type == "S" || type == "B") {
 			int id;
 			ss >> id;
 			double x, y, dir;
@@ -75,20 +75,27 @@ void System::unpack(std::string str) {
 			objects.back().id = id;
 			objects.back().pos = { x,y };
 			objects.back().dir = dir;
+			if (type == "B")
+				objects.back().type = Object::BULLET;
 
-			// orders
-			int orders;
-			ss >> orders;
-			int i = 0; objects.back().orders.size();
-			while (orders > 0) {
-				if (orders % 2 == 1)
-					objects.back().orders[i] = 1;
-				orders /= 2;
-				i++;
+
+			if (type == "S") {
+				// hp
+				double hp, hpMax;
+				ss >> hp >> hpMax;
+				objects.back().hp = hp;
+				objects.back().hpMax = hpMax;
+				// orders
+				int orders;
+				ss >> orders;
+				int i = 0; objects.back().orders.size();
+				while (orders > 0) {
+					if (orders % 2 == 1)
+						objects.back().orders[i] = 1;
+					orders /= 2;
+					i++;
+				}
 			}
-			/*for (auto e : objects.back().orders)
-				cout << e;
-			cout << "\n";*/
 		}
 	}
 }
