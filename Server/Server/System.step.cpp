@@ -5,10 +5,14 @@
 #include <math.h>
 
 void System::step() {
-	// Cooldown
+	// Counters
 	for (auto& object : objects) {
-		if (object.type == Object::SHIP)
+		if (object.type == Object::SHIP) {
 			object.gun.timeToCooldown -= dt;
+			object.energy += object.energyRecovery * dt;
+			if (object.energy > object.energyMax)
+				object.energy = object.energyMax;
+		}
 		if (object.type == Object::BULLET)
 			object.hp -= dt;
 	}
@@ -17,6 +21,8 @@ void System::step() {
 	for (auto& object : objects) {
 		if (object.type != Object::SHIP) // Orders are for ships only
 			continue;
+
+		// stabilize
 		if (object.orders[Object::STABILIZE_ROTATION] && 
 			!object.orders[Object::TURN_LEFT] && 
 			!object.orders[Object::TURN_RIGHT])
@@ -25,20 +31,49 @@ void System::step() {
 			else if (object.w < -EPS)
 				object.orders[Object::TURN_RIGHT] = 1;
 
-		if (object.orders[Object::MOVE_FORWARD])
-			object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir) * dt;
-		if (object.orders[Object::MOVE_RIGHT])
-			object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir + M_PI * 0.5) * dt;
-		if (object.orders[Object::MOVE_BACKWARD])
-			object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir + M_PI) * dt;
-		if (object.orders[Object::MOVE_LEFT])
-			object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir + M_PI * 1.5) * dt;
+		if (object.energy > EPS) {
+			// linear
+			if (object.orders[Object::MOVE_FORWARD]) {
+				object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir) * dt;
+				object.energy -= object.engine.consumptionLinear * dt;
+			}
 
-		if (object.orders[Object::TURN_RIGHT])
-			object.w += object.engine.angularForce * dt;
-		if (object.orders[Object::TURN_LEFT])
-			object.w -= object.engine.angularForce * dt;
+			if (object.orders[Object::MOVE_RIGHT]) {
+				object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir + M_PI * 0.5) * dt;
+				object.energy -= object.engine.consumptionLinear * dt;
+			}
 
+			if (object.orders[Object::MOVE_BACKWARD]) {
+				object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir + M_PI) * dt;
+				object.energy -= object.engine.consumptionLinear * dt;
+			}
+
+			if (object.orders[Object::MOVE_LEFT]) {
+				object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir + M_PI * 1.5) * dt;
+				object.energy -= object.engine.consumptionLinear * dt;
+			}
+
+			// angular
+			if (object.orders[Object::TURN_RIGHT]) {
+				object.w += object.engine.angularForce * dt;
+				object.energy -= object.engine.consumptionAngular * dt;
+			}
+
+			if (object.orders[Object::TURN_LEFT]) {
+				object.w -= object.engine.angularForce * dt;
+				object.energy -= object.engine.consumptionAngular * dt;
+			}
+		}
+		else {
+			object.orders[Object::MOVE_FORWARD] = 0;
+			object.orders[Object::MOVE_RIGHT] = 0;
+			object.orders[Object::MOVE_BACKWARD] = 0;
+			object.orders[Object::MOVE_LEFT] = 0;
+			object.orders[Object::TURN_RIGHT] = 0;
+			object.orders[Object::TURN_LEFT] = 0;
+		}
+
+		// shoot
 		if (object.orders[Object::SHOOT])
 			shoot(object);
 		

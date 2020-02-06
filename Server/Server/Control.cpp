@@ -8,7 +8,9 @@ Control::Control() {
 	//buffer = new char(1024);
 	sys = System("level.lvl");
 	sys.objects.push_back({ {3, 4}, 1, 0 });
-	sys.objects.push_back({ {4, 4}, 1, 0 });
+	sys.objects.back().color = {3, 252, 248};
+	sys.objects.push_back({ {36, 36}, 1, 0 });
+	sys.objects.back().color = { 165, 252, 3 };
 	sys.objects.back().id = 10;
 
 	socket.setBlocking(0);
@@ -36,12 +38,12 @@ void Control::step() {
 	int timeMs = getMilliCount();
 	if (timeMs - timePrev > dt) {
 		timePrev = timeMs;
-		 
+		
+		checkMessages();
+
 		for (int i = 0; i < 1; i++) {
 			sys.step();
 		}
-
-
 		// Sending
 		for (auto a : addresses) { 
 			std::string message = sys.pack();
@@ -66,8 +68,18 @@ void Control::receive() {
 		}
 
 		// Applying received info
+		
+		messages.push_back(std::string(buffer));
+		received = 0;
+	}
+}
+
+void Control::checkMessages() {
+	while(messages.size()) {
 		std::stringstream ss;
-		ss << buffer;
+		ss << messages.front();
+		messages.pop_front();
+
 		int id;
 		ss >> id;
 
@@ -109,7 +121,6 @@ void Control::receive() {
 			}
 		}
 
-
-		received = 0;
+		
 	}
 }

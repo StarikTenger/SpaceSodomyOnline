@@ -14,8 +14,7 @@ using namespace std;
 
 
 template <typename T>
-std::string to_string(const T a_value, int n)
-{
+std::string to_string(const T a_value, int n) {
 	std::ostringstream out;
 	out.precision(n);
 	out << std::fixed << a_value;
@@ -78,13 +77,23 @@ std::string System::pack() {
 	for (const auto& object : objects) {
 		if (object.type == Object::SHIP) {
 			str += "S ";
+			// id
 			str += to_string(object.id) + " ";
+			// position
 			str += to_string(object.pos.x, 3) + " ";
 			str += to_string(object.pos.y, 3) + " ";
+			// direction
 			str += to_string(object.dir, 4) + " ";
+			// color
+			str += to_string((int)object.color.r) + " ";
+			str += to_string((int)object.color.g) + " ";
+			str += to_string((int)object.color.b) + " ";
 			// hp
 			str += to_string(object.hp, 1) + " ";
-			str += to_string(object.maxHp, 1) + " ";
+			str += to_string(object.hpMax, 1) + " ";
+			// energy
+			str += to_string(object.energy, 1) + " ";
+			str += to_string(object.energyMax, 1) + " ";
 			// packing orders
 			int orders = 0;
 			for (int i = 0; i < object.orders.size(); i++) {
@@ -95,24 +104,33 @@ std::string System::pack() {
 		}
 		if (object.type == Object::BULLET) {
 			str += "B ";
+			// id
 			str += to_string(object.id) + " ";
+			// position
 			str += to_string(object.pos.x, 3) + " ";
 			str += to_string(object.pos.y, 3) + " ";
+			// direction
 			str += to_string(object.dir, 4) + " ";
+			// color
+			str += to_string((int)object.color.r) + " ";
+			str += to_string((int)object.color.g) + " ";
+			str += to_string((int)object.color.b) + " ";
 		}
 	}
 	return str;
 }
 
 void System::shoot(Object& object) {
-	if (object.gun.timeToCooldown > 0)
+	if (object.gun.timeToCooldown > 0 || object.energy < object.gun.consumption)
 		return;
 	std::cout << object.gun.timeToCooldown << "\n";
 	object.gun.timeToCooldown = object.gun.cooldownTime;
+	object.energy -= object.gun.consumption;
 
 	Object bullet;
 	bullet.type = Object::BULLET;
 	bullet.id = object.id;
+	bullet.color = object.color;
 	bullet.r = 0.2;
 	bullet.dir = object.dir;
 	bullet.pos = object.pos;

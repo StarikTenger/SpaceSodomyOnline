@@ -1,9 +1,10 @@
 #pragma once
 class Gun {
 public:
-	double cooldownTime = 1;
+	double cooldownTime = 0.5;
 	double timeToCooldown = 0;
-	double vel = 10; // velocity of bullet
+	double vel = 15; // velocity of bullet
 	double lifetime = 10; // countdown to explosion
+	double consumption = 1; // energy points required
 };
 

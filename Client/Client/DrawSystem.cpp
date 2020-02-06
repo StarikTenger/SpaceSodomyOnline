@@ -63,33 +63,45 @@ void DrawSystem::drawScene() {
 	for (const auto& object : sys.objects) {
 		if (object.type == Object::SHIP) {
 			image("ship", object.pos.x, object.pos.y, object.r * 2, object.r * 2, object.dir);
+			image("shipColors", object.pos.x, object.pos.y, object.r * 2, object.r * 2, object.dir, object.color);
 
 			// engines
 			double r1 = object.r * 2.0 * 44.0 / 24.0;
 			if (object.orders[Object::MOVE_FORWARD])
-				image("fireForward", object.pos.x, object.pos.y, r1, r1, object.dir);
+				image("fireForward", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
 			if (object.orders[Object::MOVE_BACKWARD])
-				image("fireBackward", object.pos.x, object.pos.y, r1, r1, object.dir);
+				image("fireBackward", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
 			if (object.orders[Object::MOVE_LEFT])
-				image("fireLeft", object.pos.x, object.pos.y, r1, r1, object.dir);
+				image("fireLeft", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
 			if (object.orders[Object::MOVE_RIGHT])
-				image("fireRight", object.pos.x, object.pos.y, r1, r1, object.dir);
+				image("fireRight", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
 			if (object.orders[Object::TURN_LEFT])
-				image("fireTurnLeft", object.pos.x, object.pos.y, r1, r1, object.dir);
+				image("fireTurnLeft", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
 			if (object.orders[Object::TURN_RIGHT])
-				image("fireTurnRight", object.pos.x, object.pos.y, r1, r1, object.dir);
+				image("fireTurnRight", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
 
 			// hp
-			auto shift = Vec2(0, 0) - geom::direction(cam.dir) * 0.5;
-			double l = object.hp / object.hpMax * 1;
-			image("box", object.pos.x + shift.x, object.pos.y + shift.y, 1, 0.1, cam.dir + M_PI / 2, {20, 100, 20, 255});
-			shift = Vec2(0, 0) - geom::rotate({(1 - l) / 2, -0.5}, cam.dir + M_PI / 2);
-			image("box", object.pos.x + shift.x , object.pos.y + shift.y, l, 0.1, cam.dir + M_PI / 2, {0, 255, 0, 255});
+			{			
+				auto shift = Vec2(0, 0) - geom::direction(cam.dir) * 0.5;
+				double l = object.hp / object.hpMax * 1;
+				image("box", object.pos.x + shift.x, object.pos.y + shift.y, 1, 0.1, cam.dir + M_PI / 2, { 20, 100, 20, 255 });
+				shift = Vec2(0, 0) - geom::rotate({ (1 - l) / 2, -0.5 }, cam.dir + M_PI / 2);
+				image("box", object.pos.x + shift.x, object.pos.y + shift.y, l, 0.1, cam.dir + M_PI / 2, { 0, 255, 0, 255 });
+			}
+
+			// energy
+			{
+				auto shift = Vec2(0, 0) - geom::direction(cam.dir) * 0.6;
+				double l = object.energy / object.energyMax * 1;
+				image("box", object.pos.x + shift.x, object.pos.y + shift.y, 1, 0.1, cam.dir + M_PI / 2, { 0, 107, 145, 255 });
+				shift = Vec2(0, 0) - geom::rotate({ (1 - l) / 2, -0.6 }, cam.dir + M_PI / 2);
+				image("box", object.pos.x + shift.x, object.pos.y + shift.y, l, 0.1, cam.dir + M_PI / 2, { 3, 186, 252, 255 });
+			}
 
 		}
 		if (object.type == Object::BULLET) {
 			double r1 = object.r * 2.0 * 2;
-			image("bullet", object.pos.x, object.pos.y, r1, r1, object.dir);
+			image("bullet", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
 		}
 	}
 

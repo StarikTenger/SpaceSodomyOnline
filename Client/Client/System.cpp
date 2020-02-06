@@ -75,9 +75,14 @@ void System::unpack(std::string str) {
 			objects.back().id = id;
 			objects.back().pos = { x,y };
 			objects.back().dir = dir;
+			// color
+			Color col;
+			col.a = 255;
+			ss >> col.r >> col.g >> col.b;
+			objects.back().color = col;
+
 			if (type == "B")
 				objects.back().type = Object::BULLET;
-
 
 			if (type == "S") {
 				// hp
@@ -85,6 +90,11 @@ void System::unpack(std::string str) {
 				ss >> hp >> hpMax;
 				objects.back().hp = hp;
 				objects.back().hpMax = hpMax;
+				// energy
+				double energy, energyMax;
+				ss >> energy >> energyMax;
+				objects.back().energy = std::max(0.0, energy);
+				objects.back().energyMax = energyMax;
 				// orders
 				int orders;
 				ss >> orders;

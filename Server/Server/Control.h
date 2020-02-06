@@ -2,6 +2,7 @@
 #include <ctime>
 #include <algorithm>
 #include <fstream>
+#include <deque>
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
 
@@ -25,7 +26,7 @@ public:
 	sf::IpAddress sender;
 	unsigned short port = 0;
 	std::vector<std::pair<sf::IpAddress, int>> addresses;
-
+	std::deque<std::string> messages;
 
 	controlMode mode = MENU;
 
@@ -47,6 +48,7 @@ public:
 
 	void step();
 	void receive();
+	void checkMessages();
 	std::string configParametersAdress = "parameters.conf";
 	void loadConfig();
 	void saveConfig();

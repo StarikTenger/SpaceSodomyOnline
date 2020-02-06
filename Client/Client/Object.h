@@ -1,5 +1,6 @@
 #pragma once
 #include "geometry.h"
+#include "color.h"
 
 class Object {
 public:
@@ -21,11 +22,15 @@ public:
 
 	int id = 0;
 	Type type = SHIP;
+	Color color;
+
 	Vec2 pos;
 	double r = 0.4;
 	double dir;
 	double hp;
 	double hpMax;
+	double energyMax;
+	double energy;
 
 	std::vector<bool> orders = { 0,0,0,0,0,0,0,0,0,0 };
 

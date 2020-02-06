@@ -3,6 +3,7 @@
 #include "Engine.h"
 #include "Gun.h"
 #include "geometry.h"
+#include "color.h"
 #include <vector>
 
 
@@ -28,6 +29,7 @@ public:
 
 	int id = 666;
 	Type type = SHIP;
+	Color color;
 
 	Vec2 pos; // position
 	Vec2 vel; // velocity
@@ -40,8 +42,11 @@ public:
 	double r = 0.4; // radius 
 	double dir = 0; // direction
 	double w = 0; // angular velocity
-	double maxHp = 5; // maximum hit points
-	double hp = maxHp; // hit points
+	double hpMax = 10; // maximum hit points
+	double hp = hpMax; // hit points
+	double energyMax = 10;
+	double energy = energyMax;
+	double energyRecovery = 1;
 
 	bool collision = 1;
 

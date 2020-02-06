@@ -1,38 +1,7 @@
-﻿  DrawSystem.cpp
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(32,50): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(32,50): warning C4244:         with
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(32,50): warning C4244:         [
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(32,50): warning C4244:             T=float
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(32,50): warning C4244:         ]
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(32,47): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(32,47): warning C4244:         with
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(32,47): warning C4244:         [
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(32,47): warning C4244:             T=float
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(32,47): warning C4244:         ]
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(45,61): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(45,61): warning C4244:         with
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(45,61): warning C4244:         [
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(45,61): warning C4244:             T=float
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(45,61): warning C4244:         ]
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(45,26): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(45,26): warning C4244:         with
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(45,26): warning C4244:         [
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(45,26): warning C4244:             T=float
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(45,26): warning C4244:         ]
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(46,41): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(46,41): warning C4244:         with
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(46,41): warning C4244:         [
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(46,41): warning C4244:             T=float
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(46,41): warning C4244:         ]
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(46,22): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(46,22): warning C4244:         with
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(46,22): warning C4244:         [
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(46,22): warning C4244:             T=float
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(46,22): warning C4244:         ]
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(48,42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+﻿  System.cpp
   Generating code
-  1 of 858 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+  2 of 860 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    3 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Client.vcxproj -> C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Release\Client.exe

@@ -51,7 +51,7 @@ bool System::collision(Object& body, std::pair<Vec2, Vec2> wall) {
 void System::collision() {
 	double blockSize = 1;
 	bool touch = 0;
-	//objects
+	// objects
 	for (Object& a : objects) {
 		for (Object& b : objects) {
 			Vec2 aPos = a.pos + a.vel * dt;
@@ -70,7 +70,7 @@ void System::collision() {
 		}
 	}
 
-	//walls
+	// walls
 	for (Object& u : objects) {
 		vector<pair<pair<Vec2, Vec2>, bool> > walls;
 		walls.push_back({ {{0, 0}, {0, (double)field.size()}}, 0 });
@@ -82,7 +82,7 @@ void System::collision() {
 		int y0 = (int)(u.pos.y / blockSize + 1) - 1;
 		for (int x = std::max(0, x0 - 1); x <= std::min((int)field.size() - 1, x0 + 1); x++) {
 			for (int y = std::max(0, y0 - 1); y <= std::min((int)field[0].size() - 1, y0 + 1); y++) {
-				//block verticies
+				// block verticies
 				Vec2 pA(x + 0.0, y + 0.0);
 				Vec2 pB(x + 1.0, y + 0.0);
 				Vec2 pC(x + 1.0, y + 1.0);
