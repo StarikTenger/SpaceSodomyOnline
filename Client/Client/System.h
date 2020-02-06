@@ -11,13 +11,18 @@
 class System{
 public:
 	int id = 0;
+	int privilegies = 1;
+
+	double bulletVel = 15;
 
 	std::string state;
 	std::vector<Object> objects;
 	std::vector<std::vector<Cell> > field;
 
+
 	System();
 	System(std::string path);
 	~System();
+	int checkWall(Vec2 pos);
 	void unpack(std::string str);
 };

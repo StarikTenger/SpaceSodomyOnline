@@ -137,5 +137,8 @@
     <ClCompile Include="DrawSystem.drawWalls.cpp">
       <Filter>Source Files\System</Filter>
     </ClCompile>
+    <ClCompile Include="DrawSystem.objects.cpp">
+      <Filter>Source Files\DrawSystem</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -60,6 +60,19 @@ System::System(string path) {
 	}
 }
 
+int System::checkWall(Vec2 pos) {
+	int x = (int)(pos.x / 1);
+	int y = (int)(pos.y / 1);
+	Vec2 rel = pos - Vec2(x + 0.5, y + 0.5);
+	if ((x < 0 || y < 0 || x >= field.size() || y >= field[0].size() || field[x][y].type == 1) ||
+		rel.y < -rel.x && field[x][y].type == CORNER_A || rel.y > -rel.x && field[x][y].type == CORNER_C ||
+		rel.y < rel.x && field[x][y].type == CORNER_B || rel.y > rel.x && field[x][y].type == CORNER_D
+		) {
+		return 1;
+	}
+	return 0;
+}
+
 void System::unpack(std::string str) {
 	objects = {};
 	std::stringstream ss;
@@ -67,34 +80,33 @@ void System::unpack(std::string str) {
 	std::string type;
 	while (ss >> type) {
 		if (type == "S" || type == "B") {
-			int id;
-			ss >> id;
-			double x, y, dir;
-			ss >> x >> y >> dir;
 			objects.push_back({});
-			objects.back().id = id;
-			objects.back().pos = { x,y };
-			objects.back().dir = dir;
+			auto& object = objects.back();
+
+			// id
+			ss >> object.id;
+			// position
+			ss >> object.pos.x >> object.pos.y;
+			// direction
+			ss >> object.dir;
+			
+			// linear velocity
+			ss >> object.vel.x >> object.vel.y;
+			// angular velocity
+			ss >> object.w;
+
 			// color
-			Color col;
-			col.a = 255;
-			ss >> col.r >> col.g >> col.b;
-			objects.back().color = col;
+			ss >> object.color.r >> object.color.g >> object.color.b;
+			object.color.a = 255;
 
 			if (type == "B")
 				objects.back().type = Object::BULLET;
 
 			if (type == "S") {
 				// hp
-				double hp, hpMax;
-				ss >> hp >> hpMax;
-				objects.back().hp = hp;
-				objects.back().hpMax = hpMax;
+				ss >> object.hp >> object.hpMax;
 				// energy
-				double energy, energyMax;
-				ss >> energy >> energyMax;
-				objects.back().energy = std::max(0.0, energy);
-				objects.back().energyMax = energyMax;
+				ss >> object.energy >> object.energyMax;
 				// orders
 				int orders;
 				ss >> orders;

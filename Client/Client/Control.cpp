@@ -57,6 +57,16 @@ void Control::step() {
 	if (timeMs - timePrev > dt) {
 		timePrev = timeMs;
 		
+		drawSys.cam.border = { drawSys.w, drawSys.h};
+
+		drawSys.cam.dir = -M_PI/2;
+		if (mouse.state) {
+			drawSys.cam.pos += (mousePrev.pos - mouse.pos) / drawSys.cam.scale;
+		}
+		double dS = pow(1.1, mouse.delta);
+		drawSys.cam.scale *= dS;
+		drawSys.cam.pos += (drawSys.cam.border / 2 - mouse.pos) / drawSys.cam.scale * (1 - dS); // it works
+
 		events();
 		drawSys.mouse = mouse;			
 
@@ -86,12 +96,6 @@ void Control::step() {
 			message += "S";
 		socket.send(message.c_str(), message.size() + 1, address, port);
 
-		// Receive
-		/*std::size_t received = 0;
-		sf::IpAddress sender;
-		unsigned short port = 0;
-		socket.receive(buffer, sizeof(buffer), received, sender, port);*/
-		//std::cout << buffer << "\n";
 		sys.state = std::string(buffer);
 		sys.unpack(sys.state);
 

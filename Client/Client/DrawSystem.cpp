@@ -62,6 +62,11 @@ void DrawSystem::drawScene() {
 	// Drawing ships
 	for (const auto& object : sys.objects) {
 		if (object.type == Object::SHIP) {
+			// beam
+			if (object.id == sys.id) {
+				beam(object.pos, geom::dir(object.vel + geom::direction(object.dir) * sys.bulletVel), { 255, 0, 0, 130 });
+			}
+
 			image("ship", object.pos.x, object.pos.y, object.r * 2, object.r * 2, object.dir);
 			image("shipColors", object.pos.x, object.pos.y, object.r * 2, object.r * 2, object.dir, object.color);
 
@@ -100,6 +105,11 @@ void DrawSystem::drawScene() {
 
 		}
 		if (object.type == Object::BULLET) {
+			if (sys.privilegies) {
+				Color col = object.color;
+				col.a = 100;
+				beam(object.pos, geom::dir(object.vel), col);
+			}
 			double r1 = object.r * 2.0 * 2;
 			image("bullet", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
 		}

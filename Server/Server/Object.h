@@ -42,7 +42,7 @@ public:
 	double r = 0.4; // radius 
 	double dir = 0; // direction
 	double w = 0; // angular velocity
-	double hpMax = 10; // maximum hit points
+	double hpMax = 5; // maximum hit points
 	double hp = hpMax; // hit points
 	double energyMax = 10;
 	double energy = energyMax;
@@ -53,6 +53,6 @@ public:
 	std::vector<bool> orders = {0,0,0,0,0,0,0,0,0,0}; // shows which commands are active
 
 	Object();
-	Object(Vec2 _pos, double _m, double _dir);
+	Object(int _id, Color _color, Vec2 _pos, double _m, double _dir);
 };
 

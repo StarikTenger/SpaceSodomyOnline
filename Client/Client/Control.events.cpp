@@ -4,8 +4,9 @@
 void Control::events() {
 	
 	drawSys.window->setKeyRepeatEnabled(false);
-	mouse.statePrev = mouse.state;
+	mousePrev = mouse;
 	sf::Event event;
+	mouse.delta = 0;
 	while (drawSys.window->pollEvent(event))
 	{
 		switch (event.type) {
@@ -26,6 +27,9 @@ void Control::events() {
 		case sf::Event::MouseMoved:
 			mouse.pos.x = event.mouseMove.x;
 			mouse.pos.y = event.mouseMove.y;
+			break;
+		case sf::Event::MouseWheelMoved:
+			mouse.delta = event.mouseWheel.delta;
 			break;
 		case sf::Event::MouseButtonPressed:
 			mouse.state = 1;

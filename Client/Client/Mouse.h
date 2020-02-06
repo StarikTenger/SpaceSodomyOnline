@@ -4,6 +4,7 @@
 class Mouse{
 public:
 	Vec2 pos;
+	double delta = 0;
 	bool state = 0;
 	bool statePrev = 0;
 	Mouse();

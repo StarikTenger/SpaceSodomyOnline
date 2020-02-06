@@ -49,6 +49,7 @@ public:
 
 	// Objects
 	void drawWalls();
+	void beam(Vec2 pos, double dir, Color col);
 
 	// Load
 	std::map<std::string, sf::Texture*> textures;

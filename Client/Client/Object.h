@@ -25,8 +25,10 @@ public:
 	Color color;
 
 	Vec2 pos;
+	Vec2 vel;
 	double r = 0.4;
 	double dir;
+	double w;
 	double hp;
 	double hpMax;
 	double energyMax;

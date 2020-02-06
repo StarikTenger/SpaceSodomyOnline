@@ -157,6 +157,7 @@
     <ClCompile Include="DrawSystem.cpp" />
     <ClCompile Include="DrawSystem.drawWalls.cpp" />
     <ClCompile Include="DrawSystem.loadTextures.cpp" />
+    <ClCompile Include="DrawSystem.objects.cpp" />
     <ClCompile Include="Gamepad.cpp" />
     <ClCompile Include="geometry.cpp" />
     <ClCompile Include="getMilliCount.cpp" />

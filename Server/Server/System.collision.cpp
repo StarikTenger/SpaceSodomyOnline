@@ -64,7 +64,7 @@ void System::collision() {
 					b.hp -= 1;
 					a.hp = -EPS;
 				}
-				a.vel += geom::direction(a.pos, b.pos) * dt * 10 / a.m;
+				//a.vel += geom::direction(a.pos, b.pos) * dt * 10 / a.m;
 			}
 
 		}

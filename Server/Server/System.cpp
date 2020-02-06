@@ -22,9 +22,7 @@ std::string to_string(const T a_value, int n) {
 }
 
 System::System(){
-	objects.push_back({ {0, 0}, 1, 0 });
-	objects.push_back({ {200, 100}, 1, 0 });
-	objects.back().id = 10;
+
 }
 
 System::System(string path) {
@@ -73,21 +71,30 @@ System::~System() {
 }
 
 std::string System::pack() {
-	std::string str = "";
+	std::string packet = "";
 	for (const auto& object : objects) {
+		std::string str = "";
+		// id
+		str += to_string(object.id) + " ";
+		// position
+		str += to_string(object.pos.x, 3) + " ";
+		str += to_string(object.pos.y, 3) + " ";
+		// direction
+		str += to_string(object.dir, 4) + " ";
+		// linear velocity
+		str += to_string(object.vel.x, 3) + " ";
+		str += to_string(object.vel.y, 3) + " ";
+		// angular velocity
+		str += to_string(object.w, 3) + " ";
+		
+		// color
+		str += to_string((int)object.color.r) + " ";
+		str += to_string((int)object.color.g) + " ";
+		str += to_string((int)object.color.b) + " ";
+
 		if (object.type == Object::SHIP) {
-			str += "S ";
-			// id
-			str += to_string(object.id) + " ";
-			// position
-			str += to_string(object.pos.x, 3) + " ";
-			str += to_string(object.pos.y, 3) + " ";
-			// direction
-			str += to_string(object.dir, 4) + " ";
-			// color
-			str += to_string((int)object.color.r) + " ";
-			str += to_string((int)object.color.g) + " ";
-			str += to_string((int)object.color.b) + " ";
+			str = "S " + str;
+			
 			// hp
 			str += to_string(object.hp, 1) + " ";
 			str += to_string(object.hpMax, 1) + " ";
@@ -103,21 +110,12 @@ std::string System::pack() {
 			str += to_string(orders) + " ";
 		}
 		if (object.type == Object::BULLET) {
-			str += "B ";
-			// id
-			str += to_string(object.id) + " ";
-			// position
-			str += to_string(object.pos.x, 3) + " ";
-			str += to_string(object.pos.y, 3) + " ";
-			// direction
-			str += to_string(object.dir, 4) + " ";
-			// color
-			str += to_string((int)object.color.r) + " ";
-			str += to_string((int)object.color.g) + " ";
-			str += to_string((int)object.color.b) + " ";
+			str = "B " + str;
 		}
+
+		packet += str;
 	}
-	return str;
+	return packet;
 }
 
 void System::shoot(Object& object) {
