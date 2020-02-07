@@ -1,8 +1,11 @@
-﻿  Control.cpp
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\Control.cpp(89,23): warning C4018: '<': signed/unsigned mismatch
+﻿  System.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(124,22): warning C4018: '<': signed/unsigned mismatch
+  System.step.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(126,25): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.step.cpp(92,20): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  1 of 833 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+  15 of 962 functions ( 1.6%) were compiled, the rest were copied from previous compilation.
+    6 functions were new in current compilation
+    22 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Server.vcxproj -> C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Release\Server.exe

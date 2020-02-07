@@ -75,10 +75,24 @@ int System::checkWall(Vec2 pos) {
 
 void System::unpack(std::string str) {
 	objects = {};
+	players = {};
+
 	std::stringstream ss;
 	ss << str;
 	std::string type;
+	
 	while (ss >> type) {
+		// players
+		if (type == "P") {
+			players.push_back({});
+			auto& player = players.back();
+
+			ss >> player.id;
+			ss >> player.color.r >> player.color.g >> player.color.b;
+			player.color.a = 255;
+			ss >> player.kills;
+			ss >> player.deaths;
+		}
 		if (type == "S" || type == "B") {
 			objects.push_back({});
 			auto& object = objects.back();

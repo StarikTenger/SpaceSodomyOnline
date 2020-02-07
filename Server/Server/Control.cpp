@@ -7,11 +7,11 @@
 Control::Control() {
 	//buffer = new char(1024);
 	sys = System("level.lvl");
-	sys.objects.push_back({ 1, {48, 145, 255}, {3, 3}, 1, 0 });
-	sys.objects.push_back({ 2, {0, 255, 64},{46, 5}, 1, 0 });
-	sys.objects.push_back({ 3, {255, 38, 96},{43, 47}, 1, 0 });
-	sys.objects.push_back({ 4, {255, 234, 79},{3, 46}, 1, 0 });
-	sys.objects.push_back({ 5, {194, 41, 255},{23, 25}, 1, 0 });
+	sys.setPlayer({ 1, {48, 145, 255}, {3, 3}, 1, 0 });
+	sys.setPlayer({ 2, {0, 255, 64},{46, 5}, 1, 0 });
+	sys.setPlayer({ 3, {255, 38, 96},{43, 47}, 1, 0 });
+	sys.setPlayer({ 4, {255, 234, 79},{3, 46}, 1, 0 });
+	sys.setPlayer({ 5, {194, 41, 255},{23, 25}, 1, 0 });
 
 	socket.setBlocking(0);
 	socket.bind(8001);

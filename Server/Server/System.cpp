@@ -70,8 +70,26 @@ System::System(string path) {
 System::~System() {
 }
 
+void System::setPlayer(Object object) {
+	objects.push_back(object);
+	if(players.find(object.id) == players.end())
+		players[object.id] = Player();
+	players[object.id].color = object.color;
+}
+
 std::string System::pack() {
 	std::string packet = "";
+
+	for (const auto& player : players) {
+		packet += "P ";
+		packet += to_string(player.first) + " ";
+		packet += to_string(player.second.color.r) + " ";
+		packet += to_string(player.second.color.g) + " ";
+		packet += to_string(player.second.color.b) + " ";
+		packet += to_string(player.second.kills) + " ";
+		packet += to_string(player.second.deaths) + " ";
+	}
+
 	for (const auto& object : objects) {
 		std::string str = "";
 		// id

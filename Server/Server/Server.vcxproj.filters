@@ -75,6 +75,9 @@
     <ClInclude Include="Cell.h">
       <Filter>Header Files\System</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -123,6 +126,9 @@
       <Filter>Source Files\System</Filter>
     </ClCompile>
     <ClCompile Include="System.collision.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
       <Filter>Source Files\System</Filter>
     </ClCompile>
   </ItemGroup>

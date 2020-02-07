@@ -91,8 +91,27 @@ void System::step() {
 	// Delete
 	for (int i = 0; i < objects.size(); i++) {
 		if (objects[i].hp < EPS) {
+			if (objects[i].type == Object::SHIP) {
+				players[objects[i].id].alive = 0;
+			}
 			objects.erase(objects.begin() + i);
 			i--;
+		}
+	}
+
+	// Respawn
+	for (auto& player : players) {
+		if (!player.second.alive) {
+			while (1) {
+				int x = random::intRandom(1, field.size() - 1);
+				int y = random::intRandom(1, field.size() - 1);
+				if (field[x][y].type)
+					continue;
+				player.second.deaths++;
+				setPlayer({ player.first, player.second.color, Vec2(x + 0.5, y + 0.5), 1, 0 });
+				player.second.alive = 1;
+				break;
+			}
 		}
 	}
 

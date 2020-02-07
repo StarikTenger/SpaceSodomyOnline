@@ -6,6 +6,7 @@
 #include "Vec2.h"
 #include "Object.h"
 #include "Cell.h"
+#include "Player.h"
 
 
 class System{
@@ -18,7 +19,7 @@ public:
 	std::string state;
 	std::vector<Object> objects;
 	std::vector<std::vector<Cell> > field;
-
+	std::vector<Player> players;
 
 	System();
 	System(std::string path);

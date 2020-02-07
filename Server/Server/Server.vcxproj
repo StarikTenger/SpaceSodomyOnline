@@ -30,6 +30,7 @@
     <ClInclude Include="keys.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="random.h" />
     <ClInclude Include="System.h" />
     <ClInclude Include="Vec2.h" />
@@ -46,6 +47,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="random.cpp" />
     <ClCompile Include="System.collision.cpp" />
     <ClCompile Include="System.cpp" />

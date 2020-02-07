@@ -63,6 +63,9 @@ void System::collision() {
 				if (a.type == Object::BULLET && a.hp > EPS) {
 					b.hp -= 1;
 					a.hp = -EPS;
+					if (b.hp < EPS && b.type == Object::SHIP) {
+						players[a.id].kills++;
+					}
 				}
 				//a.vel += geom::direction(a.pos, b.pos) * dt * 10 / a.m;
 			}

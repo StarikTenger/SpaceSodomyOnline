@@ -85,22 +85,24 @@ void DrawSystem::drawScene() {
 			if (object.orders[Object::TURN_RIGHT])
 				image("fireTurnRight", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
 
-			// hp
-			{			
-				auto shift = Vec2(0, 0) - geom::direction(cam.dir) * 0.5;
-				double l = object.hp / object.hpMax * 1;
-				image("box", object.pos.x + shift.x, object.pos.y + shift.y, 1, 0.1, cam.dir + M_PI / 2, { 20, 100, 20, 255 });
-				shift = Vec2(0, 0) - geom::rotate({ (1 - l) / 2, -0.5 }, cam.dir + M_PI / 2);
-				image("box", object.pos.x + shift.x, object.pos.y + shift.y, l, 0.1, cam.dir + M_PI / 2, { 0, 255, 0, 255 });
-			}
+			if (object.id != sys.id) {
+				// hp
+				{
+					auto shift = Vec2(0, 0) - geom::direction(cam.dir) * 0.5;
+					double l = object.hp / object.hpMax * 1;
+					image("box", object.pos.x + shift.x, object.pos.y + shift.y, 1, 0.1, cam.dir + M_PI / 2, { 20, 100, 20, 255 });
+					shift = Vec2(0, 0) - geom::rotate({ (1 - l) / 2, -0.5 }, cam.dir + M_PI / 2);
+					image("box", object.pos.x + shift.x, object.pos.y + shift.y, l, 0.1, cam.dir + M_PI / 2, { 0, 255, 0, 255 });
+				}
 
-			// energy
-			{
-				auto shift = Vec2(0, 0) - geom::direction(cam.dir) * 0.6;
-				double l = object.energy / object.energyMax * 1;
-				image("box", object.pos.x + shift.x, object.pos.y + shift.y, 1, 0.1, cam.dir + M_PI / 2, { 0, 107, 145, 255 });
-				shift = Vec2(0, 0) - geom::rotate({ (1 - l) / 2, -0.6 }, cam.dir + M_PI / 2);
-				image("box", object.pos.x + shift.x, object.pos.y + shift.y, l, 0.1, cam.dir + M_PI / 2, { 3, 186, 252, 255 });
+				// energy
+				{
+					auto shift = Vec2(0, 0) - geom::direction(cam.dir) * 0.6;
+					double l = object.energy / object.energyMax * 1;
+					image("box", object.pos.x + shift.x, object.pos.y + shift.y, 1, 0.1, cam.dir + M_PI / 2, { 0, 107, 145, 255 });
+					shift = Vec2(0, 0) - geom::rotate({ (1 - l) / 2, -0.6 }, cam.dir + M_PI / 2);
+					image("box", object.pos.x + shift.x, object.pos.y + shift.y, l, 0.1, cam.dir + M_PI / 2, { 3, 186, 252, 255 });
+				}
 			}
 
 		}
@@ -119,7 +121,45 @@ void DrawSystem::drawScene() {
 }
 
 void DrawSystem::drawInterface() {
-	
+	// Configuring camera
+	System& sys = *system;
+	w = window->getSize().x;
+	h = window->getSize().y;
+
+	// Absolute view
+	window->setView(sf::View(sf::FloatRect(0, 0, w, h)));
+
+	image("interface", w / 2, h / 2, w, h, 0);
+
+	// hp, energy
+	for (const auto& object : sys.objects) {
+		if (object.type == Object::SHIP && object.id == sys.id) {
+			double size = w / 5;
+			double sizeH = h / 30;
+			double alpha = 220;
+			// hp
+			{
+				Vec2 shift = {w / 2, h - sizeH * 2};
+				double l = object.hp / object.hpMax * size;
+				image("box", shift.x, shift.y, size, sizeH, 0, { 20, 100, 20, alpha });
+				image("box", shift.x - (size - l) / 2, shift.y, l, sizeH, 0, { 0, 255, 0, alpha });
+			}
+
+			// energy 
+			{
+				Vec2 shift = { w / 2, h - sizeH };
+				double l = object.energy / object.energyMax * size;
+				image("box", shift.x, shift.y, size, sizeH, 0, { 0, 107, 145, alpha });
+				image("box", shift.x  - (size - l) / 2, shift.y, l, sizeH, 0, { 3, 186, 252, alpha });
+			}
+		}
+	}
+
+	// list
+	for (int i = 0; i < sys.players.size(); i++) {
+		std::string str = "ID" + std::to_string(sys.players[i].id) + " K" + std::to_string(sys.players[i].kills) + " D" + std::to_string(sys.players[i].deaths);
+		text(str, 60, 20 + i*30, 25, sys.players[i].color);
+	}
 }
 
 void DrawSystem::draw() {
