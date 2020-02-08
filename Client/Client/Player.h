@@ -11,3 +11,5 @@ public:
 
 	Player() {};
 };
+
+bool operator<(const Player& a, const Player& b);

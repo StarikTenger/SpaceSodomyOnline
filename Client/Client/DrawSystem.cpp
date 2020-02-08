@@ -129,7 +129,7 @@ void DrawSystem::drawInterface() {
 	// Absolute view
 	window->setView(sf::View(sf::FloatRect(0, 0, w, h)));
 
-	image("interface", w / 2, h / 2, w, h, 0);
+	
 
 	// hp, energy
 	for (const auto& object : sys.objects) {
@@ -155,10 +155,17 @@ void DrawSystem::drawInterface() {
 		}
 	}
 
+	image("interface", w / 2, h / 2, w, h, 0);
+
 	// list
 	for (int i = 0; i < sys.players.size(); i++) {
-		std::string str = "ID" + std::to_string(sys.players[i].id) + " K" + std::to_string(sys.players[i].kills) + " D" + std::to_string(sys.players[i].deaths);
-		text(str, 60, 20 + i*30, 25, sys.players[i].color);
+		//std::string str =  + ;
+		double size = h / 30;
+		double sizeW = w / 60;
+		//image("box", 0 , h - sys.players.size() * size + i * size, size * 15, size, 0, {0, 0, 0, 255});
+		text("ID" + std::to_string(sys.players[i].id), sizeW * 2 , h - sys.players.size() * size + i * size, size, sys.players[i].color);
+		text("" + std::to_string(sys.players[i].kills), sizeW * 10 , h - sys.players.size() * size + i * size, size, sys.players[i].color);
+		text("" + std::to_string(sys.players[i].deaths), sizeW * 14 , h - sys.players.size() * size + i * size, size, sys.players[i].color);
 	}
 }
 

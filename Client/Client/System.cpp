@@ -134,4 +134,7 @@ void System::unpack(std::string str) {
 			}
 		}
 	}
+
+	std::sort(players.begin(), players.end());
+	std::reverse(players.begin(), players.end());
 }
