@@ -5,6 +5,7 @@
 #include "System.h"
 #include "Camera.h"
 #include "Mouse.h"
+#include "Animation.h"
 
 class DrawSystem {
 public:
@@ -17,6 +18,9 @@ public:
 	Mouse mouse;
 	double w, h;
 	double blockSize = 1;
+
+	std::vector<Animation> animations;
+	std::vector<Animation> animationsInterface;
 
 	DrawSystem();
 	~DrawSystem();
@@ -37,6 +41,8 @@ public:
 	
 //private:
 	// Basics
+	void animation(std::string img, AnimationState p1, AnimationState p2, double time);
+	void animationInterface(std::string img, AnimationState p1, AnimationState p2, double time);
 	Color fromHSV(double H, double S, double V);
 	void fillRect(double x, double y, double width, double height, Color color);
 	void fillCircle(double x, double y, double r, Color color);

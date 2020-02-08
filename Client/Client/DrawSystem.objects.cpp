@@ -7,7 +7,7 @@
 void DrawSystem::beam(Vec2 pos, double dir, Color col) {
 	Vec2 step = geom::direction(dir) * 0.4;
 	Vec2 posPrev = pos;
-	for (int i = 0; i < 50; i++) {
+	for (int i = 0; i < 120; i++) {
 		pos += step;
 		if (system->checkWall(pos)) {
 			pos -= step;

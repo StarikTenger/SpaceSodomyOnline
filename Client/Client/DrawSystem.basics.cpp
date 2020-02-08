@@ -48,6 +48,22 @@ Color DrawSystem::fromHSV(double H, double S, double V) {
 	return color;
 }
 
+void DrawSystem::animation(std::string img, AnimationState p1, AnimationState p2, double time) {
+	animations.push_back(
+		Animation(
+			img, p1, p2, system->time, system->time + time
+		)
+	);
+}
+
+void DrawSystem::animationInterface(std::string img, AnimationState p1, AnimationState p2, double time) {
+	animationsInterface.push_back(
+		Animation(
+			img, p1, p2, system->time, system->time + time
+		)
+	);
+}
+
 void DrawSystem::fillRect(double x, double y, double width, double height, Color color) {
 	sf::RectangleShape rectangle;
 	rectangle.setOrigin(width / 2, height / 2);

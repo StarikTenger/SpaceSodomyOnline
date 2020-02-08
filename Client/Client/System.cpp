@@ -76,13 +76,14 @@ int System::checkWall(Vec2 pos) {
 void System::unpack(std::string str) {
 	objects = {};
 	players = {};
+	bonuses = {};
 
 	std::stringstream ss;
 	ss << str;
 	std::string type;
 	
 	while (ss >> type) {
-		// players
+		// Players
 		if (type == "P") {
 			players.push_back({});
 			auto& player = players.back();
@@ -93,6 +94,18 @@ void System::unpack(std::string str) {
 			ss >> player.kills;
 			ss >> player.deaths;
 		}
+
+		// Bonuses
+		if (type == "b") {
+			bonuses.push_back({});
+			auto& bonus = bonuses.back();
+			int x, y;
+			ss >> x >> y;
+			bonus.pos.x = (int)x + 0.5;
+			bonus.pos.y = (int)y + 0.5;
+		}
+
+		// Objects
 		if (type == "S" || type == "B") {
 			objects.push_back({});
 			auto& object = objects.back();

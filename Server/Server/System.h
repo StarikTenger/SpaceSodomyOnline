@@ -7,12 +7,14 @@
 #include "Object.h"
 #include "Cell.h"
 #include "Player.h"
+#include "Bonus.h"
 
 
 class System {
 public:
 	double dt = 0.02;
 	double bounce = 0.2;
+	int bonusLimit = 6;
 
 	Vec2 border = {50, 50};
 
@@ -20,6 +22,8 @@ public:
 
 	std::vector<Object> objects;
 	std::vector<Object> objectsToAdd;
+	std::vector<Bonus> bonuses;
+
 	std::vector<std::vector<Cell> > field;
 
 	System();

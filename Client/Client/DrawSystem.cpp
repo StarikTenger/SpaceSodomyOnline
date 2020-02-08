@@ -1,4 +1,5 @@
 #include "DrawSystem.h"
+#include "random.h"
 #include <math.h>
 #include <algorithm>
 #include <SFML/Graphics.hpp>
@@ -59,14 +60,16 @@ void DrawSystem::drawScene() {
 	);
 
 
-	// Drawing ships
+	// Objects
 	for (const auto& object : sys.objects) {
+		// Ship
 		if (object.type == Object::SHIP) {
 			// beam
-			if (object.id == sys.id) {
+			if (object.id == sys.id || sys.privilegies) {
 				beam(object.pos, geom::dir(object.vel + geom::direction(object.dir) * sys.bulletVel), { 255, 0, 0, 130 });
 			}
 
+			// model
 			image("ship", object.pos.x, object.pos.y, object.r * 2, object.r * 2, object.dir);
 			image("shipColors", object.pos.x, object.pos.y, object.r * 2, object.r * 2, object.dir, object.color);
 
@@ -85,6 +88,7 @@ void DrawSystem::drawScene() {
 			if (object.orders[Object::TURN_RIGHT])
 				image("fireTurnRight", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
 
+			// bars
 			if (object.id != sys.id) {
 				// hp
 				{
@@ -106,15 +110,37 @@ void DrawSystem::drawScene() {
 			}
 
 		}
+		// Bullet
 		if (object.type == Object::BULLET) {
-			if (sys.privilegies) {
+			// beam
+			if (0 && sys.privilegies) {
 				Color col = object.color;
 				col.a = 100;
 				beam(object.pos, geom::dir(object.vel), col);
 			}
-			double r1 = object.r * 2.0 * 2;
+			// model
+			double r1 = object.r * 3;
 			image("bullet", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
+			image("bullet", object.pos.x, object.pos.y, r1 * 0.8, r1 * 0.8, object.dir, {255, 255, 255});
+
+			// set animation
+			animation("bullet", 
+				AnimationState(object.pos, {0.3, 0.3}, 0, object.color),
+				AnimationState(object.pos + geom::direction(random::floatRandom(0, M_PI*2, 2)) * 0.2, { 0.0, 0.0 }, 0, object.color), 
+				0.2);
 		}
+	}
+
+	// Bonuses
+	for (const auto& bonus : sys.bonuses) {
+		image("bonusEnergy", bonus.pos.x, bonus.pos.y, 0.5, 0.5, cam.dir + M_PI/2);
+	}
+
+	// Animations
+	for (auto& a : animations) {
+		a.time = sys.time;
+		a.setState();
+		image(a.img, a.state.pos.x, a.state.pos.y, a.state.box.x, a.state.box.y, a.state.direction, a.state.color);
 	}
 
 	drawWalls();
@@ -129,7 +155,12 @@ void DrawSystem::drawInterface() {
 	// Absolute view
 	window->setView(sf::View(sf::FloatRect(0, 0, w, h)));
 
-	
+	// Animations
+	for (auto& a : animationsInterface) {
+		a.time = sys.time;
+		a.setState();
+		image(a.img, a.state.pos.x, a.state.pos.y, a.state.box.x, a.state.box.y, a.state.direction, a.state.color);
+	}
 
 	// hp, energy
 	for (const auto& object : sys.objects) {
@@ -143,6 +174,14 @@ void DrawSystem::drawInterface() {
 				double l = object.hp / object.hpMax * size;
 				image("box", shift.x, shift.y, size, sizeH, 0, { 20, 100, 20, alpha });
 				image("box", shift.x - (size - l) / 2, shift.y, l, sizeH, 0, { 0, 255, 0, alpha });
+				if (object.hp < sys.hpPrev) {
+					animationInterface("blood",
+						AnimationState(Vec2(w, h) / 2, Vec2(w, h), 0, {255, 255, 255}),
+						AnimationState(Vec2(w, h) / 2, Vec2(w, h), 0, { 255, 255, 255, 0}),
+						1);
+				}
+
+				sys.hpPrev = object.hp;
 			}
 
 			// energy 
@@ -176,4 +215,18 @@ void DrawSystem::draw() {
 	drawScene();
 	
 	drawInterface();
+
+	// kill animations
+	for (int i = 0; i < animations.size(); i++) {
+		if (animations[i].time >= animations[i].timeFinish || animations[i].time < animations[i].timeStart) {
+			animations.erase(animations.begin() + i);
+			i--;
+		}
+	}
+	for (int i = 0; i < animationsInterface.size(); i++) {
+		if (animationsInterface[i].time >= animationsInterface[i].timeFinish || animationsInterface[i].time < animationsInterface[i].timeStart) {
+			animationsInterface.erase(animationsInterface.begin() + i);
+			i--;
+		}
+	}
 }

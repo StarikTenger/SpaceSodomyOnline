@@ -82,19 +82,52 @@ void System::step() {
 	// Collison
 	collision();
 
+	// Bonuses collect
+	for (auto& object : objects) {
+		if (object.type == Object::SHIP) {
+			for (auto& bonus : bonuses) {
+				if (geom::distance(object.pos, bonus.pos) < object.r * 2) {
+					if (bonus.type == Bonus::ENERGY) {
+						bonus.type = Bonus::NONE;
+						object.energy += 5;
+					}
+				}
+			}
+		}
+	}
+
+	// Bonusese set
+	if (bonuses.size() < bonusLimit) {
+		int x = random::intRandom(1, field.size() - 1);
+		int y = random::intRandom(1, field.size() - 1);
+		if (!field[x][y].type) {
+			bonuses.push_back({});
+			bonuses.back().pos = {x + 0.5, y + 0.5};
+		}
+	}
+			
+
 	// Add new objects
 	for (auto& object : objectsToAdd) {
 		objects.push_back(object);
 	}
 	objectsToAdd = {};
 
-	// Delete
+	// Delete objects
 	for (int i = 0; i < objects.size(); i++) {
 		if (objects[i].hp < EPS) {
 			if (objects[i].type == Object::SHIP) {
 				players[objects[i].id].alive = 0;
 			}
 			objects.erase(objects.begin() + i);
+			i--;
+		}
+	}
+
+	// Delete bonuses
+	for (int i = 0; i < bonuses.size(); i++) {
+		if (bonuses[i].type == Bonus::NONE) {
+			bonuses.erase(bonuses.begin() + i);
 			i--;
 		}
 	}

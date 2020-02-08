@@ -7,19 +7,27 @@
 #include "Object.h"
 #include "Cell.h"
 #include "Player.h"
+#include "Bonus.h"
 
 
 class System{
 public:
 	int id = 0;
-	int privilegies = 1;
+	int privilegies = 0;
 
 	double bulletVel = 15;
+	double time = 0;
+	double hpPrev = 0;
 
 	std::string state;
-	std::vector<Object> objects;
-	std::vector<std::vector<Cell> > field;
+
 	std::vector<Player> players;
+
+	std::vector<Object> objects;
+	std::vector<Bonus> bonuses;
+	
+	std::vector<std::vector<Cell> > field;
+	
 
 	System();
 	System(std::string path);

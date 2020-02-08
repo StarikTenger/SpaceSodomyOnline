@@ -42,7 +42,7 @@ public:
 	double r = 0.4; // radius 
 	double dir = 0; // direction
 	double w = 0; // angular velocity
-	double hpMax = 5; // maximum hit points
+	double hpMax = 3; // maximum hit points
 	double hp = hpMax; // hit points
 	double energyMax = 10;
 	double energy = energyMax;

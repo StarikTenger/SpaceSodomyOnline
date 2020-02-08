@@ -80,6 +80,7 @@ void System::setPlayer(Object object) {
 std::string System::pack() {
 	std::string packet = "";
 
+	// Players
 	for (const auto& player : players) {
 		packet += "P ";
 		packet += to_string(player.first) + " ";
@@ -90,6 +91,14 @@ std::string System::pack() {
 		packet += to_string(player.second.deaths) + " ";
 	}
 
+	// Bonuses
+	for (const auto& bonus : bonuses) {
+		packet += "b ";
+		packet += std::to_string((int)bonus.pos.x) + " ";
+		packet += std::to_string((int)bonus.pos.y) + " ";
+	}
+
+	// Objects
 	for (const auto& object : objects) {
 		std::string str = "";
 		// id
@@ -147,7 +156,7 @@ void System::shoot(Object& object) {
 	bullet.type = Object::BULLET;
 	bullet.id = object.id;
 	bullet.color = object.color;
-	bullet.r = 0.2;
+	bullet.r = 0.4;
 	bullet.dir = object.dir;
 	bullet.pos = object.pos;
 	bullet.vel = object.vel + geom::direction(object.dir) * object.gun.vel;

@@ -84,6 +84,12 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files\System</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Header Files\DrawSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Bonus.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -144,6 +150,12 @@
       <Filter>Source Files\DrawSystem</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Source Files\DrawSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Bonus.cpp">
       <Filter>Source Files\System</Filter>
     </ClCompile>
   </ItemGroup>

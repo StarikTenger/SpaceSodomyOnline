@@ -56,7 +56,8 @@ void Control::step() {
 	int timeMs = getMilliCount();
 	if (timeMs - timePrev > dt) {
 		timePrev = timeMs;
-		
+		sys.time = timeMs * 0.001;
+
 		drawSys.cam.border = { drawSys.w, drawSys.h};
 
 		drawSys.cam.dir = -M_PI/2;

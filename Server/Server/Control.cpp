@@ -45,8 +45,8 @@ void Control::step() {
 			sys.step();
 		}
 		// Sending
-		for (auto a : addresses) { 
-			std::string message = sys.pack();
+		std::string message = sys.pack();
+		for (auto a : addresses) { 		
 			socket.send(message.c_str(), message.size() + 1, a.first, a.second);
 		}
 	}
