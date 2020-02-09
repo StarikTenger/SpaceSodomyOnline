@@ -2,6 +2,7 @@
 #include "geometry.h"
 #include "Engine.h"
 #include "Gun.h"
+#include "Effects.h"
 #include "geometry.h"
 #include "color.h"
 #include <vector>
@@ -37,6 +38,7 @@ public:
 	// Ship atributes (only for objects with SHIP type)
 	Engine engine;
 	Gun gun;
+	Effects effects;
 
 	double m = 1; // mass
 	double r = 0.4; // radius 
@@ -46,7 +48,7 @@ public:
 	double hp = hpMax; // hit points
 	double energyMax = 10;
 	double energy = energyMax;
-	double energyRecovery = 1;
+	double energyRecovery = 0.2;
 
 	bool collision = 1;
 

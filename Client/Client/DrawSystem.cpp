@@ -88,6 +88,12 @@ void DrawSystem::drawScene() {
 			if (object.orders[Object::TURN_RIGHT])
 				image("fireTurnRight", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
 
+			// effect
+			if (object.berserk)
+				image("effect", object.pos.x, object.pos.y, r1, r1, object.dir+sys.time*5, {255, 20, 20});
+			if (object.immortal)
+				image("effect", object.pos.x, object.pos.y, r1, r1, object.dir+sys.time, { 200, 200, 20 });
+
 			// bars
 			if (object.id != sys.id) {
 				// hp
@@ -133,7 +139,19 @@ void DrawSystem::drawScene() {
 
 	// Bonuses
 	for (const auto& bonus : sys.bonuses) {
-		image("bonusEnergy", bonus.pos.x, bonus.pos.y, 0.5, 0.5, cam.dir + M_PI/2);
+		double r = 0.5;
+		if (bonus.type == Bonus::ENERGY) {
+			image("bonusEnergy", bonus.pos.x, bonus.pos.y, r, r, cam.dir + M_PI / 2);
+		}
+		if (bonus.type == Bonus::HP) {
+			image("bonusHp", bonus.pos.x, bonus.pos.y, r, r, cam.dir + M_PI / 2);
+		}
+		if (bonus.type == Bonus::BERSERK) {
+			image("bonusBerserk", bonus.pos.x, bonus.pos.y, r, r, cam.dir + M_PI / 2);
+		}
+		if (bonus.type == Bonus::IMMORTAL) {
+			image("bonusImmortal", bonus.pos.x, bonus.pos.y, r, r, cam.dir + M_PI / 2);
+		}
 	}
 
 	// Animations
@@ -202,9 +220,9 @@ void DrawSystem::drawInterface() {
 		double size = h / 30;
 		double sizeW = w / 60;
 		//image("box", 0 , h - sys.players.size() * size + i * size, size * 15, size, 0, {0, 0, 0, 255});
-		text("ID" + std::to_string(sys.players[i].id), sizeW * 2 , h - sys.players.size() * size + i * size, size, sys.players[i].color);
-		text("" + std::to_string(sys.players[i].kills), sizeW * 10 , h - sys.players.size() * size + i * size, size, sys.players[i].color);
-		text("" + std::to_string(sys.players[i].deaths), sizeW * 14 , h - sys.players.size() * size + i * size, size, sys.players[i].color);
+		text(sys.players[i].name, sizeW * 4 , h - sys.players.size() * size + i * size, size/2, sys.players[i].color);
+		text("" + std::to_string(sys.players[i].kills), sizeW * 9 , h - sys.players.size() * size + i * size, size/1.5, sys.players[i].color);
+		text("" + std::to_string(sys.players[i].deaths), sizeW * 11 , h - sys.players.size() * size + i * size, size / 1.5, sys.players[i].color);
 	}
 }
 

@@ -11,7 +11,7 @@ Control::Control() {
 	sys.setPlayer({ 2, {0, 255, 64},{46, 5}, 1, 0 });
 	sys.setPlayer({ 3, {255, 38, 96},{43, 47}, 1, 0 });
 	sys.setPlayer({ 4, {255, 234, 79},{3, 46}, 1, 0 });
-	sys.setPlayer({ 5, {194, 41, 255},{23, 25}, 1, 0 });
+	//sys.setPlayer({ 5, {194, 41, 255},{23, 25}, 1, 0 });
 
 	socket.setBlocking(0);
 	socket.bind(8001);
@@ -81,7 +81,10 @@ void Control::checkMessages() {
 		messages.pop_front();
 
 		int id;
+		std::string name;
 		ss >> id;
+		ss >> name;
+		sys.players[id].name = name;
 
 		for (auto& object : sys.objects) {
 			if (object.type == Object::SHIP && object.id == id) {
@@ -119,8 +122,6 @@ void Control::checkMessages() {
 					}
 				}
 			}
-		}
-
-		
+		}	
 	}
 }

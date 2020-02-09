@@ -1,9 +1,10 @@
 #pragma once
 #include "Color.h"
+#include <string>
 
 class Player {
 public:
-	int id = 0;
+	std::string name = "a";
 	int kills = 0;
 	int deaths = 0;
 

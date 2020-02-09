@@ -88,7 +88,7 @@ void System::unpack(std::string str) {
 			players.push_back({});
 			auto& player = players.back();
 
-			ss >> player.id;
+			ss >> player.name;
 			ss >> player.color.r >> player.color.g >> player.color.b;
 			player.color.a = 255;
 			ss >> player.kills;
@@ -96,13 +96,21 @@ void System::unpack(std::string str) {
 		}
 
 		// Bonuses
-		if (type == "b") {
+		if (type == "e" || type == "h" || type == "b" || type == "i") {
 			bonuses.push_back({});
 			auto& bonus = bonuses.back();
 			int x, y;
 			ss >> x >> y;
-			bonus.pos.x = (int)x + 0.5;
-			bonus.pos.y = (int)y + 0.5;
+			bonus.pos.x = x + 0.5;
+			bonus.pos.y = y + 0.5;
+			if (type == "e")
+				bonus.type = Bonus::ENERGY;
+			if (type == "h")
+				bonus.type = Bonus::HP;
+			if (type == "b")
+				bonus.type = Bonus::BERSERK;
+			if (type == "i")
+				bonus.type = Bonus::IMMORTAL;
 		}
 
 		// Objects
@@ -144,6 +152,8 @@ void System::unpack(std::string str) {
 					orders /= 2;
 					i++;
 				}
+				// effects
+				ss >> object.berserk >> object.immortal;
 			}
 		}
 	}

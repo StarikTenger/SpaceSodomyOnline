@@ -6,16 +6,27 @@
 
 void System::step() {
 	// Counters
+	specialBonusCountdown -= dt;
 	for (auto& object : objects) {
 		if (object.type == Object::SHIP) {
-			object.gun.timeToCooldown -= dt;
+			double k = 1;
+			if (object.effects.berserk > 0) {
+				k = 3;
+				object.energy = object.energyMax;
+			}
+			object.gun.timeToCooldown -= dt * k;
 			object.energy += object.energyRecovery * dt;
 			if (object.energy > object.energyMax)
 				object.energy = object.energyMax;
+
+			object.effects.berserk -= dt;
+			object.effects.immortal -= dt;
 		}
 		if (object.type == Object::BULLET)
 			object.hp -= dt;
 	}
+
+	//OBJECTS//////////////////////////////////////////////////////////////////////////
 
 	// Orders
 	for (auto& object : objects) {
@@ -82,31 +93,6 @@ void System::step() {
 	// Collison
 	collision();
 
-	// Bonuses collect
-	for (auto& object : objects) {
-		if (object.type == Object::SHIP) {
-			for (auto& bonus : bonuses) {
-				if (geom::distance(object.pos, bonus.pos) < object.r * 2) {
-					if (bonus.type == Bonus::ENERGY) {
-						bonus.type = Bonus::NONE;
-						object.energy += 5;
-					}
-				}
-			}
-		}
-	}
-
-	// Bonusese set
-	if (bonuses.size() < bonusLimit) {
-		int x = random::intRandom(1, field.size() - 1);
-		int y = random::intRandom(1, field.size() - 1);
-		if (!field[x][y].type) {
-			bonuses.push_back({});
-			bonuses.back().pos = {x + 0.5, y + 0.5};
-		}
-	}
-			
-
 	// Add new objects
 	for (auto& object : objectsToAdd) {
 		objects.push_back(object);
@@ -120,14 +106,6 @@ void System::step() {
 				players[objects[i].id].alive = 0;
 			}
 			objects.erase(objects.begin() + i);
-			i--;
-		}
-	}
-
-	// Delete bonuses
-	for (int i = 0; i < bonuses.size(); i++) {
-		if (bonuses[i].type == Bonus::NONE) {
-			bonuses.erase(bonuses.begin() + i);
 			i--;
 		}
 	}
@@ -152,5 +130,90 @@ void System::step() {
 	for (auto& object : objects) {
 		object.pos += object.vel * dt;
 		object.dir += object.w * dt;
+	}
+
+	//BONUSES//////////////////////////////////////////////////////////////////////////
+
+	// Bonuses collect
+	for (auto& object : objects) {
+		if (object.type != Object::SHIP)
+			continue;
+
+		for (auto& bonus : bonuses) {
+			if (geom::distance(object.pos, bonus.pos) >= object.r * 2)
+				continue;
+
+			if (bonus.type == Bonus::ENERGY) {
+				bonus.type = Bonus::NONE;
+				object.energy += 5;
+			}
+			if (bonus.type == Bonus::HP && object.hp < object.hpMax - EPS) {
+				bonus.type = Bonus::NONE;
+				object.hp += 1;
+			}
+			if (bonus.type == Bonus::BERSERK) {
+				bonus.type = Bonus::NONE;
+				object.effects.berserk = 5;
+			}
+			if (bonus.type == Bonus::IMMORTAL) {
+				bonus.type = Bonus::NONE;
+				object.effects.immortal = 10;
+			}
+		}
+	}
+
+	// Bonuses calculating
+	int bonusEnergy = 0;
+	int bonusHp = 0;
+	int bonusBerserk = 0;
+	int bonusImmortal = 0;
+	for (auto& bonus : bonuses) {
+		switch (bonus.type) {
+		case Bonus::ENERGY:
+			bonusEnergy++;
+			break;
+		case Bonus::HP:
+			bonusHp++;
+			break;
+		case Bonus::BERSERK:
+			bonusBerserk++;
+			break;
+		case Bonus::IMMORTAL:
+			bonusImmortal++;
+			break;
+		}
+	}
+
+	// Bonuses spawn
+	if (bonuses.size() < bonusLimit) {
+		int x = random::intRandom(1, field.size() - 1);
+		int y = random::intRandom(1, field.size() - 1);
+		if (!field[x][y].type) {
+			bonuses.push_back({});
+			bonuses.back().pos = {x + 0.5, y + 0.5};
+			int r = random::intRandom(0, 3);
+			if(r == 0 && bonusEnergy < bonusEnergyLimit)
+				bonuses.back().type = Bonus::ENERGY;
+			if(r == 1 && bonusHp < bonusHpLimit)
+				bonuses.back().type = Bonus::HP;
+			if (r == 2 && bonusBerserk < bonusBerserkLimit && specialBonusCountdown < 0) {
+				bonuses.back().type = Bonus::BERSERK;
+				specialBonusCountdown = 10;
+			}
+			if (r == 2 && bonusImmortal < bonusImmortalLimit && specialBonusCountdown < 0) {
+				bonuses.back().type = Bonus::IMMORTAL;
+				specialBonusCountdown = 10;
+			}
+		}
+	}
+
+
+			
+	// Delete bonuses
+	for (int i = 0; i < bonuses.size(); i++) {
+		if (bonuses[i].type == Bonus::NONE) {
+			bonuses.erase(bonuses.begin() + i);
+			i--;
+		}
 	}
 }

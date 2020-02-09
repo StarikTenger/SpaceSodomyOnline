@@ -28,6 +28,7 @@ Control::Control() {
 	config >> address;
 	config >> port;
 	config >> id;
+	config >> name;
 	config.close();
 
 	sys.id = id;
@@ -79,6 +80,7 @@ void Control::step() {
 		// Send
 		std::string message = "";
 		message += std::to_string(id) + " ";
+		message += name + " ";
 		if (keys[MOVE_LEFT])
 			message += "L";
 		if (keys[MOVE_RIGHT])

@@ -60,7 +60,7 @@ void System::collision() {
 				continue;
 
 			if (geom::distance(a.pos, b.pos) < a.r + b.r) {
-				if (a.type == Object::BULLET && a.hp > EPS) {
+				if (a.type == Object::BULLET && a.hp > EPS && b.effects.immortal <= 0) {
 					b.hp -= 1;
 					a.hp = -EPS;
 					if (b.hp < EPS && b.type == Object::SHIP) {

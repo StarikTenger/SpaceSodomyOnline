@@ -24,6 +24,9 @@ public:
 	Type type = SHIP;
 	Color color;
 
+	bool berserk = 0;
+	bool immortal = 0;
+
 	Vec2 pos;
 	Vec2 vel;
 	double r = 0.4;

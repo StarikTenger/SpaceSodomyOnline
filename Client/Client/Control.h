@@ -25,6 +25,7 @@ public:
 	int port = 8001;
 	sf::UdpSocket socket;
 	int id = 666;
+	std::string name = "";
 
 	controlMode mode = MENU;
 

@@ -4,8 +4,11 @@
 class Bonus {
 public:
 	enum Type {
+		NONE,
 		HP,
-		ENERGY
+		ENERGY,
+		BERSERK,
+		IMMORTAL
 	};
 	Vec2 pos;
 	Type type = ENERGY;

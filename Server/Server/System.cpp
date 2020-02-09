@@ -82,8 +82,9 @@ std::string System::pack() {
 
 	// Players
 	for (const auto& player : players) {
+		std::cout << player.second.name << "\n";
 		packet += "P ";
-		packet += to_string(player.first) + " ";
+		packet += player.second.name + " ";
 		packet += to_string(player.second.color.r) + " ";
 		packet += to_string(player.second.color.g) + " ";
 		packet += to_string(player.second.color.b) + " ";
@@ -93,7 +94,24 @@ std::string System::pack() {
 
 	// Bonuses
 	for (const auto& bonus : bonuses) {
-		packet += "b ";
+		if (bonus.type == Bonus::NONE)
+			continue;
+
+		switch (bonus.type) {
+		case Bonus::ENERGY:
+			packet += "e ";
+			break;
+		case Bonus::HP:
+			packet += "h ";
+			break;
+		case Bonus::BERSERK:
+			packet += "b ";
+			break;
+		case Bonus::IMMORTAL:
+			packet += "i ";
+			break;
+		}
+			
 		packet += std::to_string((int)bonus.pos.x) + " ";
 		packet += std::to_string((int)bonus.pos.y) + " ";
 	}
@@ -135,6 +153,9 @@ std::string System::pack() {
 					orders += pow(2, i);
 			}
 			str += to_string(orders) + " ";
+			// effects
+			str += to_string(object.effects.berserk > 0) + " ";
+			str += to_string(object.effects.immortal > 0) + " ";
 		}
 		if (object.type == Object::BULLET) {
 			str = "B " + str;

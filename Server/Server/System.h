@@ -14,7 +14,13 @@ class System {
 public:
 	double dt = 0.02;
 	double bounce = 0.2;
-	int bonusLimit = 6;
+	double specialBonusCountdown = 0;
+
+	int bonusLimit = 20;
+	int bonusEnergyLimit = 6;
+	int bonusHpLimit= 6;
+	int bonusBerserkLimit = 1;
+	int bonusImmortalLimit = 1;
 
 	Vec2 border = {50, 50};
 

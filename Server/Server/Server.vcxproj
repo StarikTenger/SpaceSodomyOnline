@@ -23,6 +23,7 @@
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Control.h" />
+    <ClInclude Include="Effects.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Gamepad.h" />
     <ClInclude Include="geometry.h" />
@@ -41,6 +42,7 @@
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Control.cpp" />
+    <ClCompile Include="Effects.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Gamepad.cpp" />
     <ClCompile Include="geometry.cpp" />
