@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bonus.h" />
+    <ClInclude Include="BonusInfo.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Control.h" />
@@ -39,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bonus.cpp" />
+    <ClCompile Include="BonusInfo.cpp" />
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Control.cpp" />

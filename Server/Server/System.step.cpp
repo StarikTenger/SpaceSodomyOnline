@@ -6,7 +6,10 @@
 
 void System::step() {
 	// Counters
-	specialBonusCountdown -= dt;
+	bonusEnergy.countdown -= dt;
+	bonusHp.countdown -= dt;
+	bonusBerserk.countdown -= dt;
+	bonusImmortal.countdown -= dt;
 	for (auto& object : objects) {
 		if (object.type == Object::SHIP) {
 			double k = 1;
@@ -153,7 +156,7 @@ void System::step() {
 			}
 			if (bonus.type == Bonus::BERSERK) {
 				bonus.type = Bonus::NONE;
-				object.effects.berserk = 5;
+				object.effects.berserk = 10;
 			}
 			if (bonus.type == Bonus::IMMORTAL) {
 				bonus.type = Bonus::NONE;
@@ -163,46 +166,75 @@ void System::step() {
 	}
 
 	// Bonuses calculating
-	int bonusEnergy = 0;
-	int bonusHp = 0;
-	int bonusBerserk = 0;
-	int bonusImmortal = 0;
+	bonusEnergy.number = 0;
+	bonusHp.number = 0;
+	bonusBerserk.number = 0;
+	bonusImmortal.number = 0;
 	for (auto& bonus : bonuses) {
 		switch (bonus.type) {
 		case Bonus::ENERGY:
-			bonusEnergy++;
+			bonusEnergy.number++;
 			break;
 		case Bonus::HP:
-			bonusHp++;
+			bonusHp.number++;
 			break;
 		case Bonus::BERSERK:
-			bonusBerserk++;
+			bonusBerserk.number++;
 			break;
 		case Bonus::IMMORTAL:
-			bonusImmortal++;
+			bonusImmortal.number++;
 			break;
 		}
 	}
 
+	// Bonus countdown freezing
+	if (bonusEnergy.number >= bonusEnergy.limit)
+		bonusEnergy.countdown = bonusEnergy.countdownTime;
+	if (bonusHp.number >= bonusHp.limit)
+		bonusHp.countdown = bonusHp.countdownTime;
+	if (bonusBerserk.number >= bonusBerserk.limit)
+		bonusBerserk.countdown = bonusBerserk.countdownTime;
+	if (bonusImmortal.number >= bonusImmortal.limit)
+		bonusImmortal.countdown = bonusImmortal.countdownTime;
+
 	// Bonuses spawn
-	if (bonuses.size() < bonusLimit) {
-		int x = random::intRandom(1, field.size() - 1);
-		int y = random::intRandom(1, field.size() - 1);
+	{
+		int r = random::intRandom(0, 3);
+		Vec2 pos;
+		if (r == 0) {
+			pos = bonusEnergy.positions[random::intRandom(0, bonusEnergy.positions.size()-1)];
+		}
+		if (r == 1) {
+			pos = bonusHp.positions[random::intRandom(0, bonusHp.positions.size() - 1)];
+		}
+		if (r == 2) {
+			pos = bonusBerserk.positions[random::intRandom(0, bonusBerserk.positions.size() - 1)];
+		}
+		if (r == 3) {
+			pos = bonusImmortal.positions[random::intRandom(0, bonusImmortal.positions.size() - 1)];
+		}
+
+		int x = (int)pos.x;
+		int y = (int)pos.y;
 		if (!field[x][y].type) {
 			bonuses.push_back({});
 			bonuses.back().pos = {x + 0.5, y + 0.5};
-			int r = random::intRandom(0, 3);
-			if(r == 0 && bonusEnergy < bonusEnergyLimit)
+
+			if (r == 0 && bonusEnergy.number < bonusEnergy.limit && bonusEnergy.countdown < 0) {
 				bonuses.back().type = Bonus::ENERGY;
-			if(r == 1 && bonusHp < bonusHpLimit)
-				bonuses.back().type = Bonus::HP;
-			if (r == 2 && bonusBerserk < bonusBerserkLimit && specialBonusCountdown < 0) {
-				bonuses.back().type = Bonus::BERSERK;
-				specialBonusCountdown = 10;
+				bonusEnergy.countdown = bonusEnergy.countdownTime;
 			}
-			if (r == 2 && bonusImmortal < bonusImmortalLimit && specialBonusCountdown < 0) {
+			if (r == 1 && bonusHp.number < bonusHp.limit && bonusHp.countdown < 0) {
+				bonuses.back().type = Bonus::HP;
+				bonusHp.countdown = bonusHp.countdownTime;
+			}
+			if (r == 2 && bonusBerserk.number < bonusBerserk.limit && bonusBerserk.countdown < 0) {
+				bonuses.back().type = Bonus::BERSERK;
+				bonusBerserk.countdown = bonusBerserk.countdownTime;
+			}
+			if (r == 3 && bonusImmortal.number < bonusImmortal.limit && bonusImmortal.countdown < 0) {
 				bonuses.back().type = Bonus::IMMORTAL;
-				specialBonusCountdown = 10;
+				bonusImmortal.countdown = bonusImmortal.countdownTime;
 			}
 		}
 	}

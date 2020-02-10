@@ -65,6 +65,28 @@ System::System(string path) {
 			field[y][x] = c;
 		}
 	}
+
+	while (file) {
+		string command;
+		file >> command;
+		if (command == "END") {
+			break;
+		}
+		if (command == "BONUS") {
+			Vec2 pos;
+			std::string type;
+			file >> pos.x >> pos.y;
+			file >> type;
+			if (type == "energy")
+				bonusEnergy.positions.push_back(pos);
+			if (type == "hp")
+				bonusHp.positions.push_back(pos);
+			if (type == "berserk")
+				bonusBerserk.positions.push_back(pos);
+			if (type == "immortal")
+				bonusImmortal.positions.push_back(pos);
+		}
+	}
 }
 
 System::~System() {
@@ -82,7 +104,6 @@ std::string System::pack() {
 
 	// Players
 	for (const auto& player : players) {
-		std::cout << player.second.name << "\n";
 		packet += "P ";
 		packet += player.second.name + " ";
 		packet += to_string(player.second.color.r) + " ";

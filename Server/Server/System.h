@@ -8,19 +8,19 @@
 #include "Cell.h"
 #include "Player.h"
 #include "Bonus.h"
+#include "BonusInfo.h"
 
 
 class System {
 public:
 	double dt = 0.02;
 	double bounce = 0.2;
-	double specialBonusCountdown = 0;
 
-	int bonusLimit = 20;
-	int bonusEnergyLimit = 6;
-	int bonusHpLimit= 6;
-	int bonusBerserkLimit = 1;
-	int bonusImmortalLimit = 1;
+	BonusInfo bonusEnergy = { 6, 1 };
+	BonusInfo bonusHp = { 6, 1 };
+	BonusInfo bonusBerserk = { 1, 40 };
+	BonusInfo bonusImmortal = { 1, 40 };
+
 
 	Vec2 border = {50, 50};
 
