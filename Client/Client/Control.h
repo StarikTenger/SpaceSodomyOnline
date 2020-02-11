@@ -20,7 +20,7 @@ enum controlMode {
 class Control{
 public:
 	// net stuff
-	char buffer[1024];
+	char buffer[2048];
 	std::string address = "localhost";
 	int port = 8001;
 	sf::UdpSocket socket;

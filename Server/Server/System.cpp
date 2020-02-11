@@ -78,13 +78,13 @@ System::System(string path) {
 			file >> pos.x >> pos.y;
 			file >> type;
 			if (type == "energy")
-				bonusEnergy.positions.push_back(pos);
+				bonusInfo[Bonus::ENERGY].positions.push_back(pos);
 			if (type == "hp")
-				bonusHp.positions.push_back(pos);
+				bonusInfo[Bonus::HP].positions.push_back(pos);
 			if (type == "berserk")
-				bonusBerserk.positions.push_back(pos);
+				bonusInfo[Bonus::BERSERK].positions.push_back(pos);
 			if (type == "immortal")
-				bonusImmortal.positions.push_back(pos);
+				bonusInfo[Bonus::IMMORTAL].positions.push_back(pos);
 		}
 	}
 }

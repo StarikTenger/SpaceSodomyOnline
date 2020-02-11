@@ -13,13 +13,18 @@
 
 class System {
 public:
+
 	double dt = 0.02;
 	double bounce = 0.2;
 
-	BonusInfo bonusEnergy = { 6, 1 };
-	BonusInfo bonusHp = { 6, 1 };
-	BonusInfo bonusBerserk = { 1, 40 };
-	BonusInfo bonusImmortal = { 1, 40 };
+	std::vector<BonusInfo> bonusInfo = { 
+		{},
+		{ 6, 5 },
+		{ 6, 5 },
+		{ 1, 40 },
+		{ 1, 40 }
+	};
+
 
 
 	Vec2 border = {50, 50};
