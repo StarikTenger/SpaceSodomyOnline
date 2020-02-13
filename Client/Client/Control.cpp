@@ -77,6 +77,14 @@ void Control::step() {
 		if (keys[ZOOM_IN])
 			drawSys.cam.scale *= pow(drawSys.cam.scaleVel, 1.0 / (double)dt);
 
+		// Shoot cheat
+		sys.target = 0;
+		for (const auto& object : sys.objects) {
+			if (sys.checkAbility(sys.mainPlayer, object, 0.06))
+				sys.target = 1;
+		}
+
+
 		// Send
 		std::string message = "";
 		message += std::to_string(id) + " ";
@@ -95,7 +103,7 @@ void Control::step() {
 			message += "l";
 		if (keys[STABILIZE_ROTATION])
 			message += "s";
-		if (keys[SHOOT])
+		if (keys[SHOOT] || keys[F] && sys.privilegies &&  sys.target)
 			message += "S";
 		socket.send(message.c_str(), message.size() + 1, address, port);
 
@@ -107,8 +115,10 @@ void Control::step() {
 		drawSys.window->display();
 
 	}
-	std::size_t received = 0;
-	sf::IpAddress sender;
-	unsigned short port = 0;
-	socket.receive(buffer, sizeof(buffer), received, sender, port);
+	for (int i = 0; i < 5; i++) {
+		std::size_t received = 0;
+		sf::IpAddress sender;
+		unsigned short port = 0;
+		socket.receive(buffer, sizeof(buffer), received, sender, port);
+	}
 }

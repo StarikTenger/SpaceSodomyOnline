@@ -59,7 +59,6 @@ void DrawSystem::drawScene() {
 		1.0 / 2
 	);
 
-
 	// Objects
 	for (const auto& object : sys.objects) {
 		// Ship
@@ -68,6 +67,7 @@ void DrawSystem::drawScene() {
 			if (object.id == sys.id || sys.privilegies) {
 				beam(object.pos, geom::dir(object.vel + geom::direction(object.dir) * sys.bulletVel), { 255, 0, 0, 130 });
 			}
+
 
 			// model
 			image("ship", object.pos.x, object.pos.y, object.r * 2, object.r * 2, object.dir);
@@ -89,9 +89,9 @@ void DrawSystem::drawScene() {
 				image("fireTurnRight", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
 
 			// effect
-			if (object.berserk)
+			if (object.effects[Bonus::BERSERK])
 				image("effect", object.pos.x, object.pos.y, r1, r1, object.dir+sys.time*5, {255, 20, 20});
-			if (object.immortal)
+			if (object.effects[Bonus::IMMORTAL])
 				image("effect", object.pos.x, object.pos.y, r1, r1, object.dir+sys.time, { 200, 200, 20 });
 
 			// bars
@@ -111,8 +111,16 @@ void DrawSystem::drawScene() {
 					double l = object.energy / object.energyMax * 1;
 					image("box", object.pos.x + shift.x, object.pos.y + shift.y, 1, 0.1, cam.dir + M_PI / 2, { 0, 107, 145, 255 });
 					shift = Vec2(0, 0) - geom::rotate({ (1 - l) / 2, -0.6 }, cam.dir + M_PI / 2);
-					image("box", object.pos.x + shift.x, object.pos.y + shift.y, l, 0.1, cam.dir + M_PI / 2, { 3, 186, 252, 255 });
+					image("box", object.pos.x + shift.x, object.pos.y + shift. y, l, 0.1, cam.dir + M_PI / 2, { 3, 186, 252, 255 });
 				}
+
+				// Target pointer
+				if (sys.privilegies) {
+					if (sys.checkAbility(sys.mainPlayer, object, 0.06)) 
+						image("pointer", object.pos.x, object.pos.y, r1, r1, cam.dir + M_PI / 4);
+
+				}
+				
 			}
 
 		}

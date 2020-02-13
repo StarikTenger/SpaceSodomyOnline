@@ -73,6 +73,40 @@ int System::checkWall(Vec2 pos) {
 	return 0;
 }
 
+bool System::checkAbility(Object shooter, Object target, double threshold) {
+	if (distance(shooter.pos, target.pos) < EPS) {
+		return 0;
+	}
+	bool contact = 1;
+
+	double stepSize = 0.5;
+	double a = abs(dir(shooter.vel - target.vel + direction(shooter.dir) * 15)
+		- dir(target.pos - shooter.pos));
+	Vec2 step = direction(dir(shooter.vel - target.vel + direction(shooter.dir) * 15))* stepSize;
+	for (int i = 0; i < distance(shooter.pos, target.pos) / stepSize; i++) {
+		if (checkWall(shooter.pos + step * i)) {
+			contact = 0;
+		}
+	}
+
+	if (!contact) {
+		return 0;
+	}
+
+
+
+	while (a >= 2 * M_PI) {
+		a -= 2 * M_PI;
+	}
+	while (a <= 0) {
+		a += 2 * M_PI;
+	}
+	if (a < threshold) {
+		return 1;
+	}
+	return 0;
+}
+
 void System::unpack(std::string str) {
 	objects = {};
 	players = {};
@@ -143,21 +177,41 @@ void System::unpack(std::string str) {
 				// energy
 				ss >> object.energy >> object.energyMax;
 				// orders
-				int orders;
-				ss >> orders;
-				int i = 0; objects.back().orders.size();
-				while (orders > 0) {
-					if (orders % 2 == 1)
-						objects.back().orders[i] = 1;
-					orders /= 2;
-					i++;
+				{
+					int orders;
+					ss >> orders;
+					int i = 0; objects.back().orders.size();
+					while (orders > 0) {
+						if (orders % 2 == 1)
+							objects.back().orders[i] = 1;
+						orders /= 2;
+						i++;
+					}
 				}
 				// effects
-				ss >> object.berserk >> object.immortal;
+				{
+					int effects;
+					ss >> effects;
+					int i = 0; objects.back().orders.size();
+					while (effects > 0) {
+						if (effects % 2 == 1)
+							objects.back().effects[i] = 1;
+						effects /= 2;
+						i++;
+					}
+				}
 			}
 		}
 	}
 
+	// Sort players
 	std::sort(players.begin(), players.end());
 	std::reverse(players.begin(), players.end());
+
+	// Find main player
+	for (const auto& object : objects) {
+		if (object.type == Object::SHIP && object.id == id) {
+			mainPlayer = object;
+		}
+	}
 }

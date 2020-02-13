@@ -159,4 +159,23 @@
       <Filter>Source Files\System</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="config.conf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="keys.conf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="textures.conf">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="level.lvl">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="font.ttf">
+      <Filter>Resource Files</Filter>
+    </Font>
+  </ItemGroup>
 </Project>

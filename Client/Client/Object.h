@@ -24,8 +24,7 @@ public:
 	Type type = SHIP;
 	Color color;
 
-	bool berserk = 0;
-	bool immortal = 0;
+	std::vector<bool> effects = { 0,0,0,0,0,0,0,0 };
 
 	Vec2 pos;
 	Vec2 vel;

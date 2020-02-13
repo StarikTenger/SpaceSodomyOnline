@@ -86,6 +86,9 @@ void Control::checkMessages() {
 		ss >> name;
 		sys.players[id].name = name;
 
+		if (sys.players.find(id) == sys.players.end())
+			continue;
+
 		for (auto& object : sys.objects) {
 			if (object.type == Object::SHIP && object.id == id) {
 				// Setting all orders to 0

@@ -81,9 +81,6 @@
     <ClInclude Include="Bonus.h">
       <Filter>Header Files\System</Filter>
     </ClInclude>
-    <ClInclude Include="Effects.h">
-      <Filter>Header Files\System</Filter>
-    </ClInclude>
     <ClInclude Include="BonusInfo.h">
       <Filter>Header Files\System</Filter>
     </ClInclude>
@@ -143,11 +140,13 @@
     <ClCompile Include="Bonus.cpp">
       <Filter>Source Files\System</Filter>
     </ClCompile>
-    <ClCompile Include="Effects.cpp">
-      <Filter>Source Files\System</Filter>
-    </ClCompile>
     <ClCompile Include="BonusInfo.cpp">
       <Filter>Source Files\System</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="level.lvl">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

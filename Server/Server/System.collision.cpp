@@ -60,7 +60,7 @@ void System::collision() {
 				continue;
 
 			if (geom::distance(a.pos, b.pos) < a.r + b.r) {
-				if (a.type == Object::BULLET && a.hp > EPS && b.effects.immortal <= 0) {
+				if (a.type == Object::BULLET && a.hp > EPS && b.effects[Bonus::IMMORTAL] <= 0) {
 					b.hp -= 1;
 					a.hp = -EPS;
 					if (b.hp < EPS && b.type == Object::SHIP) {
@@ -127,6 +127,9 @@ void System::collision() {
 				if (wall.second)
 					dmg = 1;
 			}
+		}
+		if (dmg && u.type == Object::SHIP) {
+			u.hp -= 1;
 		}
 		if (touch && u.type == Object::BULLET) {
 			u.hp = 0;

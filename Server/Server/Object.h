@@ -38,7 +38,7 @@ public:
 	// Ship atributes (only for objects with SHIP type)
 	Engine engine;
 	Gun gun;
-	Effects effects;
+	std::vector<double> effects = {0,0,0,0,0,0,0,0};
 
 	double m = 1; // mass
 	double r = 0.4; // radius 

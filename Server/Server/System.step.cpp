@@ -12,7 +12,7 @@ void System::step() {
 	for (auto& object : objects) {
 		if (object.type == Object::SHIP) {
 			double k = 1;
-			if (object.effects.berserk > 0) {
+			if (object.effects[Bonus::BERSERK] > 0) {
 				k = 3;
 				object.energy = object.energyMax;
 			}
@@ -21,8 +21,9 @@ void System::step() {
 			if (object.energy > object.energyMax)
 				object.energy = object.energyMax;
 
-			object.effects.berserk -= dt;
-			object.effects.immortal -= dt;
+
+			for (auto& effect : object.effects)
+				effect -= dt;
 		}
 		if (object.type == Object::BULLET)
 			object.hp -= dt;
@@ -155,11 +156,11 @@ void System::step() {
 			}
 			if (bonus.type == Bonus::BERSERK) {
 				bonus.type = Bonus::NONE;
-				object.effects.berserk = 10;
+				object.effects[Bonus::BERSERK] = 10;
 			}
 			if (bonus.type == Bonus::IMMORTAL) {
 				bonus.type = Bonus::NONE;
-				object.effects.immortal = 10;
+				object.effects[Bonus::IMMORTAL] = 10;
 			}
 		}
 	}

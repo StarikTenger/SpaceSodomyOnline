@@ -21,7 +21,7 @@ std::string to_string(const T a_value, int n) {
 	return out.str();
 }
 
-System::System(){
+System::System() {
 
 }
 
@@ -94,7 +94,7 @@ System::~System() {
 
 void System::setPlayer(Object object) {
 	objects.push_back(object);
-	if(players.find(object.id) == players.end())
+	if (players.find(object.id) == players.end())
 		players[object.id] = Player();
 	players[object.id].color = object.color;
 }
@@ -132,7 +132,7 @@ std::string System::pack() {
 			packet += "i ";
 			break;
 		}
-			
+
 		packet += std::to_string((int)bonus.pos.x) + " ";
 		packet += std::to_string((int)bonus.pos.y) + " ";
 	}
@@ -152,7 +152,7 @@ std::string System::pack() {
 		str += to_string(object.vel.y, 3) + " ";
 		// angular velocity
 		str += to_string(object.w, 3) + " ";
-		
+
 		// color
 		str += to_string((int)object.color.r) + " ";
 		str += to_string((int)object.color.g) + " ";
@@ -160,13 +160,15 @@ std::string System::pack() {
 
 		if (object.type == Object::SHIP) {
 			str = "S " + str;
-			
+
 			// hp
 			str += to_string(object.hp, 1) + " ";
 			str += to_string(object.hpMax, 1) + " ";
+
 			// energy
 			str += to_string(object.energy, 1) + " ";
 			str += to_string(object.energyMax, 1) + " ";
+
 			// packing orders
 			int orders = 0;
 			for (int i = 0; i < object.orders.size(); i++) {
@@ -174,9 +176,16 @@ std::string System::pack() {
 					orders += pow(2, i);
 			}
 			str += to_string(orders) + " ";
-			// effects
-			str += to_string(object.effects.berserk > 0) + " ";
-			str += to_string(object.effects.immortal > 0) + " ";
+
+			// packing effects
+			int effects = 0;
+			for (int i = 0; i < object.effects.size(); i++) {
+				if (object.effects[i] > 0)
+					effects += pow(2, i);
+			}
+			//std::cout << effects << "\n";
+			str += to_string(effects) + " ";
+
 		}
 		if (object.type == Object::BULLET) {
 			str = "B " + str;
