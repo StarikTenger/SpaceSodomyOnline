@@ -7,11 +7,14 @@
 Control::Control() {
 	//buffer = new char(1024);
 	sys = System("level.lvl");
-	sys.setPlayer({ 1, {48, 145, 255}, {3, 3}, 1, 0 });
-	sys.setPlayer({ 2, {0, 255, 64},{46, 5}, 1, 0 });
-	sys.setPlayer({ 3, {255, 38, 96},{43, 47}, 1, 0 });
-	sys.setPlayer({ 4, {255, 234, 79},{3, 46}, 1, 0 });
-	//sys.setPlayer({ 5, {194, 41, 255},{23, 25}, 1, 0 });
+	sys.setPlayer({ 1, 1,  {48, 145, 255}, {3, 3}, 1, 0 });
+	sys.setPlayer({ 2, 1,  {48, 145, 255}, {3, 3}, 1, 0 });
+	sys.setPlayer({ 3, 2, {0, 255, 64},{46, 5}, 1, 0 });
+	sys.setPlayer({ 4, 2, {0, 255, 64},{46, 5}, 1, 0 });
+	sys.setPlayer({ 5, 2, {0, 255, 64},{46, 5}, 1, 0 });
+	//sys.setPlayer({ 3, 2, {255, 38, 96},{43, 47}, 1, 0 });
+	//sys.setPlayer({ 4, 2, {255, 234, 79},{3, 44}, 1, 0 });
+	//sys.setPlayer({ 5, 2, {194, 41, 255},{23, 25}, 1, 0 });
 
 	socket.setBlocking(0);
 	socket.bind(8001);
@@ -84,10 +87,11 @@ void Control::checkMessages() {
 		std::string name;
 		ss >> id;
 		ss >> name;
-		sys.players[id].name = name;
-
+	
 		if (sys.players.find(id) == sys.players.end())
 			continue;
+
+		sys.players[id].name = name;
 
 		for (auto& object : sys.objects) {
 			if (object.type == Object::SHIP && object.id == id) {

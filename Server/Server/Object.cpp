@@ -4,8 +4,9 @@ Object::Object() {
 
 }
 
-Object::Object(int _id, Color _color, Vec2 _pos, double _m, double _dir){
+Object::Object(int _id, int _team, Color _color, Vec2 _pos, double _m, double _dir) {
 	id = _id;
+	team = _team;
 	color = _color;
 	pos = _pos;
 	m = _m;

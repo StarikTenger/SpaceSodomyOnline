@@ -51,12 +51,15 @@ bool System::collision(Object& body, std::pair<Vec2, Vec2> wall) {
 void System::collision() {
 	double blockSize = 1;
 	bool touch = 0;
+
 	// objects
 	for (Object& a : objects) {
 		for (Object& b : objects) {
 			Vec2 aPos = a.pos + a.vel * dt;
 			Vec2 bPos = b.pos + b.vel * dt;
-			if (a.id == b.id || &a == &b || !a.collision || !b.collision)
+
+			// damage
+			if (a.team == b.team || a.id == b.id || &a == &b || !a.collision || !b.collision)
 				continue;
 
 			if (geom::distance(a.pos, b.pos) < a.r + b.r) {
@@ -128,7 +131,7 @@ void System::collision() {
 					dmg = 1;
 			}
 		}
-		if (dmg && u.type == Object::SHIP) {
+		if (dmg && u.type == Object::SHIP && u.effects[Bonus::IMMORTAL] < 0) {
 			u.hp -= 1;
 		}
 		if (touch && u.type == Object::BULLET) {

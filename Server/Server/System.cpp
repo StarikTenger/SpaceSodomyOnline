@@ -96,6 +96,7 @@ void System::setPlayer(Object object) {
 	objects.push_back(object);
 	if (players.find(object.id) == players.end())
 		players[object.id] = Player();
+	players[object.id].team = object.team;
 	players[object.id].color = object.color;
 }
 
@@ -206,6 +207,7 @@ void System::shoot(Object& object) {
 	Object bullet;
 	bullet.type = Object::BULLET;
 	bullet.id = object.id;
+	bullet.team = object.team;
 	bullet.color = object.color;
 	bullet.r = 0.4;
 	bullet.dir = object.dir;

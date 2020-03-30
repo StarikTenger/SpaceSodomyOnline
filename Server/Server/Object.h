@@ -29,6 +29,7 @@ public:
 	};
 
 	int id = 666;
+	int team = 0;
 	Type type = SHIP;
 	Color color;
 
@@ -55,6 +56,6 @@ public:
 	std::vector<bool> orders = {0,0,0,0,0,0,0,0,0,0}; // shows which commands are active
 
 	Object();
-	Object(int _id, Color _color, Vec2 _pos, double _m, double _dir);
+	Object(int _id, int _team, Color _color, Vec2 _pos, double _m, double _dir);
 };
 

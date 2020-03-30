@@ -122,7 +122,7 @@ void System::step() {
 				if (field[x][y].type)
 					continue;
 				player.second.deaths++;
-				setPlayer({ player.first, player.second.color, Vec2(x + 0.5, y + 0.5), 1, 0 });
+				setPlayer({ player.first, player.second.team, player.second.color, Vec2(x + 0.5, y + 0.5), 1, 0 });
 				player.second.alive = 1;
 				break;
 			}

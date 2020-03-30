@@ -1,40 +1,14 @@
-﻿  Bonus.cpp
-  BonusInfo.cpp
-  Cell.cpp
-  Color.cpp
-  Control.cpp
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\BonusInfo.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\BonusInfo.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  Engine.cpp
-  Gamepad.cpp
-  geometry.cpp
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\Control.cpp(95,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\geometry.cpp(81,20): warning C4018: '<': signed/unsigned mismatch
-  getMilliCount.cpp
-  Gun.cpp
-  main.cpp
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\geometry.cpp(92,20): warning C4018: '<': signed/unsigned mismatch
-  Mouse.cpp
-  Object.cpp
-  Player.cpp
-  random.cpp
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\BonusInfo.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  System.collision.cpp
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\random.cpp(6,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+﻿  System.collision.cpp
   System.cpp
 C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\BonusInfo.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\BonusInfo.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(174,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(176,25): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(182,22): warning C4018: '<': signed/unsigned mismatch
-  System.step.cpp
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(184,26): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\BonusInfo.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.step.cpp(106,20): warning C4018: '<': signed/unsigned mismatch
-  Vec2.cpp
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.step.cpp(205,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(175,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(177,25): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(183,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(185,26): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
   Generating code
-  Previous IPDB not found, fall back to full compilation.
-  All 1242 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  3 of 1242 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Server.vcxproj -> C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Release\Server.exe
