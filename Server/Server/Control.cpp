@@ -5,13 +5,19 @@
 #include <sstream>
 
 Control::Control() {
-	//buffer = new char(1024);
 	sys = System("level.lvl");
-	sys.setPlayer({ 1, 1,  {48, 145, 255}, {3, 3}, 1, 0 });
-	sys.setPlayer({ 2, 1,  {48, 145, 255}, {3, 3}, 1, 0 });
-	sys.setPlayer({ 3, 2, {0, 255, 64},{46, 5}, 1, 0 });
-	sys.setPlayer({ 4, 2, {0, 255, 64},{46, 5}, 1, 0 });
-	sys.setPlayer({ 5, 2, {0, 255, 64},{46, 5}, 1, 0 });
+	// teams
+	sys.teams.insert({ 1, {} });
+	sys.teams.insert({ 2, {} });
+	sys.teams[1].spawnpoints = { {2, 2} };
+	sys.teams[2].spawnpoints = { {47, 47} };
+
+	// players
+	sys.setPlayer({ 1, 1,  {48, 145, 255}, {2, 2}, 1, 0 });
+	sys.setPlayer({ 2, 1,  {48, 145, 255}, {2, 2}, 1, 0 });
+	sys.setPlayer({ 3, 2, {0, 255, 64},{47, 47}, 1, 0 });
+	sys.setPlayer({ 4, 2, {0, 255, 64},{47, 47}, 1, 0 });
+	sys.setPlayer({ 5, 2, {0, 255, 64},{47, 47}, 1, 0 });
 	//sys.setPlayer({ 3, 2, {255, 38, 96},{43, 47}, 1, 0 });
 	//sys.setPlayer({ 4, 2, {255, 234, 79},{3, 44}, 1, 0 });
 	//sys.setPlayer({ 5, 2, {194, 41, 255},{23, 25}, 1, 0 });

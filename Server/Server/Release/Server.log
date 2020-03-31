@@ -1,14 +1,25 @@
-﻿  System.collision.cpp
+﻿  Control.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\BonusInfo.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Engine.cpp
+  Object.cpp
+  System.collision.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\Control.cpp(105,23): warning C4018: '<': signed/unsigned mismatch
   System.cpp
 C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\BonusInfo.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\BonusInfo.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(175,22): warning C4018: '<': signed/unsigned mismatch
 C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(177,25): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
 C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(183,22): warning C4018: '<': signed/unsigned mismatch
+  System.step.cpp
 C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(185,26): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\BonusInfo.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.step.cpp(106,20): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.step.cpp(207,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\BonusInfo.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
   Generating code
-  3 of 1242 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+  4 of 1379 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    3 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Server.vcxproj -> C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Release\Server.exe

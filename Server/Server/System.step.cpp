@@ -93,7 +93,7 @@ void System::step() {
 		
 	}
 
-	// Collison
+	// Collison (&damage)
 	collision();
 
 	// Add new objects
@@ -119,10 +119,14 @@ void System::step() {
 			while (1) {
 				int x = random::intRandom(1, field.size() - 1);
 				int y = random::intRandom(1, field.size() - 1);
-				if (field[x][y].type)
+				Vec2 pos = Vec2(x + 0.5, y + 0.5);
+				if (teams.find(player.second.team) != teams.end() && teams[player.second.team].spawnpoints.size())
+					pos = teams[player.second.team].spawnpoints[random::intRandom(0, teams[player.second.team].spawnpoints.size() - 1)];
+				else if (field[x][y].type)
 					continue;
+
 				player.second.deaths++;
-				setPlayer({ player.first, player.second.team, player.second.color, Vec2(x + 0.5, y + 0.5), 1, 0 });
+				setPlayer({ player.first, player.second.team, player.second.color, pos, 1, 0 });
 				player.second.alive = 1;
 				break;
 			}
@@ -177,7 +181,6 @@ void System::step() {
 	for (auto& b : bonusInfo) 
 		if (b.number >= b.limit)
 			b.countdown = b.countdownTime;
-
 	// Bonuses spawn
 	{
 		int r = random::intRandom(1, bonusInfo.size() - 1);
@@ -199,8 +202,7 @@ void System::step() {
 			bonusInfo[r].countdown = bonusInfo[r].countdownTime;
 		}
 	}
-
-			
+	
 	// Delete bonuses
 	for (int i = 0; i < bonuses.size(); i++) {
 		if (bonuses[i].type == Bonus::NONE) {
@@ -208,4 +210,6 @@ void System::step() {
 			i--;
 		}
 	}
+	
+
 }

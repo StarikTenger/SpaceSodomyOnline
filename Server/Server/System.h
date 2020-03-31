@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Bonus.h"
 #include "BonusInfo.h"
+#include "Team.h"
 
 
 class System {
@@ -30,6 +31,7 @@ public:
 	Vec2 border = {50, 50};
 
 	std::map<int, Player> players;
+	std::map<int, Team> teams;
 
 	std::vector<Object> objects;
 	std::vector<Object> objectsToAdd;
