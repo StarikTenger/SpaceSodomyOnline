@@ -89,6 +89,8 @@ System::System(string path) {
 				bonus->type = Bonus::BERSERK;
 			if (type == "immortal")
 				bonus->type = Bonus::IMMORTAL;
+			if (type == "boost")
+				bonus->type = Bonus::BOOST;
 			units.push_back(bonus);
 		}
 	}

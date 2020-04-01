@@ -8,7 +8,8 @@ public:
 		HP,
 		ENERGY,
 		BERSERK,
-		IMMORTAL
+		IMMORTAL,
+		BOOST
 	};
 	Type type = NONE;
 	Bonus();

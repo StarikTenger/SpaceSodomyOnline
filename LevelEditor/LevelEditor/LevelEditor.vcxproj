@@ -198,6 +198,15 @@
     <ClInclude Include="Unit.h" />
     <ClInclude Include="Vector2d.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="keys.conf" />
+    <None Include="level.lvl" />
+    <None Include="levelTemplate.lvl" />
+    <None Include="textures.conf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="font.ttf" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

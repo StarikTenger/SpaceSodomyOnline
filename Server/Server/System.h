@@ -20,10 +20,12 @@ public:
 
 	std::vector<BonusInfo> bonusInfo = { 
 		{},
-		{ 6, 5 },
-		{ 6, 5 },
-		{ 1, 40 },
-		{ 1, 40 }
+		{ 6, 5 }, // HP
+		{ 6, 5 }, // ENERGY
+		{ 1, 40 }, // BERSERK
+		{ 1, 40 }, // IMMORTAL
+		{ 2, 30 }, // BOOST
+		//{ 1, 40 } // SNIPER
 	};
 
 

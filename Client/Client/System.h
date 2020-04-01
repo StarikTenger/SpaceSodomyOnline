@@ -13,7 +13,7 @@
 class System{
 public:
 	int id = 0;
-	int privilegies = 1;
+	int privilegies = 0;
 	int target = 0;
 
 	double bulletVel = 15;

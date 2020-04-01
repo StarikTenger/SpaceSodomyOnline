@@ -85,6 +85,8 @@ System::System(string path) {
 				bonusInfo[Bonus::BERSERK].positions.push_back(pos);
 			if (type == "immortal")
 				bonusInfo[Bonus::IMMORTAL].positions.push_back(pos);
+			if (type == "boost")
+				bonusInfo[Bonus::BOOST].positions.push_back(pos);
 		}
 	}
 }
@@ -132,6 +134,9 @@ std::string System::pack() {
 		case Bonus::IMMORTAL:
 			packet += "i ";
 			break;
+		case Bonus::BOOST:
+			packet += "o ";
+			break;
 		}
 
 		packet += std::to_string((int)bonus.pos.x) + " ";
@@ -149,8 +154,8 @@ std::string System::pack() {
 		// direction
 		str += to_string(object.dir, 4) + " ";
 		// linear velocity
-		str += to_string(object.vel.x, 3) + " ";
-		str += to_string(object.vel.y, 3) + " ";
+		str += to_string(object.vel.x, 2) + " ";
+		str += to_string(object.vel.y, 2) + " ";
 		// angular velocity
 		str += to_string(object.w, 3) + " ";
 
@@ -187,6 +192,9 @@ std::string System::pack() {
 			//std::cout << effects << "\n";
 			str += to_string(effects) + " ";
 
+			// actives
+			str += to_string(object.activeAbility) + " ";
+
 		}
 		if (object.type == Object::BULLET) {
 			str = "B " + str;
@@ -212,6 +220,7 @@ void System::shoot(Object& object) {
 	bullet.r = 0.4;
 	bullet.dir = object.dir;
 	bullet.pos = object.pos;
+	bullet.damage = object.gun.damage;
 	bullet.vel = object.vel + geom::direction(object.dir) * object.gun.vel;
 	bullet.hp = object.gun.lifetime;
 	objectsToAdd.push_back(bullet);

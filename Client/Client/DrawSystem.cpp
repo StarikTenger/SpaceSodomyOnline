@@ -88,11 +88,16 @@ void DrawSystem::drawScene() {
 			if (object.orders[Object::TURN_RIGHT])
 				image("fireTurnRight", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
 
-			// effect
+			// effects
 			if (object.effects[Bonus::BERSERK])
 				image("effect", object.pos.x, object.pos.y, r1, r1, object.dir+sys.time*5, {255, 20, 20});
 			if (object.effects[Bonus::IMMORTAL])
 				image("effect", object.pos.x, object.pos.y, r1, r1, object.dir+sys.time, { 200, 200, 20 });
+			if (object.effects[Bonus::BOOST])
+				animation("bullet",
+					AnimationState(object.pos, Vec2( 0.3, 0.3 ) * 5.0, 0, object.color),
+					AnimationState(object.pos + geom::direction(random::floatRandom(0, M_PI * 2, 2)) * 0.2, { 0.0, 0.0 }, 0, object.color),
+					0.2);
 
 			// bars
 			if (object.id != sys.id) {
@@ -160,6 +165,9 @@ void DrawSystem::drawScene() {
 		if (bonus.type == Bonus::IMMORTAL) {
 			image("bonusImmortal", bonus.pos.x, bonus.pos.y, r, r, cam.dir + M_PI / 2);
 		}
+		if (bonus.type == Bonus::BOOST) {
+			image("bonusBoost", bonus.pos.x, bonus.pos.y, r, r, cam.dir + M_PI / 2);
+		}
 	}
 
 	// Animations
@@ -188,7 +196,7 @@ void DrawSystem::drawInterface() {
 		image(a.img, a.state.pos.x, a.state.pos.y, a.state.box.x, a.state.box.y, a.state.direction, a.state.color);
 	}
 
-	// hp, energy
+	// hp, energy, active
 	for (const auto& object : sys.objects) {
 		if (object.type == Object::SHIP && object.id == sys.id) {
 			double size = w / 5;
@@ -217,6 +225,22 @@ void DrawSystem::drawInterface() {
 				image("box", shift.x, shift.y, size, sizeH, 0, { 0, 107, 145, alpha });
 				image("box", shift.x  - (size - l) / 2, shift.y, l, sizeH, 0, { 3, 186, 252, alpha });
 			}
+
+			// active
+			std::string img = "bonusEmpty";
+			switch (object.activeAbility) {
+			case Bonus::BERSERK:
+				img = "bonusBerserk";
+				break;
+			case Bonus::IMMORTAL:
+				img = "bonusImmortal";
+				break;
+			case Bonus::BOOST:
+				img = "bonusBoost";
+				break;
+			}
+			size = w * 0.08;
+			image(img, w - size * 0.52, h - size * 0.52, size, size, 0);
 		}
 	}
 

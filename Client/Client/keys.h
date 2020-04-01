@@ -14,6 +14,7 @@ enum Commands {
 	ZOOM_IN, 
 	ZOOM_OUT, 
 	STABILIZE_ROTATION, 
+	ACTIVATE,
 	RESTART, 
 	EXIT,
 	/////////////////////////////////////////
@@ -184,6 +185,8 @@ inline Commands getKey(std::string s) {
 		return ZOOM_OUT;
 	if (s == "STABILIZE_ROTATION")
 		return STABILIZE_ROTATION;
+	if (s == "ACTIVATE")
+		return ACTIVATE;
 	if (s == "RESTART")
 		return RESTART;
 	if (s == "EXIT")

@@ -1,6 +1,7 @@
 #pragma once
 #include "geometry.h"
-#include "color.h"
+#include "Color.h"
+#include "Bonus.h"
 
 class Object {
 public:
@@ -24,6 +25,7 @@ public:
 	Type type = SHIP;
 	Color color;
 
+	Bonus::Type activeAbility = Bonus::NONE;
 	std::vector<bool> effects = { 0,0,0,0,0,0,0,0 };
 
 	Vec2 pos;

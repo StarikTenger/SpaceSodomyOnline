@@ -64,7 +64,7 @@ void System::collision() {
 
 			if (geom::distance(a.pos, b.pos) < a.r + b.r) {
 				if (a.type == Object::BULLET && a.hp > EPS && b.effects[Bonus::IMMORTAL] <= 0) {
-					b.hp -= 1;
+					b.hp -= a.damage;
 					a.hp = -EPS;
 					if (b.hp < EPS && b.type == Object::SHIP) {
 						players[a.id].kills++;

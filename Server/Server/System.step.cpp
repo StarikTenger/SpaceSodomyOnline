@@ -47,23 +47,27 @@ void System::step() {
 
 		if (object.energy > EPS) {
 			// linear
+			double k = 1;
+			if (object.effects[Bonus::BOOST] > 0)
+				k = 5;
+
 			if (object.orders[Object::MOVE_FORWARD]) {
-				object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir) * dt;
+				object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir) * dt * k;
 				object.energy -= object.engine.consumptionLinear * dt;
 			}
 
 			if (object.orders[Object::MOVE_RIGHT]) {
-				object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir + M_PI * 0.5) * dt;
+				object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir + M_PI * 0.5) * dt * k;
 				object.energy -= object.engine.consumptionLinear * dt;
 			}
 
 			if (object.orders[Object::MOVE_BACKWARD]) {
-				object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir + M_PI) * dt;
+				object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir + M_PI) * dt * k;
 				object.energy -= object.engine.consumptionLinear * dt;
 			}
 
 			if (object.orders[Object::MOVE_LEFT]) {
-				object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir + M_PI * 1.5) * dt;
+				object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir + M_PI * 1.5) * dt * k;
 				object.energy -= object.engine.consumptionLinear * dt;
 			}
 
@@ -91,6 +95,21 @@ void System::step() {
 		if (object.orders[Object::SHOOT])
 			shoot(object);
 		
+		// activate
+		if (object.orders[Object::ACTIVATE]) {
+			switch (object.activeAbility) {
+			case Bonus::BERSERK:
+				object.effects[Bonus::BERSERK] = 10;
+				break;
+			case Bonus::IMMORTAL:
+				object.effects[Bonus::IMMORTAL] = 10;
+				break;
+			case Bonus::BOOST:
+				object.effects[Bonus::BOOST] = 5;
+				break;
+			}
+			object.activeAbility = Bonus::NONE;
+		}
 	}
 
 	// Collison (&damage)
@@ -160,11 +179,15 @@ void System::step() {
 			}
 			if (bonus.type == Bonus::BERSERK) {
 				bonus.type = Bonus::NONE;
-				object.effects[Bonus::BERSERK] = 10;
+				object.activeAbility = Bonus::BERSERK;
 			}
 			if (bonus.type == Bonus::IMMORTAL) {
 				bonus.type = Bonus::NONE;
-				object.effects[Bonus::IMMORTAL] = 10;
+				object.activeAbility = Bonus::IMMORTAL;
+			}
+			if (bonus.type == Bonus::BOOST) {
+				bonus.type = Bonus::NONE;
+				object.activeAbility = Bonus::BOOST;
 			}
 		}
 	}

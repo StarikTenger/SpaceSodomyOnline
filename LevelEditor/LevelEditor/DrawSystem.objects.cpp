@@ -90,6 +90,8 @@ void  DrawSystem::drawBonus(Bonus* s) {
 		image("bonusBerserk", p.x, p.y, newSize, newSize, s->body.direction);
 	if (s->type == Bonus::IMMORTAL)
 		image("bonusImmortal", p.x, p.y, newSize, newSize, s->body.direction);
+	if (s->type == Bonus::BOOST)
+		image("bonusBoost", p.x, p.y, newSize, newSize, s->body.direction);
 }
 
 void DrawSystem::drawRocketLauncher(RocketLauncher* s) {

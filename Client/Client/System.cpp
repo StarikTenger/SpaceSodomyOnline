@@ -130,7 +130,7 @@ void System::unpack(std::string str) {
 		}
 
 		// Bonuses
-		if (type == "e" || type == "h" || type == "b" || type == "i") {
+		if (type == "e" || type == "h" || type == "b" || type == "i" || type == "o") {
 			bonuses.push_back({});
 			auto& bonus = bonuses.back();
 			int x, y;
@@ -145,6 +145,8 @@ void System::unpack(std::string str) {
 				bonus.type = Bonus::BERSERK;
 			if (type == "i")
 				bonus.type = Bonus::IMMORTAL;
+			if (type == "o")
+				bonus.type = Bonus::BOOST;
 		}
 
 		// Objects
@@ -200,6 +202,10 @@ void System::unpack(std::string str) {
 						i++;
 					}
 				}
+				// active
+				int abl;
+				ss >> abl;
+				object.activeAbility = Bonus::Type(abl);
 			}
 		}
 	}

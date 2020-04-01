@@ -65,6 +65,8 @@ void System::save(std::string path) {
 					type = "berserk";
 				if (bonus->type == Bonus::IMMORTAL)
 					type = "immortal";
+				if (bonus->type == Bonus::BOOST)
+					type = "boost";
 				file << "BONUS " << (int)bonus->body.pos.x << " " << (int)bonus->body.pos.y << " " << type <<  "\n";
 				continue;
 			}

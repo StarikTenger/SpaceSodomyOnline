@@ -8,7 +8,9 @@ public:
 		HP,
 		ENERGY,
 		BERSERK,
-		IMMORTAL
+		IMMORTAL,
+		BOOST,
+		SNIPER
 	};
 	Vec2 pos;
 	Type type = NONE;

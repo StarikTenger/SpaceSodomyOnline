@@ -8,7 +8,8 @@ public:
 		HP,
 		ENERGY,
 		BERSERK,
-		IMMORTAL
+		IMMORTAL,
+		BOOST
 	};
 	Vec2 pos;
 	Type type = ENERGY;

@@ -4,7 +4,8 @@
 #include "Gun.h"
 #include "Effects.h"
 #include "geometry.h"
-#include "color.h"
+#include "Color.h"
+#include "Bonus.h"
 #include <vector>
 
 
@@ -25,7 +26,8 @@ public:
 		TURN_LEFT,
 		TURN_RIGHT,
 		SHOOT,
-		STABILIZE_ROTATION
+		STABILIZE_ROTATION,
+		ACTIVATE
 	};
 
 	int id = 666;
@@ -36,9 +38,13 @@ public:
 	Vec2 pos; // position
 	Vec2 vel; // velocity
 
+	// Bullet atributes
+	double damage = 1;
+
 	// Ship atributes (only for objects with SHIP type)
 	Engine engine;
 	Gun gun;
+	Bonus::Type activeAbility  = Bonus::NONE;
 	std::vector<double> effects = {0,0,0,0,0,0,0,0};
 
 	double m = 1; // mass
