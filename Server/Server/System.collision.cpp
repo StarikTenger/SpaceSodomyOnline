@@ -70,6 +70,14 @@ void System::collision() {
 						players[a.id].kills++;
 					}
 				}
+
+				if (b.type == Object::SHIP && a.type == Object::SHIP && a.effects[Bonus::BOOST] > 0 && b.effects[Bonus::IMMORTAL] <= 0) {
+					b.hp  = -1;
+					if (b.hp < EPS && b.type == Object::SHIP) {
+						players[a.id].kills++;
+					}
+				}
+
 				//a.vel += geom::direction(a.pos, b.pos) * dt * 10 / a.m;
 			}
 

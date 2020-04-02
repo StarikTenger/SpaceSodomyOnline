@@ -10,24 +10,25 @@ Control::Control() {
 	sys.teams.insert({ 1, {} });
 	sys.teams.insert({ 2, {} });
 	sys.teams[2].spawnpoints = { {2, 2}, {47, 47} };
-	sys.teams[1].spawnpoints = { 
+	/*sys.teams[1].spawnpoints = { 
 		{20, 16}, 
 		{22, 36},
 		{3, 37},
 		{47, 11}
-	};
+	};*/
+	sys.teams[1].spawnpoints = { {2, 2}};
+	sys.teams[2].spawnpoints = { {47, 47}};
 
 	// players
-	sys.setPlayer({ 1, 1,   {146, 235, 52}, {23, 23}, 1, 0 });
+	sys.setPlayer({ 1, 1,   {0, 135, 47}, {23, 23}, 1, 0 });
 	sys.setPlayer({ 2, 1,  {0, 135, 47}, {27, 27}, 1, 0 });
-	sys.setPlayer({ 4, 1, {0, 255, 208},{20, 16}, 1, 0 });
 
-
+	sys.setPlayer({ 4, 2, {255, 20, 20},{20, 16}, 1, 0 });
 	sys.setPlayer({ 3, 2, {255, 20, 20},{47, 47}, 1, 0 });
-	sys.objects.back().gun.cooldownTime = 0.3;
+	/*sys.objects.back().gun.cooldownTime = 0.3;
 	sys.objects.back().gun.consumption = 0.5;
 	sys.objects.back().gun.vel = 22;
-	sys.objects.back().engine.linearForce = 5;
+	sys.objects.back().engine.linearForce = 5;*/
 
 	//sys.setPlayer({ 5, 2, {0, 255, 64},{47, 47}, 1, 0 });
 	//sys.setPlayer({ 3, 2, {255, 38, 96},{43, 47}, 1, 0 });

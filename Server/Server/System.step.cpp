@@ -65,7 +65,7 @@ void System::step() {
 				object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir + M_PI) * dt * k;
 				object.energy -= object.engine.consumptionLinear * dt;
 			}
-
+			
 			if (object.orders[Object::MOVE_LEFT]) {
 				object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir + M_PI * 1.5) * dt * k;
 				object.energy -= object.engine.consumptionLinear * dt;
@@ -99,10 +99,10 @@ void System::step() {
 		if (object.orders[Object::ACTIVATE]) {
 			switch (object.activeAbility) {
 			case Bonus::BERSERK:
-				object.effects[Bonus::BERSERK] = 10;
+				object.effects[Bonus::BERSERK] = 5;
 				break;
 			case Bonus::IMMORTAL:
-				object.effects[Bonus::IMMORTAL] = 10;
+				object.effects[Bonus::IMMORTAL] = 5;
 				break;
 			case Bonus::BOOST:
 				object.effects[Bonus::BOOST] = 5;
@@ -126,6 +126,7 @@ void System::step() {
 		if (objects[i].hp < EPS) {
 			if (objects[i].type == Object::SHIP) {
 				players[objects[i].id].alive = 0;
+				players[objects[i].id].timer = 3;
 			}
 			objects.erase(objects.begin() + i);
 			i--;
@@ -134,8 +135,12 @@ void System::step() {
 
 	// Respawn
 	for (auto& player : players) {
+		player.second.timer -= dt;
 		if (!player.second.alive) {
 			while (1) {
+				if (player.second.timer > 0)
+					break;
+
 				int x = random::intRandom(1, field.size() - 1);
 				int y = random::intRandom(1, field.size() - 1);
 				Vec2 pos = Vec2(x + 0.5, y + 0.5);
