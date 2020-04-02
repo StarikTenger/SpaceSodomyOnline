@@ -52,6 +52,7 @@ public:
 	void image(std::string name, double x, double y, double width, double height, double dir, Color color);
 	void image(std::string name, double x, double y, double width, double height, double dir, double d);
 	void text(std::string text, double x, double y, int size, Color color);
+	void text(std::string text, double x, double y, double size, double dir, Color color);
 
 	// Objects
 	void drawWalls();

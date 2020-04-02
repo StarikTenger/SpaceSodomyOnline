@@ -109,6 +109,7 @@ bool System::checkAbility(Object shooter, Object target, double threshold) {
 
 void System::unpack(std::string str) {
 	objects = {};
+	playerList = {};
 	players = {};
 	bonuses = {};
 
@@ -117,16 +118,26 @@ void System::unpack(std::string str) {
 	std::string type;
 	
 	while (ss >> type) {
+		// END
+		if (type == "/")
+			break;
+
 		// Players
 		if (type == "P") {
-			players.push_back({});
-			auto& player = players.back();
+			playerList.push_back({});
+			auto& player = playerList.back();
 
+			int id = 0;
+
+			ss >> id;
 			ss >> player.name;
 			ss >> player.color.r >> player.color.g >> player.color.b;
 			player.color.a = 255;
 			ss >> player.kills;
 			ss >> player.deaths;
+
+			players[id] = player;
+			//players.insert({ id, player });
 		}
 
 		// Bonuses
@@ -167,7 +178,8 @@ void System::unpack(std::string str) {
 			ss >> object.w;
 
 			// color
-			ss >> object.color.r >> object.color.g >> object.color.b;
+			//ss >> object.color.r >> object.color.g >> object.color.b;
+			object.color = players[object.id].color;
 			object.color.a = 255;
 
 			if (type == "B")
@@ -210,9 +222,9 @@ void System::unpack(std::string str) {
 		}
 	}
 
-	// Sort players
-	std::sort(players.begin(), players.end());
-	std::reverse(players.begin(), players.end());
+	// Sort playerList
+	std::sort(playerList.begin(), playerList.end());
+	std::reverse(playerList.begin(), playerList.end());
 
 	// Find main player
 	for (const auto& object : objects) {

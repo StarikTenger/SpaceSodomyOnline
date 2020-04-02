@@ -128,8 +128,6 @@ void DrawSystem::image(std::string name, double x, double y, double width, doubl
 	image(name, pos.x, pos.y, width * d, height * d, dir);
 }
 
-
-
 void DrawSystem::text(std::string text, double x, double y, int size, Color color) {
 	sf::Text drawnText;
 	drawnText.setFont(font);
@@ -138,5 +136,18 @@ void DrawSystem::text(std::string text, double x, double y, int size, Color colo
 	drawnText.setCharacterSize(size);
 	drawnText.setOrigin(floor(drawnText.getLocalBounds().width / 2), floor(drawnText.getLocalBounds().height));
 	drawnText.setPosition(x, y);
+	window->draw(drawnText);
+}
+
+void DrawSystem::text(std::string text, double x, double y, double size, double dir, Color color) {
+	sf::Text drawnText;
+	drawnText.setFont(font);
+	drawnText.setString(text);
+	drawnText.setFillColor(sf::Color(color.r, color.g, color.b, color.a));
+	drawnText.setCharacterSize(60);
+	drawnText.setScale(size / 2, size);
+	drawnText.setOrigin(floor(drawnText.getLocalBounds().width / 2), floor(drawnText.getLocalBounds().height));
+	drawnText.setPosition(x, y);
+	drawnText.setRotation(dir * 180 / M_PI);
 	window->draw(drawnText);
 }

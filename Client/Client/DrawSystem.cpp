@@ -126,6 +126,14 @@ void DrawSystem::drawScene() {
 
 				}
 				
+				// name
+				{
+					auto shift = Vec2(0, 0) - geom::direction(cam.dir) * 0.9;
+					std::string str = sys.players[object.id].name;
+					if (str.size() > 18)
+						str = str.substr(0, 18);
+					text(str, object.pos.x + shift.x, object.pos.y + shift.y, 0.03 / 5, cam.dir + M_PI / 2, object.color);
+				}
 			}
 
 		}
@@ -247,14 +255,14 @@ void DrawSystem::drawInterface() {
 	image("interface", w / 2, h / 2, w, h, 0);
 
 	// list
-	for (int i = 0; i < sys.players.size(); i++) {
+	for (int i = 0; i < sys.playerList.size(); i++) {
 		//std::string str =  + ;
 		double size = h / 30;
 		double sizeW = w / 60;
-		//image("box", 0 , h - sys.players.size() * size + i * size, size * 15, size, 0, {0, 0, 0, 255});
-		text(sys.players[i].name, sizeW * 4 , h - sys.players.size() * size + i * size, size/2, sys.players[i].color);
-		text("" + std::to_string(sys.players[i].kills), sizeW * 9 , h - sys.players.size() * size + i * size, size/1.5, sys.players[i].color);
-		text("" + std::to_string(sys.players[i].deaths), sizeW * 11 , h - sys.players.size() * size + i * size, size / 1.5, sys.players[i].color);
+		//image("box", 0 , h - sys.playerList.size() * size + i * size, size * 15, size, 0, {0, 0, 0, 255});
+		text(sys.playerList[i].name, sizeW * 4 , h - sys.playerList.size() * size + i * size, size/2, sys.playerList[i].color);
+		text("" + std::to_string(sys.playerList[i].kills), sizeW * 9 , h - sys.playerList.size() * size + i * size, size/1.5, sys.playerList[i].color);
+		text("" + std::to_string(sys.playerList[i].deaths), sizeW * 11 , h - sys.playerList.size() * size + i * size, size / 1.5, sys.playerList[i].color);
 	}
 }
 

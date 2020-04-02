@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <map>
 #include <fstream>
 #include <string>
 #include <SFML/Graphics.hpp>
@@ -24,7 +25,8 @@ public:
 
 	std::string state;
 
-	std::vector<Player> players;
+	std::vector<Player> playerList;
+	std::map<int, Player> players;
 
 	std::vector<Object> objects;
 	std::vector<Bonus> bonuses;
