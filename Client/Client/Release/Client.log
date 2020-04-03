@@ -1,9 +1,11 @@
-﻿  System.cpp
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\System.cpp(67,27): warning C4018: '>=': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\System.cpp(67,48): warning C4018: '>=': signed/unsigned mismatch
+﻿  Control.cpp
+  Control.events.cpp
+  Replay.cpp
+  main.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\Replay.cpp(16,12): warning C4018: '>=': signed/unsigned mismatch
   Generating code
-  2 of 1256 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+  4 of 1317 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+    2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Client.vcxproj -> C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Release\Client.exe

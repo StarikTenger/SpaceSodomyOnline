@@ -90,6 +90,9 @@
     <ClInclude Include="Bonus.h">
       <Filter>Header Files\System</Filter>
     </ClInclude>
+    <ClInclude Include="Replay.h">
+      <Filter>Header Files\Control</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -157,6 +160,9 @@
     </ClCompile>
     <ClCompile Include="Bonus.cpp">
       <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Replay.cpp">
+      <Filter>Source Files\Control</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

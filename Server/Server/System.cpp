@@ -108,6 +108,7 @@ std::string System::pack() {
 	// Players
 	for (const auto& player : players) {
 		packet += "P ";
+		packet += to_string(player.first) + " ";
 		packet += player.second.name + " ";
 		packet += to_string(player.second.color.r) + " ";
 		packet += to_string(player.second.color.g) + " ";
@@ -159,11 +160,6 @@ std::string System::pack() {
 		// angular velocity
 		str += to_string(object.w, 3) + " ";
 
-		// color
-		str += to_string((int)object.color.r) + " ";
-		str += to_string((int)object.color.g) + " ";
-		str += to_string((int)object.color.b) + " ";
-
 		if (object.type == Object::SHIP) {
 			str = "S " + str;
 
@@ -202,6 +198,9 @@ std::string System::pack() {
 
 		packet += str;
 	}
+
+	packet += "/";
+
 	return packet;
 }
 

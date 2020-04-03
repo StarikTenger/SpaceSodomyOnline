@@ -12,9 +12,10 @@
 #include "geometry.h"
 #include "Mouse.h"
 #include "Gamepad.h"
+#include "Replay.h"
 
 enum controlMode {
-	MENU, GAME
+	GAME, REPLAY
 };
 
 class Control{
@@ -27,7 +28,8 @@ public:
 	int id = 666;
 	std::string name = "";
 
-	controlMode mode = MENU;
+	controlMode mode = REPLAY;
+	Replay replay;
 
 	System sys;
 	DrawSystem drawSys;
@@ -36,10 +38,11 @@ public:
 	Gamepad joystick;
 
 	std::vector<bool> keys = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
+	std::vector<bool> keysPrev = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 };
 	std::vector<std::vector<int> > keyMatches;
 
 	//time
-	int dt = 20;
+	int dt = 40;
 	int timePrev = 0;
 	bool stop = 0;
 	int iteration = 0;

@@ -28,6 +28,8 @@ public:
 	std::vector<std::pair<sf::IpAddress, int>> addresses;
 	std::deque<std::string> messages;
 
+	std::ofstream replay;
+
 	controlMode mode = MENU;
 
 	System sys;

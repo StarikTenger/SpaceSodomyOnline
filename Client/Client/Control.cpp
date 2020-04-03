@@ -34,6 +34,11 @@ Control::Control() {
 	sys.id = id;
 
 	socket.setBlocking(0);
+
+	// Replay
+	if (mode == REPLAY) {
+		replay = Replay("replay.rep");
+	}
 }
 
 Control::~Control() {
@@ -59,9 +64,9 @@ void Control::step() {
 		timePrev = timeMs;
 		sys.time = timeMs * 0.001;
 
-		drawSys.cam.border = { drawSys.w, drawSys.h};
+		drawSys.cam.border = { drawSys.w, drawSys.h };
 
-		drawSys.cam.dir = -M_PI/2;
+		drawSys.cam.dir = -M_PI / 2;
 		if (mouse.state) {
 			drawSys.cam.pos += (mousePrev.pos - mouse.pos) / drawSys.cam.scale;
 		}
@@ -70,49 +75,56 @@ void Control::step() {
 		drawSys.cam.pos += (drawSys.cam.border / 2 - mouse.pos) / drawSys.cam.scale * (1 - dS); // it works
 
 		events();
-		drawSys.mouse = mouse;			
+		drawSys.mouse = mouse;
 
 		if (keys[ZOOM_OUT])
 			drawSys.cam.scale /= pow(drawSys.cam.scaleVel, 1.0 / (double)dt);
 		if (keys[ZOOM_IN])
 			drawSys.cam.scale *= pow(drawSys.cam.scaleVel, 1.0 / (double)dt);
 
-		// Shoot cheat
-		sys.target = 0;
-		for (const auto& object : sys.objects) {
-			if (sys.checkAbility(sys.mainPlayer, object, 0.06))
-				sys.target = 1;
+		if (mode == GAME){
+			// Send
+			std::string message = "";
+			message += std::to_string(id) + " ";
+			message += name + " ";
+			if (keys[MOVE_LEFT])
+				message += "L";
+			if (keys[MOVE_RIGHT])
+				message += "R";
+			if (keys[MOVE_FORWARD])
+				message += "U";
+			if (keys[MOVE_BACKWARD])
+				message += "D";
+			if (keys[TURN_RIGHT])
+				message += "r";
+			if (keys[TURN_LEFT])
+				message += "l";
+			if (keys[STABILIZE_ROTATION])
+				message += "s";
+			if (keys[ACTIVATE])
+				message += "a";
+			if (keys[SHOOT])
+				message += "S";
+			socket.send(message.c_str(), message.size() + 1, address, port);
+
+
+			sys.state = std::string(buffer);
+		} 
+		else {
+			if (keys[LEFT] && !keysPrev[LEFT])
+				replay.speedDown();
+			if (keys[RIGHT] && !keysPrev[RIGHT])
+				replay.speedUp();
+			if (keys[SPACE] && !keysPrev[SPACE])
+				replay.play = !replay.play;
+			sys.state = replay.frames[replay.frame];
+			replay.step();
 		}
-
-
-		// Send
-		std::string message = "";
-		message += std::to_string(id) + " ";
-		message += name + " ";
-		if (keys[MOVE_LEFT])
-			message += "L";
-		if (keys[MOVE_RIGHT])
-			message += "R";
-		if (keys[MOVE_FORWARD]) 
-			message += "U";
-		if (keys[MOVE_BACKWARD])
-			message += "D";
-		if (keys[TURN_RIGHT])
-			message += "r";
-		if (keys[TURN_LEFT])
-			message += "l";
-		if (keys[STABILIZE_ROTATION])
-			message += "s";
-		if (keys[ACTIVATE])
-			message += "a";
-		if (keys[SHOOT])
-			message += "S";
-		socket.send(message.c_str(), message.size() + 1, address, port);
-
-		sys.state = std::string(buffer);
 		sys.unpack(sys.state);
 
+		drawSys.mode = mode;
 		drawSys.system = &sys;
+		drawSys.replay = &replay;
 		drawSys.draw();
 		drawSys.window->display();
 

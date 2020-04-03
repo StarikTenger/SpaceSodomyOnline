@@ -151,6 +151,7 @@ void System::step() {
 
 				player.second.deaths++;
 				setPlayer({ player.first, player.second.team, player.second.color, pos, 1, 0 });
+				objects.back().dir = random::floatRandom(0, 2 * M_PI, 2);
 				player.second.alive = 1;
 				break;
 			}

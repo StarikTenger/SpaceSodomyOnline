@@ -130,6 +130,8 @@ void System::collision() {
 				}
 			}
 		}
+
+		// Damage
 		bool touch = 0;
 		bool dmg = 0;
 		for (const auto& wall : walls) {

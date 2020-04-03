@@ -1,5 +1,6 @@
 #include "DrawSystem.h"
 #include "random.h"
+#include "getMilliCount.h"
 #include <math.h>
 #include <algorithm>
 #include <SFML/Graphics.hpp>
@@ -197,62 +198,71 @@ void DrawSystem::drawInterface() {
 	// Absolute view
 	window->setView(sf::View(sf::FloatRect(0, 0, w, h)));
 
-	// Animations
-	for (auto& a : animationsInterface) {
-		a.time = sys.time;
-		a.setState();
-		image(a.img, a.state.pos.x, a.state.pos.y, a.state.box.x, a.state.box.y, a.state.direction, a.state.color);
-	}
+	if (mode == 0) {
+		// Animations
+		for (auto& a : animationsInterface) {
+			a.time = sys.time;
+			a.setState();
+			image(a.img, a.state.pos.x, a.state.pos.y, a.state.box.x, a.state.box.y, a.state.direction, a.state.color);
+		}
 
-	// hp, energy, active
-	for (const auto& object : sys.objects) {
-		if (object.type == Object::SHIP && object.id == sys.id) {
-			double size = w / 5;
-			double sizeH = h / 30;
-			double alpha = 220;
-			// hp
-			{
-				Vec2 shift = {w / 2, h - sizeH * 2};
-				double l = object.hp / object.hpMax * size;
-				image("box", shift.x, shift.y, size, sizeH, 0, { 20, 100, 20, alpha });
-				image("box", shift.x - (size - l) / 2, shift.y, l, sizeH, 0, { 0, 255, 0, alpha });
-				if (object.hp < sys.hpPrev) {
-					animationInterface("blood",
-						AnimationState(Vec2(w, h) / 2, Vec2(w, h), 0, {255, 255, 255}),
-						AnimationState(Vec2(w, h) / 2, Vec2(w, h), 0, { 255, 255, 255, 0}),
-						1);
+		// hp, energy, active
+		for (const auto& object : sys.objects) {
+			if (object.type == Object::SHIP && object.id == sys.id) {
+				double size = w / 5;
+				double sizeH = h / 30;
+				double alpha = 220;
+				// hp
+				{
+					Vec2 shift = { w / 2, h - sizeH * 2 };
+					double l = object.hp / object.hpMax * size;
+					image("box", shift.x, shift.y, size, sizeH, 0, { 20, 100, 20, alpha });
+					image("box", shift.x - (size - l) / 2, shift.y, l, sizeH, 0, { 0, 255, 0, alpha });
+					if (object.hp < sys.hpPrev) {
+						animationInterface("blood",
+							AnimationState(Vec2(w, h) / 2, Vec2(w, h), 0, { 255, 255, 255 }),
+							AnimationState(Vec2(w, h) / 2, Vec2(w, h), 0, { 255, 255, 255, 0 }),
+							1);
+					}
+
+					sys.hpPrev = object.hp;
 				}
 
-				sys.hpPrev = object.hp;
-			}
+				// energy 
+				{
+					Vec2 shift = { w / 2, h - sizeH };
+					double l = object.energy / object.energyMax * size;
+					image("box", shift.x, shift.y, size, sizeH, 0, { 0, 107, 145, alpha });
+					image("box", shift.x - (size - l) / 2, shift.y, l, sizeH, 0, { 3, 186, 252, alpha });
+				}
 
-			// energy 
-			{
-				Vec2 shift = { w / 2, h - sizeH };
-				double l = object.energy / object.energyMax * size;
-				image("box", shift.x, shift.y, size, sizeH, 0, { 0, 107, 145, alpha });
-				image("box", shift.x  - (size - l) / 2, shift.y, l, sizeH, 0, { 3, 186, 252, alpha });
+				// active
+				std::string img = "bonusEmpty";
+				switch (object.activeAbility) {
+				case Bonus::BERSERK:
+					img = "bonusBerserk";
+					break;
+				case Bonus::IMMORTAL:
+					img = "bonusImmortal";
+					break;
+				case Bonus::BOOST:
+					img = "bonusBoost";
+					break;
+				}
+				size = w * 0.08;
+				image(img, w - size * 0.52, h - size * 0.52, size, size, 0);
 			}
-
-			// active
-			std::string img = "bonusEmpty";
-			switch (object.activeAbility) {
-			case Bonus::BERSERK:
-				img = "bonusBerserk";
-				break;
-			case Bonus::IMMORTAL:
-				img = "bonusImmortal";
-				break;
-			case Bonus::BOOST:
-				img = "bonusBoost";
-				break;
-			}
-			size = w * 0.08;
-			image(img, w - size * 0.52, h - size * 0.52, size, size, 0);
 		}
-	}
 
-	image("interface", w / 2, h / 2, w, h, 0);
+		image("interface", w / 2, h / 2, w, h, 0);
+	}
+	else {
+		double progress = (double)replay->frame / replay->frames.size();
+		image("box", w * progress / 2, h, w * progress, 20, 0, { 0, 229, 255, 80 });
+
+		int time = replay->frame * 20;
+		text(getTime(time), w - 120, h - 40, 40, Color(181, 247, 255));
+	}
 
 	// list
 	for (int i = 0; i < sys.playerList.size(); i++) {

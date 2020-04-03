@@ -6,12 +6,15 @@
 #include "Camera.h"
 #include "Mouse.h"
 #include "Animation.h"
+#include "Replay.h"
 
 class DrawSystem {
 public:
 	sf::RenderWindow* window;
 	Camera cam;
 	System* system;
+	Replay* replay;
+	int mode;
 	bool fullscreenMode = 0;
 
 
