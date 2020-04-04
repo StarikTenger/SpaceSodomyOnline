@@ -16,7 +16,7 @@ public:
 	Replay* replay;
 	int mode;
 	bool fullscreenMode = 0;
-
+	Vec2 smartView = {0, 0};
 
 	Mouse mouse;
 	double w, h;
@@ -57,9 +57,10 @@ public:
 	void text(std::string text, double x, double y, int size, Color color);
 	void text(std::string text, double x, double y, double size, double dir, Color color);
 
-	// Objects
+	// Game
 	void drawWalls();
 	void beam(Vec2 pos, double dir, Color col);
+	Vec2 getCenter(System& sys);
 
 	// Load
 	std::map<std::string, sf::Texture*> textures;

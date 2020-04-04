@@ -29,6 +29,10 @@ void DrawSystem::drawScene() {
 			cam.dir = object.dir;
 		}
 	}
+	// Smart camera
+	//smartView = smartView + (getCenter(sys) - smartView) * 0.1;
+	//cam.pos = smartView;
+
 
 	// Absolute view
 	window->setView(sf::View(sf::FloatRect(0, 0, w, h)));
@@ -50,6 +54,9 @@ void DrawSystem::drawScene() {
 	view.setRotation((cam.dir * 180 / M_PI) + 90);
 	window->setView(view);
 
+	
+
+	// DRAWING /////////////////////////////////////////////////
 	// Background
 	image("backwall1",
 		(sys.field.size()) * blockSize / 2,
@@ -258,10 +265,20 @@ void DrawSystem::drawInterface() {
 	}
 	else {
 		double progress = (double)replay->frame / replay->frames.size();
-		image("box", w * progress / 2, h, w * progress, 20, 0, { 0, 229, 255, 80 });
+		image("box", w * progress / 2, h, w * progress, 20, 0, { 0, 229, 255, 180 });
+		image("box", (w + w * progress) / 2, h, w - w * progress, 20, 0, { 0, 100, 100, 180 });
+
 
 		int time = replay->frame * 20;
 		text(getTime(time), w - 120, h - 40, 40, Color(181, 247, 255));
+
+		std::string txt = std::to_string(replay->speed / 2);
+		if (replay->speed == 1)
+			txt = "0.5";
+		if (replay->speed == -1)
+			txt = "-0.5";
+
+		text(txt, w - 120, h - 85, 40, Color(181, 247, 255));
 	}
 
 	// list

@@ -128,7 +128,7 @@ void System::unpack(std::string str) {
 			auto& player = playerList.back();
 
 			int id = 0;
-
+			
 			ss >> id;
 			ss >> player.name;
 			ss >> player.color.r >> player.color.g >> player.color.b;
@@ -226,10 +226,13 @@ void System::unpack(std::string str) {
 	std::sort(playerList.begin(), playerList.end());
 	std::reverse(playerList.begin(), playerList.end());
 
-	// Find main player
-	for (const auto& object : objects) {
-		if (object.type == Object::SHIP && object.id == id) {
-			mainPlayer = object;
+	// Relation object to player
+	for (auto& object : objects) {
+		if (object.type == Object::SHIP) {
+			players[object.id].object = &object;
+			// Find main player
+			if(object.id == id)
+				mainPlayer = object;
 		}
 	}
 }

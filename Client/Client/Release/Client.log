@@ -1,11 +1,7 @@
-﻿  Control.cpp
-  Control.events.cpp
-  Replay.cpp
-  main.cpp
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\Replay.cpp(16,12): warning C4018: '>=': signed/unsigned mismatch
+﻿  Control.setSounds.cpp
   Generating code
-  4 of 1317 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+  2 of 1531 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+    3 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Client.vcxproj -> C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Release\Client.exe

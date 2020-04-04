@@ -4,6 +4,8 @@
 #include <fstream>
 #include <sstream>
 
+
+
 Control::Control() {
 	for (int i = 0; i < 100; i++) {
 		keyMatches.push_back({});
@@ -67,12 +69,14 @@ void Control::step() {
 		drawSys.cam.border = { drawSys.w, drawSys.h };
 
 		drawSys.cam.dir = -M_PI / 2;
-		if (mouse.state) {
-			drawSys.cam.pos += (mousePrev.pos - mouse.pos) / drawSys.cam.scale;
+		if (!mouseVideoMode) {
+			if (mouse.state) {
+				drawSys.cam.pos += (mousePrev.pos - mouse.pos) / drawSys.cam.scale;
+			}
+			double dS = pow(1.1, mouse.delta);
+			drawSys.cam.scale *= dS;
+			drawSys.cam.pos += (drawSys.cam.border / 2 - mouse.pos) / drawSys.cam.scale * (1 - dS); // it works
 		}
-		double dS = pow(1.1, mouse.delta);
-		drawSys.cam.scale *= dS;
-		drawSys.cam.pos += (drawSys.cam.border / 2 - mouse.pos) / drawSys.cam.scale * (1 - dS); // it works
 
 		events();
 		drawSys.mouse = mouse;
@@ -117,10 +121,22 @@ void Control::step() {
 				replay.speedUp();
 			if (keys[SPACE] && !keysPrev[SPACE])
 				replay.play = !replay.play;
-			sys.state = replay.frames[replay.frame];
+
+			// Mouse
+			if (mouse.state && !mousePrev.state && mouse.pos.y > drawSys.h - 10)
+				mouseVideoMode = 1;
+			if(mouseVideoMode && !mouse.state && mousePrev.state)
+				mouseVideoMode = 0;
+			if (mouseVideoMode)
+				replay.frame = (int)(replay.frames.size() * mouse.pos.x / drawSys.w);
+
 			replay.step();
+			sys.state = replay.frames[replay.frame];
 		}
+		sysPrev = sys;
 		sys.unpack(sys.state);
+
+		setSounds();
 
 		drawSys.mode = mode;
 		drawSys.system = &sys;

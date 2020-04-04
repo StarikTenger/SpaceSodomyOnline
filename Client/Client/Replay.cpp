@@ -1,4 +1,7 @@
 #include "Replay.h"
+#include "System.h"
+#include <iostream>
+#include <thread>
 
 Replay::Replay(std::string path) {
 	std::ifstream replayFile = std::ifstream(path);
@@ -10,11 +13,12 @@ Replay::Replay(std::string path) {
 }
 void Replay::step() {
 	if(play)
-		frame += speed * 2;
+		frame += speed * 1;
 	if (frame < 0)
 		frame = 0;
 	if (frame >= frames.size())
 		frame = frames.size() - 1;
+
 }
 
 void Replay::speedUp() {
