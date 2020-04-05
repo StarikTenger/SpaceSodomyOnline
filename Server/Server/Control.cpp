@@ -45,7 +45,8 @@ Control::Control() {
 	sys.setPlayer({ 3, 3, {255, 234, 79},{3, 44}, 1, 0 });
 	sys.setPlayer({ 4, 4, {194, 41, 255},{23, 25}, 1, 0 });
 	sys.setPlayer({ 5, 5, {0, 229, 255},{23, 25}, 1, 0 });
-	sys.setPlayer({ 6, 6, {235, 255, 191},{23, 25}, 1, 0 });
+	//sys.setPlayer({ 6, 6, {235, 255, 191},{23, 25}, 1, 0 });
+	//sys.setPlayer({ 7, 7, {190, 255, 100},{47, 41}, 1, 0 });
 
 	// Socket config
 	socket.setBlocking(0);

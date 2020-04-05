@@ -10,7 +10,7 @@ public:
 		BERSERK,
 		IMMORTAL,
 		BOOST,
-		//SNIPER
+		LASER
 	};
 	Vec2 pos;
 	Type type = NONE;

@@ -49,7 +49,7 @@ public:
 
 	double m = 1; // mass
 	double r = 0.4; // radius 
-	double dir = 0; // direction
+	double dir = 0; // dir
 	double w = 0; // angular velocity
 	double hpMax = 3; // maximum hit points
 	double hp = hpMax; // hit points

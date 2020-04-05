@@ -126,7 +126,6 @@ BONUS 33 22 energy
 BONUS 16 33 energy
 BONUS 14 16 energy
 BONUS 35 34 energy
-BONUS 16 29 berserk
 BONUS 14 19 immortal
 BONUS 32 28 immortal
 BONUS 7 45 hp
@@ -135,5 +134,7 @@ BONUS 36 3 hp
 BONUS 45 5 hp
 BONUS 41 41 boost
 BONUS 10 10 boost
-BONUS 25 22 berserk
+BONUS 10 37 berserk
+BONUS 35 11 berserk
+BONUS 21 25 laser
 END

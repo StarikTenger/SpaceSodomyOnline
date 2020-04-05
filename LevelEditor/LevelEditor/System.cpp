@@ -91,6 +91,8 @@ System::System(string path) {
 				bonus->type = Bonus::IMMORTAL;
 			if (type == "boost")
 				bonus->type = Bonus::BOOST;
+			if (type == "laser")
+				bonus->type = Bonus::LASER;
 			units.push_back(bonus);
 		}
 	}

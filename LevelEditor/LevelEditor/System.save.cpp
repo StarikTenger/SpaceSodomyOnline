@@ -67,6 +67,8 @@ void System::save(std::string path) {
 					type = "immortal";
 				if (bonus->type == Bonus::BOOST)
 					type = "boost";
+				if (bonus->type == Bonus::LASER)
+					type = "laser";
 				file << "BONUS " << (int)bonus->body.pos.x << " " << (int)bonus->body.pos.y << " " << type <<  "\n";
 				continue;
 			}

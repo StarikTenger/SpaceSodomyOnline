@@ -107,6 +107,9 @@ void System::step() {
 			case Bonus::BOOST:
 				object.effects[Bonus::BOOST] = 5;
 				break;
+			case Bonus::LASER:
+				object.effects[Bonus::LASER] = 0.5;
+				break;
 			}
 			object.activeAbility = Bonus::NONE;
 		}
@@ -179,21 +182,15 @@ void System::step() {
 				bonus.type = Bonus::NONE;
 				object.energy += 5;
 			}
-			if (bonus.type == Bonus::HP && object.hp < object.hpMax - EPS) {
-				bonus.type = Bonus::NONE;
-				object.hp += 1;
+			else if (bonus.type == Bonus::HP) {
+				if (object.hp < object.hpMax - EPS) {
+					bonus.type = Bonus::NONE;
+					object.hp += 1;
+				}
 			}
-			if (bonus.type == Bonus::BERSERK) {
+			else {
+				object.activeAbility = bonus.type;
 				bonus.type = Bonus::NONE;
-				object.activeAbility = Bonus::BERSERK;
-			}
-			if (bonus.type == Bonus::IMMORTAL) {
-				bonus.type = Bonus::NONE;
-				object.activeAbility = Bonus::IMMORTAL;
-			}
-			if (bonus.type == Bonus::BOOST) {
-				bonus.type = Bonus::NONE;
-				object.activeAbility = Bonus::BOOST;
 			}
 		}
 	}

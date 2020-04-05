@@ -29,21 +29,21 @@ bool System::collision(Object& body, std::pair<Vec2, Vec2> wall) {
 		geom::distance(posNew, perpendicular.first, perpendicular.second) < length / 2 &&
 		geom::distance(posNew, wall.first, wall.second) < geom::distance(body.pos, wall.first, wall.second)) {
 		touch = 1;
-		Vec2 velNew = geom::rotate(body.vel, -geom::angle(wall.first - wall.second));
+		Vec2 velNew = geom::rotate(body.vel, -geom::dir(wall.first - wall.second));
 		velNew.y *= -bounce;
-		body.vel = geom::rotate(velNew, geom::angle(wall.first - wall.second));
+		body.vel = geom::rotate(velNew, geom::dir(wall.first - wall.second));
 	}
 	else if (geom::distance(posNew, wall.first) < body.r) { // Point collision
 		touch = 1;
-		Vec2 velNew = geom::rotate(body.vel, -geom::angle(wall.first - posNew));
+		Vec2 velNew = geom::rotate(body.vel, -geom::dir(wall.first - posNew));
 		velNew.x *= -bounce;
-		body.vel = geom::rotate(velNew, (geom::angle(wall.first - posNew)));
+		body.vel = geom::rotate(velNew, (geom::dir(wall.first - posNew)));
 	}
 	else if (geom::distance(posNew, wall.second) < body.r) {
 		touch = 1;
-		Vec2 velNew = geom::rotate(body.vel, -geom::angle(wall.second - posNew));
+		Vec2 velNew = geom::rotate(body.vel, -geom::dir(wall.second - posNew));
 		velNew.x *= -bounce;
-		body.vel = geom::rotate(velNew, (geom::angle(wall.second - posNew)));
+		body.vel = geom::rotate(velNew, (geom::dir(wall.second - posNew)));
 	}
 	return touch;
 }
@@ -63,22 +63,16 @@ void System::collision() {
 				continue;
 
 			if (geom::distance(a.pos, b.pos) < a.r + b.r) {
-				if (a.type == Object::BULLET && a.hp > EPS && b.effects[Bonus::IMMORTAL] <= 0) {
-					b.hp -= a.damage;
-					a.hp = -EPS;
-					if (b.hp < EPS && b.type == Object::SHIP) {
-						players[a.id].kills++;
-					}
+				if (a.type == Object::BULLET) {
+					damage(a, b, 1);
+					damage(b, a, 1000);
 				}
 
-				if (b.type == Object::SHIP && a.type == Object::SHIP && a.effects[Bonus::BOOST] > 0 && b.effects[Bonus::IMMORTAL] <= 0) {
-					b.hp  = -1;
-					if (b.hp < EPS && b.type == Object::SHIP) {
-						players[a.id].kills++;
-					}
+				if (a.effects[Bonus::BOOST] > 0) {
+					damage(a, b, 10);
 				}
 
-				//a.vel += geom::direction(a.pos, b.pos) * dt * 10 / a.m;
+				//a.vel += geom::dir(a.pos, b.pos) * dt * 10 / a.m;
 			}
 
 		}
@@ -146,6 +140,16 @@ void System::collision() {
 		}
 		if (touch && u.type == Object::BULLET) {
 			u.hp = 0;
+		}
+	}
+
+	// Laser collision
+	for (auto& object : objects) {
+		if (object.type == Object::SHIP && object.effects[Bonus::LASER] > 0) {
+			for (auto& target : objects) {
+				if (checkAbility(object, target, 0.4))
+					damage(object, target, 10);
+			}
 		}
 	}
 }

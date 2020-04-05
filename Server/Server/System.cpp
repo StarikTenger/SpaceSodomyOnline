@@ -87,6 +87,8 @@ System::System(string path) {
 				bonusInfo[Bonus::IMMORTAL].positions.push_back(pos);
 			if (type == "boost")
 				bonusInfo[Bonus::BOOST].positions.push_back(pos);
+			if (type == "laser")
+				bonusInfo[Bonus::LASER].positions.push_back(pos);
 		}
 	}
 }
@@ -138,6 +140,9 @@ std::string System::pack() {
 		case Bonus::BOOST:
 			packet += "o ";
 			break;
+		case Bonus::LASER:
+			packet += "l ";
+			break;
 		}
 
 		packet += std::to_string((int)bonus.pos.x) + " ";
@@ -152,7 +157,7 @@ std::string System::pack() {
 		// position
 		str += to_string(object.pos.x, 3) + " ";
 		str += to_string(object.pos.y, 3) + " ";
-		// direction
+		// dir
 		str += to_string(object.dir, 4) + " ";
 		// linear velocity
 		str += to_string(object.vel.x, 2) + " ";
@@ -223,4 +228,61 @@ void System::shoot(Object& object) {
 	bullet.vel = object.vel + geom::direction(object.dir) * object.gun.vel;
 	bullet.hp = object.gun.lifetime;
 	objectsToAdd.push_back(bullet);
+}
+
+void System::damage(Object& object, Object& target, double value) {
+	if (object.team == target.team || target.effects[Bonus::IMMORTAL] > 0)
+		return;
+	target.hp -= value;
+	if (target.hp < EPS && target.type == Object::SHIP) {
+		players[object.id].kills++;
+	}
+}
+
+
+int System::checkWall(Vec2 pos) {
+	int x = (int)(pos.x / 1);
+	int y = (int)(pos.y / 1);
+	Vec2 rel = pos - Vec2(x + 0.5, y + 0.5);
+	if ((x < 0 || y < 0 || x >= field.size() || y >= field[0].size() || field[x][y].type == 1) ||
+		rel.y < -rel.x && field[x][y].type == CORNER_A || rel.y > -rel.x && field[x][y].type == CORNER_C ||
+		rel.y < rel.x && field[x][y].type == CORNER_B || rel.y > rel.x && field[x][y].type == CORNER_D
+		) {
+		return 1;
+	}
+	return 0;
+}
+
+bool System::checkAbility(Object shooter, Object target, double threshold) {
+	if (distance(shooter.pos, target.pos) < EPS) {
+		return 0;
+	}
+	bool contact = 1;
+
+	double stepSize = 0.5;
+
+	Vec2 step = direction(shooter.dir) * stepSize;
+	for (int i = 0; i < distance(shooter.pos, target.pos) / stepSize; i++) {
+		if (checkWall(shooter.pos + step * i)) {
+			contact = 0;
+		}
+	}
+
+	if (!contact) {
+		return 0;
+	}
+
+
+	double a = abs(shooter.dir - dir(target.pos - shooter.pos));
+
+	while (a >= 2 * M_PI) {
+		a -= 2 * M_PI;
+	}
+	while (a <= 0) {
+		a += 2 * M_PI;
+	}
+
+	if (distance(target.pos, shooter.pos, shooter.pos + step) < target.r && a < threshold)
+		return 1;
+	return 0;
 }

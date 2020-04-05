@@ -1,8 +1,14 @@
-﻿  System.collision.cpp
+﻿  System.cpp
 C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\BonusInfo.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(181,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(183,25): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(189,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(191,26): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(247,27): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(247,48): warning C4018: '>=': signed/unsigned mismatch
   Generating code
-  1 of 1383 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 1386 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+    3 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Server.vcxproj -> C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Release\Server.exe

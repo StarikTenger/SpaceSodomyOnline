@@ -156,6 +156,14 @@ void Control::actions() {
 				sys.units.push_back(bonus);
 			}
 		}
+		if (keys[NUM6] && !keysPrev[NUM6]) {
+			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
+				Bonus* bonus = new Bonus();
+				bonus->body.pos = Vector2d((int)pos.x + 0.5, (int)pos.y + 0.5);
+				bonus->type = Bonus::LASER;
+				sys.units.push_back(bonus);
+			}
+		}
 
 		if (keys[DELETE] && !keysPrev[DELETE] || keys[Q] && !keysPrev[Q]) {
 			for (int i = 0; i < sys.units.size(); i++) {

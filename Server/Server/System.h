@@ -25,7 +25,7 @@ public:
 		{ 1, 40 }, // BERSERK
 		{ 1, 40 }, // IMMORTAL
 		{ 2, 30 }, // BOOST
-		//{ 1, 40 } // SNIPER
+		{ 1, 20 } // LASER
 	};
 
 
@@ -49,6 +49,9 @@ public:
 	void step();
 	void setPlayer(Object object);
 	void shoot(Object& object);
+	void damage(Object& object, Object& target, double value);
+	int checkWall(Vec2 pos);
+	bool checkAbility(Object shooter, Object target, double threshold);
 	bool collision(Object& body, std::pair<Vec2, Vec2> wall);
 	void collision();
 };

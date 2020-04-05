@@ -9,7 +9,8 @@ public:
 		ENERGY,
 		BERSERK,
 		IMMORTAL,
-		BOOST
+		BOOST,
+		LASER
 	};
 	Type type = NONE;
 	Bonus();
