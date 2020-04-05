@@ -31,7 +31,7 @@ public:
 	int id = 666;
 	std::string name = "";
 
-	controlMode mode = REPLAY;
+	controlMode mode = GAME;
 	Replay replay;
 
 	System sys;

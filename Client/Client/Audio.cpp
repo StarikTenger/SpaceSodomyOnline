@@ -10,6 +10,7 @@ Audio::Audio(){
 	loadSound("knock", "sounds/knock.wav");
 	loadSound("bip", "sounds/bip.wav");
 	loadSound("death", "sounds/death.wav");
+	loadSound("laser", "sounds/laser.wav");
 }
 
 Audio::~Audio(){
@@ -53,5 +54,5 @@ void Audio::play(std::string name, Vec2 pos, double volume) {
 void Audio::play(std::string name, Vec2 pos, double volume, Camera cam) {
 	pos -= cam.pos;
 	pos = geom::rotate(pos, -cam.dir);
-	play(name, pos, 1 / cam.scale);
+	play(name, pos, -5);
 }

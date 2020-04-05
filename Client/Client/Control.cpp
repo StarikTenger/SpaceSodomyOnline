@@ -136,13 +136,13 @@ void Control::step() {
 		sysPrev = sys;
 		sys.unpack(sys.state);
 
-		setSounds();
-
 		drawSys.mode = mode;
 		drawSys.system = &sys;
 		drawSys.replay = &replay;
 		drawSys.draw();
 		drawSys.window->display();
+
+		setSounds();
 
 	}
 	for (int i = 0; i < 5; i++) {

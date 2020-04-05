@@ -1,4 +1,5 @@
 #include "Color.h"
+#include <algorithm>
 
 Color::Color(double r1, double g1, double b1, double a1) {
 	r = r1;

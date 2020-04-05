@@ -141,7 +141,7 @@ void System::unpack(std::string str) {
 		}
 
 		// Bonuses
-		if (type == "e" || type == "h" || type == "b" || type == "i" || type == "o") {
+		if (type == "e" || type == "h" || type == "b" || type == "i" || type == "o" || type == "l") {
 			bonuses.push_back({});
 			auto& bonus = bonuses.back();
 			int x, y;
@@ -158,6 +158,8 @@ void System::unpack(std::string str) {
 				bonus.type = Bonus::IMMORTAL;
 			if (type == "o")
 				bonus.type = Bonus::BOOST;
+			if (type == "l")
+				bonus.type = Bonus::LASER;
 		}
 
 		// Objects

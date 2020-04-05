@@ -60,6 +60,7 @@ public:
 	// Game
 	void drawWalls();
 	void beam(Vec2 pos, double dir, Color col);
+	void laserBeam(Vec2 pos, double dir, Color col);
 	Vec2 getCenter(System& sys);
 
 	// Load

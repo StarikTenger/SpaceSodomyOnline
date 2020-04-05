@@ -9,7 +9,7 @@ public:
 	int kills = 0;
 	int deaths = 0;
 
-	Object* object;
+	Object* object = nullptr;
 
 	Color color;
 

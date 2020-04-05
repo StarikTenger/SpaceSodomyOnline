@@ -75,6 +75,11 @@ void DrawSystem::drawScene() {
 			if (object.id == sys.id || sys.privilegies) {
 				beam(object.pos, geom::dir(object.vel + geom::direction(object.dir) * sys.bulletVel), { 255, 0, 0, 130 });
 			}
+			if (object.activeAbility == Bonus::LASER) {
+				Color col = object.color;
+				col.a = 130;
+				beam(object.pos, object.dir, col);
+			}
 
 
 			// model
@@ -106,6 +111,8 @@ void DrawSystem::drawScene() {
 					AnimationState(object.pos, Vec2( 0.3, 0.3 ) * 5.0, 0, object.color),
 					AnimationState(object.pos + geom::direction(random::floatRandom(0, M_PI * 2, 2)) * 0.2, { 0.0, 0.0 }, 0, object.color),
 					0.2);
+			if (object.effects[Bonus::LASER])
+				laserBeam(object.pos, object.dir, object.color);
 
 			// bars
 			if (object.id != sys.id) {
@@ -169,21 +176,29 @@ void DrawSystem::drawScene() {
 	// Bonuses
 	for (const auto& bonus : sys.bonuses) {
 		double r = 0.5;
-		if (bonus.type == Bonus::ENERGY) {
-			image("bonusEnergy", bonus.pos.x, bonus.pos.y, r, r, cam.dir + M_PI / 2);
+		std::string name = "bonusEnergy";
+		switch (bonus.type) {
+		case Bonus::ENERGY:
+			name = "bonusEnergy";
+			break;
+		case Bonus::HP:
+			name = "bonusHp";
+			break;
+		case Bonus::BERSERK:
+			name = "bonusBerserk";
+			break;
+		case Bonus::IMMORTAL:
+			name = "bonusImmortal";
+			break;
+		case Bonus::BOOST:
+			name = "bonusBoost";
+			break;
+		case Bonus::LASER:
+			name = "bonusLaser";
+			break;
 		}
-		if (bonus.type == Bonus::HP) {
-			image("bonusHp", bonus.pos.x, bonus.pos.y, r, r, cam.dir + M_PI / 2);
-		}
-		if (bonus.type == Bonus::BERSERK) {
-			image("bonusBerserk", bonus.pos.x, bonus.pos.y, r, r, cam.dir + M_PI / 2);
-		}
-		if (bonus.type == Bonus::IMMORTAL) {
-			image("bonusImmortal", bonus.pos.x, bonus.pos.y, r, r, cam.dir + M_PI / 2);
-		}
-		if (bonus.type == Bonus::BOOST) {
-			image("bonusBoost", bonus.pos.x, bonus.pos.y, r, r, cam.dir + M_PI / 2);
-		}
+		
+		image(name, bonus.pos.x, bonus.pos.y, r, r, cam.dir + M_PI / 2);
 	}
 
 	// Animations
@@ -255,7 +270,11 @@ void DrawSystem::drawInterface() {
 				case Bonus::BOOST:
 					img = "bonusBoost";
 					break;
+				case Bonus::LASER:
+					img = "bonusLaser";
+					break;
 				}
+
 				size = w * 0.08;
 				image(img, w - size * 0.52, h - size * 0.52, size, size, 0);
 			}
