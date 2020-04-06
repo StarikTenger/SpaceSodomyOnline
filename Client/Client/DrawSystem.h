@@ -16,6 +16,7 @@ public:
 	Replay* replay;
 	int mode;
 	bool fullscreenMode = 0;
+	
 	Vec2 smartView = {0, 0};
 
 	Mouse mouse;

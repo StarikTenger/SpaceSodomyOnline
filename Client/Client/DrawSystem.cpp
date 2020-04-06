@@ -30,8 +30,9 @@ void DrawSystem::drawScene() {
 		}
 	}
 	// Smart camera
-	//smartView = smartView + (getCenter(sys) - smartView) * 0.1;
-	//cam.pos = smartView;
+	smartView = smartView + (getCenter(sys) - smartView) * 0.1;
+	if (replay->smartMode)
+		cam.pos = smartView;
 
 
 	// Absolute view
@@ -220,7 +221,7 @@ void DrawSystem::drawInterface() {
 	// Absolute view
 	window->setView(sf::View(sf::FloatRect(0, 0, w, h)));
 
-	if (mode == 0) {
+	if (mode == 0 || replay->hud && replay->focusId) {
 		// Animations
 		for (auto& a : animationsInterface) {
 			a.time = sys.time;
@@ -282,33 +283,36 @@ void DrawSystem::drawInterface() {
 
 		image("interface", w / 2, h / 2, w, h, 0);
 	}
-	else {
+	if (mode == 1 && replay->hud) {
 		double progress = (double)replay->frame / replay->frames.size();
 		image("box", w * progress / 2, h, w * progress, 20, 0, { 0, 229, 255, 180 });
 		image("box", (w + w * progress) / 2, h, w - w * progress, 20, 0, { 0, 100, 100, 180 });
 
+		if (!replay->focusId) {
+			int time = replay->frame * 20;
+			text(getTime(time), w - 120, h - 40, 40, Color(181, 247, 255));
 
-		int time = replay->frame * 20;
-		text(getTime(time), w - 120, h - 40, 40, Color(181, 247, 255));
+			std::string txt = std::to_string(replay->speed / 2);
+			if (replay->speed == 1)
+				txt = "0.5";
+			if (replay->speed == -1)
+				txt = "-0.5";
 
-		std::string txt = std::to_string(replay->speed / 2);
-		if (replay->speed == 1)
-			txt = "0.5";
-		if (replay->speed == -1)
-			txt = "-0.5";
-
-		text(txt, w - 120, h - 85, 40, Color(181, 247, 255));
+			text(txt, w - 120, h - 85, 40, Color(181, 247, 255));
+		}
 	}
 
-	// list
-	for (int i = 0; i < sys.playerList.size(); i++) {
-		//std::string str =  + ;
-		double size = h / 30;
-		double sizeW = w / 60;
-		//image("box", 0 , h - sys.playerList.size() * size + i * size, size * 15, size, 0, {0, 0, 0, 255});
-		text(sys.playerList[i].name, sizeW * 4 , h - sys.playerList.size() * size + i * size, size/2, sys.playerList[i].color);
-		text("" + std::to_string(sys.playerList[i].kills), sizeW * 9 , h - sys.playerList.size() * size + i * size, size/1.5, sys.playerList[i].color);
-		text("" + std::to_string(sys.playerList[i].deaths), sizeW * 11 , h - sys.playerList.size() * size + i * size, size / 1.5, sys.playerList[i].color);
+	if (mode == 0 || replay->hud) {
+		// list
+		for (int i = 0; i < sys.playerList.size(); i++) {
+			//std::string str =  + ;
+			double size = h / 30;
+			double sizeW = w / 60;
+			//image("box", 0 , h - sys.playerList.size() * size + i * size, size * 15, size, 0, {0, 0, 0, 255});
+			text(sys.playerList[i].name, sizeW * 4, h - sys.playerList.size() * size + i * size, size / 2, sys.playerList[i].color);
+			text("" + std::to_string(sys.playerList[i].kills), sizeW * 9, h - sys.playerList.size() * size + i * size, size / 1.5, sys.playerList[i].color);
+			text("" + std::to_string(sys.playerList[i].deaths), sizeW * 11, h - sys.playerList.size() * size + i * size, size / 1.5, sys.playerList[i].color);
+		}
 	}
 }
 

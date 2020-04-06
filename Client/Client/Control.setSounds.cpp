@@ -23,11 +23,9 @@ void Control::setSounds() {
 
 		if (!object && objectPrev) {
 			audio.play("death", objectPrev->pos, 100, drawSys.cam);
-			std::cout << objectPrev->pos.x << " " << objectPrev->pos.y << "\n";
 		}
 		if (object && objectPrev && object->hp < objectPrev->hp) {
 			audio.play("knock", object->pos, 100, drawSys.cam);
-			std::cout << object->pos.x << " " << object->pos.y << "\n";
 		}
 
 		if (!objectPrev || !object || geom::distance({ 0, 0 }, object->pos) > 1e5)

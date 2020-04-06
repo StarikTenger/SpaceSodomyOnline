@@ -26,19 +26,18 @@ Control::Control() {
 
 	sys = System("level.lvl");
 	
-	std::ifstream config("config.conf");
-	config >> address;
-	config >> port;
-	config >> id;
-	config >> name;
-	config.close();
+	loadConfig();
 
 	sys.id = id;
 
 	socket.setBlocking(0);
 
+	if (name == "REPLAY")
+		mode = REPLAY;
+
 	// Replay
 	if (mode == REPLAY) {
+		dt = 40;
 		replay = Replay("replay.rep");
 	}
 }
@@ -52,7 +51,12 @@ Vec2 Control::getCursorPos() {
 }
 
 void Control::loadConfig() {
-	
+	std::ifstream config("config.conf");
+	config >> address;
+	config >> port;
+	config >> id;
+	config >> name;
+	config.close();
 }
 
 
@@ -115,12 +119,43 @@ void Control::step() {
 			sys.state = std::string(buffer);
 		} 
 		else {
+			
 			if (keys[LEFT] && !keysPrev[LEFT])
 				replay.speedDown();
 			if (keys[RIGHT] && !keysPrev[RIGHT])
 				replay.speedUp();
 			if (keys[SPACE] && !keysPrev[SPACE])
 				replay.play = !replay.play;
+			if (keys[S] && !keysPrev[S])
+				replay.smartMode = !replay.smartMode;
+			if (keys[H] && !keysPrev[H])
+				replay.hud = !replay.hud;
+			if (keys[UP] && !keysPrev[UP]) {
+				replay.focusId++;
+				if (replay.focusId >= sys.players.size()) {
+					replay.focusId = 0;
+				}
+				std::cout << replay.focusId << "\n";
+			}
+			if (keys[DOWN] && !keysPrev[DOWN]) {
+				replay.focusId--;
+				if (replay.focusId < 0) {
+					replay.focusId = sys.players.size() - 1;
+				}
+				std::cout << replay.focusId << "\n";
+			}
+
+			// Set sys.id
+			{
+				sys.id = 0;
+				int i = 0;
+				for (const auto& player : sys.players) {
+					if (i == replay.focusId)
+						break;
+					i++;
+					sys.id = player.first;
+				}
+			}
 
 			// Mouse
 			if (mouse.state && !mousePrev.state && mouse.pos.y > drawSys.h - 10)

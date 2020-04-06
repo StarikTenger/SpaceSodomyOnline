@@ -16,6 +16,9 @@ public:
 	int frame = 0;
 	int speed = 2;
 	bool play = 1;
+	int focusId = 0;
+	bool smartMode = 0;
+	bool hud = 1;
 
 	Replay() {};
 	Replay(std::string path);

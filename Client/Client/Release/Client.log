@@ -1,6 +1,174 @@
-﻿  Generating code
-  0 of 1532 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+﻿  Control.cpp
+  Control.events.cpp
+  Control.setSounds.cpp
+  DrawSystem.basics.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\Control.cpp(135,24): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(69,40): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(69,28): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(70,40): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(70,40): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(70,40): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(70,40): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(70,40): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(70,33): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(70,33): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(70,33): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(70,33): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(70,33): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(71,67): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(71,58): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(71,49): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(71,40): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(72,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(72,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(78,40): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(78,28): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(79,40): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(79,40): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(79,40): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(79,40): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(79,40): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(79,33): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(79,33): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(79,33): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(79,33): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(79,33): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(80,70): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(80,61): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(80,52): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(80,43): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(83,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(83,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(89,22): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(89,19): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(90,19): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(91,64): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(91,55): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(91,46): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(91,37): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(92,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(92,21): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(99,30): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(99,30): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(99,30): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(99,30): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(99,30): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(99,27): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(99,27): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(99,27): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(99,27): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(99,27): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(100,31): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(100,31): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(100,31): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(100,31): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(100,31): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(100,27): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(100,27): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(100,27): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(100,27): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(100,27): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(102,70): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(102,61): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(102,52): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(102,43): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(111,56): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(111,56): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(111,56): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(111,56): warning C4244:             T=unsigned int
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(111,56): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(111,35): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(111,35): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(111,35): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(111,35): warning C4244:             T=unsigned int
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(111,35): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(113,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(113,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(114,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(114,21): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(116,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(135,67): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(135,58): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(135,49): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(135,40): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(138,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(138,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(146,67): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(146,58): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(146,49): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(146,40): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(148,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(148,26): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(150,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(150,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  DrawSystem.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(151,34): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,50): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,50): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,50): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,50): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,50): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,47): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,47): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,47): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,47): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,47): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,61): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,61): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,61): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,61): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,61): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,26): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,26): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,26): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,26): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,26): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,41): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,41): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,41): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,41): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,41): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,22): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,22): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,22): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,22): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,22): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(55,42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,50): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,50): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,50): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,50): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,50): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,47): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,47): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,47): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,47): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,47): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(307,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(312,94): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(313,116): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(314,118): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(328,20): warning C4018: '<': signed/unsigned mismatch
+  DrawSystem.drawWalls.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(334,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(14,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(15,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(32,11): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(38,11): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(55,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(56,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(78,11): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(90,11): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(100,20): warning C4018: '<': signed/unsigned mismatch
+  DrawSystem.loadTextures.cpp
+  DrawSystem.objects.cpp
+  Replay.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(101,21): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\Replay.cpp(19,12): warning C4018: '>=': signed/unsigned mismatch
+  Generating code
+  3 of 1535 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    3 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Client.vcxproj -> C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Release\Client.exe
