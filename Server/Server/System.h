@@ -27,8 +27,7 @@ public:
 		{ 2, 30 }, // BOOST
 		{ 1, 20 } // LASER
 	};
-
-
+	static std::map<std::string, int> bonusNames;
 
 	Vec2 border = {50, 50};
 
@@ -55,3 +54,4 @@ public:
 	bool collision(Object& body, std::pair<Vec2, Vec2> wall);
 	void collision();
 };
+

@@ -1,6 +1,6 @@
 #include "Control.h"
 
-int main(int, char**){
+int main(){
 	random::start();
 	
 	Control control;

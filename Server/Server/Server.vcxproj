@@ -61,6 +61,7 @@
     <ClCompile Include="Vec2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="config.conf" />
     <None Include="level.lvl" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

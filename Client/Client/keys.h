@@ -6,6 +6,8 @@ enum Commands {
 	NONE,
 	MOVE_FORWARD, 
 	MOVE_BACKWARD, 
+	MOVE_FORWARD1,
+	MOVE_BACKWARD1,
 	MOVE_LEFT, 
 	MOVE_RIGHT, 
 	TURN_LEFT, 
@@ -169,6 +171,10 @@ inline Commands getKey(std::string s) {
 		return MOVE_FORWARD;
 	if (s == "MOVE_BACKWARD")
 		return MOVE_BACKWARD;
+	if (s == "MOVE_FORWARD1")
+		return MOVE_FORWARD1;
+	if (s == "MOVE_BACKWARD1")
+		return MOVE_BACKWARD1;
 	if (s == "MOVE_LEFT")
 		return MOVE_LEFT;
 	if (s == "MOVE_RIGHT")

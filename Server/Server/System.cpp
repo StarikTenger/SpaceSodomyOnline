@@ -96,12 +96,38 @@ System::System(string path) {
 System::~System() {
 }
 
+std::map<std::string, int> System::bonusNames = {
+		{"HP", Bonus::HP},
+		{"ENERGY", Bonus::BERSERK},
+		{"BERSERK", Bonus::BERSERK},
+		{"IMMORTAL", Bonus::IMMORTAL},
+		{"BOOST", Bonus::BOOST},
+		{"LASER", Bonus::LASER}
+};
+
 void System::setPlayer(Object object) {
 	objects.push_back(object);
 	if (players.find(object.id) == players.end())
 		players[object.id] = Player();
 	players[object.id].team = object.team;
-	players[object.id].color = object.color;
+	if (teams.find(object.team) == teams.end()) {
+		teams[object.team] = Team();
+		teams[object.team].color = fromHSV(random::intRandom(0, 360), 1, 1);
+	}
+	object.color = players[object.id].color = teams[object.team].color;
+	
+	auto& player = objects.back();
+	while (1) {
+		int x = random::intRandom(1, field.size() - 1);
+		int y = random::intRandom(1, field.size() - 1);
+		player.pos = Vec2(x + 0.5, y + 0.5);
+		if (teams.find(player.team) != teams.end() && teams[player.team].spawnpoints.size())
+			player.pos = teams[player.team].spawnpoints[random::intRandom(0, teams[player.team].spawnpoints.size() - 1)] + Vec2(0.5, 0.5);
+		else if (field[x][y].type)
+			continue;
+
+		break;
+	}
 }
 
 std::string System::pack() {
@@ -236,6 +262,7 @@ void System::damage(Object& object, Object& target, double value) {
 	target.hp -= value;
 	if (target.hp < EPS && target.type == Object::SHIP) {
 		players[object.id].kills++;
+		players[target.id].deaths++;
 	}
 }
 

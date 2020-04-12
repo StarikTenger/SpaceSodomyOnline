@@ -12,3 +12,4 @@ Color operator+(const Color& a, const Color& b);
 Color operator-(const Color& a, const Color& b);
 Color operator*(const Color& a, const double& b);
 Color operator/(const Color& a, const double& b);
+Color fromHSV(double H, double S, double V);

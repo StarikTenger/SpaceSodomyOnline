@@ -8,45 +8,7 @@ Control::Control() {
 
 	// sys config
 	sys = System("level.lvl");
-	// teams
-	sys.teams.insert({ 1, {} });
-	sys.teams.insert({ 2, {} });
-	//sys.teams[2].spawnpoints = { {2, 2}, {47, 47} };
-	/*sys.teams[1].spawnpoints = {
-		{20, 16},
-		{22, 36},
-		{3, 37},
-		{47, 11}
-	};*/
-	//sys.teams[1].spawnpoints = { {2, 2}, {2, 7}, {7, 2} };
-	//sys.teams[2].spawnpoints = { {47, 47}, {41, 47}, {47, 41} };
-
-
-	// players
-
-	// TEAM
-	
-	/*sys.setPlayer({ 1, 1,   {31, 255, 15}, {2, 2}, 1, 0 });
-	sys.setPlayer({ 3, 1,   {31, 255, 15}, {2, 7}, 1, 0 });
-	sys.setPlayer({ 5, 1,   {31, 255, 15}, {7, 2}, 1, 0 });
-
-	sys.setPlayer({ 2, 2, {255, 20, 20},{47, 47}, 1, 0 });
-	sys.setPlayer({ 4, 2, {255, 20, 20},{41, 47}, 1, 0 });
-	sys.setPlayer({ 6, 2, {255, 20, 20},{47, 41}, 1, 0 });*/
-
-	// FFA
-	/*sys.objects.back().gun.cooldownTime = 0.3;
-	sys.objects.back().gun.consumption = 0.5;
-	sys.objects.back().gun.vel = 22;
-	sys.objects.back().engine.linearForce = 5;*/
-
-	sys.setPlayer({ 1, 1, {0, 255, 64},{47, 47}, 1, 0 });
-	sys.setPlayer({ 2, 2, {255, 38, 96},{43, 47}, 1, 0 });
-	sys.setPlayer({ 3, 3, {255, 234, 79},{3, 44}, 1, 0 });
-	sys.setPlayer({ 4, 4, {194, 41, 255},{23, 25}, 1, 0 });
-	sys.setPlayer({ 5, 5, {0, 229, 255},{23, 25}, 1, 0 });
-	//sys.setPlayer({ 6, 6, {235, 255, 191},{23, 25}, 1, 0 });
-	//sys.setPlayer({ 7, 7, {190, 255, 100},{47, 41}, 1, 0 });
+	loadConfig("config.conf");
 
 	// Socket config
 	socket.setBlocking(0);
@@ -62,8 +24,50 @@ Control::~Control() {
 }
 
 
-void Control::loadConfig() {
-	
+void Control::loadConfig(std::string path) {
+	std::ifstream file(path);
+	std::string command;
+	while (file >> command) {
+		if (command == "END")
+			break;
+		if (command == "TEAM") {
+			int id;
+			file >> id;
+			sys.teams.insert({ id, {} });
+			std::string command1;
+			while (file >> command1) {
+				if (command1 == "END")
+					break;
+				if (command1 == "S") {
+					Vec2 pos;
+					file >> pos.x >> pos.y;
+					sys.teams[id].spawnpoints.push_back(pos);
+				}
+				if (command1 == "COL") {
+					Color col;
+					file >> col.r >> col.g >> col.b;
+					col.a = 255;
+					sys.teams[id].color = col;
+				}
+			}
+		}
+		if (command == "PLAYER") {
+			int id, team;
+			file >> id >> team;
+			sys.setPlayer({ id, team, {},{0, 0}, 1, 0 });
+		}
+		if (command == "BONUSINFO") {
+			std::string command1;
+			while (file >> command1) {
+				if (command1 == "END")
+					break;
+				
+				int type = System::bonusNames[command1];
+				file >> sys.bonusInfo[type].limit;
+				file >> sys.bonusInfo[type].countdownTime;
+			}
+		}
+	}
 }
 
 

@@ -29,10 +29,10 @@ void DrawSystem::laserBeam(Vec2 pos, double dir, Color col) {
 			step = step / 2;
 		}
 		Vec2 pos1 = pos + geom::rotate(step, M_PI / 2) * random::floatRandom(0, 0.1, 2) * 0.2;
-		image("laser", pos1.x, pos1.y, geom::distance(step, {}), 0.5, dir);
 	}
 
-	//image("laser", (posPrev.x + pos.x) / 2, (posPrev.y + pos.y) / 2, geom::distance(pos, posPrev), 0.5, dir);
+	image("laser", (posPrev.x + pos.x) / 2, (posPrev.y + pos.y) / 2, geom::distance(pos, posPrev), 0.5, dir, col);
+	image("laserBase", (posPrev.x + pos.x) / 2, (posPrev.y + pos.y) / 2, geom::distance(pos, posPrev), 0.5, dir);
 }
 
 Vec2 DrawSystem::getCenter(System& sys) {

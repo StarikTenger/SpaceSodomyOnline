@@ -52,7 +52,7 @@ public:
 	void receive();
 	void checkMessages();
 	std::string configParametersAdress = "parameters.conf";
-	void loadConfig();
+	void loadConfig(std::string path);
 	void saveConfig();
 };
 

@@ -23,6 +23,7 @@ Control::Control() {
 
 		}
 	}
+	drawSys.cam.dir = -M_PI / 2;
 
 	sys = System("level.lvl");
 	
@@ -73,6 +74,7 @@ void Control::step() {
 		drawSys.cam.border = { drawSys.w, drawSys.h };
 
 		drawSys.cam.dir = -M_PI / 2;
+
 		if (!mouseVideoMode) {
 			if (mouse.state) {
 				drawSys.cam.pos += (mousePrev.pos - mouse.pos) / drawSys.cam.scale;
@@ -99,9 +101,9 @@ void Control::step() {
 				message += "L";
 			if (keys[MOVE_RIGHT])
 				message += "R";
-			if (keys[MOVE_FORWARD])
+			if (keys[MOVE_FORWARD] || keys[MOVE_FORWARD1])
 				message += "U";
-			if (keys[MOVE_BACKWARD])
+			if (keys[MOVE_BACKWARD] || keys[MOVE_BACKWARD1])
 				message += "D";
 			if (keys[TURN_RIGHT])
 				message += "r";
@@ -132,15 +134,16 @@ void Control::step() {
 				replay.hud = !replay.hud;
 			if (keys[UP] && !keysPrev[UP]) {
 				replay.focusId++;
-				if (replay.focusId >= sys.players.size()) {
+				if (replay.focusId > sys.players.size()) {
 					replay.focusId = 0;
 				}
 				std::cout << replay.focusId << "\n";
 			}
+			//std::cout << sys.players.size() << " s\n";
 			if (keys[DOWN] && !keysPrev[DOWN]) {
 				replay.focusId--;
 				if (replay.focusId < 0) {
-					replay.focusId = sys.players.size() - 1;
+					replay.focusId = sys.players.size();
 				}
 				std::cout << replay.focusId << "\n";
 			}

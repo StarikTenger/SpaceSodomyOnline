@@ -154,5 +154,8 @@
     <None Include="level.lvl">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="config.conf">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
