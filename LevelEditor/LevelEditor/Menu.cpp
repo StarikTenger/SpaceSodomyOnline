@@ -30,7 +30,7 @@ Menu::Menu(){
 	buttons[4]->value = 1;
 	buttons[5]->value = 0;
 
-	buttons[0]->step = M_PI/12;
+	buttons[0]->step = 1;
 	buttons[1]->step = 0.1;
 	buttons[2]->step = 0.5;
 	buttons[3]->step = 0.05;
@@ -40,7 +40,7 @@ Menu::Menu(){
 	b_dir->type = 1;
 	b_color->type = 1;
 
-	b_dir->bound = Vector2d(0, M_PI*2);
+	b_dir->bound = Vector2d(0, 8);
 	b_w->bound = Vector2d(-10, 10);
 	b_bv->bound = Vector2d(0, 50);
 	b_cd->bound = Vector2d(0, 1000);

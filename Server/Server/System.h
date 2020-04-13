@@ -33,6 +33,7 @@ public:
 
 	std::map<int, Player> players;
 	std::map<int, Team> teams;
+	int wallKills = 0;
 
 	std::vector<Object> objects;
 	std::vector<Object> objectsToAdd;

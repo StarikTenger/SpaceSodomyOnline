@@ -42,6 +42,7 @@ public:
 	Mouse mousePrev;
 	Gamepad joystick;
 	bool mouseVideoMode = 0;
+	bool stabilize = 0;
 
 	std::deque<Sound> sounds;
 

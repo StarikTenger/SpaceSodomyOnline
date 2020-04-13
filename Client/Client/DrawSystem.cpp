@@ -278,6 +278,11 @@ void DrawSystem::drawInterface() {
 
 				size = w * 0.08;
 				image(img, w - size * 0.52, h - size * 0.52, size, size, 0);
+
+				// stabilization
+				if (sys.mainPlayer.orders[Object::STABILIZE_ROTATION]) {
+					text("stab", w - size * 1.52, h - size * 0.2, 20, { 255, 255, 255 });
+				}
 			}
 		}
 

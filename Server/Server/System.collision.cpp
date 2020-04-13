@@ -137,6 +137,10 @@ void System::collision() {
 		}
 		if (dmg && u.type == Object::SHIP && u.effects[Bonus::IMMORTAL] < 0) {
 			u.hp -= 1;
+			if (u.hp < EPS) {
+				wallKills++;
+				players[u.id].deaths++;
+			}
 		}
 		if (touch && u.type == Object::BULLET) {
 			u.hp = 0;

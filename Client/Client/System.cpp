@@ -58,6 +58,24 @@ System::System(string path) {
 			field[y][x] = c;
 		}
 	}
+
+	while (file) {
+		string command;
+		file >> command;
+		if (command == "END") {
+			break;
+		}
+		if (command == "FORCEFIELD") {
+			for (int x = 0; x < width; x++) {
+				for (int y = 0; y < height; y++) {
+					int dir;
+					file >> dir;
+					if (dir)
+						field[x][y].forceField = geom::direction((dir - 1) * M_PI / 4) * 16;
+				}
+			}
+		}
+	}
 }
 
 int System::checkWall(Vec2 pos) {

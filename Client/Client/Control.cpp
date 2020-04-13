@@ -93,6 +93,11 @@ void Control::step() {
 			drawSys.cam.scale *= pow(drawSys.cam.scaleVel, 1.0 / (double)dt);
 
 		if (mode == GAME){
+			// stab
+			if (keys[STABILIZE_ROTATION] && !keysPrev[STABILIZE_ROTATION]) {
+				stabilize = !stabilize;
+			}
+
 			// Send
 			std::string message = "";
 			message += std::to_string(id) + " ";
@@ -109,7 +114,7 @@ void Control::step() {
 				message += "r";
 			if (keys[TURN_LEFT])
 				message += "l";
-			if (keys[STABILIZE_ROTATION])
+			if (stabilize)
 				message += "s";
 			if (keys[ACTIVATE])
 				message += "a";

@@ -38,10 +38,10 @@ void System::save(std::string path) {
 		}
 		file << "\n";
 	}
-	file << "COLORS \n";
+	file << "FORCEFIELD \n";
 	for (int y = 0; y < field[0].size(); y++) {
 		for (int x = 0; x < field.size(); x++) {
-			file << field[x][y].color << " ";
+			file << field[x][y].forceField << " ";
 		}
 		file << "\n";
 	}

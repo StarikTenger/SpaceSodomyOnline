@@ -62,6 +62,13 @@ System::System(string path) {
 		if (command == "END") {
 			break;
 		}
+		if (command == "FORCEFIELD") {
+			for (int x = 0; x < width; x++) {
+				for (int y = 0; y < height; y++) {
+					file >> field[y][x].forceField;
+				}
+			}
+		}
 		if (command == "SPAWNPOINT") {
 			std::cout << "spawn\n";
 			Ship* ship = new Ship(

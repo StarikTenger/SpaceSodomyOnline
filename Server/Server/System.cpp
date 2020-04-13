@@ -72,6 +72,16 @@ System::System(string path) {
 		if (command == "END") {
 			break;
 		}
+		if (command == "FORCEFIELD") {
+			for (int x = 0; x < width; x++) {
+				for (int y = 0; y < height; y++) {
+					int dir;
+					file >> dir;
+					if(dir)
+						field[x][y].forceField = geom::direction((dir - 1) * M_PI/4) * 16;
+				}
+			}
+		}
 		if (command == "BONUS") {
 			Vec2 pos;
 			std::string type;
@@ -106,9 +116,11 @@ std::map<std::string, int> System::bonusNames = {
 };
 
 void System::setPlayer(Object object) {
+
 	objects.push_back(object);
 	if (players.find(object.id) == players.end())
 		players[object.id] = Player();
+	
 	players[object.id].team = object.team;
 	if (teams.find(object.team) == teams.end()) {
 		teams[object.team] = Team();
@@ -135,6 +147,8 @@ std::string System::pack() {
 
 	// Players
 	for (const auto& player : players) {
+		if (player.second.afkTimer < 0)
+			continue;
 		packet += "P ";
 		packet += to_string(player.first) + " ";
 		packet += player.second.name + " ";
@@ -143,6 +157,15 @@ std::string System::pack() {
 		packet += to_string(player.second.color.b) + " ";
 		packet += to_string(player.second.kills) + " ";
 		packet += to_string(player.second.deaths) + " ";
+	}
+	// wall player
+	{
+		packet += "P ";
+		packet += "0 ";
+		packet += " WALL ";
+		packet += "255 255 255 ";
+		packet += to_string(wallKills) + " ";
+		packet += to_string(0) + " ";
 	}
 
 	// Bonuses

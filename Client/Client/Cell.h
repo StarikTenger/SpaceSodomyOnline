@@ -1,4 +1,5 @@
 #pragma once
+#include "Vec2.h"
 
 enum CellType {
 	EMPTY,
@@ -18,6 +19,9 @@ public:
 	int type = 0;
 	int spikes = 0;
 	int color = 0;
+
+	Vec2 forceField = { 0, 0 };
+
 	Cell();
 	~Cell();
 };

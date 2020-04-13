@@ -1,4 +1,5 @@
 #include "DrawSystem.h"
+#include "random.h"
 #include <math.h>
 #include <algorithm>
 #include <SFML/Graphics.hpp>
@@ -11,6 +12,20 @@ void DrawSystem::drawWalls() {
 	System& sys = *system;
 
 	Color color(0, 151, 255);
+	for (int x = 0; x < sys.field.size(); x++) {
+		for (int y = 0; y < sys.field[0].size(); y++) {
+			if (geom::distance({}, sys.field[x][y].forceField) > EPS && !random::intRandom(0, 9)) {
+				Vec2 pos = Vec2(x, y) + Vec2(random::floatRandom(0, 1, 2), random::floatRandom(0, 1, 2));
+				double dir = geom::dir(sys.field[x][y].forceField);
+				animation("particleLaser",
+					AnimationState(pos, { 0.1, 0.1 }, dir, { 255, 255, 255 }),
+					AnimationState(pos + sys.field[x][y].forceField  * 0.1, { 0.1, 0.1 }, dir, { 0, 0, 0 }),
+					0.3
+				);
+			}
+		}
+	}
+
 	for (int x = 0; x < sys.field.size(); x++) {
 		for (int y = 0; y < sys.field[0].size(); y++) {
 			if (sys.field[x][y].type) {

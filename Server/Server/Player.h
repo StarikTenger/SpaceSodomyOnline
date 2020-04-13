@@ -9,6 +9,7 @@ public:
 	int deaths = 0;
 	int team = 0;
 
+	double afkTimer = 0;
 	double timer = 0;
 
 	std::string name = "???";

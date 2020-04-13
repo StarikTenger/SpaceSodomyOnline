@@ -72,11 +72,11 @@ void DrawSystem::drawInterface() {
 				fillRect(b->pos.x*h, b->pos.y*h, b->box.x*h*0.6, b->box.y*h*0.6, system->colorMatches[(int)b->value]);
 			}
 			else {
-				for (int i = 0; i < 2 * M_PI / b->step; i++) {
-					Vector2d pos = Vector2d(b->pos.x*h, b->pos.y*h) + geom::direction(b->step*i) * b->box.x*h*0.45;
-					image("pointer", pos.x, pos.y, b->box.x*h / 10, b->box.y*h / 10, b->step*i + M_PI);
+				for (int i = 0; i < 8; i++) {
+					Vector2d pos = Vector2d(b->pos.x*h, b->pos.y*h) + geom::direction(b->step*i * M_PI / 4) * b->box.x*h*0.45;
+					image("pointer", pos.x, pos.y, b->box.x*h / 10, b->box.y*h / 10, b->step*i * M_PI / 4 + M_PI);
 				}
-				image("pointer", b->pos.x*h, b->pos.y*h, b->box.x*h, b->box.y*h, b->value);
+				image("pointer", b->pos.x*h, b->pos.y*h, b->box.x*h, b->box.y*h, b->value * M_PI/4);
 			}
 		}
 	}

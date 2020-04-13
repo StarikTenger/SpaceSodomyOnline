@@ -1,9 +1,14 @@
-﻿  Control.cpp
+﻿  System.cpp
 C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\BonusInfo.h(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\Control.cpp(139,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(230,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(232,25): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(238,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(240,26): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(297,27): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(297,48): warning C4018: '>=': signed/unsigned mismatch
   Generating code
-  2 of 1505 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 1507 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    4 functions had inline decision re-evaluated but remain unchanged
+    3 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Server.vcxproj -> C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Release\Server.exe

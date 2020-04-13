@@ -64,6 +64,7 @@ void Control::actions() {
 			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
 				sys.field[(int)pos.x][(int)pos.y].type = 0;
 				sys.field[(int)pos.x][(int)pos.y].spikes = 0;
+				sys.field[(int)pos.x][(int)pos.y].forceField = 0;
 				sys.field[(int)pos.x][(int)pos.y].color = (int)menu.b_color->value;
 				saved = 0;
 			}
@@ -163,6 +164,9 @@ void Control::actions() {
 				bonus->type = Bonus::LASER;
 				sys.units.push_back(bonus);
 			}
+		}
+		if (keys[F] && pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
+			sys.field[(int)pos.x][(int)pos.y].forceField = (int)menu.b_dir->value + 1;
 		}
 
 		if (keys[DELETE] && !keysPrev[DELETE] || keys[Q] && !keysPrev[Q]) {

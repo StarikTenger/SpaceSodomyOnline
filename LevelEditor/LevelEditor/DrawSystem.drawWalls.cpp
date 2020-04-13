@@ -16,6 +16,14 @@ void DrawSystem::drawWalls() {
 			strokeRect(x + 0.5, y + 0.5, 1, 1, Color(0, 0, 0));
 		}
 	}
+	// force field
+	for (int x = 0; x < sys.field.size(); x++) {
+		for (int y = 0; y < sys.field[0].size(); y++) {
+			if (sys.field[x][y].forceField) {
+				image("arrow", x + 0.5, y + 0.5, 1, 1, (sys.field[x][y].forceField - 1) * M_PI/4, {255, 255, 255});
+			}
+		}
+	}
 	for (int x = 0; x < sys.field.size(); x++) {
 		for (int y = 0; y < sys.field[0].size(); y++) {
 			if (sys.field[x][y].type) {

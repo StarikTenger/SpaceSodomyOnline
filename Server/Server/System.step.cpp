@@ -115,6 +115,13 @@ void System::step() {
 		}
 	}
 
+	// Forcefield
+	for (auto& object : objects) {
+		int x = (int)object.pos.x;
+		int y = (int)object.pos.y;
+		object.vel += field[x][y].forceField * dt / object.m;
+	}
+
 	// Collison (&damage)
 	collision();
 
@@ -237,5 +244,8 @@ void System::step() {
 		}
 	}
 	
-
+	//PLAYERS//////////////////////////////////////////////////////////////////////////
+	for (auto& player : players) {
+		player.second.afkTimer -= dt;
+	}
 }
