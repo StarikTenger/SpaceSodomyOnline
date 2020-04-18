@@ -1,5 +1,6 @@
 #pragma once
 #include "Color.h"
+#include "Object.h"
 #include <string>
 
 class Player {
@@ -13,8 +14,10 @@ public:
 	double timer = 0;
 
 	std::string name = "???";
-
+	
 	Color color;
+
+	Object* object = nullptr;
 
 	Player() {};
 };

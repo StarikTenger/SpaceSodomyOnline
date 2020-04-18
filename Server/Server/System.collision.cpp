@@ -145,7 +145,15 @@ void System::collision() {
 		if (touch && u.type == Object::BULLET) {
 			u.hp = 0;
 		}
+
+		// If in wall
+		if (checkWall(u.pos)) {
+			//std::cout << "q";
+			u.hp = -10;
+		}
 	}
+
+	
 
 	// Laser collision
 	for (auto& object : objects) {

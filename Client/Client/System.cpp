@@ -71,7 +71,7 @@ System::System(string path) {
 					int dir;
 					file >> dir;
 					if (dir)
-						field[x][y].forceField = geom::direction((dir - 1) * M_PI / 4) * 16;
+						field[y][x].forceField = geom::direction((dir - 1) * M_PI / 4) * 16;
 				}
 			}
 		}

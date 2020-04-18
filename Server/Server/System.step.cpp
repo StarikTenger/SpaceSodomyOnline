@@ -31,6 +31,13 @@ void System::step() {
 
 	//OBJECTS//////////////////////////////////////////////////////////////////////////
 
+	// Matching to players
+	for (auto& object : objects) {
+		if (object.type != Object::SHIP) 
+			continue;
+		players[object.id].object = &object;
+	}
+
 	// Orders
 	for (auto& object : objects) {
 		if (object.type != Object::SHIP) // Orders are for ships only
@@ -148,7 +155,7 @@ void System::step() {
 		player.second.timer -= dt;
 		if (!player.second.alive) {
 			while (1) {
-				if (player.second.timer > 0)
+				if (player.second.timer > 0 || player.second.afkTimer < 0)
 					break;
 
 				int x = random::intRandom(1, field.size() - 1);

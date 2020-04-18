@@ -133,22 +133,24 @@ void Control::checkMessages() {
 
 		sys.players[id].name = name;
 
+		// AFK management
+		std::string orders;
+		
+		if (ss >> orders && orders.size() && orders != "s") {
+			sys.players[id].afkTimer = 10;
+		}
+
 		for (auto& object : sys.objects) {
+
 			if (object.type == Object::SHIP && object.id == id) {
 				// Setting all orders to 0
 				for (int i = 0; i < object.orders.size(); i++)
 					object.orders[i] = 0;
-				
-				// AFK management
-				std::string orders;
-				
-				if (ss >> orders && orders.size() && orders != "s") {
-					sys.players[id].afkTimer = 10;
-				}
 
 				// Getting commands from string
 				std::stringstream orderStream;
 				orderStream << orders;
+
 				char command;
 				while (orderStream >> command) {
 					switch (command) {

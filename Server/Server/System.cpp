@@ -78,7 +78,7 @@ System::System(string path) {
 					int dir;
 					file >> dir;
 					if(dir)
-						field[x][y].forceField = geom::direction((dir - 1) * M_PI/4) * 16;
+						field[y][x].forceField = geom::direction((dir - 1) * M_PI/4) * 16;
 				}
 			}
 		}
@@ -286,6 +286,11 @@ void System::damage(Object& object, Object& target, double value) {
 	if (target.hp < EPS && target.type == Object::SHIP) {
 		players[object.id].kills++;
 		players[target.id].deaths++;
+
+		if (players[object.id].object) {
+			players[object.id].object->energy += 5;
+			players[object.id].object->energyRecovery *= 1.1;
+		}
 	}
 }
 
