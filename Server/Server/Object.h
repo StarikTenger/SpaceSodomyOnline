@@ -18,18 +18,6 @@ public:
 		EXPLOSION
 	};
 
-	enum Orders {
-		MOVE_LEFT,
-		MOVE_RIGHT,
-		MOVE_FORWARD,
-		MOVE_BACKWARD,
-		TURN_LEFT,
-		TURN_RIGHT,
-		SHOOT,
-		STABILIZE_ROTATION,
-		ACTIVATE
-	};
-
 	int id = 666;
 	int team = 0;
 	Type type = SHIP;
@@ -40,12 +28,6 @@ public:
 
 	// Bullet atributes
 	double damage = 1;
-
-	// Ship atributes (only for objects with SHIP type)
-	Engine engine;
-	Gun gun;
-	Bonus::Type activeAbility  = Bonus::NONE;
-	std::vector<double> effects = {0,0,0,0,0,0,0,0};
 
 	double m = 1; // mass
 	double r = 0.4; // radius 
@@ -58,8 +40,6 @@ public:
 	double energyRecovery = 0.2;
 
 	bool collision = 1;
-
-	std::vector<bool> orders = {0,0,0,0,0,0,0,0,0,0}; // shows which commands are active
 
 	Object();
 	Object(int _id, int _team, Color _color, Vec2 _pos, double _m, double _dir);

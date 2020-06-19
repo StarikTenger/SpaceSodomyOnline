@@ -157,6 +157,7 @@ std::string System::pack() {
 		packet += to_string(player.second.color.b) + " ";
 		packet += to_string(player.second.kills) + " ";
 		packet += to_string(player.second.deaths) + " ";
+		packet += to_string(player.second.progress) + " ";
 	}
 	// wall player
 	{
@@ -165,6 +166,7 @@ std::string System::pack() {
 		packet += " WALL ";
 		packet += "255 255 255 ";
 		packet += to_string(wallKills) + " ";
+		packet += to_string(0) + " ";
 		packet += to_string(0) + " ";
 	}
 
@@ -225,25 +227,26 @@ std::string System::pack() {
 			str += to_string(object.energy, 1) + " ";
 			str += to_string(object.energyMax, 1) + " ";
 
+			const auto& player = players[object.id];
+
 			// packing orders
 			int orders = 0;
-			for (int i = 0; i < object.orders.size(); i++) {
-				if (object.orders[i])
+			for (int i = 0; i < player.orders.size(); i++) {
+				if (player.orders[i])
 					orders += pow(2, i);
 			}
 			str += to_string(orders) + " ";
 
 			// packing effects
 			int effects = 0;
-			for (int i = 0; i < object.effects.size(); i++) {
-				if (object.effects[i] > 0)
+			for (int i = 0; i < player.effects.size(); i++) {
+				if (player.effects[i] > 0)
 					effects += pow(2, i);
 			}
-			//std::cout << effects << "\n";
 			str += to_string(effects) + " ";
 
 			// actives
-			str += to_string(object.activeAbility) + " ";
+			str += to_string(player.activeAbility) + " ";
 
 		}
 		if (object.type == Object::BULLET) {
@@ -259,11 +262,12 @@ std::string System::pack() {
 }
 
 void System::shoot(Object& object) {
-	if (object.gun.timeToCooldown > 0 || object.energy < object.gun.consumption)
+	auto& player = players[object.id];
+
+	if (player.gun.timeToCooldown > 0 || object.energy < player.gun.consumption)
 		return;
-	std::cout << object.gun.timeToCooldown << "\n";
-	object.gun.timeToCooldown = object.gun.cooldownTime;
-	object.energy -= object.gun.consumption;
+	player.gun.timeToCooldown = player.gun.cooldownTime;
+	object.energy -= player.gun.consumption;
 
 	Object bullet;
 	bullet.type = Object::BULLET;
@@ -273,23 +277,26 @@ void System::shoot(Object& object) {
 	bullet.r = 0.4;
 	bullet.dir = object.dir;
 	bullet.pos = object.pos;
-	bullet.damage = object.gun.damage;
-	bullet.vel = object.vel + geom::direction(object.dir) * object.gun.vel;
-	bullet.hp = object.gun.lifetime;
+	bullet.damage = player.gun.damage;
+	bullet.vel = object.vel + geom::direction(object.dir) * player.gun.vel;
+	bullet.hp = player.gun.lifetime;
 	objectsToAdd.push_back(bullet);
 }
 
 void System::damage(Object& object, Object& target, double value) {
-	if (object.team == target.team || target.effects[Bonus::IMMORTAL] > 0)
+	const auto& playerTarget = players[target.id];
+
+	if (object.team == target.team || playerTarget.effects[Bonus::IMMORTAL] > 0)
 		return;
 	target.hp -= value;
 	if (target.hp < EPS && target.type == Object::SHIP) {
 		players[object.id].kills++;
+		players[object.id].progress++;
 		players[target.id].deaths++;
 
 		if (players[object.id].object) {
 			players[object.id].object->energy += 5;
-			players[object.id].object->energyRecovery *= 1.1;
+			players[object.id].object->energyRecovery *= 1.26;
 		}
 	}
 }

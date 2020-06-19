@@ -8,6 +8,7 @@ public:
 	std::string name = "a";
 	int kills = 0;
 	int deaths = 0;
+	int progress = 0;
 
 	Object* object = nullptr;
 

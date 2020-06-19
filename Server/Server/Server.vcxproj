@@ -30,6 +30,8 @@
     <ClInclude Include="getMilliCount.h" />
     <ClInclude Include="Gun.h" />
     <ClInclude Include="keys.h" />
+    <ClInclude Include="Module.h" />
+    <ClInclude Include="ModuleInfo.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
@@ -50,6 +52,8 @@
     <ClCompile Include="getMilliCount.cpp" />
     <ClCompile Include="Gun.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Module.cpp" />
+    <ClCompile Include="ModuleInfo.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />

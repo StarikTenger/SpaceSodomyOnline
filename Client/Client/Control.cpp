@@ -67,6 +67,8 @@ void Control::saveConfig() {
 
 void Control::step() {
 	int timeMs = getMilliCount();
+
+	// Timer action
 	if (timeMs - timePrev > dt) {
 		timePrev = timeMs;
 		sys.time = timeMs * 0.001;
@@ -93,8 +95,8 @@ void Control::step() {
 			drawSys.cam.scale *= pow(drawSys.cam.scaleVel, 1.0 / (double)dt);
 
 		if (mode == GAME){
-			// stab
-			if (keys[STABILIZE_ROTATION] && !keysPrev[STABILIZE_ROTATION]) {
+			// Stab
+			if (keys[STABILIZE_ROTATION_AUTO] && !keysPrev[STABILIZE_ROTATION_AUTO]) {
 				stabilize = !stabilize;
 			}
 
@@ -114,10 +116,14 @@ void Control::step() {
 				message += "r";
 			if (keys[TURN_LEFT])
 				message += "l";
-			if (stabilize)
+			if (stabilize || keys[STABILIZE_ROTATION])
 				message += "s";
 			if (keys[ACTIVATE])
 				message += "a";
+			if (keys[MODULE_1])
+				message += "1";
+			if (keys[MODULE_2])
+				message += "2";
 			if (keys[SHOOT])
 				message += "S";
 			socket.send(message.c_str(), message.size() + 1, address, port);
@@ -188,6 +194,8 @@ void Control::step() {
 		setSounds();
 
 	}
+
+	// Getting messages from server
 	for (int i = 0; i < 5; i++) {
 		std::size_t received = 0;
 		sf::IpAddress sender;

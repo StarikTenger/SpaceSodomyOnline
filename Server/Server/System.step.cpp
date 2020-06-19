@@ -5,25 +5,39 @@
 #include <math.h>
 
 void System::step() {
-	// Counters
+	//COUNTERS/////////////////////////////////////////////////////////////////////////
+
+	// For respawning bonuses
 	for (auto& b : bonusInfo) {
 		b.countdown -= dt;
 	}
+	// Objects' counters
 	for (auto& object : objects) {
+		auto& player = players[object.id];
+
 		if (object.type == Object::SHIP) {
-			double k = 1;
-			if (object.effects[Bonus::BERSERK] > 0) {
+			double k = 1; // cooldown speed koeff
+			// boosts for berserk mode
+			if (player.effects[Bonus::BERSERK] > 0) {
 				k = 3;
 				object.energy = object.energyMax;
 			}
-			object.gun.timeToCooldown -= dt * k;
+
+			// gun
+			player.gun.timeToCooldown -= dt * k;
+
+			// energy
 			object.energy += object.energyRecovery * dt;
 			if (object.energy > object.energyMax)
 				object.energy = object.energyMax;
-
-
-			for (auto& effect : object.effects)
+			
+			// effects
+			for (auto& effect : player.effects)
 				effect -= dt;
+
+			// modules
+			for (auto& module : player.modules)
+				module.timeToCoolDown -= dt;
 		}
 		if (object.type == Object::BULLET)
 			object.hp -= dt;
@@ -33,7 +47,7 @@ void System::step() {
 
 	// Matching to players
 	for (auto& object : objects) {
-		if (object.type != Object::SHIP) 
+		if (object.type != Object::SHIP)
 			continue;
 		players[object.id].object = &object;
 	}
@@ -43,82 +57,109 @@ void System::step() {
 		if (object.type != Object::SHIP) // Orders are for ships only
 			continue;
 
-		// stabilize
-		if (object.orders[Object::STABILIZE_ROTATION] && 
-			!object.orders[Object::TURN_LEFT] && 
-			!object.orders[Object::TURN_RIGHT])
-			if (object.w > EPS)
-				object.orders[Object::TURN_LEFT] = 1;
-			else if (object.w < -EPS)
-				object.orders[Object::TURN_RIGHT] = 1;
+		auto& player = players[object.id];
 
-		if (object.energy > EPS) {
+		// stabilize
+		if (player.orders[Player::STABILIZE_ROTATION] &&
+			!player.orders[Player::TURN_LEFT] &&
+			!player.orders[Player::TURN_RIGHT])
+			if (object.w > EPS)
+				player.orders[Player::TURN_LEFT] = 1;
+			else if (object.w < -EPS)
+				player.orders[Player::TURN_RIGHT] = 1;
+
+		if (object.energy > EPS) { // USELESS CHECK???
 			// linear
 			double k = 1;
-			if (object.effects[Bonus::BOOST] > 0)
+			if (player.effects[Bonus::BOOST] > 0)
 				k = 5;
 
-			if (object.orders[Object::MOVE_FORWARD]) {
-				object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir) * dt * k;
-				object.energy -= object.engine.consumptionLinear * dt;
+			if (player.orders[Player::MOVE_FORWARD]) {
+				object.vel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir) * dt * k;
+				object.energy -= player.engine.consumptionLinear * dt;
 			}
 
-			if (object.orders[Object::MOVE_RIGHT]) {
-				object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir + M_PI * 0.5) * dt * k;
-				object.energy -= object.engine.consumptionLinear * dt;
+			if (player.orders[Player::MOVE_RIGHT]) {
+				object.vel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir + M_PI * 0.5) * dt * k;
+				object.energy -= player.engine.consumptionLinear * dt;
 			}
 
-			if (object.orders[Object::MOVE_BACKWARD]) {
-				object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir + M_PI) * dt * k;
-				object.energy -= object.engine.consumptionLinear * dt;
+			if (player.orders[Player::MOVE_BACKWARD]) {
+				object.vel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir + M_PI) * dt * k;
+				object.energy -= player.engine.consumptionLinear * dt;
 			}
 			
-			if (object.orders[Object::MOVE_LEFT]) {
-				object.vel += geom::rotate(Vec2(object.engine.linearForce, 0), object.dir + M_PI * 1.5) * dt * k;
-				object.energy -= object.engine.consumptionLinear * dt;
+			if (player.orders[Player::MOVE_LEFT]) {
+				object.vel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir + M_PI * 1.5) * dt * k;
+				object.energy -= player.engine.consumptionLinear * dt;
 			}
 
 			// angular
-			if (object.orders[Object::TURN_RIGHT]) {
-				object.w += object.engine.angularForce * dt;
-				object.energy -= object.engine.consumptionAngular * dt;
+			if (player.orders[Player::TURN_RIGHT]) {
+				object.w += player.engine.angularForce * dt;
+				object.energy -= player.engine.consumptionAngular * dt;
 			}
 
-			if (object.orders[Object::TURN_LEFT]) {
-				object.w -= object.engine.angularForce * dt;
-				object.energy -= object.engine.consumptionAngular * dt;
+			if (player.orders[Player::TURN_LEFT]) {
+				object.w -= player.engine.angularForce * dt;
+				object.energy -= player.engine.consumptionAngular * dt;
 			}
-		}
+		} 
 		else {
-			object.orders[Object::MOVE_FORWARD] = 0;
-			object.orders[Object::MOVE_RIGHT] = 0;
-			object.orders[Object::MOVE_BACKWARD] = 0;
-			object.orders[Object::MOVE_LEFT] = 0;
-			object.orders[Object::TURN_RIGHT] = 0;
-			object.orders[Object::TURN_LEFT] = 0;
+			player.orders[Player::MOVE_FORWARD] = 0;
+			player.orders[Player::MOVE_RIGHT] = 0;
+			player.orders[Player::MOVE_BACKWARD] = 0;
+			player.orders[Player::MOVE_LEFT] = 0;
+			player.orders[Player::TURN_RIGHT] = 0;
+			player.orders[Player::TURN_LEFT] = 0;
 		}
 
-		// shoot
-		if (object.orders[Object::SHOOT])
+		// Shoot
+		if (player.orders[Player::SHOOT])
 			shoot(object);
 		
-		// activate
-		if (object.orders[Object::ACTIVATE]) {
-			switch (object.activeAbility) {
+		// Activate
+		if (player.orders[Player::ACTIVATE]) {
+			switch (player.activeAbility) {
 			case Bonus::BERSERK:
-				object.effects[Bonus::BERSERK] = 5;
+				player.effects[Bonus::BERSERK] = 5;
 				break;
 			case Bonus::IMMORTAL:
-				object.effects[Bonus::IMMORTAL] = 5;
+				player.effects[Bonus::IMMORTAL] = 5;
 				break;
 			case Bonus::BOOST:
-				object.effects[Bonus::BOOST] = 5;
+				player.effects[Bonus::BOOST] = 5;
 				break;
 			case Bonus::LASER:
-				object.effects[Bonus::LASER] = 0.5;
+				player.effects[Bonus::LASER] = 0.5;
 				break;
 			}
-			object.activeAbility = Bonus::NONE;
+			player.activeAbility = Bonus::NONE;
+		}
+
+		// Using modules
+		for (int i = Player::MODULE_1; i <= Player::MODULE_2; i++) {
+			if (!player.orders[i]) // Order is inactive
+				continue;
+
+			// Current module id
+			int moduleId = i - Player::MODULE_1; 
+
+			if (player.modules[moduleId].timeToCoolDown > 0) // Module is on cooldown
+				break;
+
+			// Set timeToCoolDown
+			player.modules[moduleId].timeToCoolDown = moduleInfo[moduleId].cooldownTime;
+
+			// Check for type of module
+			switch (player.modules[moduleId].type) {
+			case Module::HP_UP:
+				player.object->hp += 1;
+				break;
+			case Module::ENERGY_UP:
+				player.object->energy += 5;
+				break;
+			}
 		}
 	}
 
@@ -143,6 +184,7 @@ void System::step() {
 		if (objects[i].hp < EPS) {
 			if (objects[i].type == Object::SHIP) {
 				players[objects[i].id].alive = 0;
+				players[objects[i].id].progress = 0;
 				players[objects[i].id].timer = 3;
 			}
 			objects.erase(objects.begin() + i);
@@ -188,6 +230,8 @@ void System::step() {
 		if (object.type != Object::SHIP)
 			continue;
 
+		auto& player = players[object.id];
+
 		for (auto& bonus : bonuses) {
 			if (geom::distance(object.pos, bonus.pos) >= object.r * 2)
 				continue;
@@ -203,7 +247,7 @@ void System::step() {
 				}
 			}
 			else {
-				object.activeAbility = bonus.type;
+				player.activeAbility = bonus.type;
 				bonus.type = Bonus::NONE;
 			}
 		}
@@ -221,6 +265,7 @@ void System::step() {
 	for (auto& b : bonusInfo) 
 		if (b.number >= b.limit)
 			b.countdown = b.countdownTime;
+
 	// Bonuses spawn
 	{
 		int r = random::intRandom(1, bonusInfo.size() - 1);

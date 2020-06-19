@@ -1,19 +1,11 @@
-﻿  DrawSystem.drawWalls.cpp
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(15,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(16,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(31,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(32,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(49,11): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(55,11): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(72,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(73,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(95,11): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(107,11): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(117,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(118,21): warning C4018: '<': signed/unsigned mismatch
+﻿  Control.cpp
+  Control.events.cpp
+  Control.setSounds.cpp
+  main.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\Control.cpp(148,24): warning C4018: '>': signed/unsigned mismatch
   Generating code
   1 of 1535 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    10 functions had inline decision re-evaluated but remain unchanged
+    4 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Client.vcxproj -> C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Release\Client.exe

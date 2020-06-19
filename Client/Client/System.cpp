@@ -153,6 +153,7 @@ void System::unpack(std::string str) {
 			player.color.a = 255;
 			ss >> player.kills;
 			ss >> player.deaths;
+			ss >> player.progress;
 
 			players[id] = player;
 			//players.insert({ id, player });

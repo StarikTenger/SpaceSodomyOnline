@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Bonus.h"
 #include "BonusInfo.h"
+#include "ModuleInfo.h"
 #include "Team.h"
 
 
@@ -18,6 +19,7 @@ public:
 	double dt = 0.02;
 	double bounce = 0.2;
 
+	// bonuses
 	std::vector<BonusInfo> bonusInfo = { 
 		{},
 		{ 6, 5 }, // HP
@@ -28,6 +30,11 @@ public:
 		{ 1, 20 } // LASER
 	};
 	static std::map<std::string, int> bonusNames;
+
+	// modules
+	std::vector<ModuleInfo> moduleInfo = {
+		{5}, {5}, {5}, {5}, {5}, {5}
+	};
 
 	Vec2 border = {50, 50};
 

@@ -5,9 +5,8 @@ int main(){
 	
 	Control control;
 
-	while (!control.stop) {
+	while (!control.stop)
 		control.step();
-		
-	}
+
 	return 0;
 }

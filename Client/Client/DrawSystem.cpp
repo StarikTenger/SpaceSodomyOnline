@@ -317,6 +317,7 @@ void DrawSystem::drawInterface() {
 			text(sys.playerList[i].name, sizeW * 4, h - sys.playerList.size() * size + i * size, size / 2, sys.playerList[i].color);
 			text("" + std::to_string(sys.playerList[i].kills), sizeW * 9, h - sys.playerList.size() * size + i * size, size / 1.5, sys.playerList[i].color);
 			text("" + std::to_string(sys.playerList[i].deaths), sizeW * 11, h - sys.playerList.size() * size + i * size, size / 1.5, sys.playerList[i].color);
+			text("" + std::to_string(sys.playerList[i].progress), sizeW * 13, h - sys.playerList.size() * size + i * size, size / 1.5, sys.playerList[i].color);
 		}
 	}
 }

@@ -62,13 +62,15 @@ void System::collision() {
 			if (a.team == b.team || a.id == b.id || &a == &b || !a.collision || !b.collision)
 				continue;
 
+			const auto& player = players[a.id];
+
 			if (geom::distance(a.pos, b.pos) < a.r + b.r) {
 				if (a.type == Object::BULLET) {
 					damage(a, b, 1);
 					damage(b, a, 1000);
 				}
 
-				if (a.effects[Bonus::BOOST] > 0) {
+				if (player.effects[Bonus::BOOST] > 0) {
 					damage(a, b, 10);
 				}
 
@@ -135,7 +137,9 @@ void System::collision() {
 					dmg = 1;
 			}
 		}
-		if (dmg && u.type == Object::SHIP && u.effects[Bonus::IMMORTAL] < 0) {
+
+		const auto& player = players[u.id];
+		if (dmg && u.type == Object::SHIP && player.effects[Bonus::IMMORTAL] < 0) {
 			u.hp -= 1;
 			if (u.hp < EPS) {
 				wallKills++;
@@ -157,7 +161,8 @@ void System::collision() {
 
 	// Laser collision
 	for (auto& object : objects) {
-		if (object.type == Object::SHIP && object.effects[Bonus::LASER] > 0) {
+		const auto& player = players[object.id];
+		if (object.type == Object::SHIP && player.effects[Bonus::LASER] > 0) {
 			for (auto& target : objects) {
 				if (checkAbility(object, target, 0.4))
 					damage(object, target, 10);

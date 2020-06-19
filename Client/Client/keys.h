@@ -16,7 +16,13 @@ enum Commands {
 	ZOOM_IN, 
 	ZOOM_OUT, 
 	STABILIZE_ROTATION, 
+	STABILIZE_ROTATION_AUTO, 
 	ACTIVATE,
+	MODULE_1,
+	MODULE_2,
+	MODULE_3,
+	MODULE_4,
+	MODULE_5,
 	RESTART, 
 	EXIT,
 	/////////////////////////////////////////
@@ -27,7 +33,9 @@ enum Commands {
 	SPACE,
 	SHIFT,
 	ESCAPE,
-	Q, W, E, R, T, Y, U, I, O, P, A, S, D, F, G, H, J, K, L, Z, X, C, V, B, N, M
+	ALT,
+	Q, W, E, R, T, Y, U, I, O, P, A, S, D, F, G, H, J, K, L, Z, X, C, V, B, N, M,
+	NUM1, NUM2, NUM3, NUM4, NUM5, NUM6, NUM7, NUM8, NUM9, NUM0,
 };
 
 
@@ -47,6 +55,8 @@ inline Commands getKey(sf::Keyboard::Key key) {
 		return SHIFT;
 	case sf::Keyboard::Escape:
 		return ESCAPE;
+	case sf::Keyboard::LAlt:
+		return ALT;
 
 	case sf::Keyboard::Q:
 		return Q;
@@ -100,7 +110,26 @@ inline Commands getKey(sf::Keyboard::Key key) {
 		return N;
 	case sf::Keyboard::M:
 		return M;
-
+	case sf::Keyboard::Num1:
+		return NUM1;
+	case sf::Keyboard::Num2:
+		return NUM2;
+	case sf::Keyboard::Num3:
+		return NUM3;
+	case sf::Keyboard::Num4:
+		return NUM4;
+	case sf::Keyboard::Num5:
+		return NUM5;
+	case sf::Keyboard::Num6:
+		return NUM6;
+	case sf::Keyboard::Num7:
+		return NUM7;
+	case sf::Keyboard::Num8:
+		return NUM8;
+	case sf::Keyboard::Num9:
+		return NUM9;
+	case sf::Keyboard::Num0:
+		return NUM0;
 	}
 	return NONE;
 }
@@ -120,6 +149,8 @@ inline Commands getKey(std::string s) {
 		return SHIFT;
 	if (s == "ESCAPE")
 		return ESCAPE;
+	if (s == "ALT")
+		return ALT;
 
 	if (s == "Q")
 		return Q;
@@ -167,6 +198,27 @@ inline Commands getKey(std::string s) {
 		return C;
 	if (s == "V")
 		return V;
+	if (s == "NUM1")
+		return NUM1;
+	if (s == "NUM2")
+		return NUM2;
+	if (s == "NUM3")
+		return NUM3;
+	if (s == "NUM4")
+		return NUM4;
+	if (s == "NUM5")
+		return NUM5;
+	if (s == "NUM6")
+		return NUM6;
+	if (s == "NUM7")
+		return NUM7;
+	if (s == "NUM8")
+		return NUM8;
+	if (s == "NUM9")
+		return NUM9;
+	if (s == "NUM0")
+		return NUM0;
+
 	if (s == "MOVE_FORWARD")
 		return MOVE_FORWARD;
 	if (s == "MOVE_BACKWARD")
@@ -191,6 +243,20 @@ inline Commands getKey(std::string s) {
 		return ZOOM_OUT;
 	if (s == "STABILIZE_ROTATION")
 		return STABILIZE_ROTATION;
+	if (s == "STABILIZE_ROTATION_AUTO")
+		return STABILIZE_ROTATION_AUTO;
+	if (s == "ACTIVATE")
+		return ACTIVATE;
+	if (s == "MODULE_1")
+		return MODULE_1;
+	if (s == "MODULE_2")
+		return MODULE_2;
+	if (s == "MODULE_3")
+		return MODULE_1;
+	if (s == "MODULE_4")
+		return MODULE_1;
+	if (s == "MODULE_5")
+		return MODULE_1;
 	if (s == "ACTIVATE")
 		return ACTIVATE;
 	if (s == "RESTART")

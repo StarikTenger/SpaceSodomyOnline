@@ -18,10 +18,12 @@ void DrawSystem::drawWalls() {
 				Vec2 pos = Vec2(x, y) + Vec2(random::floatRandom(0, 1, 2), random::floatRandom(0, 1, 2));
 				double dir = geom::dir(sys.field[x][y].forceField);
 				Color col = { 255, 255, 255 };
+				Color col1 = col;
+				col1.a = 0;
 
 				animation("particleLaser",
 					AnimationState(pos, { 0.1, 0.1 }, dir, col),
-					AnimationState(pos + sys.field[x][y].forceField  * 0.1, { 0.1, 0.1 }, dir, { 0, 0, 0 }),
+					AnimationState(pos + sys.field[x][y].forceField * 0.1, { 0.3, 0.1 }, dir, col1),
 					0.3
 				);
 			}

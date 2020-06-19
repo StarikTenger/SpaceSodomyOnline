@@ -119,70 +119,78 @@ void Control::receive() {
 
 void Control::checkMessages() {
 	while(messages.size()) {
+		// Putting message to stringstream
 		std::stringstream ss;
 		ss << messages.front();
 		messages.pop_front();
 
+		// Getting id & name
 		int id;
 		std::string name;
 		ss >> id;
 		ss >> name;
 	
+		// Checking if ID not found
 		if (sys.players.find(id) == sys.players.end())
 			continue;
 
+		// Giving player a name
 		sys.players[id].name = name;
 
 		// AFK management
-		std::string orders;
-		
-		if (ss >> orders && orders.size() && orders != "s") {
+		std::string orders;		
+		if (ss >> orders && orders.size() && orders != "s") { // "s" stands for autostab which is not an action
 			sys.players[id].afkTimer = 10;
 		}
 
-		for (auto& object : sys.objects) {
+		// Current player
+		auto& player = sys.players[id];
 
-			if (object.type == Object::SHIP && object.id == id) {
-				// Setting all orders to 0
-				for (int i = 0; i < object.orders.size(); i++)
-					object.orders[i] = 0;
+		// Setting all orders to 0
+		for (int i = 0; i < player.orders.size(); i++)
+			player.orders[i] = 0;
 
-				// Getting commands from string
-				std::stringstream orderStream;
-				orderStream << orders;
+		// Getting commands from string
+		std::stringstream orderStream;
+		orderStream << orders;
 
-				char command;
-				while (orderStream >> command) {
-					switch (command) {
-					case 'L':
-						object.orders[Object::MOVE_LEFT] = 1;
-						break;
-					case 'R':
-						object.orders[Object::MOVE_RIGHT] = 1;
-						break;
-					case 'U':
-						object.orders[Object::MOVE_FORWARD] = 1;
-						break;
-					case 'D':
-						object.orders[Object::MOVE_BACKWARD] = 1;
-						break;
-					case 'l':
-						object.orders[Object::TURN_LEFT] = 1;
-						break;
-					case 'r':
-						object.orders[Object::TURN_RIGHT] = 1;
-						break;
-					case 'S':
-						object.orders[Object::SHOOT] = 1;
-						break;
-					case 's':
-						object.orders[Object::STABILIZE_ROTATION] = 1;
-						break;
-					case 'a':
-						object.orders[Object::ACTIVATE] = 1;
-						break;
-					}
-				}
+		// Matching commands to orders (CAN BE DONE WITH MAP!!!)
+		char command;
+		while (orderStream >> command) {
+			switch (command) {
+			case 'L':
+				player.orders[Player::MOVE_LEFT] = 1;
+				break;
+			case 'R':
+				player.orders[Player::MOVE_RIGHT] = 1;
+				break;
+			case 'U':
+				player.orders[Player::MOVE_FORWARD] = 1;
+				break;
+			case 'D':
+				player.orders[Player::MOVE_BACKWARD] = 1;
+				break;
+			case 'l':
+				player.orders[Player::TURN_LEFT] = 1;
+				break;
+			case 'r':
+				player.orders[Player::TURN_RIGHT] = 1;
+				break;
+			case 'S':
+				player.orders[Player::SHOOT] = 1;
+				break;
+			case 's':
+				player.orders[Player::STABILIZE_ROTATION] = 1;
+				break;
+			case 'a':
+				player.orders[Player::ACTIVATE] = 1;
+				break;
+			case '1':
+				player.orders[Player::MODULE_1] = 1;
+				break;
+			case '2':
+				player.orders[Player::MODULE_2] = 1;
+				break;
 			}
 		}	
 	}

@@ -120,12 +120,8 @@ FORCEFIELD
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 5 5 5 5 5 0 0 0 0 0 0 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 5 5 5 5 5 5 0 0 0 0 0 0 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
-BONUS 3 3 boost
-BONUS 56 56 boost
 BONUS 42 42 immortal
 BONUS 39 39 berserk
-BONUS 23 30 laser
-BONUS 32 25 laser
 BONUS 23 23 immortal
 BONUS 2 57 hp
 BONUS 57 2 hp
@@ -164,4 +160,8 @@ BONUS 50 31 energy
 BONUS 32 47 hp
 BONUS 39 28 hp
 BONUS 44 26 energy
+BONUS 3 3 laser
+BONUS 56 56 laser
+BONUS 23 30 boost
+BONUS 32 25 boost
 END
