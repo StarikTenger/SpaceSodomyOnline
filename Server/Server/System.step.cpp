@@ -13,9 +13,9 @@ void System::step() {
 	}
 	// Objects' counters
 	for (auto& object : objects) {
-		auto& player = players[object.id];
-
 		if (object.type == Object::SHIP) {
+			auto& player = players[object.id];
+
 			double k = 1; // cooldown speed koeff
 			// boosts for berserk mode
 			if (player.effects[Bonus::BERSERK] > 0) {

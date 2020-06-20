@@ -1,9 +1,14 @@
-﻿  System.step.cpp
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.step.cpp(184,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.step.cpp(293,20): warning C4018: '<': signed/unsigned mismatch
+﻿  System.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(234,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(236,25): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(242,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(244,26): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(252,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(314,27): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(314,48): warning C4018: '>=': signed/unsigned mismatch
   Generating code
-  1 of 1567 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  2 of 1570 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Server.vcxproj -> C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Release\Server.exe

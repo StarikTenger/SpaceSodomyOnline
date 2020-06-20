@@ -114,7 +114,25 @@ void DrawSystem::image(std::string name, double x, double y, double width, doubl
 	sprite.setPosition(x, y);
 	sprite.setColor(sf::Color(std::min(255, (int)color.r), std::min(255, (int)color.g), std::min(255, (int)color.b), std::min(255, (int)color.a)));
 	sprite.setRotation(dir * 180 / M_PI);
+	window->draw(sprite);
+}
 
+void DrawSystem::image(std::string name, double x, double y, double width, double height, double dir, Color color, Vec2 a, Vec2 b) {
+	sf::Texture& tex = *textures[name];
+	Vec2 scale = { width / tex.getSize().x  , height / tex.getSize().y };
+	Vec2 pos = { x, y };// cam.transform({ x, y });
+	sf::Sprite sprite;
+	sprite.setOrigin(tex.getSize().x / 2, tex.getSize().y / 2);
+	sprite.setTexture(tex);
+	sprite.setScale(scale.x, scale.y);
+	a.x *= tex.getSize().x;
+	a.y *= tex.getSize().y;
+	b.x *= tex.getSize().x;
+	b.y *= tex.getSize().y;
+	sprite.setTextureRect(sf::IntRect(a.x, a.y, b.x, b.y));
+	sprite.setPosition(x, y);
+	sprite.setColor(sf::Color(std::min(255, (int)color.r), std::min(255, (int)color.g), std::min(255, (int)color.b), std::min(255, (int)color.a)));
+	sprite.setRotation(dir * 180 / M_PI);
 	window->draw(sprite);
 }
 
@@ -150,4 +168,32 @@ void DrawSystem::text(std::string text, double x, double y, double size, double 
 	drawnText.setPosition(x, y);
 	drawnText.setRotation(dir * 180 / M_PI);
 	window->draw(drawnText);
+}
+
+// basics using Vec2
+
+void DrawSystem::fillRect(Vec2 pos, Vec2 box, Color color) {
+	fillRect(pos.x, pos.y, box.x, box.y, color);
+}
+void DrawSystem::fillCircle(Vec2 pos, double r, Color color) {
+	fillCircle(pos.x, pos.y, r, color);
+}
+void DrawSystem::strokeRect(Vec2 pos, Vec2 box, Color color) {
+	strokeRect(pos.x, pos.y, box.x, box.y, color);
+}
+void DrawSystem::line(Vec2 pos, Vec2 pos1, Color color) {
+	line(pos.x, pos.y, pos1.x, pos1.y, color);
+}
+void DrawSystem::image(std::string name, Vec2 pos, Vec2 box, double angle) {
+	image(name, pos.x, pos.y, box.x, box.y, angle);
+}
+void DrawSystem::image(std::string name, Vec2 pos, Vec2 box, double angle, Color color) {
+	image(name, pos.x, pos.y, box.x, box.y, angle, color);
+}
+void DrawSystem::text(std::string str, Vec2 pos, int size, Color color) {
+	text(str, pos.x, pos.y, size, color);
+}
+
+void DrawSystem::image(std::string name, Vec2 pos, Vec2 box, double angle, Color color, Vec2 a, Vec2 b) {
+	image(name, pos.x, pos.y, box.x, box.y, angle, color, a, b);
 }

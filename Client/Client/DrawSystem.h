@@ -54,9 +54,20 @@ public:
 	void line(double x, double y, double x1, double y1, Color color);
 	void image(std::string name, double x, double y, double width, double height, double dir);
 	void image(std::string name, double x, double y, double width, double height, double dir, Color color);
+	void image(std::string name, double x, double y, double width, double height, double dir, Color color, Vec2 a, Vec2 b);
 	void image(std::string name, double x, double y, double width, double height, double dir, double d);
 	void text(std::string text, double x, double y, int size, Color color);
 	void text(std::string text, double x, double y, double size, double dir, Color color);
+
+	// Basics using Vec2d
+	void fillRect(Vec2 pos, Vec2 box, Color color);
+	void fillCircle(Vec2 pos, double r, Color color);
+	void strokeRect(Vec2 pos, Vec2 box, Color color);
+	void line(Vec2 pos, Vec2 pos1, Color color);
+	void image(std::string name, Vec2 pos, Vec2 box, double angle);
+	void image(std::string name, Vec2 pos, Vec2 box, double angle, Color color);
+	void image(std::string name, Vec2 pos, Vec2 box, double angle, Color color, Vec2 a, Vec2 b);
+	void text(std::string str, Vec2 pos, int size, Color color);
 
 	// Game
 	void drawWalls();

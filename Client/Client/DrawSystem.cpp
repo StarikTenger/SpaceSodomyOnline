@@ -221,6 +221,7 @@ void DrawSystem::drawInterface() {
 	// Absolute view
 	window->setView(sf::View(sf::FloatRect(0, 0, w, h)));
 
+	/// ship HUD
 	if (mode == 0 || replay->hud && replay->focusId) {
 		// Animations
 		for (auto& a : animationsInterface) {
@@ -279,6 +280,17 @@ void DrawSystem::drawInterface() {
 				size = w * 0.08;
 				image(img, w - size * 0.52, h - size * 0.52, size, size, 0);
 
+				// modules
+				auto& player = sys.players[object.id];
+				for (int i = 0; i < 2; i++) {
+					img = "moduleHpUp";
+					if(i == 1)
+						img = "moduleEnergyUp";
+					image(img, w - size * 0.52 * (6 - i * 2), h - size * 0.52, size, size, 0, { 50, 50, 50, 200 });
+					image(img, w - size * 0.52 * (6 - i * 2), h - size * 0.52 + size * int(player.modules[i] * 24.0) / 24, size, size, 0, { 255, 255, 255 }, { 0.0, player.modules[i] }, { 1.0,  1.0 });
+				}
+
+
 				// stabilization
 				if (sys.mainPlayer.orders[Object::STABILIZE_ROTATION]) {
 					text("stab", w - size * 1.52, h - size * 0.2, 20, { 255, 255, 255 });
@@ -288,6 +300,8 @@ void DrawSystem::drawInterface() {
 
 		image("interface", w / 2, h / 2, w, h, 0);
 	}
+
+	// replay bar
 	if (mode == 1 && replay->hud) {
 		double progress = (double)replay->frame / replay->frames.size();
 		image("box", w * progress / 2, h, w * progress, 20, 0, { 0, 229, 255, 180 });
@@ -307,6 +321,7 @@ void DrawSystem::drawInterface() {
 		}
 	}
 
+	// list of players
 	if (mode == 0 || replay->hud) {
 		// list
 		for (int i = 0; i < sys.playerList.size(); i++) {

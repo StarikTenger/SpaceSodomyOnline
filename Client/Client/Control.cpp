@@ -60,7 +60,6 @@ void Control::loadConfig() {
 	config.close();
 }
 
-
 void Control::saveConfig() {
 	
 }

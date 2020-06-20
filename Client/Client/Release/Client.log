@@ -1,10 +1,54 @@
-﻿  Control.cpp
-  Control.events.cpp
-  Control.setSounds.cpp
-  main.cpp
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\Control.cpp(148,24): warning C4018: '>': signed/unsigned mismatch
+﻿  DrawSystem.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,50): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,50): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,50): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,50): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,50): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,47): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,47): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,47): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,47): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,47): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,61): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,61): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,61): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,61): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,61): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,26): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,26): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,26): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,26): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,26): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,41): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,41): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,41): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,41): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,41): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,22): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,22): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,22): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,22): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,22): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(55,42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,50): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,50): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,50): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,50): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,50): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,47): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,47): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,47): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,47): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,47): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(327,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(332,94): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(333,116): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(334,118): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(335,120): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(349,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(355,20): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  1 of 1535 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 1598 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     4 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

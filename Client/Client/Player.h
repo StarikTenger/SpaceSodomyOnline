@@ -10,6 +10,8 @@ public:
 	int deaths = 0;
 	int progress = 0;
 
+	std::vector<double> modules = {0, 0};
+
 	Object* object = nullptr;
 
 	Color color;

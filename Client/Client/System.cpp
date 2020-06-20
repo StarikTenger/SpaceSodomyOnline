@@ -207,10 +207,15 @@ void System::unpack(std::string str) {
 				objects.back().type = Object::BULLET;
 
 			if (type == "S") {
+				// related player
+				auto& player = players[object.id];
+
 				// hp
 				ss >> object.hp >> object.hpMax;
+
 				// energy
 				ss >> object.energy >> object.energyMax;
+
 				// orders
 				{
 					int orders;
@@ -223,6 +228,7 @@ void System::unpack(std::string str) {
 						i++;
 					}
 				}
+
 				// effects
 				{
 					int effects;
@@ -235,10 +241,16 @@ void System::unpack(std::string str) {
 						i++;
 					}
 				}
+
 				// active
 				int abl;
 				ss >> abl;
 				object.activeAbility = Bonus::Type(abl);
+
+				// modules
+				for (int i = 0; i < player.modules.size(); i++) {
+					ss >> player.modules[i];
+				}
 			}
 		}
 	}

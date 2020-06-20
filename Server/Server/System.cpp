@@ -248,6 +248,11 @@ std::string System::pack() {
 			// actives
 			str += to_string(player.activeAbility) + " ";
 
+			// modules
+			for (int i = 0; i < player.modules.size(); i++) {
+				str += to_string(max(player.modules[i].timeToCoolDown, 0.0) / moduleInfo[i].cooldownTime, 2) + " ";
+			}
+
 		}
 		if (object.type == Object::BULLET) {
 			str = "B " + str;
@@ -286,7 +291,7 @@ void System::shoot(Object& object) {
 void System::damage(Object& object, Object& target, double value) {
 	const auto& playerTarget = players[target.id];
 
-	if (object.team == target.team || playerTarget.effects[Bonus::IMMORTAL] > 0)
+	if (object.team == target.team || playerTarget.effects[Bonus::IMMORTAL] > 0 && target.type == Object::SHIP)
 		return;
 	target.hp -= value;
 	if (target.hp < EPS && target.type == Object::SHIP) {

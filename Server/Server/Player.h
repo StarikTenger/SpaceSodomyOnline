@@ -19,7 +19,7 @@ public:
 		MODULE_1,
 		MODULE_2
 	};
-	std::vector<bool> orders = { 0,0,0,0,0,0,0,0,0,0 }; // shows which commands are active
+	std::vector<bool> orders = { 0,0,0,0,0,0,0,0,0,0,0,0,0,0 }; // shows which commands are active
 
 	// Ship atributes (only for objects with SHIP type)
 	Engine engine;
