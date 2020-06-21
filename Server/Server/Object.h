@@ -28,6 +28,7 @@ public:
 
 	// Bullet atributes
 	double damage = 1;
+	double force = 0;
 
 	double m = 1; // mass
 	double r = 0.4; // radius 

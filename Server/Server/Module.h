@@ -5,7 +5,9 @@ public:
 		HP_UP,
 		ENERGY_UP,
 		CASCADE,
-		IMPULSE
+		IMPULSE,
+		ROCKET,
+		SPLASH
 	};
 
 	int type = 0;

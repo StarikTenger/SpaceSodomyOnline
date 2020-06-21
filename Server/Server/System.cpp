@@ -250,7 +250,7 @@ std::string System::pack() {
 
 			// modules
 			for (int i = 0; i < player.modules.size(); i++) {
-				str += to_string(max(player.modules[i].timeToCoolDown, 0.0) / moduleInfo[i].cooldownTime, 2) + " ";
+				str += to_string(max(player.modules[i].timeToCoolDown, 0.0) / moduleInfo[player.modules[i].type].cooldownTime, 2) + " ";
 			}
 
 		}
@@ -266,13 +266,15 @@ std::string System::pack() {
 	return packet;
 }
 
-void System::shoot(Object& object) {
+void System::shoot(Object& object, Vec2 shift, double dir, int skip) {
 	auto& player = players[object.id];
 
-	if (player.gun.timeToCooldown > 0 || object.energy < player.gun.consumption)
-		return;
-	player.gun.timeToCooldown = player.gun.cooldownTime;
-	object.energy -= player.gun.consumption;
+	if (!skip) {
+		if ((player.gun.timeToCooldown > 0 || object.energy < player.gun.consumption))
+			return;
+		player.gun.timeToCooldown = player.gun.cooldownTime;
+		object.energy -= player.gun.consumption;
+	}
 
 	Object bullet;
 	bullet.type = Object::BULLET;
@@ -280,12 +282,22 @@ void System::shoot(Object& object) {
 	bullet.team = object.team;
 	bullet.color = object.color;
 	bullet.r = 0.4;
-	bullet.dir = object.dir;
-	bullet.pos = object.pos;
+
+	// Pos & dir
+	shift = geom::rotate(shift, object.dir);
+	bullet.dir = object.dir + dir;
+	bullet.pos = object.pos + shift;
+
 	bullet.damage = player.gun.damage;
-	bullet.vel = object.vel + geom::direction(object.dir) * player.gun.vel;
+	bullet.vel = object.vel + geom::direction(bullet.dir) * player.gun.vel;
+	bullet.w = object.w;
+	bullet.force = player.gun.force;
 	bullet.hp = player.gun.lifetime;
 	objectsToAdd.push_back(bullet);
+}
+
+void System::shoot(Object& object) {
+	shoot(object, { 0.0, 0.0 }, 0, 0);
 }
 
 void System::damage(Object& object, Object& target, double value) {
@@ -294,7 +306,7 @@ void System::damage(Object& object, Object& target, double value) {
 	if (object.team == target.team || playerTarget.effects[Bonus::IMMORTAL] > 0 && target.type == Object::SHIP)
 		return;
 	target.hp -= value;
-	if (target.hp < EPS && target.type == Object::SHIP) {
+	if (target.hp + value > EPS && target.hp < EPS && target.type == Object::SHIP) {
 		players[object.id].kills++;
 		players[object.id].progress++;
 		players[target.id].deaths++;
@@ -306,6 +318,15 @@ void System::damage(Object& object, Object& target, double value) {
 	}
 }
 
+void System::explode(Vec2 pos, double r, double power) {
+	for (auto& object : objects) {
+		double dist = geom::distance(pos, object.pos);
+		if (dist < r && dist > EPS) {
+			Vec2 dl = object.pos - pos;
+			object.vel += dl / dist * power;
+		}
+	}
+}
 
 int System::checkWall(Vec2 pos) {
 	int x = (int)(pos.x / 1);

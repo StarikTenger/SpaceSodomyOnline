@@ -86,6 +86,7 @@ void Control::step() {
 		for (int i = 0; i < 1; i++) {
 			sys.step();
 		}
+
 		// Sending
 		std::string message = sys.pack();
 		for (auto a : addresses) { 		
@@ -119,6 +120,7 @@ void Control::receive() {
 
 void Control::checkMessages() {
 	while(messages.size()) {
+
 		// Putting message to stringstream
 		std::stringstream ss;
 		ss << messages.front();
@@ -193,5 +195,10 @@ void Control::checkMessages() {
 				break;
 			}
 		}	
+
+		// Modules
+		for (auto& m : player.modules) {
+			ss >> m.type;
+		}
 	}
 }

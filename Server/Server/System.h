@@ -33,7 +33,12 @@ public:
 
 	// modules
 	std::vector<ModuleInfo> moduleInfo = {
-		{5}, {5}, {5}, {5}, {5}, {5}
+		{15}, // 0 hp up
+		{7}, // 1 energy up
+		{5}, // 2 cascade
+		{5}, // 3 impulse
+		{3}, // 4 rocket
+		{2}, // 5 splash
 	};
 
 	Vec2 border = {50, 50};
@@ -55,8 +60,10 @@ public:
 	std::string pack();
 	void step();
 	void setPlayer(Object object);
+	void shoot(Object& object, Vec2 shift, double dir, int skip);
 	void shoot(Object& object);
 	void damage(Object& object, Object& target, double value);
+	void explode(Vec2 pos, double r, double power);
 	int checkWall(Vec2 pos);
 	bool checkAbility(Object shooter, Object target, double threshold);
 	bool collision(Object& body, std::pair<Vec2, Vec2> wall);

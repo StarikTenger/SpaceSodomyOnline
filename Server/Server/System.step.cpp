@@ -149,18 +149,55 @@ void System::step() {
 				break;
 
 			// Set timeToCoolDown
-			player.modules[moduleId].timeToCoolDown = moduleInfo[moduleId].cooldownTime;
+			player.modules[moduleId].timeToCoolDown = moduleInfo[player.modules[moduleId].type].cooldownTime;
 
 			// Check for type of module
 			switch (player.modules[moduleId].type) {
 			case Module::HP_UP:
 				player.object->hp += 1;
+				if (player.object->hp > player.object->hpMax)
+					player.object->hp = player.object->hpMax;
 				break;
+
 			case Module::ENERGY_UP:
 				player.object->energy += 5;
 				break;
+
+			case Module::CASCADE: {
+				auto gunVelprev = player.gun.vel;
+				player.gun.vel /= 4;
+				for (int i = -2; i <= 2; i++) {
+					shoot(object, { 0, 0 }, i * 0.1, 1);
+				}
+				player.gun.vel = gunVelprev;
+				break;
+			}
+
+			case Module::IMPULSE:
+				object.vel += geom::direction(object.dir) * 15;
+				break;
+
+			case Module::ROCKET: {
+				auto gunVelprev = player.gun.vel;
+				player.gun.vel = 0;
+				player.gun.force = 10;
+				shoot(object, { 0, 0 }, 0, 1);
+				player.gun.vel = gunVelprev;
+				player.gun.force = 0;
+				break;
+			}
+
+			case Module::SPLASH:
+				explode(object.pos, 3, 7);
 			}
 		}
+	}
+
+	// Bullet force
+	for (auto& object : objects) {
+		if (object.type != Object::BULLET)
+			continue;
+		object.vel += geom::rotate(Vec2(object.force, 0), object.dir) * dt;
 	}
 
 	// Forcefield
