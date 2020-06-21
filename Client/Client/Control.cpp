@@ -57,6 +57,8 @@ void Control::loadConfig() {
 	config >> port;
 	config >> id;
 	config >> name;
+	for(int i = 0; i < 2; i++)
+		config >> sys.modules[i];
 	config.close();
 }
 
@@ -102,7 +104,7 @@ void Control::step() {
 			// Send
 			std::string message = "";
 			message += std::to_string(id) + " ";
-			message += name + " ";
+			message += name + " #";
 			if (keys[MOVE_LEFT])
 				message += "L";
 			if (keys[MOVE_RIGHT])
@@ -125,6 +127,9 @@ void Control::step() {
 				message += "2";
 			if (keys[SHOOT])
 				message += "S";
+
+			// modules
+			message += " " + std::to_string(sys.modules[0]) + " " + std::to_string(sys.modules[1]);
 			socket.send(message.c_str(), message.size() + 1, address, port);
 
 

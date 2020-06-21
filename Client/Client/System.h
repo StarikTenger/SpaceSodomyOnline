@@ -22,6 +22,7 @@ public:
 	double hpPrev = 0;
 
 	Object mainPlayer;
+	std::vector<int> modules = { 3, 3 };
 
 	std::string state;
 

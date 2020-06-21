@@ -282,10 +282,16 @@ void DrawSystem::drawInterface() {
 
 				// modules
 				auto& player = sys.players[object.id];
+				std::vector < std::string> moduleImg = {
+					"moduleHpUp",
+					"moduleEnergyUp",
+					"moduleCascade",
+					"moduleImpulse",
+					"moduleRocket",
+					"moduleSplash",
+				};
 				for (int i = 0; i < 2; i++) {
-					img = "moduleHpUp";
-					if(i == 1)
-						img = "moduleEnergyUp";
+					std::string img = moduleImg[sys.modules[i] % moduleImg.size()];
 					image(img, w - size * 0.52 * (6 - i * 2), h - size * 0.52, size, size, 0, { 50, 50, 50, 200 });
 					image(img, w - size * 0.52 * (6 - i * 2), h - size * 0.52 + size * int(player.modules[i] * 24.0) / 24, size, size, 0, { 255, 255, 255 }, { 0.0, player.modules[i] }, { 1.0,  1.0 });
 				}

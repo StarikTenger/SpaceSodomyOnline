@@ -40,15 +40,15 @@ C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,47): wa
 C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,47): warning C4244:         [
 C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,47): warning C4244:             T=float
 C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(222,47): warning C4244:         ]
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(327,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(332,94): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(333,116): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(334,118): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(335,120): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(349,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(333,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(338,94): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(339,116): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(340,118): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(341,120): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(355,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(361,20): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  1 of 1598 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 1643 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     4 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
