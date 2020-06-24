@@ -87,9 +87,11 @@ void Control::step() {
 			drawSys.cam.pos += (drawSys.cam.border / 2 - mouse.pos) / drawSys.cam.scale * (1 - dS); // it works
 		}
 
+		// Events
 		events();
 		drawSys.mouse = mouse;
 
+		// Zoom
 		if (keys[ZOOM_OUT])
 			drawSys.cam.scale /= pow(drawSys.cam.scaleVel, 1.0 / (double)dt);
 		if (keys[ZOOM_IN])
@@ -186,7 +188,10 @@ void Control::step() {
 			replay.step();
 			sys.state = replay.frames[replay.frame];
 		}
+
+		// Copy of system
 		sysPrev = sys;
+
 		sys.unpack(sys.state);
 
 		drawSys.mode = mode;

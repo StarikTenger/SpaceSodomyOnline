@@ -33,6 +33,7 @@ public:
 	int deaths = 0;
 	int team = 0;
 	int progress = 0;
+	int lastContact = 0;
 
 	double afkTimer = 0;
 	double timer = 0;

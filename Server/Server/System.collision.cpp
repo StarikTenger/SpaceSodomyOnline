@@ -20,10 +20,13 @@ bool System::collision(Object& body, std::pair<Vec2, Vec2> wall) {
 	std::pair<Vec2, Vec2> perpendicular;
 	perpendicular.first = geom::rotate(wall.first - center, M_PI / 2) + center;
 	perpendicular.second = geom::rotate(wall.second - center, M_PI / 2) + center;
+
 	// Length of wall
 	double length = geom::distance(wall.first, wall.second);
+
 	// Pos after movement
 	Vec2 posNew = body.pos + body.vel * dt;
+
 	// Checking collision
 	if (geom::distance(posNew, wall.first, wall.second) < body.r &&
 		geom::distance(posNew, perpendicular.first, perpendicular.second) < length / 2 &&
@@ -52,13 +55,13 @@ void System::collision() {
 	double blockSize = 1;
 	bool touch = 0;
 
-	// objects
+	// Objects
 	for (Object& a : objects) {
 		for (Object& b : objects) {
 			Vec2 aPos = a.pos + a.vel * dt;
 			Vec2 bPos = b.pos + b.vel * dt;
 
-			// damage
+			// Damage
 			if (a.team == b.team || a.id == b.id || &a == &b || !a.collision || !b.collision)
 				continue;
 
@@ -144,6 +147,11 @@ void System::collision() {
 			if (u.hp < EPS) {
 				wallKills++;
 				players[u.id].deaths++;
+				//players[u.id].kills--;
+
+				// Last contact
+				if (players[u.id].lastContact)
+					players[players[u.id].lastContact].kills++;
 			}
 		}
 		if (touch && u.type == Object::BULLET) {
@@ -153,7 +161,7 @@ void System::collision() {
 		// If in wall
 		if (checkWall(u.pos)) {
 			//std::cout << "q";
-			u.hp = -10;
+			u.hp = -4;
 		}
 	}
 

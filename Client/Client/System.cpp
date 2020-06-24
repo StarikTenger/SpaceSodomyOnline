@@ -252,6 +252,8 @@ void System::unpack(std::string str) {
 					ss >> player.modules[i];
 				}
 			}
+
+			players[id].object = &object;
 		}
 	}
 

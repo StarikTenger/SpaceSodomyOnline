@@ -5,6 +5,7 @@ void Control::setSounds() {
 	for (auto& object : sys.objects)
 		if (object.type == Object::SHIP)
 			sys.players[object.id].object = &object;
+
 	for (auto& object : sysPrev.objects)
 		if (object.type == Object::SHIP)
 			sysPrev.players[object.id].object = &object;
@@ -21,10 +22,17 @@ void Control::setSounds() {
 		Object* object = p.second.object;
 		Object* objectPrev = playerPrev.object;
 
-		if (!object && objectPrev) {
+		if (objectPrev && player.deaths > playerPrev.deaths) {
+			std::cout << "death\n";
 			audio.play("death", objectPrev->pos, 100, drawSys.cam);
+
+			drawSys.animation("shipAura",
+				AnimationState(objectPrev->pos, Vec2(objectPrev->r * 2, objectPrev->r * 2), objectPrev->dir, { 255, 255, 255 }),
+				AnimationState(objectPrev->pos + geom::direction(random::floatRandom(0, M_PI * 2, 2)) * 0.05, Vec2(objectPrev->r * 2, objectPrev->r * 2) * 1.5, objectPrev->dir, { 255, 255, 255, 0 }),
+				0.2);
 		}
 		if (object && objectPrev && object->hp < objectPrev->hp) {
+			std::cout << "knock\n";
 			audio.play("knock", object->pos, 100, drawSys.cam);
 		}
 

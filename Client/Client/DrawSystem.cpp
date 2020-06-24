@@ -72,9 +72,12 @@ void DrawSystem::drawScene() {
 	for (const auto& object : sys.objects) {
 		// Ship
 		if (object.type == Object::SHIP) {
-			// beam
+			// Beam, interface
 			if (object.id == sys.id || sys.privilegies) {
 				beam(object.pos, geom::dir(object.vel + geom::direction(object.dir) * sys.bulletVel), { 255, 0, 0, 130 });
+				float time = getMilliCount();
+				if(sys.modules[0] == 7 || sys.modules[1] == 7)
+					image("shipAura", object.pos + geom::direction(object.dir) * 5, { object.r * 2, object.r * 2 }, object.dir, Color(0, 255, 255, 40));
 			}
 			if (object.activeAbility == Bonus::LASER) {
 				Color col = object.color;
@@ -82,12 +85,11 @@ void DrawSystem::drawScene() {
 				beam(object.pos, object.dir, col);
 			}
 
-
-			// model
+			// Model
 			image("ship", object.pos.x, object.pos.y, object.r * 2, object.r * 2, object.dir);
 			image("shipColors", object.pos.x, object.pos.y, object.r * 2, object.r * 2, object.dir, object.color);
 
-			// engines
+			// Engines
 			double r1 = object.r * 2.0 * 44.0 / 24.0;
 			if (object.orders[Object::MOVE_FORWARD])
 				image("fireForward", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
@@ -102,11 +104,17 @@ void DrawSystem::drawScene() {
 			if (object.orders[Object::TURN_RIGHT])
 				image("fireTurnRight", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
 
-			// effects
+			// Effects
 			if (object.effects[Bonus::BERSERK])
 				image("effect", object.pos.x, object.pos.y, r1, r1, object.dir+sys.time*5, {255, 20, 20});
-			if (object.effects[Bonus::IMMORTAL])
-				image("effect", object.pos.x, object.pos.y, r1, r1, object.dir+sys.time, { 200, 200, 20 });
+			if (object.effects[Bonus::IMMORTAL]) {
+				//image("effect", object.pos.x, object.pos.y, r1, r1, object.dir+sys.time, { 200, 200, 20 });
+				//image("shipAura", object.pos.x, object.pos.y, object.r * 2, object.r * 2, object.dir);
+				animation("shipAura",
+					AnimationState(object.pos, Vec2(object.r * 2, object.r * 2), object.dir, {255, 255, 255}),
+					AnimationState(object.pos + geom::direction(random::floatRandom(0, M_PI * 2, 2)) * 0.05, Vec2(object.r * 2, object.r * 2), object.dir, { 255, 255, 255, 0}),
+					0.1);
+			}
 			if (object.effects[Bonus::BOOST])
 				animation("bullet",
 					AnimationState(object.pos, Vec2( 0.3, 0.3 ) * 5.0, 0, object.color),
@@ -115,7 +123,7 @@ void DrawSystem::drawScene() {
 			if (object.effects[Bonus::LASER])
 				laserBeam(object.pos, object.dir, object.color);
 
-			// bars
+			// Bars
 			if (object.id != sys.id) {
 				// hp
 				{
@@ -174,6 +182,8 @@ void DrawSystem::drawScene() {
 		}
 	}
 
+	// Deaths (not yet)
+
 	// Bonuses
 	for (const auto& bonus : sys.bonuses) {
 		double r = 0.5;
@@ -230,7 +240,7 @@ void DrawSystem::drawInterface() {
 			image(a.img, a.state.pos.x, a.state.pos.y, a.state.box.x, a.state.box.y, a.state.direction, a.state.color);
 		}
 
-		// hp, energy, active
+		// hp, energy, active, modules
 		for (const auto& object : sys.objects) {
 			if (object.type == Object::SHIP && object.id == sys.id) {
 				double size = w / 5;
@@ -289,6 +299,8 @@ void DrawSystem::drawInterface() {
 					"moduleImpulse",
 					"moduleRocket",
 					"moduleSplash",
+					"moduleImmortality",
+					"moduleBlink",
 				};
 				for (int i = 0; i < 2; i++) {
 					std::string img = moduleImg[sys.modules[i] % moduleImg.size()];

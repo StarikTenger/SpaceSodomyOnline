@@ -37,7 +37,7 @@ void System::step() {
 
 			// modules
 			for (auto& module : player.modules)
-				module.timeToCoolDown -= dt;
+				module.timeToCooldown -= dt;
 		}
 		if (object.type == Object::BULLET)
 			object.hp -= dt;
@@ -145,11 +145,11 @@ void System::step() {
 			// Current module id
 			int moduleId = i - Player::MODULE_1; 
 
-			if (player.modules[moduleId].timeToCoolDown > 0) // Module is on cooldown
+			if (player.modules[moduleId].timeToCooldown > 0) // Module is on cooldown
 				break;
 
-			// Set timeToCoolDown
-			player.modules[moduleId].timeToCoolDown = moduleInfo[player.modules[moduleId].type].cooldownTime;
+			// Set timeToCooldown
+			player.modules[moduleId].timeToCooldown = moduleInfo[player.modules[moduleId].type].cooldownTime;
 
 			// Check for type of module
 			switch (player.modules[moduleId].type) {
@@ -165,7 +165,7 @@ void System::step() {
 
 			case Module::CASCADE: {
 				auto gunVelprev = player.gun.vel;
-				player.gun.vel /= 4;
+				player.gun.vel /= 2;
 				for (int i = -2; i <= 2; i++) {
 					shoot(object, { 0, 0 }, i * 0.1, 1);
 				}
@@ -182,16 +182,31 @@ void System::step() {
 				player.gun.vel = 0;
 				player.gun.force = 10;
 				shoot(object, { 0, 0 }, 0, 1);
+				shoot(object, { -0.3,  0.3 }, 0, 1);
+				shoot(object, { -0.3,  -0.3 }, 0, 1);
 				player.gun.vel = gunVelprev;
 				player.gun.force = 0;
 				break;
 			}
 
 			case Module::SPLASH:
-				explode(object.pos, 3, 7);
-			}
+				explode(object, object.pos, 4, 13);
+				break;
+
+			case Module::IMMORTALITY:
+				player.effects[Bonus::IMMORTAL] = 1.0;
+				break;
+
+			case Module::BLINK:
+				object.pos += geom::direction(object.dir) * 5;
+				break;
+
+			}			
 		}
 	}
+
+	// Collison (&damage)
+	collision();
 
 	// Bullet force
 	for (auto& object : objects) {
@@ -206,9 +221,6 @@ void System::step() {
 		int y = (int)object.pos.y;
 		object.vel += field[x][y].forceField * dt / object.m;
 	}
-
-	// Collison (&damage)
-	collision();
 
 	// Add new objects
 	for (auto& object : objectsToAdd) {

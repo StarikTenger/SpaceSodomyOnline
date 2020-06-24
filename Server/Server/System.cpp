@@ -122,6 +122,14 @@ void System::setPlayer(Object object) {
 		players[object.id] = Player();
 	
 	players[object.id].team = object.team;
+	players[object.id].lastContact = 0;
+
+
+	players[object.id].activeAbility = Bonus::NONE;
+	for (auto& module : players[object.id].modules) {
+		module.timeToCooldown = 0;
+	}
+
 	if (teams.find(object.team) == teams.end()) {
 		teams[object.team] = Team();
 		teams[object.team].color = fromHSV(random::intRandom(0, 360), 1, 1);
@@ -250,7 +258,7 @@ std::string System::pack() {
 
 			// modules
 			for (int i = 0; i < player.modules.size(); i++) {
-				str += to_string(max(player.modules[i].timeToCoolDown, 0.0) / moduleInfo[player.modules[i].type].cooldownTime, 2) + " ";
+				str += to_string(max(player.modules[i].timeToCooldown, 0.0) / moduleInfo[player.modules[i].type].cooldownTime, 2) + " ";
 			}
 
 		}
@@ -301,11 +309,17 @@ void System::shoot(Object& object) {
 }
 
 void System::damage(Object& object, Object& target, double value) {
-	const auto& playerTarget = players[target.id];
+	auto& playerTarget = players[target.id];
 
 	if (object.team == target.team || playerTarget.effects[Bonus::IMMORTAL] > 0 && target.type == Object::SHIP)
 		return;
 	target.hp -= value;
+
+	if (target.type == Object::SHIP)
+		playerTarget.effects[Bonus::IMMORTAL] = 0.1;
+
+	playerTarget.lastContact = object.id;
+
 	if (target.hp + value > EPS && target.hp < EPS && target.type == Object::SHIP) {
 		players[object.id].kills++;
 		players[object.id].progress++;
@@ -318,12 +332,13 @@ void System::damage(Object& object, Object& target, double value) {
 	}
 }
 
-void System::explode(Vec2 pos, double r, double power) {
-	for (auto& object : objects) {
-		double dist = geom::distance(pos, object.pos);
+void System::explode(Object& object, Vec2 pos, double r, double power) {
+	for (auto& target : objects) {
+		double dist = geom::distance(pos, target.pos);
 		if (dist < r && dist > EPS) {
-			Vec2 dl = object.pos - pos;
-			object.vel += dl / dist * power;
+			damage(object, target, 0);
+			Vec2 dl = target.pos - pos;
+			target.vel += dl / dist * power;
 		}
 	}
 }

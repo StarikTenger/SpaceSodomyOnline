@@ -7,11 +7,13 @@ public:
 		CASCADE,
 		IMPULSE,
 		ROCKET,
-		SPLASH
+		SPLASH,
+		IMMORTALITY,
+		BLINK
 	};
 
 	int type = 0;
-	double timeToCoolDown = 0;
+	double timeToCooldown = 0;
 	Module();
 	Module(int _type);
 };
