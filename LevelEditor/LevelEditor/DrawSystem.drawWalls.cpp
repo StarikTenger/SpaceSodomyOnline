@@ -26,6 +26,9 @@ void DrawSystem::drawWalls() {
 	}
 	for (int x = 0; x < sys.field.size(); x++) {
 		for (int y = 0; y < sys.field[0].size(); y++) {
+			if(!sys.field[x][y].allowed)
+				image("wall", x + 0.5, y + 0.5, 1, 1, 0, {255, 0, 0});
+
 			if (sys.field[x][y].type) {
 				Color color1 = color;
 				int type = 0;

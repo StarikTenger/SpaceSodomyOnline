@@ -38,4 +38,5 @@ public:
 	System(std::string path);
 	~System();
 	void save(std::string path);
+	void fill(int x, int y, int allow);
 };

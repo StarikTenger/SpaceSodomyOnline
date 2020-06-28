@@ -1,11 +1,115 @@
-﻿  System.save.cpp
+﻿  Control.actions.cpp
+  Control.cpp
+  Control.events.cpp
+  DrawSystem.basics.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\Control.actions.cpp(198,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(9,40): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(9,28): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(10,40): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(10,40): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(10,40): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(10,40): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(10,40): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(10,33): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(10,33): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(10,33): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(10,33): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(10,33): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(12,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(12,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(18,37): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(18,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(19,40): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(19,40): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(19,40): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(19,40): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(19,40): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(19,33): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(19,33): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(19,33): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(19,33): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(19,33): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(22,33): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(23,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(23,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(32,56): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(32,56): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(32,56): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(32,56): warning C4244:             T=unsigned int
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(32,56): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(32,35): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(32,35): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(32,35): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(32,35): warning C4244:             T=unsigned int
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(32,35): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(34,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(34,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(35,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(35,21): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(37,33): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(59,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  DrawSystem.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.basics.cpp(59,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(27,61): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(27,61): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(27,61): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(27,61): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(27,61): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(27,26): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(27,26): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(27,26): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(27,26): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(27,26): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(28,41): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(28,41): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(28,41): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(28,41): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(28,41): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(28,22): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(28,22): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(28,22): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(28,22): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(28,22): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(56,50): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(56,50): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(56,50): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(56,50): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(56,50): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(56,47): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(56,47): warning C4244:         with
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(56,47): warning C4244:         [
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(56,47): warning C4244:             T=float
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(56,47): warning C4244:         ]
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(66,55): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(67,51): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  DrawSystem.drawWalls.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.cpp(120,61): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.drawWalls.cpp(13,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.drawWalls.cpp(14,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.drawWalls.cpp(20,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.drawWalls.cpp(21,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.drawWalls.cpp(27,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.drawWalls.cpp(28,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.drawWalls.cpp(48,11): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.drawWalls.cpp(54,11): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.drawWalls.cpp(71,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.drawWalls.cpp(72,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.drawWalls.cpp(95,11): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.drawWalls.cpp(107,11): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.drawWalls.cpp(117,20): warning C4018: '<': signed/unsigned mismatch
+  DrawSystem.loadTextures.cpp
+  DrawSystem.objects.cpp
+  System.cpp
+  System.save.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\DrawSystem.drawWalls.cpp(118,21): warning C4018: '<': signed/unsigned mismatch
 C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\System.save.cpp(10,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\System.save.cpp(11,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\System.save.cpp(42,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\System.save.cpp(43,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\System.save.cpp(45,20): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\LevelEditor\System.save.cpp(46,21): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  1 of 1026 functions (<0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    5 functions had inline decision re-evaluated but remain unchanged
+  2 of 1105 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    4 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   LevelEditor.vcxproj -> C:\Users\ilyin\GitHub\SpaceSodomyOnline\LevelEditor\Release\LevelEditor.exe

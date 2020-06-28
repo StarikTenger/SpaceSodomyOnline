@@ -12,6 +12,9 @@ void System::save(std::string path) {
 			if (field[x][y].spikes) {
 				file << "2";
 			}
+			else if (!field[x][y].allowed) {
+				file << "X";
+			}
 			else {
 				switch (field[x][y].type) {
 				case WALL:
@@ -125,3 +128,4 @@ void System::save(std::string path) {
 	file << "END";
 	file.close();
 }
+

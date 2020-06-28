@@ -2,6 +2,8 @@
 #include "geometry.h"
 
 #include <iostream>
+#include <algorithm>
+#include <deque>
 #include <fstream>
 
 
@@ -28,6 +30,11 @@ System::System(string path) {
 			Cell c;
 			std::string type;
 			file >> type;
+
+			if (type == "END") {
+				return;
+			}
+
 			if (type == "0") {
 				c.type = 0;
 			}
@@ -40,6 +47,10 @@ System::System(string path) {
 			else if (type == "2") {
 				c.type = WALL;
 				c.spikes = 1;
+			}
+			else if (type == "X") {
+				c.type = EMPTY;
+				c.allowed = 0;
 			}
 			else if (type == "A" || type == "a") {
 				c.type = CORNER_A;
@@ -107,4 +118,27 @@ System::System(string path) {
 
 System::~System()
 {
+}
+
+void System::fill(int x, int y, int allow) {
+	std::deque<pair<int, int>> order;
+	order.push_back({x, y});
+	while (order.size()) {
+		auto pos = order.front();
+		order.pop_front();
+
+		int x0 = pos.first;
+		int y0 = pos.second;
+
+		for (int x = std::max(0, x0 - 1); x <= std::min((int)field.size() - 1, x0 + 1); x++) {
+			for (int y = std::max(0, y0 - 1); y <= std::min((int)field[0].size() - 1, y0 + 1); y++) {
+				if (field[x][y].allowed == allow || field[x][y].type)
+					continue;
+				field[x][y].spikes = 0;
+				field[x][y].type = 0;
+				field[x][y].allowed = allow;
+				order.push_front({x, y});
+			}
+		}
+	}
 }

@@ -63,6 +63,7 @@ void Control::actions() {
 		if (keys[ERASE]) {
 			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
 				sys.field[(int)pos.x][(int)pos.y].type = 0;
+				sys.field[(int)pos.x][(int)pos.y].allowed = 1;
 				sys.field[(int)pos.x][(int)pos.y].spikes = 0;
 				sys.field[(int)pos.x][(int)pos.y].forceField = 0;
 				sys.field[(int)pos.x][(int)pos.y].color = (int)menu.b_color->value;
@@ -72,6 +73,7 @@ void Control::actions() {
 		if (keys[SET_WALL]) {
 			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
 				sys.field[(int)pos.x][(int)pos.y].type = 1;
+				sys.field[(int)pos.x][(int)pos.y].allowed = 1;
 				sys.field[(int)pos.x][(int)pos.y].spikes = 0;
 				sys.field[(int)pos.x][(int)pos.y].color = (int)menu.b_color->value;
 				saved = 0;
@@ -80,6 +82,7 @@ void Control::actions() {
 		if (keys[SET_CORNER_A]) {
 			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
 				sys.field[(int)pos.x][(int)pos.y].type = CORNER_A;
+				sys.field[(int)pos.x][(int)pos.y].allowed = 1;
 				sys.field[(int)pos.x][(int)pos.y].spikes = 0;
 				sys.field[(int)pos.x][(int)pos.y].color = (int)menu.b_color->value;
 				saved = 0;
@@ -88,6 +91,7 @@ void Control::actions() {
 		if (keys[SET_CORNER_B]) {
 			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
 				sys.field[(int)pos.x][(int)pos.y].type = CORNER_B;
+				sys.field[(int)pos.x][(int)pos.y].allowed = 1;
 				sys.field[(int)pos.x][(int)pos.y].spikes = 0;
 				sys.field[(int)pos.x][(int)pos.y].color = (int)menu.b_color->value;
 				saved = 0;
@@ -96,6 +100,7 @@ void Control::actions() {
 		if (keys[SET_CORNER_C]) {
 			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
 				sys.field[(int)pos.x][(int)pos.y].type = CORNER_C;
+				sys.field[(int)pos.x][(int)pos.y].allowed = 1;
 				sys.field[(int)pos.x][(int)pos.y].spikes = 0;
 				sys.field[(int)pos.x][(int)pos.y].color = (int)menu.b_color->value;
 				saved = 0;
@@ -104,6 +109,7 @@ void Control::actions() {
 		if (keys[SET_CORNER_D]) {
 			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
 				sys.field[(int)pos.x][(int)pos.y].type = CORNER_D;
+				sys.field[(int)pos.x][(int)pos.y].allowed = 1;
 				sys.field[(int)pos.x][(int)pos.y].spikes = 0;
 				sys.field[(int)pos.x][(int)pos.y].color = (int)menu.b_color->value;
 				saved = 0;
@@ -112,8 +118,27 @@ void Control::actions() {
 		if (keys[SET_SPIKES]) {
 			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
 				sys.field[(int)pos.x][(int)pos.y].type = 1;
+				sys.field[(int)pos.x][(int)pos.y].allowed = 1;
 				sys.field[(int)pos.x][(int)pos.y].spikes = 1;
 				sys.field[(int)pos.x][(int)pos.y].color = (int)menu.b_color->value;
+				saved = 0;
+			}
+		}
+		if (keys[X]) {
+			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
+				sys.field[(int)pos.x][(int)pos.y].type = 0;
+				sys.field[(int)pos.x][(int)pos.y].spikes = 0;
+				//sys.field[(int)pos.x][(int)pos.y].allowed = 0;
+				sys.fill((int)pos.x, (int)pos.y, 0);
+				saved = 0;
+			}
+		}
+		if (keys[Z]) {
+			if (pos.x > 0 && pos.x < sys.field.size() && pos.y > 0 && pos.y < sys.field.size()) {
+				sys.field[(int)pos.x][(int)pos.y].type = 0;
+				sys.field[(int)pos.x][(int)pos.y].spikes = 0;
+				//sys.field[(int)pos.x][(int)pos.y].allowed = 0;
+				sys.fill((int)pos.x, (int)pos.y, 1);
 				saved = 0;
 			}
 		}

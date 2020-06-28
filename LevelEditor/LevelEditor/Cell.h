@@ -19,6 +19,7 @@ public:
 	int spikes = 0;
 	int color = 0;
 	int forceField = 0;
+	int allowed = 1;
 	Cell();
 	~Cell();
 };
