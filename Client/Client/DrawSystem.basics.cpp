@@ -104,6 +104,8 @@ void DrawSystem::line(double x, double y, double x1, double y1, Color color) {
 }
 
 void DrawSystem::image(std::string name, double x, double y, double width, double height, double dir, Color color) {
+	if (textures.find(name) == textures.end())
+		return;
 	sf::Texture& tex = *textures[name];
 	Vec2 scale = { width / tex.getSize().x  , height / tex.getSize().y };
 	Vec2 pos = { x, y };// cam.transform({ x, y });
@@ -118,6 +120,8 @@ void DrawSystem::image(std::string name, double x, double y, double width, doubl
 }
 
 void DrawSystem::image(std::string name, double x, double y, double width, double height, double dir, Color color, Vec2 a, Vec2 b) {
+	if (textures.find(name) == textures.end())
+		return;
 	sf::Texture& tex = *textures[name];
 	Vec2 scale = { width / tex.getSize().x  , height / tex.getSize().y };
 	Vec2 pos = { x, y };// cam.transform({ x, y });

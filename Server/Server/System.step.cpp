@@ -173,34 +173,36 @@ void System::step() {
 				break;
 			}
 
-			case Module::IMPULSE:
+			case Module::IMPULSE: 
 				object.vel += geom::direction(object.dir) * 15;
 				break;
 
 			case Module::ROCKET: {
 				auto gunVelprev = player.gun.vel;
 				player.gun.vel = 0;
-				player.gun.force = 10;
+				player.gun.force = 15;
 				shoot(object, { 0, 0 }, 0, 1);
-				shoot(object, { -0.3,  0.3 }, 0, 1);
-				shoot(object, { -0.3,  -0.3 }, 0, 1);
+				shoot(object, { -0.3,  0.3 }, 0.05, 1);
+				shoot(object, { -0.3,  -0.3 }, -0.05, 1);
 				player.gun.vel = gunVelprev;
 				player.gun.force = 0;
 				break;
 			}
 
 			case Module::SPLASH:
-				explode(object, object.pos, 4, 13);
+				explode(object, object.pos, 5, M_PI/3, 13);
 				break;
 
 			case Module::IMMORTALITY:
 				player.effects[Bonus::IMMORTAL] = 1.0;
 				break;
 
-			case Module::BLINK:
-				object.pos += geom::direction(object.dir) * 5;
+			case Module::BLINK: {
+				auto pos = object.pos + geom::direction(object.dir) * 5;
+				if (!checkWall(pos) && field[(int)pos.x][(int)pos.y].allowed)
+					object.pos = pos;
 				break;
-
+			}
 			}			
 		}
 	}

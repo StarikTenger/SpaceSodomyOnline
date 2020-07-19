@@ -130,7 +130,7 @@ void Control::step() {
 			if (keys[SHOOT])
 				message += "S";
 
-			// modules
+			// modulesCooldown
 			message += " " + std::to_string(sys.modules[0]) + " " + std::to_string(sys.modules[1]);
 			socket.send(message.c_str(), message.size() + 1, address, port);
 

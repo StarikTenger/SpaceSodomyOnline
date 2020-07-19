@@ -14,7 +14,7 @@ public:
 	void loadSound(std::string name, std::string path);
 	void play(std::string name);
 	void play(std::string name, double volume);
-	void play(std::string name, Vec2 pos, double volume);
+	void play(std::string name, Vec2 pos, double z, double volume);
 	void play(std::string name, Vec2 pos, double volume, Camera cam);
 };
 

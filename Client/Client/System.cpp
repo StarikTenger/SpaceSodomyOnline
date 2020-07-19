@@ -154,6 +154,8 @@ void System::unpack(std::string str) {
 			ss >> player.kills;
 			ss >> player.deaths;
 			ss >> player.progress;
+			ss >> player.modulesType[0];
+			ss >> player.modulesType[1];
 
 			players[id] = player;
 			//players.insert({ id, player });
@@ -247,9 +249,9 @@ void System::unpack(std::string str) {
 				ss >> abl;
 				object.activeAbility = Bonus::Type(abl);
 
-				// modules
-				for (int i = 0; i < player.modules.size(); i++) {
-					ss >> player.modules[i];
+				// modulesCooldown
+				for (int i = 0; i < player.modulesCooldown.size(); i++) {
+					ss >> player.modulesCooldown[i];
 				}
 			}
 

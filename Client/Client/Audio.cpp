@@ -11,6 +11,11 @@ Audio::Audio(){
 	loadSound("bip", "sounds/bip.wav");
 	loadSound("death", "sounds/death.wav");
 	loadSound("laser", "sounds/laser.wav");
+	loadSound("engineOn", "sounds/engine.wav");
+	loadSound("engineOff", "sounds/engineOff.wav");
+	loadSound("impulse", "sounds/impulse.wav");
+	loadSound("blink", "sounds/blink.wav");
+	loadSound("splash", "sounds/splash.wav");
 }
 
 Audio::~Audio(){
@@ -33,7 +38,7 @@ void Audio::play(std::string name, double volume) {
 	sounds[name]->setVolume(volume);
 	sounds[name]->play();
 }
-void Audio::play(std::string name, Vec2 pos, double volume) {
+void Audio::play(std::string name, Vec2 pos, double z, double volume) {
 	for (int i = 0; i < activeSounds.size(); i++) {
 		if (activeSounds[i]->getStatus() != sf::Sound::Playing) {
 			//std::cout << activeSounds.size() << " deleted\n";
@@ -45,8 +50,8 @@ void Audio::play(std::string name, Vec2 pos, double volume) {
 	sf::Listener::setDirection(1.f, 0.f, 0.f);
 	sf::Sound* sound = new sf::Sound();
 	*sound = *sounds[name];
-	sound->setPosition(volume, pos.x, pos.y);
-	sound->setVolume(100);
+	sound->setPosition(z, pos.x, pos.y);
+	sound->setVolume(volume);
 	sound->play();
 	activeSounds.push_back(sound);
 }
@@ -54,5 +59,5 @@ void Audio::play(std::string name, Vec2 pos, double volume) {
 void Audio::play(std::string name, Vec2 pos, double volume, Camera cam) {
 	pos -= cam.pos;
 	pos = geom::rotate(pos, -cam.dir);
-	play(name, pos, -5);
+	play(name, pos, -5, volume);
 }

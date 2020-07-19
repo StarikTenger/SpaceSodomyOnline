@@ -65,7 +65,7 @@ public:
 	void shoot(Object& object, Vec2 shift, double dir, int skip);
 	void shoot(Object& object);
 	void damage(Object& object, Object& target, double value);
-	void explode(Object& object, Vec2 pos, double r, double power);
+	void explode(Object& object, Vec2 pos, double r, double angle, double power);
 	int checkWall(Vec2 pos);
 	bool checkAbility(Object shooter, Object target, double threshold);
 	bool collision(Object& body, std::pair<Vec2, Vec2> wall);

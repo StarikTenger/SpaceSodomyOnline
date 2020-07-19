@@ -72,12 +72,26 @@ void DrawSystem::drawScene() {
 	for (const auto& object : sys.objects) {
 		// Ship
 		if (object.type == Object::SHIP) {
-			// Beam, interface
+			const auto& player = sys.players[object.id];
+
+			// Interface
 			if (object.id == sys.id || sys.privilegies) {
+				// Beam
 				beam(object.pos, geom::dir(object.vel + geom::direction(object.dir) * sys.bulletVel), { 255, 0, 0, 130 });
-				float time = getMilliCount();
+
+				// Blink target
+				int alpha = 40;
+				if (sys.modules[0] == 7 && player.modulesCooldown[0] <= EPS || sys.modules[1] == 7 && player.modulesCooldown[1] <= EPS)
+					alpha = 140;
 				if(sys.modules[0] == 7 || sys.modules[1] == 7)
-					image("shipAura", object.pos + geom::direction(object.dir) * 5, { object.r * 2, object.r * 2 }, object.dir, Color(0, 255, 255, 40));
+					image("shipAura", object.pos + geom::direction(object.dir) * 5, { object.r * 2, object.r * 2 }, object.dir, Color(0, 255, 255, alpha));
+
+				// Splash sector
+				/*alpha = 40;
+				if (sys.modules[0] == 5 && player.modulesCooldown[0] <= EPS || sys.modules[1] == 5 && player.modulesCooldown[1] <= EPS)
+					alpha = 140;
+				if (sys.modules[0] == 5 || sys.modules[1] == 5)
+					image("sector", object.pos, Vec2(object.r * 2, object.r * 2) * 5, object.dir, Color(0, 255, 255, alpha / 4));*/
 			}
 			if (object.activeAbility == Bonus::LASER) {
 				Color col = object.color;
@@ -240,7 +254,7 @@ void DrawSystem::drawInterface() {
 			image(a.img, a.state.pos.x, a.state.pos.y, a.state.box.x, a.state.box.y, a.state.direction, a.state.color);
 		}
 
-		// hp, energy, active, modules
+		// hp, energy, active, modulesCooldown
 		for (const auto& object : sys.objects) {
 			if (object.type == Object::SHIP && object.id == sys.id) {
 				double size = w / 5;
@@ -290,7 +304,7 @@ void DrawSystem::drawInterface() {
 				size = w * 0.08;
 				image(img, w - size * 0.52, h - size * 0.52, size, size, 0);
 
-				// modules
+				// modulesCooldown
 				auto& player = sys.players[object.id];
 				std::vector < std::string> moduleImg = {
 					"moduleHpUp",
@@ -303,9 +317,9 @@ void DrawSystem::drawInterface() {
 					"moduleBlink",
 				};
 				for (int i = 0; i < 2; i++) {
-					std::string img = moduleImg[sys.modules[i] % moduleImg.size()];
+					std::string img = moduleImg[player.modulesType[i] % moduleImg.size()];
 					image(img, w - size * 0.52 * (6 - i * 2), h - size * 0.52, size, size, 0, { 50, 50, 50, 200 });
-					image(img, w - size * 0.52 * (6 - i * 2), h - size * 0.52 + size * int(player.modules[i] * 24.0) / 24, size, size, 0, { 255, 255, 255 }, { 0.0, player.modules[i] }, { 1.0,  1.0 });
+					image(img, w - size * 0.52 * (6 - i * 2), h - size * 0.52 + size * int(player.modulesCooldown[i] * 24.0) / 24, size, size, 0, { 255, 255, 255 }, { 0.0, player.modulesCooldown[i] }, { 1.0,  1.0 });
 				}
 
 

@@ -37,6 +37,10 @@ System::System(string path) {
 			Cell c;
 			std::string type;
 			file >> type;
+			if (type == "X") {
+				c.allowed = 0;
+			}
+
 			if (type == "0") {
 				c.type = 0;
 			}
@@ -124,10 +128,15 @@ void System::setPlayer(Object object) {
 	players[object.id].team = object.team;
 	players[object.id].lastContact = 0;
 
-
+	// Modules
 	players[object.id].activeAbility = Bonus::NONE;
 	for (auto& module : players[object.id].modules) {
 		module.timeToCooldown = 0;
+	}
+
+	// Effects
+	for (auto& effect : players[object.id].effects) {
+		effect = 0;
 	}
 
 	if (teams.find(object.team) == teams.end()) {
@@ -143,7 +152,7 @@ void System::setPlayer(Object object) {
 		player.pos = Vec2(x + 0.5, y + 0.5);
 		if (teams.find(player.team) != teams.end() && teams[player.team].spawnpoints.size())
 			player.pos = teams[player.team].spawnpoints[random::intRandom(0, teams[player.team].spawnpoints.size() - 1)] + Vec2(0.5, 0.5);
-		else if (field[x][y].type)
+		else if (field[x][y].type || !field[x][y].allowed || geom::distance(field[x][y].forceField, {0,0}) > 0.1) // Forbidden cells
 			continue;
 
 		break;
@@ -166,6 +175,8 @@ std::string System::pack() {
 		packet += to_string(player.second.kills) + " ";
 		packet += to_string(player.second.deaths) + " ";
 		packet += to_string(player.second.progress) + " ";
+		packet += to_string(player.second.modules[0].type) + " ";
+		packet += to_string(player.second.modules[1].type) + " ";
 	}
 	// wall player
 	{
@@ -174,6 +185,8 @@ std::string System::pack() {
 		packet += " WALL ";
 		packet += "255 255 255 ";
 		packet += to_string(wallKills) + " ";
+		packet += to_string(0) + " ";
+		packet += to_string(0) + " ";
 		packet += to_string(0) + " ";
 		packet += to_string(0) + " ";
 	}
@@ -332,10 +345,10 @@ void System::damage(Object& object, Object& target, double value) {
 	}
 }
 
-void System::explode(Object& object, Vec2 pos, double r, double power) {
+void System::explode(Object& object, Vec2 pos, double r, double angle, double power) {
 	for (auto& target : objects) {
 		double dist = geom::distance(pos, target.pos);
-		if (dist < r && dist > EPS) {
+		if (dist < r && dist > EPS && geom::dir(target.pos, object.pos, object.pos + geom::direction(object.dir)) <= angle) {
 			damage(object, target, 0);
 			Vec2 dl = target.pos - pos;
 			target.vel += dl / dist * power;

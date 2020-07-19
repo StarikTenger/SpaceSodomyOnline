@@ -141,7 +141,15 @@ void System::collision() {
 			}
 		}
 
-		const auto& player = players[u.id];
+		// Check distance (for sure)
+		for (auto& w : walls) {
+			if (geom::distance(u.pos, w.first.first) < u.r)
+				u.pos -= geom::direction(w.first.first, u.pos) * 0.05;
+			if (geom::distance(u.pos, w.first.second) < u.r)
+				u.pos -= geom::direction(w.first.second, u.pos) * 0.05;
+		}
+
+		auto& player = players[u.id];
 		if (dmg && u.type == Object::SHIP && player.effects[Bonus::IMMORTAL] < 0) {
 			u.hp -= 1;
 			if (u.hp < EPS) {
@@ -150,8 +158,11 @@ void System::collision() {
 				//players[u.id].kills--;
 
 				// Last contact
-				if (players[u.id].lastContact)
+				if (players[u.id].lastContact) {
 					players[players[u.id].lastContact].kills++;
+					players[players[u.id].lastContact].progress++;
+
+				}
 			}
 		}
 		if (touch && u.type == Object::BULLET) {

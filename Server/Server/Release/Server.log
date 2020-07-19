@@ -1,21 +1,9 @@
-﻿  Control.cpp
-  System.collision.cpp
-  System.cpp
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\Control.cpp(152,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(242,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(244,25): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(250,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(252,26): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(260,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(350,27): warning C4018: '>=': signed/unsigned mismatch
-  System.step.cpp
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(350,48): warning C4018: '>=': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.step.cpp(232,20): warning C4018: '<': signed/unsigned mismatch
-  main.cpp
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.step.cpp(341,20): warning C4018: '<': signed/unsigned mismatch
+﻿  System.step.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.step.cpp(234,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.step.cpp(343,20): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  2 of 1572 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 1574 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+    1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Server.vcxproj -> C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Release\Server.exe
