@@ -83,7 +83,7 @@ void System::collision() {
 		}
 	}
 
-	// walls
+	// Walls
 	for (Object& u : objects) {
 		vector<pair<pair<Vec2, Vec2>, bool> > walls;
 		walls.push_back({ {{0, 0}, {0, (double)field.size()}}, 0 });
@@ -95,7 +95,7 @@ void System::collision() {
 		int y0 = (int)(u.pos.y / blockSize + 1) - 1;
 		for (int x = std::max(0, x0 - 1); x <= std::min((int)field.size() - 1, x0 + 1); x++) {
 			for (int y = std::max(0, y0 - 1); y <= std::min((int)field[0].size() - 1, y0 + 1); y++) {
-				// block verticies
+				// Block verticies
 				Vec2 pA(x + 0.0, y + 0.0);
 				Vec2 pB(x + 1.0, y + 0.0);
 				Vec2 pC(x + 1.0, y + 1.0);
@@ -165,7 +165,9 @@ void System::collision() {
 				}
 			}
 		}
-		if (touch && u.type == Object::BULLET) {
+
+		// Kill bullets & rockets if contact with wall
+		if (touch && ( u.type == Object::BULLET || u.type == Object::ROCKET) ) {
 			u.hp = 0;
 		}
 

@@ -55,7 +55,6 @@ void DrawSystem::drawScene() {
 	view.setRotation((cam.dir * 180 / M_PI) + 90);
 	window->setView(view);
 
-	
 
 	// DRAWING /////////////////////////////////////////////////
 	// Background
@@ -93,6 +92,8 @@ void DrawSystem::drawScene() {
 				if (sys.modules[0] == 5 || sys.modules[1] == 5)
 					image("sector", object.pos, Vec2(object.r * 2, object.r * 2) * 5, object.dir, Color(0, 255, 255, alpha / 4));*/
 			}
+
+			// Laser beam
 			if (object.activeAbility == Bonus::LASER) {
 				Color col = object.color;
 				col.a = 130;
@@ -122,8 +123,6 @@ void DrawSystem::drawScene() {
 			if (object.effects[Bonus::BERSERK])
 				image("effect", object.pos.x, object.pos.y, r1, r1, object.dir+sys.time*5, {255, 20, 20});
 			if (object.effects[Bonus::IMMORTAL]) {
-				//image("effect", object.pos.x, object.pos.y, r1, r1, object.dir+sys.time, { 200, 200, 20 });
-				//image("shipAura", object.pos.x, object.pos.y, object.r * 2, object.r * 2, object.dir);
 				animation("shipAura",
 					AnimationState(object.pos, Vec2(object.r * 2, object.r * 2), object.dir, {255, 255, 255}),
 					AnimationState(object.pos + geom::direction(random::floatRandom(0, M_PI * 2, 2)) * 0.05, Vec2(object.r * 2, object.r * 2), object.dir, { 255, 255, 255, 0}),
@@ -164,7 +163,7 @@ void DrawSystem::drawScene() {
 
 				}
 				
-				// name
+				// Name
 				{
 					auto shift = Vec2(0, 0) - geom::direction(cam.dir) * 0.9;
 					std::string str = sys.players[object.id].name;
@@ -177,22 +176,51 @@ void DrawSystem::drawScene() {
 		}
 		// Bullet
 		if (object.type == Object::BULLET) {
-			// beam
+			// Beam
 			if (0 && sys.privilegies) {
 				Color col = object.color;
 				col.a = 100;
 				beam(object.pos, geom::dir(object.vel), col);
 			}
-			// model
+			// Model
 			double r1 = object.r * 3;
 			image("bullet", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
 			image("bullet", object.pos.x, object.pos.y, r1 * 0.8, r1 * 0.8, object.dir, {255, 255, 255});
 
-			// set animation
+			// Set animation
 			animation("bullet", 
 				AnimationState(object.pos, {0.3, 0.3}, 0, object.color),
 				AnimationState(object.pos + geom::direction(random::floatRandom(0, M_PI*2, 2)) * 0.2, { 0.0, 0.0 }, 0, object.color), 
 				0.2);
+		}
+		// Rocket
+		if (object.type == Object::ROCKET) {
+			// Model
+			double r1 = 1.6;
+			image("rocket", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
+
+			Vec2 pos = geom::direction(object.dir) * (-0.3);
+
+			// Set animation
+			animation("bullet",
+				AnimationState(object.pos + pos, { 0.3, 0.3 }, 0, {255, 255, 255}),
+				AnimationState(object.pos + pos * 3 + geom::direction(random::floatRandom(0, M_PI * 2, 2)) * 0.2, { 0.0, 0.0 }, 0, { 255, 255, 255 }),
+				0.2);
+		}
+		// Explosion
+		if (object.type == Object::EXPLOSION) {
+			// Model
+			double r1 = object.r;
+			//image("explosion", object.pos.x, object.pos.y, r1, r1, object.dir, {255, 255, 255});
+			std::cout << "explosion\n";
+
+			// Set animation
+			for (int i = 0; i < 5; i++) {
+				animation("explosion",
+					AnimationState(object.pos, { 0.3, 0.3 }, 0, { 255, 255, 255 }),
+					AnimationState(object.pos + geom::direction(random::floatRandom(0, M_PI * 2, 2)) * 3, { 0.0, 0.0 }, 0, { 255, 255, 255, 0}),
+					0.5);
+			}
 		}
 	}
 

@@ -184,7 +184,7 @@ void System::unpack(std::string str) {
 		}
 
 		// Objects
-		if (type == "S" || type == "B") {
+		if (type == "S" || type == "B" || type == "R" || type == "E") {
 			objects.push_back({});
 			auto& object = objects.back();
 
@@ -199,6 +199,8 @@ void System::unpack(std::string str) {
 			ss >> object.vel.x >> object.vel.y;
 			// angular velocity
 			ss >> object.w;
+			// radius
+			ss >> object.r;
 
 			// color
 			//ss >> object.color.r >> object.color.g >> object.color.b;
@@ -207,6 +209,12 @@ void System::unpack(std::string str) {
 
 			if (type == "B")
 				objects.back().type = Object::BULLET;
+
+			if (type == "R")
+				objects.back().type = Object::ROCKET;
+
+			if (type == "E")
+				objects.back().type = Object::EXPLOSION;
 
 			if (type == "S") {
 				// related player

@@ -15,12 +15,14 @@ public:
 	enum Type {
 		SHIP,
 		BULLET,
+		ROCKET,
 		EXPLOSION
 	};
 
+
 	int id = 666;
 	int team = 0;
-	Type type = SHIP;
+	int type = SHIP;
 	Color color;
 
 	Vec2 pos; // position
@@ -29,6 +31,9 @@ public:
 	// Bullet atributes
 	double damage = 1;
 	double force = 0;
+
+	// Explosion atributes
+	double expansionVel = 1;
 
 	double m = 1; // mass
 	double r = 0.4; // radius 

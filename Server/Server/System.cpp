@@ -178,7 +178,7 @@ std::string System::pack() {
 		packet += to_string(player.second.modules[0].type) + " ";
 		packet += to_string(player.second.modules[1].type) + " ";
 	}
-	// wall player
+	// Wall player
 	{
 		packet += "P ";
 		packet += "0 ";
@@ -224,18 +224,20 @@ std::string System::pack() {
 	// Objects
 	for (const auto& object : objects) {
 		std::string str = "";
-		// id
+		// Id
 		str += to_string(object.id) + " ";
-		// position
+		// Position
 		str += to_string(object.pos.x, 3) + " ";
 		str += to_string(object.pos.y, 3) + " ";
-		// dir
+		// Dir
 		str += to_string(object.dir, 4) + " ";
-		// linear velocity
+		// Linear velocity
 		str += to_string(object.vel.x, 2) + " ";
 		str += to_string(object.vel.y, 2) + " ";
-		// angular velocity
+		// Angular velocity
 		str += to_string(object.w, 3) + " ";
+		// Radius
+		str += to_string(object.r, 2) + " ";
 
 		if (object.type == Object::SHIP) {
 			str = "S " + str;
@@ -278,6 +280,12 @@ std::string System::pack() {
 		if (object.type == Object::BULLET) {
 			str = "B " + str;
 		}
+		if (object.type == Object::ROCKET) {
+			str = "R " + str;
+		}
+		if (object.type == Object::EXPLOSION) {
+			str = "E " + str;
+		}
 
 		packet += str;
 	}
@@ -287,7 +295,7 @@ std::string System::pack() {
 	return packet;
 }
 
-void System::shoot(Object& object, Vec2 shift, double dir, int skip) {
+void System::shoot(Object& object, Vec2 shift, int type, double dir, int skip) {
 	auto& player = players[object.id];
 
 	if (!skip) {
@@ -298,7 +306,7 @@ void System::shoot(Object& object, Vec2 shift, double dir, int skip) {
 	}
 
 	Object bullet;
-	bullet.type = Object::BULLET;
+	bullet.type = type;
 	bullet.id = object.id;
 	bullet.team = object.team;
 	bullet.color = object.color;
@@ -318,7 +326,22 @@ void System::shoot(Object& object, Vec2 shift, double dir, int skip) {
 }
 
 void System::shoot(Object& object) {
-	shoot(object, { 0.0, 0.0 }, 0, 0);
+	shoot(object, { 0.0, 0.0 }, Object::BULLET, 0, 0);
+}
+
+void System::setExplosion(Object& object, Vec2 pos, Vec2 vel, double r, double power, double t, double dmg) {
+	Object explosion;
+	explosion.type = Object::EXPLOSION;
+	explosion.pos = pos;
+	explosion.vel = vel;
+	explosion.expansionVel = r / t;
+	explosion.hp = t;
+	explosion.team = 0;
+
+	objectsToAdd.push_back(explosion);
+
+	explode(object, explosion.pos, r, M_PI, 0, dmg);
+	explode(explosion, explosion.pos, r, M_PI, power, dmg);
 }
 
 void System::damage(Object& object, Object& target, double value) {
@@ -345,11 +368,11 @@ void System::damage(Object& object, Object& target, double value) {
 	}
 }
 
-void System::explode(Object& object, Vec2 pos, double r, double angle, double power) {
+void System::explode(Object& object, Vec2 pos, double r, double angle, double power, double dmg) {
 	for (auto& target : objects) {
 		double dist = geom::distance(pos, target.pos);
 		if (dist < r && dist > EPS && geom::dir(target.pos, object.pos, object.pos + geom::direction(object.dir)) <= angle) {
-			damage(object, target, 0);
+			damage(object, target, dmg);
 			Vec2 dl = target.pos - pos;
 			target.vel += dl / dist * power;
 		}

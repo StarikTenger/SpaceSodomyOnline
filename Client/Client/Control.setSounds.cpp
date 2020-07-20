@@ -10,6 +10,12 @@ void Control::setSounds() {
 		if (object.type == Object::SHIP)
 			sysPrev.players[object.id].object = &object;
 
+	// Signals
+	if (sys.mainPlayer.hp < sysPrev.mainPlayer.hp) {
+		audio.play("damage", sys.mainPlayer.pos, 100, drawSys.cam);
+		std::cout << "d";
+	}
+
 	//std::cout << " Q";
 	if (!sysPrev.players.size())
 		return;
@@ -24,7 +30,6 @@ void Control::setSounds() {
 
 		// Death
 		if (objectPrev && player.deaths > playerPrev.deaths) {
-			std::cout << "death\n";
 			audio.play("death", objectPrev->pos, 100, drawSys.cam);
 
 			drawSys.animation("shipAura",
@@ -38,7 +43,6 @@ void Control::setSounds() {
 
 		// Wall kick
 		if (geom::distance(object->vel, objectPrev->vel) > 0.5) {
-			std::cout << "knock\n";
 			audio.play("knock", object->pos, 100 * geom::distance(object->vel, objectPrev->vel), drawSys.cam);
 		}
 
@@ -55,7 +59,7 @@ void Control::setSounds() {
 						AnimationState(objectPrev->pos - geom::direction(objectPrev->dir + random::floatRandom(-1, 1, 2) * 0.1) * 2, Vec2(objectPrev->r, objectPrev->r), objectPrev->dir, col1),
 						0.5);
 				}
-				audio.play("impulse", objectPrev->pos, 50, drawSys.cam);
+				audio.play("impulse", objectPrev->pos, 100, drawSys.cam);
 			}
 		}
 
@@ -72,7 +76,7 @@ void Control::setSounds() {
 					AnimationState(object->pos, Vec2(object->r, object->r) * 2, object->dir, object->color),
 					AnimationState(object->pos, Vec2(object->r, object->r) * 4, object->dir, col1),
 					0.1);
-				audio.play("blink", objectPrev->pos, 50, drawSys.cam);
+				audio.play("blink", objectPrev->pos, 100, drawSys.cam);
 			}
 		}
 
@@ -85,7 +89,7 @@ void Control::setSounds() {
 					AnimationState(objectPrev->pos, Vec2(objectPrev->r, objectPrev->r) * 2 * 0, objectPrev->dir, {255, 255, 255}),
 					AnimationState(objectPrev->pos + objectPrev->vel * 0.1, Vec2(objectPrev->r, objectPrev->r) * 2 * 10, objectPrev->dir, col1),
 					0.2);
-				audio.play("splash", objectPrev->pos, 50, drawSys.cam);
+				audio.play("splash", objectPrev->pos, 100, drawSys.cam);
 			}
 		}
 		
@@ -142,4 +146,19 @@ void Control::setSounds() {
 			audio.play("laser", object->pos, 100, drawSys.cam);
 	}
 	
+	for (auto& object : sys.objects) {
+		if (object.type == Object::EXPLOSION) {
+			int con = 0;
+			for (auto& objectPrev : sysPrev.objects)
+				if (objectPrev.type == Object::EXPLOSION && geom::distance(object.pos, objectPrev.pos) < 1) {
+					con = 1;
+					break;
+				}
+			if (con)
+				continue;
+
+			audio.play("explosion", object.pos, 30, drawSys.cam);
+
+		}
+	}
 }

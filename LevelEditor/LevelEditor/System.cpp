@@ -132,12 +132,15 @@ void System::fill(int x, int y, int allow) {
 
 		for (int x = std::max(0, x0 - 1); x <= std::min((int)field.size() - 1, x0 + 1); x++) {
 			for (int y = std::max(0, y0 - 1); y <= std::min((int)field[0].size() - 1, y0 + 1); y++) {
-				if (field[x][y].allowed == allow || field[x][y].type)
+				if (x != x0 && y != y0) // diagonal
 					continue;
-				field[x][y].spikes = 0;
-				field[x][y].type = 0;
+				if (field[x][y].allowed == allow || field[x][y].type == 1)
+					continue;
+				//field[x][y].spikes = 0;
+				//field[x][y].type = 0;
 				field[x][y].allowed = allow;
-				order.push_front({x, y});
+				if(!field[x][y].type)
+					order.push_front({x, y});
 			}
 		}
 	}

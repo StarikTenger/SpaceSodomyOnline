@@ -8,6 +8,7 @@ public:
 	enum Type {
 		SHIP,
 		BULLET,
+		ROCKET,
 		EXPLOSION
 	};
 	enum Orders {

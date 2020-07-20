@@ -41,6 +41,11 @@ void System::step() {
 		}
 		if (object.type == Object::BULLET)
 			object.hp -= dt;
+		if (object.type == Object::EXPLOSION) {
+			object.hp -= dt;
+			object.r += object.expansionVel * dt;
+		}
+
 	}
 
 	//OBJECTS//////////////////////////////////////////////////////////////////////////
@@ -167,7 +172,7 @@ void System::step() {
 				auto gunVelprev = player.gun.vel;
 				player.gun.vel /= 2;
 				for (int i = -2; i <= 2; i++) {
-					shoot(object, { 0, 0 }, i * 0.1, 1);
+					shoot(object, { 0, 0 }, Object::BULLET, i * 0.1, 1);
 				}
 				player.gun.vel = gunVelprev;
 				break;
@@ -181,16 +186,14 @@ void System::step() {
 				auto gunVelprev = player.gun.vel;
 				player.gun.vel = 0;
 				player.gun.force = 15;
-				shoot(object, { 0, 0 }, 0, 1);
-				shoot(object, { -0.3,  0.3 }, 0.05, 1);
-				shoot(object, { -0.3,  -0.3 }, -0.05, 1);
+				shoot(object, { 0, 0 }, Object::ROCKET, 0, 1);
 				player.gun.vel = gunVelprev;
 				player.gun.force = 0;
 				break;
 			}
 
 			case Module::SPLASH:
-				explode(object, object.pos, 5, M_PI/3, 13);
+				explode(object, object.pos, 6, M_PI/3, 13, 0);
 				break;
 
 			case Module::IMMORTALITY:
@@ -210,11 +213,28 @@ void System::step() {
 	// Collison (&damage)
 	collision();
 
-	// Bullet force
+	// Bullet & Rocket force
 	for (auto& object : objects) {
-		if (object.type != Object::BULLET)
+		if (object.type != Object::BULLET && object.type != Object::ROCKET)
 			continue;
 		object.vel += geom::rotate(Vec2(object.force, 0), object.dir) * dt;
+	}
+
+	// Rocket triggering & explosions
+	for (auto& object : objects) {
+		if (object.type != Object::ROCKET)
+			continue;
+
+		// Trigger
+		for (auto& target : objects) {
+			if (geom::distance(object.pos, target.pos) < 2 && object.team != target.team)
+				object.hp = 0;
+		}
+
+		// Explode
+		if (object.hp < EPS) {
+			setExplosion(object, object.pos, object.vel * 0, 3, 10, 0.1, 1);
+		}
 	}
 
 	// Forcefield
