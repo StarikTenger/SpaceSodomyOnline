@@ -311,6 +311,7 @@ void System::shoot(Object& object, Vec2 shift, int type, double dir, int skip) {
 	bullet.team = object.team;
 	bullet.color = object.color;
 	bullet.r = 0.4;
+	bullet.m = 0.01;
 
 	// Pos & dir
 	shift = geom::rotate(shift, object.dir);
@@ -322,6 +323,10 @@ void System::shoot(Object& object, Vec2 shift, int type, double dir, int skip) {
 	bullet.w = object.w;
 	bullet.force = player.gun.force;
 	bullet.hp = player.gun.lifetime;
+
+	// Recoil
+	object.deltaVel -= geom::direction(bullet.dir) * player.gun.vel * bullet.m / object.m;
+
 	objectsToAdd.push_back(bullet);
 }
 
@@ -341,8 +346,8 @@ void System::setExplosion(Object& object, Vec2 pos, Vec2 vel, double r, double p
 
 	objectsToAdd.push_back(explosion);
 
-	explode(object, explosion.pos, r, M_PI, 0, dmg); // Personal
-	explode(explosion, explosion.pos, r, M_PI, power, dmg); // Neutral
+	explode(object, explosion.pos, r, M_PI, 0, dmg, 0); // Personal
+	explode(explosion, explosion.pos, r, M_PI, power, dmg, 0); // Neutral
 }
 
 void System::damage(Object& object, Object& target, double value) {
@@ -371,7 +376,7 @@ void System::damage(Object& object, Object& target, double value) {
 	}
 }
 
-void System::explode(Object& object, Vec2 pos, double r, double angle, double power, double dmg) {
+void System::explode(Object& object, Vec2 pos, double r, double angle, double power, double dmg, double backForce) {
 	for (auto& target : objects) {
 		double dist = geom::distance(pos, target.pos);
 		if (dist < r && geom::dir(target.pos, object.pos, object.pos + geom::direction(object.dir)) <= angle) {
@@ -379,6 +384,7 @@ void System::explode(Object& object, Vec2 pos, double r, double angle, double po
 			if(dist > EPS){
 				Vec2 dl = target.pos - pos;
 				target.vel += dl / dist * power;
+				object.vel -= dl / dist * power * backForce * target.m / object.m;
 			}
 		}
 	}

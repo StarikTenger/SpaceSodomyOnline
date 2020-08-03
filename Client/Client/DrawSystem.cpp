@@ -42,8 +42,8 @@ void DrawSystem::drawScene() {
 	image("background",
 		w / 2,
 		h / 2,
-		w * 1.5,
-		w * 1.5, -cam.dir
+		w * 1.44,
+		w * 1.44, -cam.dir
 	);
 	
 	
@@ -252,6 +252,11 @@ void DrawSystem::drawScene() {
 		}
 		
 		image(name, bonus.pos.x, bonus.pos.y, r, r, cam.dir + M_PI / 2);
+		if(random::intRandom(0, 4) == 0)
+			animation(name,
+				AnimationState(bonus.pos + geom::direction(random::floatRandom(0, M_PI * 2, 2)) * 0.04, Vec2( r, r ) * 1.2, cam.dir + M_PI / 2, { 255, 255, 255}),
+				AnimationState(bonus.pos, { r, r }, cam.dir + M_PI / 2, { 255, 255, 255, 0 }),
+				0.3);
 	}
 
 	// Animations

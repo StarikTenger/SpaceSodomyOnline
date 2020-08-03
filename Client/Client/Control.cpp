@@ -107,6 +107,21 @@ void Control::step() {
 			std::string message = "";
 			message += std::to_string(id) + " ";
 			message += name + " #";
+
+			// Mouse
+			if (mouse.state) {
+				double ang = geom::dir(mouse.pos - drawSys.cam.border / 2);
+				if(sin(ang) > 0 && random::floatRandom(0, 1, 3) < sin(ang))
+					message += "D";
+				if (sin(ang) < 0 && random::floatRandom(-1, 0, 3) > sin(ang))
+					message += "U";
+				if (cos(ang) > 0 && random::floatRandom(0, 1, 3) < cos(ang))
+					message += "R";
+				if (cos(ang) < 0 && random::floatRandom(-1, 0, 3) > cos(ang))
+					message += "L";
+				
+			}
+
 			if (keys[MOVE_LEFT])
 				message += "L";
 			if (keys[MOVE_RIGHT])

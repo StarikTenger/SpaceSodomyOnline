@@ -193,7 +193,7 @@ void System::step() {
 			}
 
 			case Module::SPLASH:
-				explode(object, object.pos, 6, M_PI/3, 13, 0);
+				explode(object, object.pos, 6, M_PI*2, 13, 0, 1);
 				break;
 
 			case Module::IMMORTALITY:
@@ -253,7 +253,7 @@ void System::step() {
 	for (auto& object : objects) {
 		int x = (int)object.pos.x;
 		int y = (int)object.pos.y;
-		object.vel += field[x][y].forceField * dt / object.m;
+		object.vel += field[x][y].forceField * dt; // object.m;
 	}
 
 	// Add new objects
@@ -298,6 +298,12 @@ void System::step() {
 				break;
 			}
 		}
+	}
+
+	// DeltaVel
+	for (auto& object : objects) {
+		object.vel += object.deltaVel;
+		object.deltaVel = {};
 	}
 
 	// Movement

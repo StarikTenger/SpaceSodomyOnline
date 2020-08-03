@@ -27,6 +27,7 @@ public:
 
 	Vec2 pos; // position
 	Vec2 vel; // velocity
+	Vec2 deltaVel; // deltaVel
 
 	// Bullet atributes
 	double damage = 1;

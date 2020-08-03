@@ -11,19 +11,21 @@
 void DrawSystem::drawWalls() {
 	System& sys = *system;
 
+	// Force fields
 	Color color(0, 151, 255);
 	for (int x = 0; x < sys.field.size(); x++) {
 		for (int y = 0; y < sys.field[0].size(); y++) {
 			if (geom::distance({}, sys.field[x][y].forceField) > EPS && !random::intRandom(0, 9)) {
 				Vec2 pos = Vec2(x, y) + Vec2(random::floatRandom(0, 1, 2), random::floatRandom(0, 1, 2));
 				double dir = geom::dir(sys.field[x][y].forceField);
+				Vec2 direc = geom::direction(dir);
 				Color col = { 255, 255, 255 };
-				Color col1 = col;
-				col1.a = 0;
+				Color col1 = { 100, 100, 255 };
+				//col1.a = 0;
 
 				animation("particleLaser",
-					AnimationState(pos, { 0.1, 0.1 }, dir, col),
-					AnimationState(pos + sys.field[x][y].forceField * 0.1, { 0.3, 0.1 }, dir, col1),
+					AnimationState(pos - direc * 0.5, { 0.1, 0.1 }, dir, col),
+					AnimationState(pos - direc + sys.field[x][y].forceField * 0.1, { 0.3, 0.1 }, dir, col1),
 					0.3
 				);
 			}
