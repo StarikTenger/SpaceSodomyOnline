@@ -5,6 +5,7 @@
 Audio::Audio(){
 	loadSound("damage", "sounds/damage.wav");
 	loadSound("launch", "sounds/launch.wav");
+	loadSound("rocket", "sounds/launch.wav");
 	loadSound("explosion", "sounds/explosion.wav");
 	loadSound("fire", "sounds/fire.wav");
 	loadSound("knock", "sounds/knock.wav");

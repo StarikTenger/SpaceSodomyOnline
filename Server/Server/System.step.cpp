@@ -153,8 +153,8 @@ void System::step() {
 			if (player.modules[moduleId].timeToCooldown > 0) // Module is on cooldown
 				break;
 
-			// Set timeToCooldown
-			player.modules[moduleId].timeToCooldown = moduleInfo[player.modules[moduleId].type].cooldownTime;
+			// If success=0 => activation failed 
+			int success = 1;
 
 			// Check for type of module
 			switch (player.modules[moduleId].type) {
@@ -186,7 +186,7 @@ void System::step() {
 				auto gunVelprev = player.gun.vel;
 				player.gun.vel = 0;
 				player.gun.force = 15;
-				shoot(object, { 0, 0 }, Object::ROCKET, 0, 1);
+				shoot(object, { 0.1 , 0 }, Object::ROCKET, 0, 1);
 				player.gun.vel = gunVelprev;
 				player.gun.force = 0;
 				break;
@@ -204,9 +204,15 @@ void System::step() {
 				auto pos = object.pos + geom::direction(object.dir) * 5;
 				if (!checkWall(pos) && field[(int)pos.x][(int)pos.y].allowed)
 					object.pos = pos;
+				else
+					success = 0;
 				break;
 			}
-			}			
+			}		
+
+			// Set timeToCooldown
+			if(success)
+				player.modules[moduleId].timeToCooldown = moduleInfo[player.modules[moduleId].type].cooldownTime;
 		}
 	}
 
@@ -225,6 +231,12 @@ void System::step() {
 		if (object.type != Object::ROCKET)
 			continue;
 
+		// Target-following
+		for (auto& target : objects) {
+			if (geom::distance(object.pos, target.pos) < 6 && object.team != target.team && target.type == Object::SHIP)
+				object.dir = geom::dir(target.pos - object.pos);
+		}
+
 		// Trigger
 		for (auto& target : objects) {
 			if (geom::distance(object.pos, target.pos) < 2 && object.team != target.team)
@@ -233,7 +245,7 @@ void System::step() {
 
 		// Explode
 		if (object.hp < EPS) {
-			setExplosion(object, object.pos, object.vel * 0, 3, 10, 0.1, 1);
+			setExplosion(object, object.pos, object.vel * 0, 2, 5, 0.1, 1);
 		}
 	}
 
@@ -317,7 +329,7 @@ void System::step() {
 					object.hp += 1;
 				}
 			}
-			else {
+			else if (bonus.type != Bonus::NONE) {
 				player.activeAbility = bonus.type;
 				bonus.type = Bonus::NONE;
 			}
@@ -332,7 +344,7 @@ void System::step() {
 		bonusInfo[bonus.type].number ++;
 	}
 
-	// Bonus countdown freezing
+	// Bonus countdown freezing (if count is more than limit => countdown freezes)
 	for (auto& b : bonusInfo) 
 		if (b.number >= b.limit)
 			b.countdown = b.countdownTime;
@@ -368,6 +380,7 @@ void System::step() {
 	}
 	
 	//PLAYERS//////////////////////////////////////////////////////////////////////////
+
 	for (auto& player : players) {
 		player.second.afkTimer -= dt;
 	}

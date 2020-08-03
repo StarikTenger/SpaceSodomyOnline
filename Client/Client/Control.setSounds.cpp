@@ -92,6 +92,13 @@ void Control::setSounds() {
 				audio.play("splash", objectPrev->pos, 100, drawSys.cam);
 			}
 		}
+
+		// Rocket
+		for (int i = 0; i < 2; i++) {
+			if (player.modulesType[i] == 4 && player.modulesCooldown[i] > playerPrev.modulesCooldown[i]) {
+				audio.play("rocket", objectPrev->pos, 100, drawSys.cam);
+			}
+		}
 		
 
 		// Engine

@@ -336,12 +336,13 @@ void System::setExplosion(Object& object, Vec2 pos, Vec2 vel, double r, double p
 	explosion.vel = vel;
 	explosion.expansionVel = r / t;
 	explosion.hp = t;
+	explosion.id = 0;
 	explosion.team = 0;
 
 	objectsToAdd.push_back(explosion);
 
-	explode(object, explosion.pos, r, M_PI, 0, dmg);
-	explode(explosion, explosion.pos, r, M_PI, power, dmg);
+	explode(object, explosion.pos, r, M_PI, 0, dmg); // Personal
+	explode(explosion, explosion.pos, r, M_PI, power, dmg); // Neutral
 }
 
 void System::damage(Object& object, Object& target, double value) {
@@ -354,11 +355,13 @@ void System::damage(Object& object, Object& target, double value) {
 	if (target.type == Object::SHIP)
 		playerTarget.effects[Bonus::IMMORTAL] = 0.1;
 
-	playerTarget.lastContact = object.id;
+	if (object.id && object.id != target.id) {
+		playerTarget.lastContact = object.id;
+	}
 
 	if (target.hp + value > EPS && target.hp < EPS && target.type == Object::SHIP) {
-		players[object.id].kills++;
-		players[object.id].progress++;
+		players[playerTarget.lastContact].kills++;
+		players[playerTarget.lastContact].progress++;
 		players[target.id].deaths++;
 
 		if (players[object.id].object) {
@@ -371,10 +374,12 @@ void System::damage(Object& object, Object& target, double value) {
 void System::explode(Object& object, Vec2 pos, double r, double angle, double power, double dmg) {
 	for (auto& target : objects) {
 		double dist = geom::distance(pos, target.pos);
-		if (dist < r && dist > EPS && geom::dir(target.pos, object.pos, object.pos + geom::direction(object.dir)) <= angle) {
+		if (dist < r && geom::dir(target.pos, object.pos, object.pos + geom::direction(object.dir)) <= angle) {
 			damage(object, target, dmg);
-			Vec2 dl = target.pos - pos;
-			target.vel += dl / dist * power;
+			if(dist > EPS){
+				Vec2 dl = target.pos - pos;
+				target.vel += dl / dist * power;
+			}
 		}
 	}
 }
