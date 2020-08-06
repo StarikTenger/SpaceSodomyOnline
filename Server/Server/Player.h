@@ -25,7 +25,7 @@ public:
 	Engine engine;
 	Gun gun;
 	Bonus::Type activeAbility = Bonus::NONE;
-	std::vector<double> effects = { 0,0,0,0,0,0,0,0 };
+	std::vector<double> effects = { 0,0,0,0,0,0,0,0,0,0 };
 	std::vector<Module> modules = { {Module::Type::HP_UP}, {Module::Type::ENERGY_UP} };
 
 	int alive = 1;

@@ -19,6 +19,12 @@ Color operator+(const Color& a, const Color& b) {
 Color operator-(const Color& a, const Color& b) {
 	return Color(a.r - b.r, a.g - b.g, a.b - b.b, a.a - b.a);
 }
+Color operator*(const Color& a, const Color& b) {
+	return Color(a.r * b.r, a.g * b.g, a.b * b.b, a.a * b.a);
+}
+Color operator/(const Color& a, const Color& b) {
+	return Color(a.r / b.r, a.g / b.g, a.b / b.b, a.a / b.a);
+}
 Color operator*(const Color& a, const double& b) {
 	return Color(a.r * b, a.g * b, a.b * b, a.a * b);
 }

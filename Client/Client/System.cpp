@@ -184,7 +184,7 @@ void System::unpack(std::string str) {
 		}
 
 		// Objects
-		if (type == "S" || type == "B" || type == "R" || type == "E") {
+		if (type == "S" || type == "B" || type == "R" || type == "E" || type == "M") {
 			objects.push_back({});
 			auto& object = objects.back();
 
@@ -216,6 +216,9 @@ void System::unpack(std::string str) {
 			if (type == "E")
 				objects.back().type = Object::EXPLOSION;
 
+			if (type == "M")
+				objects.back().type = Object::MASS;
+
 			if (type == "S") {
 				// related player
 				auto& player = players[object.id];
@@ -225,6 +228,9 @@ void System::unpack(std::string str) {
 
 				// energy
 				ss >> object.energy >> object.energyMax;
+
+				// stamina
+				ss >> object.stamina >> object.staminaMax;
 
 				// orders
 				{

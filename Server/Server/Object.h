@@ -16,7 +16,8 @@ public:
 		SHIP,
 		BULLET,
 		ROCKET,
-		EXPLOSION
+		EXPLOSION,
+		MASS
 	};
 
 
@@ -37,6 +38,7 @@ public:
 	double expansionVel = 1;
 
 	double m = 1; // mass
+	double mConst = m; // mass
 	double r = 0.4; // radius 
 	double dir = 0; // dir
 	double w = 0; // angular velocity
@@ -44,7 +46,10 @@ public:
 	double hp = hpMax; // hit points
 	double energyMax = 10;
 	double energy = energyMax;
-	double energyRecovery = 0.2;
+	double energyRecovery = 0;
+	double staminaMax = 10;
+	double stamina = energyMax;
+	double staminaRecovery = 2;
 
 	bool collision = 1;
 

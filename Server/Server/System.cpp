@@ -7,17 +7,19 @@
 #include <fstream>
 #include <algorithm>
 #include <sstream>
+#include <iomanip>
 
 using namespace geom;
 using namespace random;
 using namespace std;
 
 
-template <typename T>
-std::string to_string(const T a_value, int n) {
+std::string to_string(double a_value, int n) {
+	//std::cout << a_value << "\n";
 	std::ostringstream out;
-	out.precision(n);
-	out << std::fixed << a_value;
+	out << std::fixed;
+	out << std::setprecision(n);
+	out << a_value;
 	return out.str();
 }
 
@@ -250,6 +252,10 @@ std::string System::pack() {
 			str += to_string(object.energy, 1) + " ";
 			str += to_string(object.energyMax, 1) + " ";
 
+			// stamina
+			str += to_string(object.stamina, 1) + " ";
+			str += to_string(object.staminaMax, 1) + " ";
+
 			const auto& player = players[object.id];
 
 			// packing orders
@@ -286,6 +292,9 @@ std::string System::pack() {
 		if (object.type == Object::EXPLOSION) {
 			str = "E " + str;
 		}
+		if (object.type == Object::MASS) {
+			str = "M " + str;
+		}
 
 		packet += str;
 	}
@@ -299,10 +308,11 @@ void System::shoot(Object& object, Vec2 shift, int type, double dir, int skip) {
 	auto& player = players[object.id];
 
 	if (!skip) {
-		if ((player.gun.timeToCooldown > 0 || object.energy < player.gun.consumption))
+		if (player.gun.timeToCooldown > 0 || object.energy < player.gun.energy || object.stamina < player.gun.stamina)
 			return;
 		player.gun.timeToCooldown = player.gun.cooldownTime;
-		object.energy -= player.gun.consumption;
+		object.energy -= player.gun.energy;
+		object.stamina -= player.gun.stamina;
 	}
 
 	Object bullet;
@@ -312,6 +322,8 @@ void System::shoot(Object& object, Vec2 shift, int type, double dir, int skip) {
 	bullet.color = object.color;
 	bullet.r = 0.4;
 	bullet.m = 0.01;
+	if (type == Object::MASS)
+		bullet.m = 0.2;
 
 	// Pos & dir
 	shift = geom::rotate(shift, object.dir);

@@ -1,13 +1,7 @@
-﻿  System.cpp
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(257,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(259,25): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(265,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(267,26): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(275,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(397,27): warning C4018: '>=': signed/unsigned mismatch
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.cpp(397,48): warning C4018: '>=': signed/unsigned mismatch
+﻿  random.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\random.cpp(6,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Generating code
-  0 of 1575 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  0 of 1576 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

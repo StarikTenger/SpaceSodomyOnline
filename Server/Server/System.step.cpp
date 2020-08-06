@@ -21,6 +21,7 @@ void System::step() {
 			if (player.effects[Bonus::BERSERK] > 0) {
 				k = 3;
 				object.energy = object.energyMax;
+				object.stamina = object.staminaMax;
 			}
 
 			// gun
@@ -30,10 +31,18 @@ void System::step() {
 			object.energy += object.energyRecovery * dt;
 			if (object.energy > object.energyMax)
 				object.energy = object.energyMax;
+
+			// stamina
+			object.stamina += object.staminaRecovery * dt;
+			if (object.stamina > object.staminaMax)
+				object.stamina = object.staminaMax;
 			
 			// effects
-			for (auto& effect : player.effects)
+			for (auto& effect : player.effects) {
 				effect -= dt;
+				if (effect < 0)
+					effect = 0;
+			}
 
 			// modules
 			for (auto& module : player.modules)
@@ -49,6 +58,14 @@ void System::step() {
 	}
 
 	//OBJECTS//////////////////////////////////////////////////////////////////////////
+	
+	// Add mass
+	for (auto& object : objects) {
+		if (object.type != Object::SHIP)
+			continue;
+		object.mConst = object.m;
+		object.m += players[object.id].effects[Bonus::MASS] / 5;
+	}
 
 	// Matching to players
 	for (auto& object : objects) {
@@ -68,45 +85,45 @@ void System::step() {
 		if (player.orders[Player::STABILIZE_ROTATION] &&
 			!player.orders[Player::TURN_LEFT] &&
 			!player.orders[Player::TURN_RIGHT])
-			if (object.w > EPS)
+			if (object.w > EPS * 5)
 				player.orders[Player::TURN_LEFT] = 1;
-			else if (object.w < -EPS)
+			else if (object.w < -EPS * 5)
 				player.orders[Player::TURN_RIGHT] = 1;
 
-		if (object.energy > EPS) { // USELESS CHECK???
+		if (object.energy > EPS || 1) { // USELESS CHECK???
 			// linear
 			double k = 1;
 			if (player.effects[Bonus::BOOST] > 0)
 				k = 5;
 
 			if (player.orders[Player::MOVE_FORWARD]) {
-				object.vel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir) * dt * k;
+				object.vel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir) * dt * k / object.m;
 				object.energy -= player.engine.consumptionLinear * dt;
 			}
 
 			if (player.orders[Player::MOVE_RIGHT]) {
-				object.vel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir + M_PI * 0.5) * dt * k;
+				object.vel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir + M_PI * 0.5) * dt * k / object.m;
 				object.energy -= player.engine.consumptionLinear * dt;
 			}
 
 			if (player.orders[Player::MOVE_BACKWARD]) {
-				object.vel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir + M_PI) * dt * k;
+				object.vel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir + M_PI) * dt * k / object.m;
 				object.energy -= player.engine.consumptionLinear * dt;
 			}
 			
 			if (player.orders[Player::MOVE_LEFT]) {
-				object.vel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir + M_PI * 1.5) * dt * k;
+				object.vel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir + M_PI * 1.5) * dt * k / object.m;
 				object.energy -= player.engine.consumptionLinear * dt;
 			}
 
 			// angular
 			if (player.orders[Player::TURN_RIGHT]) {
-				object.w += player.engine.angularForce * dt;
+				object.w += player.engine.angularForce * dt / object.m;
 				object.energy -= player.engine.consumptionAngular * dt;
 			}
 
 			if (player.orders[Player::TURN_LEFT]) {
-				object.w -= player.engine.angularForce * dt;
+				object.w -= player.engine.angularForce * dt / object.m;
 				object.energy -= player.engine.consumptionAngular * dt;
 			}
 		} 
@@ -151,6 +168,12 @@ void System::step() {
 			int moduleId = i - Player::MODULE_1; 
 
 			if (player.modules[moduleId].timeToCooldown > 0) // Module is on cooldown
+				break;
+
+			// module info
+			auto info = moduleInfo[player.modules[moduleId].type];
+
+			if (info.energy > object.energy || info.stamina > object.stamina)
 				break;
 
 			// If success=0 => activation failed 
@@ -208,16 +231,29 @@ void System::step() {
 					success = 0;
 				break;
 			}
+			case Module::INVISIBILITY: {
+				player.effects[Bonus::INVISIBILITY] = 5.0;
+				break;
+			}
+			case Module::MASS: {
+				auto gunVelprev = player.gun.vel;
+				player.gun.vel = 6;
+				shoot(object, { 0.1 , 0 }, Object::MASS, 0, 1);
+				shoot(object, { 0.1 , 0.1 }, Object::MASS, 0.02, 1);
+				shoot(object, { 0.1 , -0.1 }, Object::MASS, -0.02, 1);
+				player.gun.vel = gunVelprev;
+				break;
+			}
 			}		
 
 			// Set timeToCooldown
-			if(success)
+			if (success) {
 				player.modules[moduleId].timeToCooldown = moduleInfo[player.modules[moduleId].type].cooldownTime;
+				object.energy -= info.energy;
+				object.stamina -= info.stamina;
+			}
 		}
 	}
-
-	// Collison (&damage)
-	collision();
 
 	// Bullet & Rocket force
 	for (auto& object : objects) {
@@ -249,11 +285,29 @@ void System::step() {
 		}
 	}
 
+	// Mass sticking
+	for (auto& object : objects) {
+		if (object.type != Object::MASS)
+			continue;
+
+		// Sticking
+		for (auto& target : objects) {
+			if (geom::distance(object.pos, target.pos) < object.r + target.r && object.team != target.team && target.type == Object::SHIP) {
+				players[target.id].effects[Bonus::MASS] += object.m * 5;
+				if(target.m > 0)
+					target.vel +=  (object.vel - target.vel) * object.m / target.m;
+				object.hp = 0;
+				damage(object, target, 0);
+			}
+		}
+	}
+
 	// Forcefield
 	for (auto& object : objects) {
 		int x = (int)object.pos.x;
 		int y = (int)object.pos.y;
-		object.vel += field[x][y].forceField * dt; // object.m;
+		if(x >= 0 && y >=0 && x < field.size() && y < field[x].size())
+			object.vel += field[x][y].forceField * dt; // object.m;
 	}
 
 	// Add new objects
@@ -306,10 +360,20 @@ void System::step() {
 		object.deltaVel = {};
 	}
 
+	// Collison (&damage)
+	collision();
+
 	// Movement
 	for (auto& object : objects) {
 		object.pos += object.vel * dt;
 		object.dir += object.w * dt;
+	}
+
+	// Restore mass
+	for (auto& object : objects) {
+		if (object.type != Object::SHIP)
+			continue;
+		object.m = object.mConst;
 	}
 
 	//BONUSES//////////////////////////////////////////////////////////////////////////

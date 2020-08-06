@@ -73,8 +73,16 @@ void DrawSystem::drawScene() {
 		if (object.type == Object::SHIP) {
 			const auto& player = sys.players[object.id];
 
+			// Invisibility
+			Color alpha = {1, 1, 1, 1};
+			if (object.effects[Bonus::INVISIBILITY])
+				if(object.id == sys.id)
+					alpha = { 1, 1, 1, 0.2 };
+				else
+					alpha = { 1, 1, 1, 0 };
+
 			// Interface
-			if (object.id == sys.id || sys.privilegies) {
+			if (object.id == sys.id) {
 				// Beam
 				beam(object.pos, geom::dir(object.vel + geom::direction(object.dir) * sys.bulletVel), { 255, 0, 0, 130 });
 
@@ -101,27 +109,27 @@ void DrawSystem::drawScene() {
 			}
 
 			// Model
-			image("ship", object.pos.x, object.pos.y, object.r * 2, object.r * 2, object.dir);
-			image("shipColors", object.pos.x, object.pos.y, object.r * 2, object.r * 2, object.dir, object.color);
+			image("ship", object.pos.x, object.pos.y, object.r * 2, object.r * 2, object.dir, Color(255, 255, 255) * alpha);
+			image("shipColors", object.pos.x, object.pos.y, object.r * 2, object.r * 2, object.dir, object.color * alpha);
 
 			// Engines
 			double r1 = object.r * 2.0 * 44.0 / 24.0;
 			if (object.orders[Object::MOVE_FORWARD])
-				image("fireForward", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
+				image("fireForward", object.pos.x, object.pos.y, r1, r1, object.dir, object.color * alpha);
 			if (object.orders[Object::MOVE_BACKWARD])
-				image("fireBackward", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
+				image("fireBackward", object.pos.x, object.pos.y, r1, r1, object.dir, object.color * alpha);
 			if (object.orders[Object::MOVE_LEFT])
-				image("fireLeft", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
+				image("fireLeft", object.pos.x, object.pos.y, r1, r1, object.dir, object.color * alpha);
 			if (object.orders[Object::MOVE_RIGHT])
-				image("fireRight", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
+				image("fireRight", object.pos.x, object.pos.y, r1, r1, object.dir, object.color * alpha);
 			if (object.orders[Object::TURN_LEFT])
-				image("fireTurnLeft", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
+				image("fireTurnLeft", object.pos.x, object.pos.y, r1, r1, object.dir, object.color * alpha);
 			if (object.orders[Object::TURN_RIGHT])
-				image("fireTurnRight", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
+				image("fireTurnRight", object.pos.x, object.pos.y, r1, r1, object.dir, object.color * alpha);
 
 			// Effects
 			if (object.effects[Bonus::BERSERK])
-				image("effect", object.pos.x, object.pos.y, r1, r1, object.dir+sys.time*5, {255, 20, 20});
+				image("effect", object.pos.x, object.pos.y, r1, r1, object.dir+sys.time*5, Color(255, 20, 20));
 			if (object.effects[Bonus::IMMORTAL]) {
 				animation("shipAura",
 					AnimationState(object.pos, Vec2(object.r * 2, object.r * 2), object.dir, {255, 255, 255}),
@@ -135,9 +143,11 @@ void DrawSystem::drawScene() {
 					0.2);
 			if (object.effects[Bonus::LASER])
 				laserBeam(object.pos, object.dir, object.color);
+			if (object.effects[Bonus::MASS])
+				image("effect", object.pos.x, object.pos.y, r1, r1, object.dir + sys.time * 5, Color(130, 100, 20));
 
 			// Bars
-			if (object.id != sys.id) {
+			if (object.id != sys.id && !object.effects[Bonus::INVISIBILITY]) {
 				// hp
 				{
 					auto shift = Vec2(0, 0) - geom::direction(cam.dir) * 0.5;
@@ -222,6 +232,20 @@ void DrawSystem::drawScene() {
 					0.5);
 			}
 		}
+		// Mass
+		if (object.type == Object::MASS) {
+			// Model
+			double r1 = object.r;
+			image("mass", object.pos.x, object.pos.y, r1, r1, object.dir, object.color);
+
+			Vec2 pos = geom::direction(object.dir) * (-0.3);
+
+			// Set animation
+			animation("bullet",
+				AnimationState(object.pos, { r1, r1 }, 0, { 125, 87, 0 }),
+				AnimationState(object.pos + geom::direction(random::floatRandom(0, M_PI * 2, 2)) * 0.2, { r1, r1 }, 0, { 125, 87, 0, 0 }),
+				0.2);
+		}
 	}
 
 	// Deaths (not yet)
@@ -295,7 +319,7 @@ void DrawSystem::drawInterface() {
 				double alpha = 220;
 				// hp
 				{
-					Vec2 shift = { w / 2, h - sizeH * 2 };
+					Vec2 shift = { w / 2, h - sizeH * 3 };
 					double l = object.hp / object.hpMax * size;
 					image("box", shift.x, shift.y, size, sizeH, 0, { 20, 100, 20, alpha });
 					image("box", shift.x - (size - l) / 2, shift.y, l, sizeH, 0, { 0, 255, 0, alpha });
@@ -311,10 +335,18 @@ void DrawSystem::drawInterface() {
 
 				// energy 
 				{
-					Vec2 shift = { w / 2, h - sizeH };
+					Vec2 shift = { w / 2, h - sizeH * 2 };
 					double l = object.energy / object.energyMax * size;
 					image("box", shift.x, shift.y, size, sizeH, 0, { 0, 107, 145, alpha });
 					image("box", shift.x - (size - l) / 2, shift.y, l, sizeH, 0, { 3, 186, 252, alpha });
+				}
+
+				// stamina 
+				{
+					Vec2 shift = { w / 2, h - sizeH };
+					double l = object.stamina / object.staminaMax * size;
+					image("box", shift.x, shift.y, size, sizeH, 0, { 127, 75, 0, alpha });
+					image("box", shift.x - (size - l) / 2, shift.y, l, sizeH, 0, { 255, 170, 0, alpha });
 				}
 
 				// active
@@ -348,9 +380,12 @@ void DrawSystem::drawInterface() {
 					"moduleSplash",
 					"moduleImmortality",
 					"moduleBlink",
+					"moduleInvisibility",
+					"moduleMass",
 				};
 				for (int i = 0; i < 2; i++) {
 					std::string img = moduleImg[player.modulesType[i] % moduleImg.size()];
+					int alpha = 220;
 					image(img, w - size * 0.52 * (6 - i * 2), h - size * 0.52, size, size, 0, { 50, 50, 50, 200 });
 					image(img, w - size * 0.52 * (6 - i * 2), h - size * 0.52 + size * int(player.modulesCooldown[i] * 24.0) / 24, size, size, 0, { 255, 255, 255 }, { 0.0, player.modulesCooldown[i] }, { 1.0,  1.0 });
 				}

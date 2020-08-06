@@ -9,7 +9,8 @@ public:
 		SHIP,
 		BULLET,
 		ROCKET,
-		EXPLOSION
+		EXPLOSION,
+		MASS
 	};
 	enum Orders {
 		MOVE_LEFT,
@@ -27,7 +28,7 @@ public:
 	Color color;
 
 	Bonus::Type activeAbility = Bonus::NONE;
-	std::vector<bool> effects = { 0,0,0,0,0,0,0,0 };
+	std::vector<bool> effects = { 0,0,0,0,0,0,0,0,0,0 };
 
 	Vec2 pos;
 	Vec2 vel;
@@ -38,6 +39,8 @@ public:
 	double hpMax;
 	double energyMax;
 	double energy;
+	double staminaMax;
+	double stamina;
 
 	std::vector<bool> orders = { 0,0,0,0,0,0,0,0,0,0 };
 

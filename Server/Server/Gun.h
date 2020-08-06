@@ -7,6 +7,7 @@ public:
 	double vel = 15; // velocity of bullet
 	double force = 0;
 	double lifetime = 10; // countdown to explosion
-	double consumption = 1; // energy points required
+	double energy = 0.3; // energy points required
+	double stamina = 2.5; // stamina points required
 };
 

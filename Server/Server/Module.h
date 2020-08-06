@@ -9,7 +9,9 @@ public:
 		ROCKET,
 		SPLASH,
 		IMMORTALITY,
-		BLINK
+		BLINK,
+		INVISIBILITY,
+		MASS
 	};
 
 	int type = 0;

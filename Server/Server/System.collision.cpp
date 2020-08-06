@@ -150,7 +150,7 @@ void System::collision() {
 		}
 
 		auto& player = players[u.id];
-		if (dmg && u.type == Object::SHIP && player.effects[Bonus::IMMORTAL] < 0) {
+		if (dmg && u.type == Object::SHIP && player.effects[Bonus::IMMORTAL] < EPS) {
 			u.hp -= 1;
 			if (u.hp < EPS) {
 				wallKills++;
@@ -167,7 +167,7 @@ void System::collision() {
 		}
 
 		// Kill bullets & rockets if contact with wall
-		if (touch && ( u.type == Object::BULLET || u.type == Object::ROCKET) ) {
+		if (touch && ( u.type == Object::BULLET || u.type == Object::ROCKET || u.type == Object::MASS) ) {
 			u.hp = 0;
 		}
 

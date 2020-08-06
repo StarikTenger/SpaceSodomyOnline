@@ -33,14 +33,16 @@ public:
 
 	// modules
 	std::vector<ModuleInfo> moduleInfo = {
-		{10}, // 0 hp up
-		{6}, // 1 energy up
-		{5}, // 2 cascade
-		{5}, // 3 impulse
-		{5}, // 4 rocket
-		{4}, // 5 splash
-		{8}, // 6 immortality
-		{15}, // 7 blink
+		{10, 3, 3}, // 0 hp up
+		{6, 0, 3}, // 1 energy up
+		{5, 1.5, 3}, // 2 cascade
+		{5, 1.5, 3}, // 3 impulse
+		{5, 1.5, 3}, // 4 rocket
+		{4, 1.5, 3}, // 5 splash
+		{8, 2, 3}, // 6 immortality
+		{15, 3, 3}, // 7 blink
+		{20, 3, 3}, // 8 invis
+		{5, 2, 3}, // 9 mass
 	};
 
 	Vec2 border = {50, 50};
