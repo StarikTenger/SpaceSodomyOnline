@@ -28,6 +28,8 @@
 |    5  |  ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/splash.png)  | Splash        |отталкивает объекты вокруг |
 |    6  |  ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/immortality.png)  | Immortality   |бессмертие на короткое время    |
 |    7   | ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/blink.png)  | Blink         |телепортация вперёд                      |
+|    8  |  ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/invisibility.png)  | Invisibility   |Невидимость    |
+|    9   | ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/mass.png)  | Mass         |массивный снаряд, обладает отдачей, приклеивается к противнику   |
 
 ### Управление
 - **Left**, **Right**, **Up**, **Down** — линейные двигатели /влево/вправо/вперёд/назад
@@ -38,6 +40,7 @@
 - **Shift** — стабилизация вращения
 - **F** — активировать предмет в инвентаре
 - **1**, **2** — модули
+- Линейными двигателями можно управлять **мышкой** 
 
 Поменять управление можно в файле *keys.conf* <br>
 Напротив каждой команды указана соответсвующая ей клавиша <br>
