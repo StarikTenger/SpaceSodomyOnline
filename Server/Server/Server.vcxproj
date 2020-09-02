@@ -23,6 +23,7 @@
     <ClInclude Include="BonusInfo.h" />
     <ClInclude Include="Cell.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="configProcessing.h" />
     <ClInclude Include="Control.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Gamepad.h" />
@@ -120,8 +121,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Users\ilyin\GitHub\libraries\SFML-2.5.1\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\ilyin\GitHub\libraries\SFML-2.5.1\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\ilyin\GitHub\libraries\SFML-2.4.2\include;C:\Users\ilyin\GitHub\libraries\SFML-2.5.1\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\ilyin\GitHub\libraries\SFML-2.4.2\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>C:\Users\ilyin\GitHub\libraries\SFML-2.5.1\include;$(IncludePath)</IncludePath>

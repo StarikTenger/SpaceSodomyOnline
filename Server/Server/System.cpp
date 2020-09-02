@@ -27,13 +27,16 @@ System::System() {
 
 }
 
+// Load map
 System::System(string path) {
 	ifstream file(path);
 	int width, height;
-	file >> width >> height;
+	file >> width >> height; // Maps size
 	for (int x = 0; x < width; x++) {
 		field.push_back(vector<Cell>(height));
 	}
+	
+	// Input map
 	for (int x = 0; x < width; x++) {
 		for (int y = 0; y < height; y++) {
 			Cell c;
@@ -75,9 +78,16 @@ System::System(string path) {
 	while (file) {
 		string command;
 		file >> command;
-		if (command == "END") {
+		if (command == "END") { // End of file
 			break;
 		}
+
+		if (command == "#") { // Comment
+			std::string input = "";
+			while (input != "#")
+				file >> input;
+		}
+
 		if (command == "FORCEFIELD") {
 			for (int x = 0; x < width; x++) {
 				for (int y = 0; y < height; y++) {
@@ -112,6 +122,7 @@ System::System(string path) {
 System::~System() {
 }
 
+// Naming
 std::map<std::string, int> System::bonusNames = {
 		{"HP", Bonus::HP},
 		{"ENERGY", Bonus::BERSERK},
@@ -119,6 +130,19 @@ std::map<std::string, int> System::bonusNames = {
 		{"IMMORTAL", Bonus::IMMORTAL},
 		{"BOOST", Bonus::BOOST},
 		{"LASER", Bonus::LASER}
+};
+
+std::map<std::string, int> System::moduleNames = {
+		{"HP_UP", Module::HP_UP},
+		{"ENERGY_UP", Module::ENERGY_UP},
+		{"CASCADE", Module::CASCADE},
+		{"IMPULSE", Module::IMPULSE},
+		{"ROCKET", Module::ROCKET},
+		{"SPLASH", Module::SPLASH},
+		{"IMMORTALITY", Module::IMMORTALITY},
+		{"BLINK", Module::BLINK},
+		{"INVISIBILITY", Module::INVISIBILITY},
+		{"MASS", Module::MASS}
 };
 
 void System::setPlayer(Object object) {

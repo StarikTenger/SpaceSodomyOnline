@@ -19,7 +19,7 @@ enum controlMode {
 
 class Control{
 public:
-	//net stuff
+	// Net stuff
 	sf::UdpSocket socket;
 	char buffer[1024];
 	std::size_t received = 0;

@@ -93,6 +93,9 @@
     <ClInclude Include="Module.h">
       <Filter>Header Files\System</Filter>
     </ClInclude>
+    <ClInclude Include="configProcessing.h">
+      <Filter>Header Files\Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

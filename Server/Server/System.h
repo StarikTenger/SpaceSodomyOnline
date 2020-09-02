@@ -31,7 +31,7 @@ public:
 	};
 	static std::map<std::string, int> bonusNames;
 
-	// modules
+	// Modules - period, energy, stamina
 	std::vector<ModuleInfo> moduleInfo = {
 		{10, 3, 3}, // 0 hp up
 		{6, 0, 3}, // 1 energy up
@@ -44,6 +44,7 @@ public:
 		{20, 3, 3}, // 8 invis
 		{5, 2, 3}, // 9 mass
 	};
+	static std::map<std::string, int> moduleNames;
 
 	Vec2 border = {50, 50};
 

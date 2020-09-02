@@ -1,5 +1,6 @@
 #include "Control.h"
 #include "getMilliCount.h"
+#include "configProcessing.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -12,7 +13,7 @@ Control::Control() {
 
 	// Socket config
 	socket.setBlocking(0);
-	socket.bind(8001);
+	socket.bind(port);
 	std::cout << sizeof(buffer) << " --- \n";
 
 	// Replay
@@ -23,13 +24,18 @@ Control::~Control() {
 
 }
 
-
+// Loading config
 void Control::loadConfig(std::string path) {
 	std::ifstream file(path);
-	std::string command;
+	std::string command; // Current command
 	while (file >> command) {
-		if (command == "END")
+		if (command == "END") // End of file
 			break;
+		comment(command, file);
+
+		if (command == "PORT") // Port
+			file >> port;
+
 		if (command == "TEAM") {
 			int id;
 			file >> id;
@@ -38,6 +44,8 @@ void Control::loadConfig(std::string path) {
 			while (file >> command1) {
 				if (command1 == "END")
 					break;
+				comment(command1, file);
+
 				if (command1 == "S") {
 					Vec2 pos;
 					file >> pos.x >> pos.y;
@@ -61,10 +69,24 @@ void Control::loadConfig(std::string path) {
 			while (file >> command1) {
 				if (command1 == "END")
 					break;
-				
+				comment(command1, file);
+
 				int type = System::bonusNames[command1];
 				file >> sys.bonusInfo[type].limit;
 				file >> sys.bonusInfo[type].countdownTime;
+			}
+		}
+		if (command == "MODULEINFO") {
+			std::string command1;
+			while (file >> command1) {
+				if (command1 == "END")
+					break;
+				comment(command1, file);
+
+				int type = System::moduleNames[command1];
+				file >> sys.moduleInfo[type].cooldownTime; // Period
+				file >> sys.moduleInfo[type].energy; // Energy consumption
+				file >> sys.moduleInfo[type].stamina; // Stamina consumption
 			}
 		}
 	}
