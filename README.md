@@ -4,9 +4,9 @@
 [![SPACE SODOMY](https://img.youtube.com/vi/WemOQuTlSWo/0.jpg)](https://www.youtube.com/watch?v=WemOQuTlSWo)
 ## Клиент
 
-Скачайте клиент игры по [ссылке](https://github.com/StarikTenger/SpaceSodomyOnline/blob/master/Client/ready_to_run.zip)
+Скачайте клиент игры по [ссылке](https://github.com/StarikTenger/SpaceSodomyOnline/raw/master/Client/ready_to_run.zip)
  
-Перед запуском надо открыть файл *config.conf* <br> В нём указаны: 
+Перед запуском надо открыть файл **config.conf** <br> В нём указаны: 
 1. Адрес 
 2. Порт
 3. Id
@@ -57,7 +57,14 @@ ALT, <br>
 Q, W, E, R, T, Y, U, I, O, P, A, S, D, F, G, H, J, K, L, Z, X, C, V, B, N, M,
  <br>
  NUM1, NUM2, NUM3, NUM4, NUM5, NUM6, NUM7, NUM8, NUM9, NUM0*
+ 
+## Сервер
 
+Скачайте сервер по [ссылке](https://github.com/StarikTenger/SpaceSodomyOnline/raw/master/Server/Server_rtr.zip)
+
+Настройте параметры, открыв **confing.conf**
+
+Запустите **Server.exe**
 
 
 
