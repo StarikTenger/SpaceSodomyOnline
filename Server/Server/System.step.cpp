@@ -140,7 +140,7 @@ void System::step() {
 		if (player.orders[Player::SHOOT])
 			shoot(object);
 		
-		// Activate
+		// Activate BONUSES
 		if (player.orders[Player::ACTIVATE]) {
 			switch (player.activeAbility) {
 			case Bonus::BERSERK:
@@ -159,7 +159,7 @@ void System::step() {
 			player.activeAbility = Bonus::NONE;
 		}
 
-		// Using modules
+		// Using MODULES
 		for (int i = Player::MODULE_1; i <= Player::MODULE_2; i++) {
 			if (!player.orders[i]) // Order is inactive
 				continue;
@@ -181,15 +181,17 @@ void System::step() {
 
 			// Check for type of module
 			switch (player.modules[moduleId].type) {
-			case Module::HP_UP:
+			case Module::HP_UP: {
 				player.object->hp += 1;
 				if (player.object->hp > player.object->hpMax)
 					player.object->hp = player.object->hpMax;
 				break;
+			}
 
-			case Module::ENERGY_UP:
+			case Module::ENERGY_UP: {
 				player.object->energy += 5;
 				break;
+			}
 
 			case Module::CASCADE: {
 				auto gunVelprev = player.gun.vel;
@@ -201,27 +203,33 @@ void System::step() {
 				break;
 			}
 
-			case Module::IMPULSE: 
+			case Module::IMPULSE: {
 				object.vel += geom::direction(object.dir) * 15;
 				break;
+			}
 
 			case Module::ROCKET: {
-				auto gunVelprev = player.gun.vel;
+				auto gunVelPrev = player.gun.vel;
+				auto gunDamagePrev = player.gun.damage;
 				player.gun.vel = 0;
 				player.gun.force = 15;
+				player.gun.damage = 2;
 				shoot(object, { 0.1 , 0 }, Object::ROCKET, 0, 1);
-				player.gun.vel = gunVelprev;
+				player.gun.vel = gunVelPrev;
+				player.gun.damage = gunDamagePrev;
 				player.gun.force = 0;
 				break;
 			}
 
-			case Module::SPLASH:
-				explode(object, object.pos, 6, M_PI*2, 13, 0, 1);
+			case Module::SPLASH: {
+				explode(object, object.pos, 6, M_PI * 2, 13, 0, 1);
 				break;
+			}
 
-			case Module::IMMORTALITY:
+			case Module::IMMORTALITY: {
 				player.effects[Bonus::IMMORTAL] = 1.0;
 				break;
+			}
 
 			case Module::BLINK: {
 				auto pos = object.pos + geom::direction(object.dir) * 5;
@@ -268,20 +276,25 @@ void System::step() {
 			continue;
 
 		// Target-following
-		for (auto& target : objects) {
-			if (geom::distance(object.pos, target.pos) < 6 && object.team != target.team && target.type == Object::SHIP)
-				object.dir = geom::dir(target.pos - object.pos);
-		}
+		if (0) // Not yet
+			for (auto& target : objects) {
+				if (geom::distance(object.pos, target.pos) < 6 && object.team != target.team && target.type == Object::SHIP)
+					object.dir = geom::dir(target.pos - object.pos);
+			}
 
 		// Trigger
 		for (auto& target : objects) {
-			if (geom::distance(object.pos, target.pos) < 2 && object.team != target.team)
+			double triggerRadius = 2;
+			if (target.type != Object::SHIP)
+				triggerRadius = 0.3;
+
+			if (geom::distance(object.pos, target.pos) < triggerRadius && object.team != target.team)
 				object.hp = 0;
 		}
 
 		// Explode
 		if (object.hp < EPS) {
-			setExplosion(object, object.pos, object.vel * 0, 2, 5, 0.1, 1);
+			setExplosion(object, object.pos, object.vel * 0, 2, 5, 0.1, object.damage);
 		}
 	}
 
@@ -420,8 +433,12 @@ void System::step() {
 			b.countdown = b.countdownTime;
 
 	// Bonuses spawn
-	{
+	for (int i = 0; i < 1; i++) {
 		int r = random::intRandom(1, bonusInfo.size() - 1);
+
+		if (!bonusInfo[r].positions.size()) // No bonuses of this type
+			continue;
+
 		Vec2 pos;
 		pos = bonusInfo[r].positions[random::intRandom(0, bonusInfo[r].positions.size() - 1)];
 

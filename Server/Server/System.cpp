@@ -165,6 +165,13 @@ void System::setPlayer(Object object) {
 		effect = 0;
 	}
 
+	// Parameters
+	objects.back().hpMax = parameters.player_hp;
+	objects.back().energyMax = parameters.player_energy;
+	objects.back().staminaMax = parameters.player_stamina;
+
+	objects.back().init();
+
 	if (teams.find(object.team) == teams.end()) {
 		teams[object.team] = Team();
 		teams[object.team].color = fromHSV(random::intRandom(0, 360), 1, 1);

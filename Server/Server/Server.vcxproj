@@ -35,6 +35,7 @@
     <ClInclude Include="ModuleInfo.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="Parameters.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="random.h" />
     <ClInclude Include="System.h" />
@@ -57,6 +58,7 @@
     <ClCompile Include="ModuleInfo.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Parameters.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="random.cpp" />
     <ClCompile Include="System.collision.cpp" />

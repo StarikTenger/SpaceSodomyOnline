@@ -11,6 +11,7 @@
 #include "BonusInfo.h"
 #include "ModuleInfo.h"
 #include "Team.h"
+#include "Parameters.h"
 
 
 class System {
@@ -18,6 +19,8 @@ public:
 
 	double dt = 0.02;
 	double bounce = 0.2;
+
+	Parameters parameters;
 
 	// bonuses
 	std::vector<BonusInfo> bonusInfo = { 

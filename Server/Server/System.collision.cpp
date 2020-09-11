@@ -186,7 +186,7 @@ void System::collision() {
 		if (object.type == Object::SHIP && player.effects[Bonus::LASER] > 0) {
 			for (auto& target : objects) {
 				if (checkAbility(object, target, 0.4))
-					damage(object, target, 10);
+					damage(object, target, parameters.bonus_laser_damage);
 			}
 		}
 	}

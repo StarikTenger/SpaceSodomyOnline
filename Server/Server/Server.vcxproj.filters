@@ -96,6 +96,9 @@
     <ClInclude Include="configProcessing.h">
       <Filter>Header Files\Global</Filter>
     </ClInclude>
+    <ClInclude Include="Parameters.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -162,6 +165,9 @@
       <Filter>Source Files\System</Filter>
     </ClCompile>
     <ClCompile Include="Module.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Parameters.cpp">
       <Filter>Source Files\System</Filter>
     </ClCompile>
   </ItemGroup>

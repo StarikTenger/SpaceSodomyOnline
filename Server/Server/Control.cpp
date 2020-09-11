@@ -26,12 +26,14 @@ Control::~Control() {
 
 // Loading config
 void Control::loadConfig(std::string path) {
-	std::ifstream file(path);
+	std::ifstream fileInput(path);
+	std::stringstream file = configProcessing::comment(fileInput);
+
 	std::string command; // Current command
 	while (file >> command) {
 		if (command == "END") // End of file
 			break;
-		comment(command, file);
+		
 
 		if (command == "PORT") // Port
 			file >> port;
@@ -44,7 +46,7 @@ void Control::loadConfig(std::string path) {
 			while (file >> command1) {
 				if (command1 == "END")
 					break;
-				comment(command1, file);
+				
 
 				if (command1 == "S") {
 					Vec2 pos;
@@ -64,12 +66,29 @@ void Control::loadConfig(std::string path) {
 			file >> id >> team;
 			sys.setPlayer({ id, team, {},{0, 0}, 1, 0 });
 		}
+		if (command == "PARAMETERS") {
+			std::string command1;
+			while (file >> command1) {
+				if (command1 == "END")
+					break;
+
+				if (command1 == "PLAYER_HP")
+					file >> sys.parameters.player_hp;
+				if (command1 == "PLAYER_ENERGY")
+					file >> sys.parameters.player_energy;
+				if (command1 == "PLAYER_STAMINA")
+					file >> sys.parameters.player_stamina;
+				if (command1 == "PLAYER_RECOVERY")
+					file >> sys.parameters.player_stamina_recovery;
+
+			}
+		}
 		if (command == "BONUSINFO") {
 			std::string command1;
 			while (file >> command1) {
 				if (command1 == "END")
 					break;
-				comment(command1, file);
+				
 
 				int type = System::bonusNames[command1];
 				file >> sys.bonusInfo[type].limit;
@@ -81,7 +100,7 @@ void Control::loadConfig(std::string path) {
 			while (file >> command1) {
 				if (command1 == "END")
 					break;
-				comment(command1, file);
+				
 
 				int type = System::moduleNames[command1];
 				file >> sys.moduleInfo[type].cooldownTime; // Period

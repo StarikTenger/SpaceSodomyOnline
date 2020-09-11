@@ -55,5 +55,7 @@ public:
 
 	Object();
 	Object(int _id, int _team, Color _color, Vec2 _pos, double _m, double _dir);
+
+	void init();
 };
 

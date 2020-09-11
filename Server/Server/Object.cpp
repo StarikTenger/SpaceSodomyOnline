@@ -12,3 +12,9 @@ Object::Object(int _id, int _team, Color _color, Vec2 _pos, double _m, double _d
 	m = _m;
 	dir = _dir;
 }
+
+void Object::init() {
+	hp = hpMax;
+	energy = energyMax;
+	stamina = staminaMax;
+}

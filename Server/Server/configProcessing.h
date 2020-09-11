@@ -1,11 +1,25 @@
 #pragma once
+#include <iostream>
 #include <fstream>
+#include <sstream>
 
-void comment(std::string& command, std::ifstream& file) {
-	if (command == "#") { // Comment
-		std::string input = "";
-		while (input != "#")
-			file >> input;
-		file >> command;
+namespace configProcessing {
+	std::stringstream comment(std::ifstream& file) {
+		std::stringstream newFile; // file without comments
+		std::string elem; // current input
+
+		while (file >> elem) {
+			if (elem == "#") { // Comment
+				std::string input = "";
+				std::getline(file, input);
+				//while (input != "#")
+				//	file >> input;
+			}
+			else {
+				newFile << elem << " ";
+			}
+		}
+
+		return newFile;
 	}
 }
