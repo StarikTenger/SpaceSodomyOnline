@@ -23,20 +23,20 @@
 Адрес, порт и Id узнавайте у хозяина сервера <br>
 Имя может содержать латинские символы и цифры, в нём не должно быть пробелов <br>
 
-### Модули выбираются в соответсвии с таблицей:
+### Модули выбираются в соответствии с таблицей:
 
 |  ID       |    | Модуль      |Описание              |
 |---------- | - |:-------------:|:------               |
 |    0 | ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/hpUp.png)    | HP up         |+1 к здоровью         |
 |    1  | ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/energyUp.png)   | Energy Up     |+5 к энергии          |
-|    2  | ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/cascade.png)   | Cascade       |выпускает несколько снарядов  |
-|    3   | ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/impulse.png)  | Impulse       |рывок вперёд       |
-|    4  |  ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/rocket.png)  | Rocket        |ракета, летит с ускорением, взрывается
-|    5  |  ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/splash.png)  | Splash        |отталкивает объекты вокруг |
-|    6  |  ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/immortality.png)  | Immortality   |бессмертие на короткое время    |
-|    7   | ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/blink.png)  | Blink         |телепортация вперёд                      |
+|    2  | ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/cascade.png)   | Grapeshot       | Выпускает веер из 5 медленных пуль  |
+|    3   | ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/impulse.png)  | Impulse       | Мгновенно придаёт большую скорость, направленную вперёд       |
+|    4  |  ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/rocket.png)  | Rocket        | Ракета, летящая с ускорением. Взрывается, нанося урон по области |
+|    5  |  ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/splash.png)  | Force        | Отталкивает все объекты вокруг игрока. Игрок отлетает в противоположном направлении|
+|    6  |  ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/immortality.png)  | Immortality   | Бессмертие на короткое время    |
+|    7   | ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/blink.png)  | Blink         |Телепортация вперёд                     |
 |    8  |  ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/invisibility.png)  | Invisibility   |Невидимость    |
-|    9   | ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/mass.png)  | Mass         |массивный снаряд, обладает отдачей, приклеивается к противнику   |
+|    9   | ![](https://raw.githubusercontent.com/StarikTenger/SpaceSodomyOnline/master/Client/Client/textures/modules/mass.png)  | Spitball         |Массивный снаряд, обладающий отдачей и приклеивающийся к противнику   |
 
 ### Управление
 - **Left**, **Right**, **Up**, **Down** — линейные двигатели /влево/вправо/вперёд/назад
@@ -87,20 +87,6 @@ Q, W, E, R, T, Y, U, I, O, P, A, S, D, F, G, H, J, K, L, Z, X, C, V, B, N, M,
 Настройте параметры, открыв **confing.conf**
 
 Запустите **Server.exe**
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
