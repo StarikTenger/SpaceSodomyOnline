@@ -286,7 +286,7 @@ void System::step() {
 		for (auto& target : objects) {
 			double triggerRadius = 2;
 			if (target.type != Object::SHIP)
-				triggerRadius = 0.3;
+				triggerRadius = target.r;
 
 			if (geom::distance(object.pos, target.pos) < triggerRadius && object.team != target.team)
 				object.hp = 0;

@@ -69,7 +69,9 @@ void System::collision() {
 
 			if (geom::distance(a.pos, b.pos) < a.r + b.r) {
 				if (a.type == Object::BULLET) {
-					damage(a, b, 1);
+					if(b.type == Object::ROCKET)
+						damage(a, b, 1000);
+					damage(a, b, a.damage);
 					damage(b, a, 1000);
 				}
 
