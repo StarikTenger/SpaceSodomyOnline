@@ -69,8 +69,18 @@ void Control::saveConfig() {
 void Control::step() {
 	int timeMs = getMilliCount();
 
+	// Getting messages from server
+	for (int i = 0; i < 10; i++) {
+		std::size_t received = 0;
+		sf::IpAddress sender;
+		unsigned short port = 0;
+		socket.receive(buffer, sizeof(buffer), received, sender, port);
+	}
+
 	// Timer action
-	if (timeMs - timePrev > dt) {
+	bool tick = (timeMs - timePrev > dt);
+	if (tick) {
+
 		timePrev = timeMs;
 		sys.time = timeMs * 0.001;
 
@@ -104,21 +114,28 @@ void Control::step() {
 			}
 
 			// Send
+			// id time name #commands module1 module2
 			std::string message = "";
 			message += std::to_string(id) + " ";
+			message += std::to_string(timeMs) + " ";
 			message += name + " #";
 
-			// Mouse
-			if (mouse.state) {
-				double ang = geom::dir(mouse.pos - drawSys.cam.border / 2);
-				if(sin(ang) > 0 && random::floatRandom(0, 1, 3) < sin(ang))
-					message += "D";
-				if (sin(ang) < 0 && random::floatRandom(-1, 0, 3) > sin(ang))
-					message += "U";
-				if (cos(ang) > 0 && random::floatRandom(0, 1, 3) < cos(ang))
-					message += "R";
-				if (cos(ang) < 0 && random::floatRandom(-1, 0, 3) > cos(ang))
-					message += "L";
+			// Mouse & stab
+			if (mouse.state || keys[STABILIZE_MOVEMENT] && (!keys[MOVE_LEFT] && !keys[MOVE_RIGHT] && !keys[MOVE_FORWARD] && !keys[MOVE_BACKWARD])) {
+				double ang = geom::dir(geom::rotate(sys.mainPlayer.vel, -sys.mainPlayer.dir + M_PI/2));
+				if(mouse.state)
+					ang = geom::dir(mouse.pos - drawSys.cam.border / 2);
+
+				if (mouse.state || geom::distance({}, sys.mainPlayer.vel) > 0.2) {
+					if (sin(ang) > 0 && random::floatRandom(0, 1, 3) < sin(ang))
+						message += "D";
+					if (sin(ang) < 0 && random::floatRandom(-1, 0, 3) > sin(ang))
+						message += "U";
+					if (cos(ang) > 0 && random::floatRandom(0, 1, 3) < cos(ang))
+						message += "R";
+					if (cos(ang) < 0 && random::floatRandom(-1, 0, 3) > cos(ang))
+						message += "L";
+				}
 				
 			}
 
@@ -149,8 +166,14 @@ void Control::step() {
 			message += " " + std::to_string(sys.modules[0]) + " " + std::to_string(sys.modules[1]);
 			socket.send(message.c_str(), message.size() + 1, address, port);
 
+			// Copy of system
+			sysPrev = sys;
 
 			sys.state = std::string(buffer);
+			sys.unpack(sys.state);
+			
+			// Ping
+			//std::cout << (timeMs - sys.players[sys.mainPlayer.id].localTime) << "\n";
 		} 
 		else {
 			
@@ -204,10 +227,12 @@ void Control::step() {
 			sys.state = replay.frames[replay.frame];
 		}
 
-		// Copy of system
-		sysPrev = sys;
+	}
 
-		sys.unpack(sys.state);
+	// Display
+	if (tick){
+		
+
 
 		drawSys.mode = mode;
 		drawSys.system = &sys;
@@ -216,14 +241,10 @@ void Control::step() {
 		drawSys.window->display();
 
 		setSounds();
-
 	}
 
-	// Getting messages from server
-	for (int i = 0; i < 5; i++) {
-		std::size_t received = 0;
-		sf::IpAddress sender;
-		unsigned short port = 0;
-		socket.receive(buffer, sizeof(buffer), received, sender, port);
-	}
+	
+
+	
+
 }

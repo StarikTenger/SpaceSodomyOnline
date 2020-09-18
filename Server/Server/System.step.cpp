@@ -97,22 +97,22 @@ void System::step() {
 				k = 5;
 
 			if (player.orders[Player::MOVE_FORWARD]) {
-				object.vel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir) * dt * k / object.m;
+				object.deltaVel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir) * dt * k / object.m;
 				object.energy -= player.engine.consumptionLinear * dt;
 			}
 
 			if (player.orders[Player::MOVE_RIGHT]) {
-				object.vel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir + M_PI * 0.5) * dt * k / object.m;
+				object.deltaVel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir + M_PI * 0.5) * dt * k / object.m;
 				object.energy -= player.engine.consumptionLinear * dt;
 			}
 
 			if (player.orders[Player::MOVE_BACKWARD]) {
-				object.vel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir + M_PI) * dt * k / object.m;
+				object.deltaVel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir + M_PI) * dt * k / object.m;
 				object.energy -= player.engine.consumptionLinear * dt;
 			}
 			
 			if (player.orders[Player::MOVE_LEFT]) {
-				object.vel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir + M_PI * 1.5) * dt * k / object.m;
+				object.deltaVel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir + M_PI * 1.5) * dt * k / object.m;
 				object.energy -= player.engine.consumptionLinear * dt;
 			}
 
@@ -204,7 +204,7 @@ void System::step() {
 			}
 
 			case Module::IMPULSE: {
-				object.vel += geom::direction(object.dir) * 15;
+				object.deltaVel += geom::direction(object.dir) * 15;
 				break;
 			}
 
@@ -267,7 +267,7 @@ void System::step() {
 	for (auto& object : objects) {
 		if (object.type != Object::BULLET && object.type != Object::ROCKET)
 			continue;
-		object.vel += geom::rotate(Vec2(object.force, 0), object.dir) * dt;
+		object.deltaVel += geom::rotate(Vec2(object.force, 0), object.dir) * dt;
 	}
 
 	// Rocket triggering & explosions
@@ -294,7 +294,7 @@ void System::step() {
 
 		// Explode
 		if (object.hp < EPS) {
-			setExplosion(object, object.pos, object.vel * 0, 2, 5, 0.1, object.damage);
+			setExplosion(object, object.pos, object.deltaVel * 0, 2, 5, 0.1, object.damage);
 		}
 	}
 
@@ -308,7 +308,7 @@ void System::step() {
 			if (geom::distance(object.pos, target.pos) < object.r + target.r && object.team != target.team && target.type == Object::SHIP) {
 				players[target.id].effects[Bonus::MASS] += object.m * 5;
 				if(target.m > 0)
-					target.vel +=  (object.vel - target.vel) * object.m / target.m;
+					target.deltaVel +=  (object.deltaVel - target.deltaVel) * object.m / target.m;
 				object.hp = 0;
 				damage(object, target, 0);
 			}
@@ -320,7 +320,7 @@ void System::step() {
 		int x = (int)object.pos.x;
 		int y = (int)object.pos.y;
 		if(x >= 0 && y >=0 && x < field.size() && y < field[x].size())
-			object.vel += field[x][y].forceField * dt; // object.m;
+			object.deltaVel += field[x][y].forceField * dt; // object.m;
 	}
 
 	// Add new objects
@@ -436,7 +436,7 @@ void System::step() {
 	for (int i = 0; i < 1; i++) {
 		int r = random::intRandom(1, bonusInfo.size() - 1);
 
-		if (!bonusInfo[r].positions.size()) // No bonuses of this type
+		if (r >= bonusInfo.size() || !bonusInfo[r].positions.size()) // No bonuses of this type
 			continue;
 
 		Vec2 pos;
@@ -449,7 +449,8 @@ void System::step() {
 			if ((int)bonus.pos.x == x && (int)bonus.pos.y == y)
 				repeat = 1;
 		}
-		if (!field[x][y].type && bonusInfo[r].number < bonusInfo[r].limit && bonusInfo[r].countdown < 0 && !repeat) {
+		if ( (x >0 && y > 0 && x < field.size() && y < field[0].size()) && 
+			(!field[x][y].type && bonusInfo[r].number < bonusInfo[r].limit && bonusInfo[r].countdown < 0 && !repeat)) {
 			bonuses.push_back({});
 			bonuses.back().pos = { x + 0.5, y + 0.5 };
 

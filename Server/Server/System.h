@@ -50,6 +50,7 @@ public:
 	static std::map<std::string, int> moduleNames;
 
 	Vec2 border = {50, 50};
+	std::string currentMap = "";
 
 	std::map<int, Player> players;
 	std::map<int, Team> teams;
@@ -66,6 +67,7 @@ public:
 	~System();
 
 	std::string pack();
+	void loadMap(std::string path);
 	void step();
 	void setPlayer(Object object);
 	void shoot(Object& object, Vec2 shift, int type, double dir, int skip);

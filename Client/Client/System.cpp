@@ -19,9 +19,14 @@ System::~System() {
 }
 
 System::System(string path) {
+	loadMap(path);
+}
+
+void System::loadMap(string path) {
 	ifstream file(path);
 	int width, height;
 	file >> width >> height;
+	field = {};
 	for (int x = 0; x < width; x++) {
 		field.push_back(vector<Cell>(height));
 	}
@@ -140,6 +145,16 @@ void System::unpack(std::string str) {
 		if (type == "/")
 			break;
 
+		// Map
+		if (type == "MP") {
+			std::string name;
+			ss >> name;
+			if (name != currentMap) {
+				loadMap("maps/" + name + ".lvl");
+				currentMap = name;
+			}
+		}
+
 		// Players
 		if (type == "P") {
 			playerList.push_back({});
@@ -148,6 +163,7 @@ void System::unpack(std::string str) {
 			int id = 0;
 			
 			ss >> id;
+			ss >> player.localTime;
 			ss >> player.name;
 			ss >> player.color.r >> player.color.g >> player.color.b;
 			player.color.a = 255;

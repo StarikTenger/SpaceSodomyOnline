@@ -1,7 +1,14 @@
-﻿  System.collision.cpp
+﻿  System.step.cpp
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.step.cpp(322,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.step.cpp(322,47): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.step.cpp(333,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.step.cpp(439,9): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.step.cpp(452,28): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.step.cpp(452,48): warning C4018: '<': signed/unsigned mismatch
+C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Server\System.step.cpp(463,20): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  1 of 1612 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  1 of 1628 functions (<0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
+    5 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Server.vcxproj -> C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Release\Server.exe

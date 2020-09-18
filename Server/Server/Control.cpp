@@ -38,6 +38,13 @@ void Control::loadConfig(std::string path) {
 		if (command == "PORT") // Port
 			file >> port;
 
+		if (command == "MAP") {
+			std::string name;
+			file >> name;
+			sys.currentMap = name;
+			sys.loadMap("maps/" + sys.currentMap + ".lvl");
+		}
+
 		if (command == "TEAM") {
 			int id;
 			file >> id;
@@ -116,6 +123,7 @@ void Control::saveConfig() {
 	
 }
 
+// Main function, that works in loop
 void Control::step() {
 	receive();
 	int timeMs = getMilliCount();
@@ -124,19 +132,20 @@ void Control::step() {
 		
 		checkMessages();
 
-		for (int i = 0; i < 1; i++) {
-			sys.step();
-		}
-
 		// Sending
 		std::string message = sys.pack();
-		for (auto a : addresses) { 		
+		for (auto a : addresses) {
 			socket.send(message.c_str(), message.size() + 1, a.first, a.second);
 		}
 		replay << message << "\n";
+
+		for (int i = 0; i < 1; i++) {
+			sys.step();
+		}
 	}
 }
 
+// Receiving data from client
 void Control::receive() {
 	// Receiving
 	socket.receive(buffer, sizeof(buffer), received, sender, port);
@@ -159,8 +168,11 @@ void Control::receive() {
 	}
 }
 
+// Message parser
 void Control::checkMessages() {
 	while(messages.size()) {
+		// Structure:
+		// id time name #commands module1 module2
 
 		// Putting message to stringstream
 		std::stringstream ss;
@@ -169,25 +181,26 @@ void Control::checkMessages() {
 
 		// Getting id & name
 		int id;
-		std::string name;
 		ss >> id;
-		ss >> name;
 	
 		// Checking if ID not found
 		if (sys.players.find(id) == sys.players.end())
 			continue;
 
+		// Current player
+		auto& player = sys.players[id];
+
+		// Client local time
+		ss >> player.localTime;
+
 		// Giving player a name
-		sys.players[id].name = name;
+		ss >> player.name;
 
 		// AFK management
 		std::string orders;		
 		if (ss >> orders && orders.size() && orders != "s") { // "s" stands for autostab which is not an action
 			sys.players[id].afkTimer = 10;
 		}
-
-		// Current player
-		auto& player = sys.players[id];
 
 		// Setting all orders to 0
 		for (int i = 0; i < player.orders.size(); i++)

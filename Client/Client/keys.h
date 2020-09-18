@@ -17,6 +17,7 @@ enum Commands {
 	ZOOM_OUT, 
 	STABILIZE_ROTATION, 
 	STABILIZE_ROTATION_AUTO, 
+	STABILIZE_MOVEMENT,
 	ACTIVATE,
 	MODULE_1,
 	MODULE_2,
@@ -33,6 +34,7 @@ enum Commands {
 	SPACE,
 	SHIFT,
 	ESCAPE,
+	CONTROL,
 	ALT,
 	Q, W, E, R, T, Y, U, I, O, P, A, S, D, F, G, H, J, K, L, Z, X, C, V, B, N, M,
 	NUM1, NUM2, NUM3, NUM4, NUM5, NUM6, NUM7, NUM8, NUM9, NUM0,
@@ -57,6 +59,8 @@ inline Commands getKey(sf::Keyboard::Key key) {
 		return ESCAPE;
 	case sf::Keyboard::LAlt:
 		return ALT;
+	case sf::Keyboard::LControl:
+		return CONTROL;
 
 	case sf::Keyboard::Q:
 		return Q;
@@ -151,6 +155,8 @@ inline Commands getKey(std::string s) {
 		return ESCAPE;
 	if (s == "ALT")
 		return ALT;
+	if (s == "CONTROL")
+		return CONTROL;
 
 	if (s == "Q")
 		return Q;
@@ -245,6 +251,8 @@ inline Commands getKey(std::string s) {
 		return STABILIZE_ROTATION;
 	if (s == "STABILIZE_ROTATION_AUTO")
 		return STABILIZE_ROTATION_AUTO;
+	if (s == "STABILIZE_MOVEMENT")
+		return STABILIZE_MOVEMENT;
 	if (s == "ACTIVATE")
 		return ACTIVATE;
 	if (s == "MODULE_1")

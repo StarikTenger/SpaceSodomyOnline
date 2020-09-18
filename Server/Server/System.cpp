@@ -29,13 +29,21 @@ System::System() {
 
 // Load map
 System::System(string path) {
+	loadMap(path);
+}
+
+System::~System() {
+}
+
+void System::loadMap(std::string path) {
 	ifstream file(path);
 	int width, height;
 	file >> width >> height; // Maps size
+	field = {};
 	for (int x = 0; x < width; x++) {
 		field.push_back(vector<Cell>(height));
 	}
-	
+
 	// Input map
 	for (int x = 0; x < width; x++) {
 		for (int y = 0; y < height; y++) {
@@ -93,8 +101,8 @@ System::System(string path) {
 				for (int y = 0; y < height; y++) {
 					int dir;
 					file >> dir;
-					if(dir)
-						field[y][x].forceField = geom::direction((dir - 1) * M_PI/4) * 16;
+					if (dir)
+						field[y][x].forceField = geom::direction((dir - 1) * M_PI / 4) * 16;
 				}
 			}
 		}
@@ -117,9 +125,6 @@ System::System(string path) {
 				bonusInfo[Bonus::LASER].positions.push_back(pos);
 		}
 	}
-}
-
-System::~System() {
 }
 
 // Naming
@@ -195,12 +200,16 @@ void System::setPlayer(Object object) {
 std::string System::pack() {
 	std::string packet = "";
 
+	// Map
+	packet += "MP " + currentMap + " ";
+
 	// Players
 	for (const auto& player : players) {
 		if (player.second.afkTimer < 0)
 			continue;
 		packet += "P ";
 		packet += to_string(player.first) + " ";
+		packet += to_string(player.second.localTime) + " ";
 		packet += player.second.name + " ";
 		packet += to_string(player.second.color.r) + " ";
 		packet += to_string(player.second.color.g) + " ";
@@ -214,6 +223,7 @@ std::string System::pack() {
 	// Wall player
 	{
 		packet += "P ";
+		packet += "0 ";
 		packet += "0 ";
 		packet += " WALL ";
 		packet += "255 255 255 ";

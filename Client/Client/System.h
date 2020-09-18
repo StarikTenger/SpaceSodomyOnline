@@ -25,6 +25,7 @@ public:
 	std::vector<int> modules = { 3, 3 };
 
 	std::string state;
+	std::string currentMap = "";
 
 	std::vector<Player> playerList;
 	std::map<int, Player> players;
@@ -38,6 +39,8 @@ public:
 	System();
 	System(std::string path);
 	~System();
+
+	void loadMap(std::string path);
 	int checkWall(Vec2 pos);
 	bool checkAbility(Object shooter, Object target, double threshold);
 	void unpack(std::string str);

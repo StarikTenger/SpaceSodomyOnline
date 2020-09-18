@@ -10,6 +10,8 @@ public:
 	int deaths = 0;
 	int progress = 0;
 
+	int localTime = 0;
+
 	std::vector<double> modulesCooldown = {0, 0};
 	std::vector<int> modulesType = {0, 0};
 
