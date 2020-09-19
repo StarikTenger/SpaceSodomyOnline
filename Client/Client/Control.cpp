@@ -165,13 +165,9 @@ void Control::step() {
 			// modulesCooldown
 			message += " " + std::to_string(sys.modules[0]) + " " + std::to_string(sys.modules[1]);
 			socket.send(message.c_str(), message.size() + 1, address, port);
-
-			// Copy of system
-			sysPrev = sys;
-
-			sys.state = std::string(buffer);
-			sys.unpack(sys.state);
 			
+			sys.state = std::string(buffer);
+
 			// Ping
 			//std::cout << (timeMs - sys.players[sys.mainPlayer.id].localTime) << "\n";
 		} 
@@ -227,6 +223,11 @@ void Control::step() {
 			sys.state = replay.frames[replay.frame];
 		}
 
+		// Copy of system
+		sysPrev = sys;
+
+		
+		sys.unpack(sys.state);
 	}
 
 	// Display
