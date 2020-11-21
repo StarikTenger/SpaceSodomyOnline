@@ -7,3 +7,4 @@ ModuleInfo::ModuleInfo(double _cooldownTime, double _energy, double _stamina) {
 	energy = _energy;
 	stamina = _stamina;
 }
+

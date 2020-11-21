@@ -30,6 +30,7 @@
     <ClInclude Include="geometry.h" />
     <ClInclude Include="getMilliCount.h" />
     <ClInclude Include="Gun.h" />
+    <ClInclude Include="HomingRocket.h" />
     <ClInclude Include="keys.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleInfo.h" />
@@ -53,6 +54,7 @@
     <ClCompile Include="geometry.cpp" />
     <ClCompile Include="getMilliCount.cpp" />
     <ClCompile Include="Gun.cpp" />
+    <ClCompile Include="HomingRocket.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Module.cpp" />
     <ClCompile Include="ModuleInfo.cpp" />

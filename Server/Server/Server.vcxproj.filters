@@ -99,6 +99,9 @@
     <ClInclude Include="Parameters.h">
       <Filter>Header Files\System</Filter>
     </ClInclude>
+    <ClInclude Include="HomingRocket.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -168,6 +171,9 @@
       <Filter>Source Files\System</Filter>
     </ClCompile>
     <ClCompile Include="Parameters.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="HomingRocket.cpp">
       <Filter>Source Files\System</Filter>
     </ClCompile>
   </ItemGroup>

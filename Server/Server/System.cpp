@@ -147,7 +147,8 @@ std::map<std::string, int> System::moduleNames = {
 		{"IMMORTALITY", Module::IMMORTALITY},
 		{"BLINK", Module::BLINK},
 		{"INVISIBILITY", Module::INVISIBILITY},
-		{"MASS", Module::MASS}
+		{"MASS", Module::MASS},
+	    {"HOOK", Module::HOOK}
 };
 
 void System::setPlayer(Object object) {
@@ -456,7 +457,7 @@ int System::checkWall(Vec2 pos) {
 	return 0;
 }
 
-bool System::checkAbility(Object shooter, Object target, double threshold) {
+bool System::checkAbilityToHit(Object shooter, Object target, double threshold) {
 	if (distance(shooter.pos, target.pos) < EPS) {
 		return 0;
 	}
@@ -478,12 +479,7 @@ bool System::checkAbility(Object shooter, Object target, double threshold) {
 
 	double a = abs(shooter.dir - dir(target.pos - shooter.pos));
 
-	while (a >= 2 * M_PI) {
-		a -= 2 * M_PI;
-	}
-	while (a <= 0) {
-		a += 2 * M_PI;
-	}
+	a = geom::normalizeAngle(a);
 
 	if (distance(target.pos, shooter.pos, shooter.pos + step) < target.r && a < threshold)
 		return 1;

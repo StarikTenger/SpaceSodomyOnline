@@ -12,7 +12,8 @@ public:
 		BOOST,
 		LASER,
 		INVISIBILITY,
-		MASS
+		MASS,
+		HOOK
 	};
 	Vec2 pos;
 	Type type = NONE;

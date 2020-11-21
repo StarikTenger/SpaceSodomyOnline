@@ -11,7 +11,8 @@ public:
 		IMMORTALITY,
 		BLINK,
 		INVISIBILITY,
-		MASS
+		MASS,
+		HOOK
 	};
 
 	int type = 0;

@@ -22,3 +22,6 @@ Vec2 operator+=(Vec2& a, const Vec2& b) {
 Vec2 operator-=(Vec2& a, const Vec2& b) {
 	return a = a - b;
 }
+double operator*(const Vec2& a, const Vec2& b) {
+	return a.x * b.x + a.y * b.y;
+}

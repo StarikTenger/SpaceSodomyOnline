@@ -12,3 +12,4 @@ Vec2 operator*(const Vec2& a, double k);
 Vec2 operator/(const Vec2& a, double k);
 Vec2 operator+=(Vec2& a, const Vec2& b);
 Vec2 operator-=(Vec2& a, const Vec2& b);
+double operator*(const Vec2& a, const Vec2& b);

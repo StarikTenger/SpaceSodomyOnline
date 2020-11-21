@@ -12,6 +12,7 @@
 #include "ModuleInfo.h"
 #include "Team.h"
 #include "Parameters.h"
+#include "HomingRocket.h"
 
 
 class System {
@@ -46,6 +47,7 @@ public:
 		{15, 3, 3}, // 7 blink
 		{20, 3, 3}, // 8 invis
 		{5, 2, 3}, // 9 mass
+		{0.02, 0.08, 0.1} // 10 hook
 	};
 	static std::map<std::string, int> moduleNames;
 
@@ -76,7 +78,7 @@ public:
 	void damage(Object& object, Object& target, double value);
 	void explode(Object& object, Vec2 pos, double r, double angle, double power, double dmg, double backForce);
 	int checkWall(Vec2 pos);
-	bool checkAbility(Object shooter, Object target, double threshold);
+	bool checkAbilityToHit(Object shooter, Object target, double threshold);
 	bool collision(Object& body, std::pair<Vec2, Vec2> wall);
 	void collision();
 };

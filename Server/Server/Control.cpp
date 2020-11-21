@@ -110,6 +110,7 @@ void Control::loadConfig(std::string path) {
 				
 
 				int type = System::moduleNames[command1];
+				;
 				file >> sys.moduleInfo[type].cooldownTime; // Period
 				file >> sys.moduleInfo[type].energy; // Energy consumption
 				file >> sys.moduleInfo[type].stamina; // Stamina consumption

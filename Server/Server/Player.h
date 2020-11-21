@@ -36,7 +36,7 @@ public:
 	int lastContact = 0; // id of hostile object, last contacted with
 	int localTime = 0; // client time for ping
 
-	double afkTimer = 0; // indiacates type from last action
+	double afkTimer = 0; // indicates type from last action
 	double timer = 0; // time in system
 	
 

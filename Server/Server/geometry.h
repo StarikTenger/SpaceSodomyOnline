@@ -18,4 +18,5 @@ namespace geom {
 	double square(std::vector<Vec2> polygon);
 	bool inPolygon(Vec2 point, std::vector<Vec2> polygon);
 	std::vector<double> angleDistribution(double direction, double width, int n);
+	double normalizeAngle(double dir);
 }

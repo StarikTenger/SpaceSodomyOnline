@@ -30,9 +30,10 @@ public:
 	Vec2 vel; // velocity
 	Vec2 deltaVel; // deltaVel
 
-	// Bullet atributes
+	// Projectile (bullet, rocket, etc) atributes
 	double damage = 1;
 	double force = 0;
+
 
 	// Explosion atributes
 	double expansionVel = 1;
@@ -50,6 +51,8 @@ public:
 	double staminaMax = 10;
 	double stamina = energyMax;
 	double staminaRecovery = 2;
+
+	
 
 	bool collision = 1;
 

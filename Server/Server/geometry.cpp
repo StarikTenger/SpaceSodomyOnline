@@ -108,3 +108,6 @@ std::vector<double> geom::angleDistribution(double direction, double width, int 
 	}
 	return arr;
 }
+double geom::normalizeAngle(double dir) {
+	return geom::dir(geom::direction(dir));
+}

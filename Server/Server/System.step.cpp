@@ -59,6 +59,8 @@ void System::step() {
 
 	//OBJECTS//////////////////////////////////////////////////////////////////////////
 	
+	
+
 	// Add mass
 	for (auto& object : objects) {
 		if (object.type != Object::SHIP)
@@ -213,7 +215,7 @@ void System::step() {
 				auto gunDamagePrev = player.gun.damage;
 				player.gun.vel = 0;
 				player.gun.force = 15;
-				player.gun.damage = 2;
+				player.gun.damage = 1;
 				shoot(object, { 0.1 , 0 }, Object::ROCKET, 0, 1);
 				player.gun.vel = gunVelPrev;
 				player.gun.damage = gunDamagePrev;
@@ -252,6 +254,18 @@ void System::step() {
 				player.gun.vel = gunVelprev;
 				break;
 			}
+			case Module::HOOK: {
+				for (auto& target : objects) {
+					if (geom::distance(object.pos, target.pos) < ModuleParam::hookDistance  
+						&& target.type == Object::SHIP
+						&& checkAbilityToHit(object, target, ModuleParam::hookAngle))
+						{
+						object.deltaVel += geom::direction(geom::dir(target.pos - object.pos)) * ModuleParam::hookAccel * dt;
+						target.deltaVel -= geom::direction(geom::dir(target.pos - object.pos)) * ModuleParam::hookAccel * dt;
+					}
+				}
+				break;
+			}
 			}		
 
 			// Set timeToCooldown
@@ -276,15 +290,16 @@ void System::step() {
 			continue;
 
 		// Target-following
-		if (0) // Not yet
+		if (object.type == Object::ROCKET) // Not yet
 			for (auto& target : objects) {
-				if (geom::distance(object.pos, target.pos) < 6 && object.team != target.team && target.type == Object::SHIP)
-					object.dir = geom::dir(target.pos - object.pos);
+				if (rocket::isInRange(object, target) && (object.team != target.team) && target.type == Object::SHIP) {
+					object.dir = rocket::accelDir(object, target, object.force);
+				}
 			}
 
 		// Trigger
 		for (auto& target : objects) {
-			double triggerRadius = 2;
+			double triggerRadius = rocket::triggerRadiusConst;
 			if (target.type != Object::SHIP)
 				triggerRadius = target.r;
 
@@ -294,7 +309,7 @@ void System::step() {
 
 		// Explode
 		if (object.hp < EPS) {
-			setExplosion(object, object.pos, object.deltaVel * 0, 2, 5, 0.1, object.damage);
+			setExplosion(object, object.pos, object.vel * rocket::explosion::isMove, rocket::explosion::radius, rocket::explosion::power, rocket::explosion::time, object.damage);
 		}
 	}
 
@@ -322,6 +337,8 @@ void System::step() {
 		if(x >= 0 && y >=0 && x < field.size() && y < field[x].size())
 			object.deltaVel += field[x][y].forceField * dt; // object.m;
 	}
+
+
 
 	// Add new objects
 	for (auto& object : objectsToAdd) {
