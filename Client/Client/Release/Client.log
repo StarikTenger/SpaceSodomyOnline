@@ -1,8 +1,269 @@
-﻿  Control.cpp
-C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Client\Control.cpp(188,24): warning C4018: '>': signed/unsigned mismatch
-  Generating code
-  0 of 1687 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  Client.vcxproj -> C:\Users\ilyin\GitHub\SpaceSodomyOnline\Client\Release\Client.exe
+﻿  Animation.cpp
+  Audio.cpp
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\Audio.cpp(39,26): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\Audio.cpp(43,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\Audio.cpp(54,34): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\Audio.cpp(54,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\Audio.cpp(54,21): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\Audio.cpp(55,19): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Bonus.cpp
+  Camera.cpp
+  Cell.cpp
+  Color.cpp
+  Control.cpp
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\Control.cpp(188,24): warning C4018: '>': signed/unsigned mismatch
+  Control.events.cpp
+  Control.setSounds.cpp
+  DrawSystem.basics.cpp
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(69,40): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(69,28): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(70,40): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(70,33): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(71,67): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(71,58): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(71,49): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(71,40): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(72,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(72,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(78,40): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(78,28): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(79,40): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(79,33): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(80,70): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(80,61): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(80,52): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(80,43): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(83,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(83,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(89,22): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(89,19): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(90,19): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(91,64): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(91,55): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(91,46): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(91,37): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(92,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(92,21): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(99,30): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(99,27): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(100,31): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(100,27): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(102,70): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(102,61): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(102,52): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(102,43): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(113,56): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(113,35): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(115,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(115,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(116,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(116,21): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(118,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(129,56): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(129,35): warning C4244: 'argument': conversion from 'T' to 'float', possible loss of data
+          with
+          [
+              T=unsigned int
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(131,32): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(131,23): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(136,52): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(136,47): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(136,42): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(136,37): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(137,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(137,21): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(139,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(157,67): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(157,58): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(157,49): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(157,40): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(160,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(160,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(168,67): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(168,58): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(168,49): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(168,40): warning C4244: 'argument': conversion from 'double' to 'sf::Uint8', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(170,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(170,26): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(172,27): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(172,24): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.basics.cpp(173,34): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  DrawSystem.cpp
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,50): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(39,47): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,61): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(52,26): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,41): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(53,22): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(55,42): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(303,50): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(303,47): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(427,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(432,94): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(433,116): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(434,118): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(435,120): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(449,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.cpp(455,20): warning C4018: '<': signed/unsigned mismatch
+  DrawSystem.drawWalls.cpp
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(16,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(17,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(35,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(36,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(53,11): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(59,11): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(76,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(77,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(99,11): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(111,11): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(121,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\DrawSystem.drawWalls.cpp(122,21): warning C4018: '<': signed/unsigned mismatch
+  DrawSystem.loadTextures.cpp
+  DrawSystem.objects.cpp
+  Gamepad.cpp
+  geometry.cpp
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\geometry.cpp(81,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\geometry.cpp(92,20): warning C4018: '<': signed/unsigned mismatch
+  getMilliCount.cpp
+  main.cpp
+  Mouse.cpp
+  Object.cpp
+  Compiling...
+  Parameter.cpp
+  Player.cpp
+  random.cpp
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\random.cpp(6,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Replay.cpp
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\Replay.cpp(19,12): warning C4018: '>=': signed/unsigned mismatch
+  Sound.cpp
+  System.cpp
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\System.cpp(90,27): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\System.cpp(90,48): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\System.cpp(255,43): warning C4834: discarding return value of function with 'nodiscard' attribute
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\System.cpp(268,43): warning C4834: discarding return value of function with 'nodiscard' attribute
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Client\System.cpp(283,23): warning C4018: '<': signed/unsigned mismatch
+  Vec2.cpp
+  Microsoft (R) Incremental Linker Version 14.27.29111.0
+  Copyright (C) Microsoft Corporation.  All rights reserved.
+  
+  "/OUT:C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Release\Client.exe" /NOLOGO "sfml-graphics.lib" "sfml-window.lib" "sfml-system.lib" "sfml-network.lib" "sfml-audio.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST "/MANIFESTUAC:level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FULL "/PDB:C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Release\Client.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF "/PGD:C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Release\Client.pgd" /LTCG:PGUpdate /TLBID:1 /DYNAMICBASE /NXCOMPAT "/IMPLIB:C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Release\Client.lib" /MACHINE:X86 /SAFESEH Release\Animation.obj 
+  Release\Audio.obj 
+  Release\Bonus.obj 
+  Release\Camera.obj 
+  Release\Cell.obj 
+  Release\Color.obj 
+  Release\Control.obj 
+  Release\Control.events.obj 
+  Release\Control.setSounds.obj 
+  Release\DrawSystem.basics.obj 
+  Release\DrawSystem.obj 
+  Release\DrawSystem.drawWalls.obj 
+  Release\DrawSystem.loadTextures.obj 
+  Release\DrawSystem.objects.obj 
+  Release\Gamepad.obj 
+  Release\geometry.obj 
+  Release\getMilliCount.obj 
+  Release\main.obj 
+  Release\Mouse.obj 
+  Release\Object.obj 
+  Release\Parameter.obj 
+  Release\Player.obj 
+  Release\random.obj 
+  Release\Replay.obj 
+  Release\Sound.obj 
+  Release\System.obj 
+  Release\Vec2.obj 
+LINK : fatal error LNK1266: error reading instrumentation file 'C:\Users\Zennn\source\ss\SpaceSodomyOnline\Client\Release\Client.pgd'; File not found

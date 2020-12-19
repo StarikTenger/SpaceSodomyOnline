@@ -1,6 +1,49 @@
-﻿  Generating code
-  0 of 1630 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  Server.vcxproj -> C:\Users\ilyin\GitHub\SpaceSodomyOnline\Server\Release\Server.exe
+﻿  Bonus.cpp
+  BonusInfo.cpp
+  Cell.cpp
+  Color.cpp
+  Control.cpp
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\Control.cpp(207,21): warning C4018: '<': signed/unsigned mismatch
+  Engine.cpp
+  Gamepad.cpp
+  geometry.cpp
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\geometry.cpp(81,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\geometry.cpp(92,20): warning C4018: '<': signed/unsigned mismatch
+  getMilliCount.cpp
+  Gun.cpp
+  HomingRocket.cpp
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\HomingRocket.cpp(40,72): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\HomingRocket.cpp(42,136): warning C4244: '-=': conversion from 'double' to 'int', possible loss of data
+  main.cpp
+  Module.cpp
+  ModuleInfo.cpp
+  Mouse.cpp
+  Object.cpp
+  Parameters.cpp
+  Player.cpp
+  random.cpp
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\random.cpp(6,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  System.collision.cpp
+  Generating Code...
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\Gamepad.cpp(32): warning C4715: 'Gamepad::get': not all control paths return a value
+  Compiling...
+  System.cpp
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.cpp(305,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.cpp(307,25): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.cpp(313,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.cpp(315,26): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.cpp(323,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.cpp(451,27): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.cpp(451,48): warning C4018: '>=': signed/unsigned mismatch
+  System.step.cpp
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.step.cpp(359,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.step.cpp(359,47): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.step.cpp(372,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.step.cpp(478,9): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.step.cpp(491,28): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.step.cpp(491,48): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.step.cpp(502,20): warning C4018: '<': signed/unsigned mismatch
+  Team.cpp
+  Vec2.cpp
+  Generating Code...
+  Server.vcxproj -> C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Release\Server.exe

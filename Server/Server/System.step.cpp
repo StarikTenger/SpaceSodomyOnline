@@ -19,10 +19,11 @@ void System::step() {
 			double k = 1; // cooldown speed koeff
 			// boosts for berserk mode
 			if (player.effects[Bonus::BERSERK] > 0) {
-				k = 3;
+				k = parameters.berserk_firingBoost;
 				object.energy = object.energyMax;
 				object.stamina = object.staminaMax;
 			}
+
 
 			// gun
 			player.gun.timeToCooldown -= dt * k;
@@ -66,8 +67,9 @@ void System::step() {
 		if (object.type != Object::SHIP)
 			continue;
 		object.mConst = object.m;
-		object.m += players[object.id].effects[Bonus::MASS] / 5;
+		object.m += players[object.id].effects[Bonus::MASS] / parameters.mass_effect * parameters.mass_cheatSlowdown;
 	}
+
 
 	// Matching to players
 	for (auto& object : objects) {
@@ -96,7 +98,9 @@ void System::step() {
 			// linear
 			double k = 1;
 			if (player.effects[Bonus::BOOST] > 0)
-				k = 5;
+				k = parameters.boost_speedIncrease;
+			if (player.effects[Bonus::IMPULSE] > 0)
+				k *= parameters.impulse_aftereffectBoost;
 
 			if (player.orders[Player::MOVE_FORWARD]) {
 				object.deltaVel += geom::rotate(Vec2(player.engine.linearForce, 0), object.dir) * dt * k / object.m;
@@ -146,16 +150,16 @@ void System::step() {
 		if (player.orders[Player::ACTIVATE]) {
 			switch (player.activeAbility) {
 			case Bonus::BERSERK:
-				player.effects[Bonus::BERSERK] = 5;
+				player.effects[Bonus::BERSERK] = parameters.berserk_duration;
 				break;
 			case Bonus::IMMORTAL:
-				player.effects[Bonus::IMMORTAL] = 5;
+				player.effects[Bonus::IMMORTAL] = parameters.immortality_duration;
 				break;
 			case Bonus::BOOST:
-				player.effects[Bonus::BOOST] = 5;
+				player.effects[Bonus::BOOST] = parameters.boost_duration;
 				break;
 			case Bonus::LASER:
-				player.effects[Bonus::LASER] = 0.5;
+				player.effects[Bonus::LASER] = parameters.laser_duration;
 				break;
 			}
 			player.activeAbility = Bonus::NONE;
@@ -184,14 +188,14 @@ void System::step() {
 			// Check for type of module
 			switch (player.modules[moduleId].type) {
 			case Module::HP_UP: {
-				player.object->hp += 1;
+				player.object->hp += parameters.hpUp_hpIncrease;
 				if (player.object->hp > player.object->hpMax)
 					player.object->hp = player.object->hpMax;
 				break;
 			}
 
 			case Module::ENERGY_UP: {
-				player.object->energy += 5;
+				player.object->energy += parameters.energyUp_energyInrease;
 				break;
 			}
 
@@ -206,16 +210,17 @@ void System::step() {
 			}
 
 			case Module::IMPULSE: {
-				object.deltaVel += geom::direction(object.dir) * 15;
+				object.deltaVel += geom::direction(object.dir) * parameters.impulse_deltaVel;
+				player.effects[Bonus::IMPULSE] = parameters.impulse_aftereffetDuration;
 				break;
 			}
 
 			case Module::ROCKET: {
 				auto gunVelPrev = player.gun.vel;
 				auto gunDamagePrev = player.gun.damage;
-				player.gun.vel = 0;
-				player.gun.force = 15;
-				player.gun.damage = 1;
+				player.gun.vel = parameters.rocket_initVel;
+				player.gun.force = parameters.rocket_force;
+				player.gun.damage = parameters.rocket_damage;
 				shoot(object, { 0.1 , 0 }, Object::ROCKET, 0, 1);
 				player.gun.vel = gunVelPrev;
 				player.gun.damage = gunDamagePrev;
@@ -224,17 +229,17 @@ void System::step() {
 			}
 
 			case Module::SPLASH: {
-				explode(object, object.pos, 6, M_PI * 2, 13, 0, 1);
+				explode(object, object.pos, parameters.force_radius, M_PI * 2, parameters.force_power, 0, 1);
 				break;
 			}
 
 			case Module::IMMORTALITY: {
-				player.effects[Bonus::IMMORTAL] = 1.0;
+				player.effects[Bonus::IMMORTAL] = parameters.pickupImmortality_duration;
 				break;
 			}
 
 			case Module::BLINK: {
-				auto pos = object.pos + geom::direction(object.dir) * 5;
+				auto pos = object.pos + geom::direction(object.dir) * parameters.blink_distance;
 				if (!checkWall(pos) && field[(int)pos.x][(int)pos.y].allowed)
 					object.pos = pos;
 				else
@@ -242,28 +247,21 @@ void System::step() {
 				break;
 			}
 			case Module::INVISIBILITY: {
-				player.effects[Bonus::INVISIBILITY] = 5.0;
+				player.effects[Bonus::INVISIBILITY] = parameters.invisibility_duration;
 				break;
 			}
 			case Module::MASS: {
 				auto gunVelprev = player.gun.vel;
-				player.gun.vel = 6;
+				player.gun.vel = parameters.mass_vel;
+
 				shoot(object, { 0.1 , 0 }, Object::MASS, 0, 1);
-				shoot(object, { 0.1 , 0.1 }, Object::MASS, 0.02, 1);
-				shoot(object, { 0.1 , -0.1 }, Object::MASS, -0.02, 1);
+				//shoot(object, { 0.1 , 0.1 }, Object::MASS, 0.02, 1);
+				//shoot(object, { 0.1 , -0.1 }, Object::MASS, -0.02, 1);
 				player.gun.vel = gunVelprev;
 				break;
 			}
 			case Module::HOOK: {
-				for (auto& target : objects) {
-					if (geom::distance(object.pos, target.pos) < ModuleParam::hookDistance  
-						&& target.type == Object::SHIP
-						&& checkAbilityToHit(object, target, ModuleParam::hookAngle))
-						{
-						object.deltaVel += geom::direction(geom::dir(target.pos - object.pos)) * ModuleParam::hookAccel * dt;
-						target.deltaVel -= geom::direction(geom::dir(target.pos - object.pos)) * ModuleParam::hookAccel * dt;
-					}
-				}
+				player.effects[Bonus::HOOK] = parameters.hook_duration;
 				break;
 			}
 			}		
@@ -275,6 +273,25 @@ void System::step() {
 				object.stamina -= info.stamina;
 			}
 		}
+	}
+
+
+	//hook effect
+	for (auto& object : objects) {
+		if (object.type != Object::SHIP)
+			continue;
+		if (players[object.id].effects[Bonus::HOOK] > EPS) {
+			for (auto& target : objects) {
+				if (geom::distance(object.pos, target.pos) < parameters.hook_distance
+					&& target.type == Object::SHIP
+					&& checkAbilityToHit(object, target, parameters.hook_angle))
+				{
+					object.deltaVel += geom::direction(geom::dir(target.pos - object.pos)) * parameters.hook_force * dt / object.m;
+					target.deltaVel -= geom::direction(geom::dir(target.pos - object.pos)) * parameters.hook_force * dt / target.m;
+				}
+			}
+		}
+		
 	}
 
 	// Bullet & Rocket force
@@ -290,16 +307,16 @@ void System::step() {
 			continue;
 
 		// Target-following
-		if (object.type == Object::ROCKET) // Not yet
+		if (object.type == Object::ROCKET) 
 			for (auto& target : objects) {
-				if (rocket::isInRange(object, target) && (object.team != target.team) && target.type == Object::SHIP) {
-					object.dir = rocket::accelDir(object, target, object.force);
+				if (rocket::isInRange(object, target, parameters) && (object.team != target.team) && target.type == Object::SHIP) {
+					object.dir = rocket::accelDir(object, target, object.force, parameters);
 				}
 			}
 
 		// Trigger
 		for (auto& target : objects) {
-			double triggerRadius = rocket::triggerRadiusConst;
+			double triggerRadius = parameters.rocket_triggerRadius;
 			if (target.type != Object::SHIP)
 				triggerRadius = target.r;
 
@@ -309,7 +326,12 @@ void System::step() {
 
 		// Explode
 		if (object.hp < EPS) {
-			setExplosion(object, object.pos, object.vel * rocket::explosion::isMove, rocket::explosion::radius, rocket::explosion::power, rocket::explosion::time, object.damage);
+			setExplosion(object, object.pos, 
+				object.vel * parameters.rocket_explosion_isMove,
+				parameters.rocket_explosion_radius,
+				parameters.rocket_explosion_power,
+				parameters.rocket_explosion_time,
+				object.damage);
 		}
 	}
 
@@ -321,7 +343,7 @@ void System::step() {
 		// Sticking
 		for (auto& target : objects) {
 			if (geom::distance(object.pos, target.pos) < object.r + target.r && object.team != target.team && target.type == Object::SHIP) {
-				players[target.id].effects[Bonus::MASS] += object.m * 5;
+				players[target.id].effects[Bonus::MASS] += object.m * parameters.mass_effect;
 				if(target.m > 0)
 					target.deltaVel +=  (object.deltaVel - target.deltaVel) * object.m / target.m;
 				object.hp = 0;
@@ -416,7 +438,7 @@ void System::step() {
 		auto& player = players[object.id];
 
 		for (auto& bonus : bonuses) {
-			if (geom::distance(object.pos, bonus.pos) >= object.r * 2)
+			if (geom::distance(object.pos, bonus.pos) >= object.r * parameters.bonus_pickupFactor)
 				continue;
 
 			if (bonus.type == Bonus::ENERGY) {

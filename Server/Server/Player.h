@@ -25,7 +25,19 @@ public:
 	Engine engine; // engine parameters
 	Gun gun; // gun parameters
 	Bonus::Type activeAbility = Bonus::NONE; // bonus slot
-	std::vector<double> effects = { 0,0,0,0,0,0,0,0,0,0 }; // time ot cooldown for every effect
+	std::vector<double> effects = { // time ot cooldown for every effect
+		0,        //NONE
+		0,        //HP
+		0,        //ENERGY
+		0,        //BERSERK
+		0,        //IMMORTAL
+		0,        //BOOST
+		0,        //LASER
+		0,        //INVINCIBILITY
+		0,        //MASS
+		0,        //HOOK
+		0         //IMPULSE
+	}; 
 	std::vector<Module> modules = { {Module::Type::HP_UP}, {Module::Type::ENERGY_UP} };
 
 	int alive = 1; // 0 - dead, 1 - alive
