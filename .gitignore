@@ -363,3 +363,4 @@ FodyWeavers.xsd
 
 # Own
 *.rep
+.vs/

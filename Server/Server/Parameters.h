@@ -12,7 +12,7 @@ struct Parameters {
 	double module_rocket_cooldown = 0.5;
 
 
-	//rocket param
+	// Rocket param
     int rocket_binSearchPrecision = 20;
     double rocket_targetingRadius = 6.0;
     double rocket_triggerRadius = 0.6;
@@ -26,12 +26,12 @@ struct Parameters {
 	double rocket_damage = 1;
 	double rocket_initVel = 0;
 
-	//force param
+	// Force param
 	double force_radius = 6;
 	double force_power = 13;
 
 
-	//misc
+	// Misc
 	double berserk_firingBoost = 3.0;
 	double berserk_duration = 5.0;
 
@@ -61,9 +61,9 @@ struct Parameters {
 	double mass_mass = 0.2;
 	double mass_vel = 18;
 	double mass_cheatSlowdown = 2;
-	double mass_effect = mass_duration / mass_mass; // duration/mass
+	double mass_effect = mass_duration / mass_mass; // Duration/mass
 
-	double bonus_pickupFactor = 2; //pickup_radius = Factor * your_radius
+	double bonus_pickupFactor = 2; // Pickup_radius = Factor * your_radius
     
 };
 

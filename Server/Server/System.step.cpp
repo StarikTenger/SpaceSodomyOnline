@@ -345,7 +345,7 @@ void System::step() {
 			if (geom::distance(object.pos, target.pos) < object.r + target.r && object.team != target.team && target.type == Object::SHIP) {
 				players[target.id].effects[Bonus::MASS] += object.m * parameters.mass_effect;
 				if(target.m > 0)
-					target.deltaVel +=  (object.deltaVel - target.deltaVel) * object.m / target.m;
+					target.deltaVel +=  (object.vel - target.vel) * object.m / target.m;
 				object.hp = 0;
 				damage(object, target, 0);
 			}
