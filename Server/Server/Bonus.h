@@ -13,7 +13,8 @@ public:
 		LASER,
 		INVISIBILITY,
 		MASS,
-		HOOK
+		HOOK,
+		IMPULSE
 	};
 	Vec2 pos;
 	Type type = NONE;

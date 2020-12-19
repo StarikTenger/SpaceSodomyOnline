@@ -365,7 +365,7 @@ void System::shoot(Object& object, Vec2 shift, int type, double dir, int skip) {
 	bullet.r = 0.4;
 	bullet.m = 0.01;
 	if (type == Object::MASS)
-		bullet.m = 0.2;
+		bullet.m = parameters.mass_mass;
 
 	// Pos & dir
 	shift = geom::rotate(shift, object.dir);

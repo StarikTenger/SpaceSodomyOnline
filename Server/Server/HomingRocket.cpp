@@ -2,15 +2,15 @@
 #include <iostream>
 
 
-double rocket::naiveAccelDir(Object rocket, Object target, double accel) {
+double rocket::naiveAccelDir(Object rocket, Object target, double accel, Parameters& parameters) {
     return (geom::dir(target.vel - rocket.vel) + M_PI / 2) * std::signbit((geom::rotate(target.vel - rocket.vel, M_PI / 2) * (target.pos - rocket.pos)));
 }
 
-double rocket::accelDir(Object rocket, Object target, double accel) {
-    return rocket::calcDir(target.pos - rocket.pos, target.vel - rocket.vel, accel);
+double rocket::accelDir(Object rocket, Object target, double accel, Parameters& parameters) {
+    return rocket::calcDir(target.pos - rocket.pos, target.vel - rocket.vel, accel, parameters);
 }
 
-double rocket::calcDir(Vec2 targetPos, Vec2 targetVel, double accel) {
+double rocket::calcDir(Vec2 targetPos, Vec2 targetVel, double accel, Parameters& parameters) {
 
     double timeLow = 0, timeHigh = 1. + 2 * sqrt(4 * (targetVel * targetVel) / (accel * accel));
 
@@ -19,7 +19,7 @@ double rocket::calcDir(Vec2 targetPos, Vec2 targetVel, double accel) {
     }
 
     
-    for (int i = 0; i < rocket::binSearchPrecision ; i++) {
+    for (int i = 0; i < parameters.rocket_binSearchPrecision ; i++) {
         if (homingFunc(targetPos, targetVel, (timeLow + timeHigh) / 2, accel) >= 0)
             timeLow = (timeLow + timeHigh) / 2;
         else 
@@ -30,11 +30,11 @@ double rocket::calcDir(Vec2 targetPos, Vec2 targetVel, double accel) {
 }
 
 
-double rocket::updateDir(Object rocket, Object target,double accel, double rocketDir) {
-    return rocket::calcUpdateDir(target.pos - rocket.pos, target.vel - rocket.vel, accel, rocketDir);
+double rocket::updateDir(Object rocket, Object target,double accel, double rocketDir, Parameters& parameters) {
+    return rocket::calcUpdateDir(target.pos - rocket.pos, target.vel - rocket.vel, accel, rocketDir, parameters);
 }
 
-double rocket::calcUpdateDir(Vec2 targetPos, Vec2 targetVel, double accel, double rocketDir) {
+double rocket::calcUpdateDir(Vec2 targetPos, Vec2 targetVel, double accel, double rocketDir, Parameters& parameters) {
     int timeEst = 0;
     if (!(geom::direction(rocketDir + M_PI / 2) * targetVel)) {
         timeEst = -(geom::direction(rocketDir + M_PI / 2) * targetPos) / (geom::direction(rocketDir + M_PI / 2) * targetVel);
@@ -53,6 +53,6 @@ double rocket::homingFuncDeriv(Vec2 pos, Vec2 vel, double time, double accel) {
 }
 
 
-bool rocket::isInRange(Object rocket, Object target) {
-    return (geom::distance(rocket.pos, target.pos) < rocket::targetingRadius);
+bool rocket::isInRange(Object rocket, Object target, Parameters& parameters) {
+    return (geom::distance(rocket.pos, target.pos) < parameters.rocket_targetingRadius);
 }
