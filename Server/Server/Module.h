@@ -12,7 +12,7 @@ public:
 		BLINK,
 		INVISIBILITY,
 		MASS,
-		HOOK
+		ADMIN
 	};
 
 	int type = 0;

@@ -49,7 +49,7 @@ public:
 	double energy = energyMax;
 	double energyRecovery = 0;
 	double staminaMax = 10;
-	double stamina = energyMax;
+	double stamina = staminaMax;
 	double staminaRecovery = 2;
 
 	
