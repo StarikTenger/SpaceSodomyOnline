@@ -11,8 +11,8 @@ C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.cpp(317,25): war
 C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.cpp(323,22): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.cpp(325,26): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
 C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.cpp(333,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.cpp(479,27): warning C4018: '>=': signed/unsigned mismatch
-C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.cpp(479,48): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.cpp(485,27): warning C4018: '>=': signed/unsigned mismatch
+C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.cpp(485,48): warning C4018: '>=': signed/unsigned mismatch
   System.step.cpp
 C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.step.cpp(360,27): warning C4018: '<': signed/unsigned mismatch
 C:\Users\Zennn\source\ss\SpaceSodomyOnline\Server\Server\System.step.cpp(360,47): warning C4018: '<': signed/unsigned mismatch

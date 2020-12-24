@@ -29,6 +29,7 @@ struct Parameters {
 	bool   isSuicideDecreaseKills = 0;
 	double collision_regenCoeff = 0.2;  //regeneration of velocity in collisions
 	double duration_Immframes = 0.1;
+	double explosion_critMassRatio = 2;
 
 
 

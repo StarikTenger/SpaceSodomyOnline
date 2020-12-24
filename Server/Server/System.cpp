@@ -458,15 +458,21 @@ void System::damage(Object& object, Object& target, double value) {
 	}
 }
 
-void System::explode(Object& object, Vec2 pos, double r, double angle, double power, double dmg, double backForce) {
+void System::explode(Object& object, Vec2 pos, double r, double angle, double power, double dmg, double isRecoil) {
 	for (auto& target : objects) {
 		double dist = geom::distance(pos, target.pos);
 		if (dist < r && geom::dir(target.pos, object.pos, object.pos + geom::direction(object.dir)) <= angle) {
 			damage(object, target, dmg);
 			if(dist > EPS){
 				Vec2 dl = target.pos - pos;
-				target.vel += dl / dist * power;
-				object.vel -= dl / dist * power * backForce * target.m / object.m;
+				if (target.m / object.m > parameters.explosion_critMassRatio) {
+					target.vel += dl / dist * power * object.m / target.m / parameters.explosion_critMassRatio;
+					object.vel -= dl / dist * power * isRecoil;
+				}
+				else {
+					target.vel += dl / dist * power;
+					object.vel -= dl / dist * power * isRecoil * target.m / object.m;
+				}
 			}
 		}
 	}
