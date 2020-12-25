@@ -148,7 +148,7 @@ std::map<std::string, int> System::moduleNames = {
 		{"BLINK", Module::BLINK},
 		{"INVISIBILITY", Module::INVISIBILITY},
 		{"MASS", Module::MASS},
-	    {"HOOK", Module::HOOK}
+	    {"ADMIN", Module::ADMIN}
 };
 
 void System::setPlayer(Object object) {
@@ -159,6 +159,14 @@ void System::setPlayer(Object object) {
 	
 	players[object.id].team = object.team;
 	players[object.id].lastContact = 0;
+
+	players[object.id].gun.cooldownTime = parameters.player_gun_cooldown;
+	players[object.id].gun.damage = parameters.player_damage;
+	players[object.id].gun.vel = parameters.player_bullet_vel;
+	players[object.id].gun.force = parameters.player_bullet_force;
+	players[object.id].gun.lifetime = parameters.player_bullet_lifetime;
+	players[object.id].gun.energy = parameters.player_energyToShoot;
+	players[object.id].gun.stamina = parameters.player_staminaToShoot;
 
 	// Modules
 	players[object.id].activeAbility = Bonus::NONE;
@@ -173,7 +181,9 @@ void System::setPlayer(Object object) {
 
 	// Parameters
 	objects.back().hpMax = parameters.player_hp;
+	objects.back().energyRecovery = parameters.player_energy_recovery;
 	objects.back().energyMax = parameters.player_energy;
+	objects.back().staminaRecovery = parameters.player_stamina_recovery;
 	objects.back().staminaMax = parameters.player_stamina;
 
 	objects.back().init();
@@ -362,24 +372,42 @@ void System::shoot(Object& object, Vec2 shift, int type, double dir, int skip) {
 	bullet.id = object.id;
 	bullet.team = object.team;
 	bullet.color = object.color;
-	bullet.r = 0.4;
-	bullet.m = 0.01;
-	if (type == Object::MASS)
-		bullet.m = parameters.mass_mass;
 
 	// Pos & dir
 	shift = geom::rotate(shift, object.dir);
 	bullet.dir = object.dir + dir;
 	bullet.pos = object.pos + shift;
 
-	bullet.damage = player.gun.damage;
-	bullet.vel = object.vel + geom::direction(bullet.dir) * player.gun.vel;
-	bullet.w = object.w;
-	bullet.force = player.gun.force;
-	bullet.hp = player.gun.lifetime;
+	if (type == Object::BULLET) {
+		bullet.r = parameters.bullet_radius;
+		bullet.m = parameters.bullet_mass;
+		bullet.damage = player.gun.damage;
+		bullet.vel = object.vel + geom::direction(bullet.dir) * player.gun.vel;
+		bullet.w = object.w;
+		bullet.force = player.gun.force;
+		bullet.hp = player.gun.lifetime;
+	}
+	if (type == Object::MASS) {
+		bullet.r = parameters.mass_radius;
+		bullet.m = parameters.mass_mass;
+		bullet.damage = 0;
+		bullet.vel = object.vel + geom::direction(bullet.dir) * parameters.mass_vel;
+		bullet.w = object.w;
+		bullet.force = 0;
+		bullet.hp = player.gun.lifetime;
+	} 
+	if (type == Object::ROCKET) {
+		bullet.r = parameters.rocket_radius;
+		bullet.m = parameters.bullet_mass;
+		bullet.damage = parameters.rocket_damage;
+		bullet.vel = object.vel + geom::direction(bullet.dir) * parameters.rocket_initVel;
+		bullet.w = object.w;
+		bullet.force = parameters.rocket_force;
+		bullet.hp = player.gun.lifetime;
+	}
 
 	// Recoil
-	object.deltaVel -= geom::direction(bullet.dir) * player.gun.vel * bullet.m / object.m;
+	object.deltaVel -= (bullet.vel - object.vel) * bullet.m / object.m;
 
 	objectsToAdd.push_back(bullet);
 }
@@ -412,7 +440,7 @@ void System::damage(Object& object, Object& target, double value) {
 	target.hp -= value;
 
 	if (target.type == Object::SHIP)
-		playerTarget.effects[Bonus::IMMORTAL] = 0.1;
+		playerTarget.effects[Bonus::IMMORTAL] = parameters.duration_Immframes;
 
 	if (object.id && object.id != target.id) {
 		playerTarget.lastContact = object.id;
@@ -424,21 +452,27 @@ void System::damage(Object& object, Object& target, double value) {
 		players[target.id].deaths++;
 
 		if (players[object.id].object) {
-			players[object.id].object->energy += 5;
-			players[object.id].object->energyRecovery *= 1.26;
+			players[object.id].object->energy += parameters.onKill_energyPlus;
+			players[object.id].object->energyRecovery *= parameters.onKill_energyRegenBoost;
 		}
 	}
 }
 
-void System::explode(Object& object, Vec2 pos, double r, double angle, double power, double dmg, double backForce) {
+void System::explode(Object& object, Vec2 pos, double r, double angle, double power, double dmg, double isRecoil) {
 	for (auto& target : objects) {
 		double dist = geom::distance(pos, target.pos);
 		if (dist < r && geom::dir(target.pos, object.pos, object.pos + geom::direction(object.dir)) <= angle) {
 			damage(object, target, dmg);
 			if(dist > EPS){
 				Vec2 dl = target.pos - pos;
-				target.vel += dl / dist * power;
-				object.vel -= dl / dist * power * backForce * target.m / object.m;
+				if (target.m / object.m > parameters.explosion_critMassRatio) {
+					target.vel += dl / dist * power * object.m / target.m / parameters.explosion_critMassRatio;
+					object.vel -= dl / dist * power * isRecoil;
+				}
+				else {
+					target.vel += dl / dist * power;
+					object.vel -= dl / dist * power * isRecoil * target.m / object.m;
+				}
 			}
 		}
 	}

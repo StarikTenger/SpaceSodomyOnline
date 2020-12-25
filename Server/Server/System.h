@@ -18,10 +18,10 @@
 class System {
 public:
 
-	double dt = 0.02;
-	double bounce = 0.2;
-
 	Parameters parameters;
+
+	double dt = 0.02;
+	double bounce = parameters.collision_regenCoeff;
 
 	// bonuses
 	std::vector<BonusInfo> bonusInfo = { 

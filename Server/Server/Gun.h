@@ -1,4 +1,5 @@
 #pragma once
+
 class Gun {
 public:
 	double cooldownTime = 0.5;

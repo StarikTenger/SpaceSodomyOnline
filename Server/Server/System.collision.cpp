@@ -76,7 +76,7 @@ void System::collision() {
 				}
 
 				if (player.effects[Bonus::BOOST] > 0) {
-					damage(a, b, 10);
+					damage(a, b, parameters.boost_damage);
 				}
 
 				//a.vel += geom::dir(a.pos, b.pos) * dt * 10 / a.m;
@@ -157,7 +157,7 @@ void System::collision() {
 			if (u.hp < EPS) {
 				wallKills++;
 				players[u.id].deaths++;
-				//players[u.id].kills--;
+				players[u.id].kills -= parameters.isSuicideDecreaseKills;
 
 				// Last contact
 				if (players[u.id].lastContact) {

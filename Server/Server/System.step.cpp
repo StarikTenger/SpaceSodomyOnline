@@ -216,15 +216,7 @@ void System::step() {
 			}
 
 			case Module::ROCKET: {
-				auto gunVelPrev = player.gun.vel;
-				auto gunDamagePrev = player.gun.damage;
-				player.gun.vel = parameters.rocket_initVel;
-				player.gun.force = parameters.rocket_force;
-				player.gun.damage = parameters.rocket_damage;
 				shoot(object, { 0.1 , 0 }, Object::ROCKET, 0, 1);
-				player.gun.vel = gunVelPrev;
-				player.gun.damage = gunDamagePrev;
-				player.gun.force = 0;
 				break;
 			}
 
@@ -234,7 +226,7 @@ void System::step() {
 			}
 
 			case Module::IMMORTALITY: {
-				player.effects[Bonus::IMMORTAL] = parameters.pickupImmortality_duration;
+				player.effects[Bonus::IMMORTAL] = parameters.bonusImmortality_duration;
 				break;
 			}
 
@@ -251,17 +243,20 @@ void System::step() {
 				break;
 			}
 			case Module::MASS: {
-				auto gunVelprev = player.gun.vel;
-				player.gun.vel = parameters.mass_vel;
-
 				shoot(object, { 0.1 , 0 }, Object::MASS, 0, 1);
 				//shoot(object, { 0.1 , 0.1 }, Object::MASS, 0.02, 1);
 				//shoot(object, { 0.1 , -0.1 }, Object::MASS, -0.02, 1);
-				player.gun.vel = gunVelprev;
 				break;
 			}
-			case Module::HOOK: {
-				player.effects[Bonus::HOOK] = parameters.hook_duration;
+			case Module::ADMIN: {
+				if (player.name == parameters.admin_name) {
+					player.effects[Bonus::IMMORTAL] = parameters.admin_duration;
+				}
+				else {
+					std::cout << "OH NO! Someone attempted to use your admin-only abilities!\n";
+					player.effects[Bonus::MASS] += parameters.mass_mass * parameters.mass_effect;
+				}
+				player.effects[Bonus::ADMIN] = parameters.admin_duration;
 				break;
 			}
 			}		
@@ -277,6 +272,7 @@ void System::step() {
 
 
 	//hook effect
+	/*
 	for (auto& object : objects) {
 		if (object.type != Object::SHIP)
 			continue;
@@ -291,8 +287,8 @@ void System::step() {
 				}
 			}
 		}
-		
 	}
+	*/
 
 	// Bullet & Rocket force
 	for (auto& object : objects) {
@@ -309,7 +305,11 @@ void System::step() {
 		// Target-following
 		if (object.type == Object::ROCKET) 
 			for (auto& target : objects) {
-				if (rocket::isInRange(object, target, parameters) && (object.team != target.team) && target.type == Object::SHIP) {
+				if (rocket::isInRange(object, target, parameters) &&
+					object.team != target.team &&
+					target.type == Object::SHIP && 
+					players[target.id].effects[Bonus::INVISIBILITY] == 0)
+				{
 					object.dir = rocket::accelDir(object, target, object.force, parameters);
 				}
 			}
@@ -319,7 +319,8 @@ void System::step() {
 			double triggerRadius = parameters.rocket_triggerRadius;
 			if (target.type != Object::SHIP)
 				triggerRadius = target.r;
-
+			if (players[target.id].effects[Bonus::INVISIBILITY] > EPS)
+				continue;
 			if (geom::distance(object.pos, target.pos) < triggerRadius && object.team != target.team)
 				object.hp = 0;
 		}
@@ -345,7 +346,7 @@ void System::step() {
 			if (geom::distance(object.pos, target.pos) < object.r + target.r && object.team != target.team && target.type == Object::SHIP) {
 				players[target.id].effects[Bonus::MASS] += object.m * parameters.mass_effect;
 				if(target.m > 0)
-					target.deltaVel +=  (object.vel - target.vel) * object.m / target.m;
+					target.deltaVel +=  (object.vel - target.vel) * object.m / target.m * parameters.mass_cheatShove;
 				object.hp = 0;
 				damage(object, target, 0);
 			}

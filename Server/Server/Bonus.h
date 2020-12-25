@@ -13,7 +13,7 @@ public:
 		LASER,
 		INVISIBILITY,
 		MASS,
-		HOOK,
+		ADMIN,
 		IMPULSE
 	};
 	Vec2 pos;
