@@ -27,14 +27,14 @@ System::System() {
 
 }
 
-// Load map
 System::System(string path) {
-	loadMap(path);
+	//loadMap(path);
 }
 
 System::~System() {
 }
 
+// Load map
 void System::loadMap(std::string path) {
 	ifstream file(path);
 	int width, height;
@@ -123,6 +123,7 @@ void System::loadMap(std::string path) {
 				bonusInfo[Bonus::BOOST].positions.push_back(pos);
 			if (type == "laser")
 				bonusInfo[Bonus::LASER].positions.push_back(pos);
+			std::cout << type << " " << pos.x << " " << pos.y << "\n";
 		}
 	}
 }
@@ -466,7 +467,7 @@ void System::explode(Object& object, Vec2 pos, double r, double angle, double po
 			if(dist > EPS){
 				Vec2 dl = target.pos - pos;
 				if (target.m / object.m > parameters.explosion_critMassRatio) {
-					target.vel += dl / dist * power * object.m / target.m / parameters.explosion_critMassRatio;
+					target.vel += dl / dist * power * object.m / target.m;
 					object.vel -= dl / dist * power * isRecoil;
 				}
 				else {

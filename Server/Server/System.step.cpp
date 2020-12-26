@@ -474,13 +474,13 @@ void System::step() {
 
 	// Bonuses spawn
 	for (int i = 0; i < 1; i++) {
-		int r = random::intRandom(1, bonusInfo.size() - 1);
+		int bonusIndex = random::intRandom(1, bonusInfo.size() - 1);
 
-		if (r >= bonusInfo.size() || !bonusInfo[r].positions.size()) // No bonuses of this type
+		if (bonusIndex >= bonusInfo.size() || !bonusInfo[bonusIndex].positions.size()) // No bonuses of this type
 			continue;
 
 		Vec2 pos;
-		pos = bonusInfo[r].positions[random::intRandom(0, bonusInfo[r].positions.size() - 1)];
+		pos = bonusInfo[bonusIndex].positions[random::intRandom(0, bonusInfo[bonusIndex].positions.size() - 1)];
 
 		int x = (int)pos.x;
 		int y = (int)pos.y;
@@ -490,12 +490,12 @@ void System::step() {
 				repeat = 1;
 		}
 		if ( (x >0 && y > 0 && x < field.size() && y < field[0].size()) && 
-			(!field[x][y].type && bonusInfo[r].number < bonusInfo[r].limit && bonusInfo[r].countdown < 0 && !repeat)) {
+			(!field[x][y].type && bonusInfo[bonusIndex].number < bonusInfo[bonusIndex].limit && bonusInfo[bonusIndex].countdown < 0 && !repeat)) {
 			bonuses.push_back({});
 			bonuses.back().pos = { x + 0.5, y + 0.5 };
 
-			bonuses.back().type = static_cast<Bonus::Type>(r);
-			bonusInfo[r].countdown = bonusInfo[r].countdownTime;
+			bonuses.back().type = static_cast<Bonus::Type>(bonusIndex);
+			bonusInfo[bonusIndex].countdown = bonusInfo[bonusIndex].countdownTime;
 		}
 	}
 	
