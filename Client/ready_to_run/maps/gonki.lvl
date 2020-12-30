@@ -243,7 +243,6 @@ FORCEFIELD
 BONUS 50 1 energy
 BONUS 50 1 hp
 BONUS 50 1 immortal
-BONUS 50 1 berserk
 BONUS 50 1 boost
 BONUS 50 1 laser
 END
